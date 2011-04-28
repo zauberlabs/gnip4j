@@ -74,6 +74,7 @@
 	<modules>
     		<module>gnip4j-core</module>
 		<module>gnip4j-stream</module>
+		<module>gnip4j-http</module>
   	</modules>
 
 	<build>
