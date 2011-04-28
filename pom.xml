@@ -8,10 +8,10 @@
 		<version>1.0.9</version>
 	</parent>
 	<name>Zauber::Gnip4j</name>
-	<groupId>com.zaubersoftware</groupId>
-	<artifactId>gnip4j</artifactId>
+	<groupId>com.zaubersoftware.gnip4j</groupId>
+	<artifactId>zauber-gnip4j-parent</artifactId>
 	<version>0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 
 	<scm>
 		<connection>scm:git:git@github.com:zaubersoftware/gnip4j.git</connection>
@@ -70,6 +70,11 @@
 			<url>file:///tmp/commons-site</url>
 		</site>
 	</distributionManagement>
+
+	<modules>
+    		<module>gnip4j-core</module>
+		<module>gnip4j-stream</module>
+  	</modules>
 
 	<build>
 		<plugins>
@@ -263,6 +268,29 @@
 		</plugins>
 	</build>
 	<dependencies>
+		<dependency>
+	      		<artifactId>junit</artifactId>
+	      		<groupId>junit</groupId>
+		</dependency>
+    		<dependency>
+      			<groupId>org.slf4j</groupId>
+      			<artifactId>slf4j-nop</artifactId>
+      			<version>${slf4j.version}</version>
+		      <scope>test</scope>
+	    	</dependency>
+	</dependencies>
+	<properties>
+		<zauber.commons.version>3.47</zauber.commons.version>
+		<doxia.version>1.1</doxia.version>
+		<slf4j.version>1.6.1</slf4j.version>
+
+		<sonar.mantis.id>44</sonar.mantis.id>
+		<crono.organization.name>zauber</crono.organization.name>
+		<crono.project.name>zauber-gnip4j</crono.project.name>
+		<crono.start.date>2011-04-28</crono.start.date>
+	</properties>
+	<dependencyManagement>
+		<dependencies>
 		<!-- BEGIN: Zauber Commons -->
 		<dependency>
 			<groupId>ar.com.zauber.commons</groupId>
@@ -311,16 +339,6 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- END: Testing -->
-	</dependencies>
-	<properties>
-		<zauber.commons.version>3.47</zauber.commons.version>
-		<doxia.version>1.1</doxia.version>
-		<slf4j.version>1.6.1</slf4j.version>
-
-		<sonar.mantis.id>44</sonar.mantis.id>
-		<crono.organization.name>zauber</crono.organization.name>
-		<crono.project.name>zauber-gnip4j</crono.project.name>
-		<crono.start.date>2011-04-28</crono.start.date>
-
-	</properties>
+		</dependencies>
+	</dependencyManagement>
 </project>
