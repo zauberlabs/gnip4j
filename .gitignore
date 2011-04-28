@@ -1,0 +1,8 @@
+target
+.settings
+.classpath
+.project
+.checkstyle
+.springBeans
+velocity.log
+.DS_Store
