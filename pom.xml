@@ -72,9 +72,8 @@
 	</distributionManagement>
 
 	<modules>
-    		<module>gnip4j-core</module>
-		<module>gnip4j-stream</module>
-		<module>gnip4j-http</module>
+    		<module>core</module>
+		<module>http</module>
   	</modules>
 
 	<build>
@@ -279,6 +278,10 @@
       			<version>${slf4j.version}</version>
 		      <scope>test</scope>
 	    	</dependency>
+		<dependency>
+                	<groupId>javax.validation</groupId>
+                	<artifactId>validation-api</artifactId>
+                </dependency>	
 	</dependencies>
 	<properties>
 		<zauber.commons.version>3.47</zauber.commons.version>
@@ -340,6 +343,31 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- END: Testing -->
+		<dependency>
+                	<groupId>javax.validation</groupId>
+                	<artifactId>validation-api</artifactId>
+                	<version>1.0.0.GA</version>
+        	</dependency>
+		<dependency>
+            		<groupId>commons-io</groupId>
+            		<artifactId>commons-io</artifactId>
+            		<version>2.0.1</version>
+        	</dependency>
+        	<dependency>
+            		<groupId>commons-codec</groupId>
+            		<artifactId>commons-codec</artifactId>
+            		<version>1.5</version>
+        	</dependency>
+        	<dependency>
+            		<groupId>joda-time</groupId>
+            		<artifactId>joda-time</artifactId>
+            		<version>1.6.2</version>
+        	</dependency>
+		<dependency>
+    			<groupId>org.apache.httpcomponents</groupId>
+    			<artifactId>httpclient</artifactId>
+    			<version>4.1.1</version>
+		</dependency>
 		</dependencies>
 	</dependencyManagement>
 </project>

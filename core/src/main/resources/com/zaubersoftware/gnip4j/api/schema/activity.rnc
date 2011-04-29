@@ -1,0 +1,11 @@
+datatypes xsd = "http://www.w3.org/2001/XMLSchema-datatypes"
+
+default namespace = "https://labs.zaubersoftware.com/ns/2011/05/gnip4j/activity"
+
+
+start = activity
+
+
+activity = element activity {
+    attribute verb { xsd:string }
+}

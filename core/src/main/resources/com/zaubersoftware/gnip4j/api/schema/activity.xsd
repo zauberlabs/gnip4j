@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="https://labs.zaubersoftware.com/ns/2011/05/gnip4j/activity" xmlns:activity="https://labs.zaubersoftware.com/ns/2011/05/gnip4j/activity">
+  <xs:element name="activity">
+    <xs:complexType>
+      <xs:attribute name="verb" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
