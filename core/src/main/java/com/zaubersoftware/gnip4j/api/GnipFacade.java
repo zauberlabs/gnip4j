@@ -16,13 +16,19 @@
 package com.zaubersoftware.gnip4j.api;
 
 /**
- * TODO: Description of the class, Comments in english by default  
- * 
+ * Facade to the Gnip Streaming API  
  * 
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
 public interface GnipFacade {
 
+    /**
+     * Gnip provides access to the data with a streaming HTTP implementation
+     * that allows you to consume data in near real-time over a single
+     * persistent HTTP connection/request.
+     * 
+     * @return the stream
+     */
     GnipStream createStream(GnipAuthentication auth);
 }

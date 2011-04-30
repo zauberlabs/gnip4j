@@ -15,15 +15,10 @@
  */
 package com.zaubersoftware.gnip4j.api.impl;
 
-import java.util.Queue;
-import java.util.TimerTask;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Future;
+import java.util.concurrent.ExecutorService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.lang.Validate;
 
-import ar.com.zauber.commons.validate.Validate;
 import ar.com.zauber.leviathan.common.async.AbstractJobScheduler;
 import ar.com.zauber.leviathan.common.async.JobQueue;
 
@@ -37,31 +32,38 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
-public class JsonToDomainJobScheduler extends AbstractJobScheduler<String> {
-    private JobQueue<Activity> activityQueue;
+public class ActivityHandlerConsumer extends AbstractJobScheduler<Activity> {
+    private final ExecutorService executors;
+    private GnipStream stream;
 
     /**
-     * Creates the JsonToDomainJobScheduler.
+     * Creates the ActivityHandlerJobScheduler.
      *
      * @param queue
+     * @param httpGnipStream 
      */
-    public JsonToDomainJobScheduler(final JobQueue<String> jsonQueue, final JobQueue<Activity> activityQueue) {
-        super(jsonQueue);
-        Validate.notNull(activityQueue);
+    public ActivityHandlerConsumer(final JobQueue<Activity> queue, final ExecutorService executors, final GnipStream stream) {
+        super(queue);
+        Validate.notNull(executors);
         
-        this.activityQueue = activityQueue;
+        this.executors = executors;
+        this.stream = stream;
     }
 
     @Override
-    protected final void doJob(final String json) throws InterruptedException {
-        final Activity activity = new Activity();
-        activity.setVerb(json);
-        activityQueue.add(activity);
+    protected final void doJob(final Activity job) throws InterruptedException {
+        executors.execute(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(job.getVerb());
+                stream.close();
+            }
+        });
     }
 
     @Override
     protected void doShutdown() {
-        // nothing to do
+        executors.shutdownNow();
     }
 
 }

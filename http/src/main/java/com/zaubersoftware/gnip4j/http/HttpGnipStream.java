@@ -34,13 +34,24 @@ import ar.com.zauber.leviathan.common.async.JobQueue;
 import ar.com.zauber.leviathan.common.async.impl.BlockingQueueJobQueue;
 
 import com.zaubersoftware.gnip4j.api.impl.AbstractGnipStream;
-import com.zaubersoftware.gnip4j.api.impl.ActivityHandlerJobScheduler;
-import com.zaubersoftware.gnip4j.api.impl.JsonToDomainJobScheduler;
+import com.zaubersoftware.gnip4j.api.impl.ActivityHandlerConsumer;
+import com.zaubersoftware.gnip4j.api.impl.JsonConsumer;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 
 /**
- * TODO: Description of the class, Comments in english by default  
+ * Implementation acording   
+ * http://docs.gnip.com/w/page/23724581/Gnip-Full-Documentation#streaminghttp
  * 
+ * <verbatim>
+ *                                               Json
+ *   +----------+   HTTP   +------------------+ (String) +--------------+        +-----------------+
+ *   | data     | -------> | GnipHttpConsumer |-----+--> | JsonConsumer |----+   | ActivityConsumer|
+ *   | colector |          +------------------+     |    +--------------+    |   +-----------------+
+ *   + ---------+                                   |         .....          +-->     ....
+ *                                                  |    +--------------+    |   +-----------------+
+ *                                                  +--> | JsonConsumer |----+   | ActivityConsumer|
+ *                                                       +--------------+        +-----------------+
+ * </verbatim>
  * 
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
@@ -51,8 +62,8 @@ public class HttpGnipStream extends AbstractGnipStream {
     private final Thread httpThread;
     private final Thread jsonThread;
     private final Thread processThread;
-    private final AbstractJobScheduler<String> stringScheduler = new JsonToDomainJobScheduler(jsonQueue, activityQueue);
-    private final AbstractJobScheduler<Activity> activityScheduler = new ActivityHandlerJobScheduler(activityQueue, Executors.newScheduledThreadPool(10), this);
+    private final AbstractJobScheduler<String> stringScheduler = new JsonConsumer(jsonQueue, activityQueue);
+    private final AbstractJobScheduler<Activity> activityScheduler = new ActivityHandlerConsumer(activityQueue, Executors.newScheduledThreadPool(10), this);
     
     private final HttpResponse response;
     

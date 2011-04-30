@@ -15,10 +15,15 @@
  */
 package com.zaubersoftware.gnip4j.api.impl;
 
-import java.util.concurrent.ExecutorService;
+import java.util.Queue;
+import java.util.TimerTask;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Future;
 
-import org.apache.commons.lang.Validate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import ar.com.zauber.commons.validate.Validate;
 import ar.com.zauber.leviathan.common.async.AbstractJobScheduler;
 import ar.com.zauber.leviathan.common.async.JobQueue;
 
@@ -32,38 +37,31 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
-public class ActivityHandlerJobScheduler extends AbstractJobScheduler<Activity> {
-    private final ExecutorService executors;
-    private GnipStream stream;
+public class JsonConsumer extends AbstractJobScheduler<String> {
+    private JobQueue<Activity> activityQueue;
 
     /**
-     * Creates the ActivityHandlerJobScheduler.
+     * Creates the JsonToDomainJobScheduler.
      *
      * @param queue
-     * @param httpGnipStream 
      */
-    public ActivityHandlerJobScheduler(final JobQueue<Activity> queue, final ExecutorService executors, final GnipStream stream) {
-        super(queue);
-        Validate.notNull(executors);
+    public JsonConsumer(final JobQueue<String> jsonQueue, final JobQueue<Activity> activityQueue) {
+        super(jsonQueue);
+        Validate.notNull(activityQueue);
         
-        this.executors = executors;
-        this.stream = stream;
+        this.activityQueue = activityQueue;
     }
 
     @Override
-    protected final void doJob(final Activity job) throws InterruptedException {
-        executors.execute(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println(job.getVerb());
-                stream.close();
-            }
-        });
+    protected final void doJob(final String json) throws InterruptedException {
+        final Activity activity = new Activity();
+        activity.setVerb(json);
+        activityQueue.add(activity);
     }
 
     @Override
     protected void doShutdown() {
-        executors.shutdownNow();
+        // nothing to do
     }
 
 }

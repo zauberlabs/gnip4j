@@ -44,7 +44,7 @@ import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 
 /**
- * TODO: Description of the class, Comments in english by default  
+ * Http implementation for the {@link GnipFacade}  
  * 
  * 
  * @author Guido Marucci Blas

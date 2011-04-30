@@ -16,15 +16,18 @@
 package com.zaubersoftware.gnip4j.api;
 
 /**
- * TODO: Description of the class, Comments in english by default  
+ * Gnip Authentication  
  * 
+ * TODO future OAuth?
  * 
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
 public interface GnipAuthentication {
  
+    /** @return the username */
     String getUsername();
     
+    /** @return the password */
     String getPassword();
 }

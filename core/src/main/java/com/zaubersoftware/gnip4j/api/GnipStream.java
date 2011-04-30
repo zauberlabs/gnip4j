@@ -20,8 +20,14 @@ import ar.com.zauber.commons.dao.Closure;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 
 /**
- * TODO: Description of the class, Comments in english by default  
- * 
+ * <p>
+ * A Stream for the Gnip. Once created with {@link GnipFacade} you más register
+ * some observer that will process the data. User MUST call {@link #close()} 
+ * to release all the releated resources (or when you want to handle gracefull shutdowns)
+ * </p>
+ * <p>
+ * Implementations SHOULD handle reconnections and timeouts.
+ * </p>
  * 
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
@@ -30,13 +36,12 @@ public interface GnipStream {
 
     void addObserver(Closure<Activity> closure);
 
-    /**
-     * 
-     */
+    /** release the stream  */
     void close();
 
     /**
-     * 
+     * await for the stream to be {@link #close()} or 
+     * to be shutdown because of some catastrofic issue.
      */
     void await() throws InterruptedException;
 }
