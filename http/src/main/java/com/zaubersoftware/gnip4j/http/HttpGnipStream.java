@@ -17,13 +17,12 @@ package com.zaubersoftware.gnip4j.http;
 
 import static ar.com.zauber.leviathan.common.async.ThreadUtils.waitForTermination;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.net.URI;
 import java.nio.charset.Charset;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.lang.UnhandledException;
@@ -36,14 +35,16 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.codehaus.jackson.JsonParser;
+import org.codehaus.jackson.map.AnnotationIntrospector;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ar.com.zauber.commons.validate.Validate;
 import ar.com.zauber.leviathan.common.CharsetStrategy;
-import ar.com.zauber.leviathan.common.async.AbstractJobScheduler;
-import ar.com.zauber.leviathan.common.async.JobQueue;
-import ar.com.zauber.leviathan.common.async.impl.BlockingQueueJobQueue;
 import ar.com.zauber.leviathan.impl.httpclient.HTTPClientURIFetcher;
 import ar.com.zauber.leviathan.impl.httpclient.charset.DefaultHttpCharsetStrategy;
 
@@ -51,8 +52,6 @@ import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.impl.AbstractGnipStream;
-import com.zaubersoftware.gnip4j.api.impl.ActivityConsumer;
-import com.zaubersoftware.gnip4j.api.impl.JsonConsumer;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 
 /**
@@ -79,15 +78,8 @@ public class HttpGnipStream extends AbstractGnipStream {
     private final String streamName;
     private final URI streamURI;
     
-    private final JobQueue<String> jsonQueue = new BlockingQueueJobQueue<String>(new LinkedBlockingQueue<String>());
-    private final JobQueue<Activity> activityQueue = new BlockingQueueJobQueue<Activity>(new LinkedBlockingQueue<Activity>());
     private final Thread httpThread;
-    private final Thread jsonThread;
-    private final Thread processThread;
-    private final AbstractJobScheduler<String> stringScheduler = 
-            new JsonConsumer(jsonQueue, activityQueue);
-    private final AbstractJobScheduler<Activity> activityScheduler = 
-            new ActivityConsumer(activityQueue, Executors.newScheduledThreadPool(10), this);
+    private final ExecutorService activityService = Executors.newScheduledThreadPool(10);
     private static final CharsetStrategy charsetStrategy = new DefaultHttpCharsetStrategy();   
     
     /** Creates the HttpGnipStream. */
@@ -108,16 +100,9 @@ public class HttpGnipStream extends AbstractGnipStream {
         
         streamName = String.format("%s-%d", domain, dataCollectorId);
         httpThread = new Thread(new GnipHttpConsumer(handshake(client, auth, streamURI)), 
-                                streamName + "-consumer-http-1");
-        
-        
-        
-        jsonThread = new Thread(stringScheduler, streamName + "consumer-json-1");
-        processThread = new Thread(activityScheduler, streamName + "consumer-activity-1");
+                                streamName + "-consumer-http");
         
         httpThread.start();
-        jsonThread.start();
-        processThread.start();
     }
 
     /** get the connection */
@@ -155,7 +140,15 @@ public class HttpGnipStream extends AbstractGnipStream {
     /** consumes the http input stream from the stream one tweet per line */
     private class GnipHttpConsumer implements Runnable {
         private final HttpResponse response;
-
+        final ObjectMapper mapper = new ObjectMapper();
+        
+        {
+            mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            final AnnotationIntrospector introspector = new JaxbAnnotationIntrospector();
+            mapper.getDeserializationConfig().withAnnotationIntrospector(introspector);
+            mapper.getSerializationConfig().withAnnotationIntrospector(introspector);
+        }
+        
         public GnipHttpConsumer(final HttpResponse response) {
             Validate.notNull(response);
             this.response = response;
@@ -164,7 +157,7 @@ public class HttpGnipStream extends AbstractGnipStream {
         @Override
         public void run() {
             HttpEntity entity = null;
-            BufferedReader is = null;
+            InputStream is = null;
             
             try {
                 entity = response.getEntity();
@@ -172,14 +165,18 @@ public class HttpGnipStream extends AbstractGnipStream {
                     final Charset charset = charsetStrategy.getCharset(HTTPClientURIFetcher.getMetaResponse(
                                     streamURI, response, entity), null);
                     // TODO Wrapp InputStream to count bytes and transfer rates 
-                    is = new BufferedReader(new InputStreamReader(entity.getContent(), charset));
-                    String json;
-                    while((json = is.readLine()) != null) {
-                        jsonQueue.add(json);
+                    is = entity.getContent();
+                    final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
+                    while(!Thread.interrupted()) {
+                        final Activity activity = parser.readValueAs(Activity.class);
+                        activityService.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                getClosure().execute(activity);
+                            }
+                        });
                     }
                 }            
-            } catch(final InterruptedException e) {
-                logger.debug("Interruped http consumer " + streamName, e);
             } catch(IOException e) {
                 // TODO handle reconnection
                 throw new UnhandledException(e);
@@ -219,17 +216,8 @@ public class HttpGnipStream extends AbstractGnipStream {
                 httpThread.interrupt();
                 waitForTermination(httpThread);
             }
-            if(jsonThread != null) {
-                jsonThread.interrupt();
-                waitForTermination(jsonThread);
-            }
-            if(processThread != null) {
-                processThread.interrupt();
-                waitForTermination(processThread);
-            }
             
-            jsonQueue.shutdown();
-            activityQueue.shutdown();
+            activityService.shutdown();
         } else {
             logger.info("Already shutting Down " + streamName);
         }

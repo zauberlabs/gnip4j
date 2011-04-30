@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ar.com.zauber.commons.dao.Closure;
+import ar.com.zauber.commons.dao.closure.NullClosure;
 
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.model.Activity;
@@ -40,11 +41,13 @@ public abstract class AbstractGnipStream implements GnipStream {
     private final Condition emptyCondition  = lock.newCondition(); 
     protected final AtomicBoolean streamClosed = new AtomicBoolean(false);
     private final Logger logger = LoggerFactory.getLogger(getClass());
+    private Closure<Activity> closure = new NullClosure<Activity>();
     
     @Override
     public final void addObserver(final Closure<Activity> closure) {
-        // TODO: Auto-generated method stub
-
+        if(closure != null) {
+            this.closure  = closure;
+        }
     }
 
     @Override
@@ -79,6 +82,9 @@ public abstract class AbstractGnipStream implements GnipStream {
         } finally {
             lock.unlock();
         }
-
+    }
+    
+    public final Closure<Activity> getClosure() {
+        return closure;
     }
 }

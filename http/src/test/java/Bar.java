@@ -16,8 +16,6 @@
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.lang.Validate;
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.junit.Test;
 
 import ar.com.zauber.commons.dao.Closure;
@@ -28,10 +26,6 @@ import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.impl.InmutableGnipAuthentication;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.http.HttpGnipFacade;
-
-/*
- * Copyright (c) 2011 Zauber S.A.  -- All rights reserved
- */
 
 /**
  * TODO: Description of the class, Comments in english by default  
@@ -61,9 +55,8 @@ public class Bar {
                 private AtomicInteger i = new AtomicInteger();
                 @Override
                 public void execute(final Activity t) {
-                    if(i.incrementAndGet() == 10) {
-                        stream.close();
-                    }
+                    System.out.println(t.getBody());
+                    stream.close();
                 }
             });
             stream.await();

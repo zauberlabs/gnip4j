@@ -294,7 +294,24 @@
 		<crono.start.date>2011-04-28</crono.start.date>
 	</properties>
 	<dependencyManagement>
-		<dependencies>
+	  <dependencies>
+            <dependency>
+              <groupId>org.codehaus.jackson</groupId> 
+              <artifactId>jackson-core-asl</artifactId> 
+              <version>1.8.0</version> 
+            </dependency>
+            <dependency>
+              <groupId>org.codehaus.jackson</groupId> 
+              <artifactId>jackson-mapper-asl</artifactId> 
+              <version>1.8.0</version> 
+            </dependency>
+            <dependency>
+              <groupId>org.codehaus.jackson</groupId> 
+              <artifactId>jackson-xc</artifactId> 
+              <version>1.8.0</version> 
+            </dependency>
+
+
 		<!-- BEGIN: Zauber Commons -->
 		<dependency>
 			<groupId>ar.com.zauber.commons</groupId>
