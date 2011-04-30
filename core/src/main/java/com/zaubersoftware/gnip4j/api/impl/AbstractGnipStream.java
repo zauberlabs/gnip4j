@@ -49,15 +49,18 @@ public abstract class AbstractGnipStream implements GnipStream {
 
     @Override
     public final void close() {
-        doClose();
-        lock.lock();
         try {
-            streamClosed.set(true);
-            emptyCondition.signalAll();
-        } catch(final Throwable t) {
-            logger.error("decrementing active jobs. should not happen ", t);
+            doClose();
         } finally {
-            lock.unlock();
+            lock.lock();
+            try {
+                streamClosed.set(true);
+                emptyCondition.signalAll();
+            } catch(final Throwable t) {
+                logger.error("decrementing active jobs. should not happen ", t);
+            } finally {
+                lock.unlock();
+            }
         }
     }
 

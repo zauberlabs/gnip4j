@@ -51,7 +51,7 @@ import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
  * @since Apr 29, 2011
  */
 public class HttpGnipFacade implements GnipFacade {
-    private String domain;
+    private final String domain;
     private final DefaultHttpClient client = new DefaultHttpClient();
     private final CredentialsProvider credsProvider = new BasicCredentialsProvider();
 
@@ -76,7 +76,7 @@ public class HttpGnipFacade implements GnipFacade {
         credsProvider.setCredentials(
                 new AuthScope(domain + ".gnip.com", AuthScope.ANY_PORT), 
                 new UsernamePasswordCredentials(auth.getUsername(), auth.getPassword()));
-        return new HttpGnipStream(handshake(dataCollectorId));
+        return new HttpGnipStream(handshake(dataCollectorId), String.format("%s-%d", domain, dataCollectorId));
     }
     
     /** get the connection */
