@@ -52,7 +52,6 @@ public class Bar {
             final GnipAuthentication auth = new InmutableGnipAuthentication(username, password);
             final GnipStream stream = gnip.createStream(domain, 1, auth);
             stream.addObserver(new Closure<Activity>() {
-                private AtomicInteger i = new AtomicInteger();
                 @Override
                 public void execute(final Activity t) {
                     System.out.println(t.getBody());

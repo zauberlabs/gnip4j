@@ -79,6 +79,7 @@ public class HttpGnipStream extends AbstractGnipStream {
     private final URI streamURI;
     
     private final Thread httpThread;
+    private final GnipHttpConsumer httpConsumer;
     private final ExecutorService activityService = Executors.newScheduledThreadPool(10);
     private static final CharsetStrategy charsetStrategy = new DefaultHttpCharsetStrategy();   
     
@@ -99,7 +100,8 @@ public class HttpGnipStream extends AbstractGnipStream {
         streamURI = URI.create(sb.toString());
         
         streamName = String.format("%s-%d", domain, dataCollectorId);
-        httpThread = new Thread(new GnipHttpConsumer(handshake(client, auth, streamURI)), 
+        httpConsumer = new GnipHttpConsumer(handshake(client, auth, streamURI));
+        httpThread = new Thread(httpConsumer, 
                                 streamName + "-consumer-http");
         
         httpThread.start();
@@ -140,24 +142,22 @@ public class HttpGnipStream extends AbstractGnipStream {
     /** consumes the http input stream from the stream one tweet per line */
     private class GnipHttpConsumer implements Runnable {
         private final HttpResponse response;
+        private InputStream is = null;
         final ObjectMapper mapper = new ObjectMapper();
         
-        {
+        public GnipHttpConsumer(final HttpResponse response) {
+            Validate.notNull(response);
+            this.response = response;
+            
             mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             final AnnotationIntrospector introspector = new JaxbAnnotationIntrospector();
             mapper.getDeserializationConfig().withAnnotationIntrospector(introspector);
             mapper.getSerializationConfig().withAnnotationIntrospector(introspector);
         }
         
-        public GnipHttpConsumer(final HttpResponse response) {
-            Validate.notNull(response);
-            this.response = response;
-        }
-        
         @Override
         public void run() {
             HttpEntity entity = null;
-            InputStream is = null;
             
             try {
                 entity = response.getEntity();
@@ -178,13 +178,15 @@ public class HttpGnipStream extends AbstractGnipStream {
                     }
                 }            
             } catch(IOException e) {
-                // TODO handle reconnection
-                throw new UnhandledException(e);
+                if(!shuttingDown.get()) {
+                    throw new UnhandledException(e);
+                }
             } finally {
                 try {
                     if(is != null) {
                         try {
                             is.close();
+                            is = null;
                         } catch (IOException e) {
                             // ignore
                         }
@@ -204,6 +206,17 @@ public class HttpGnipStream extends AbstractGnipStream {
                 }
             }
         }
+        
+        void closeInputStream() {
+            if(is != null) {
+                try {
+                    is.close();
+                    is = null;
+                } catch (IOException e) {
+                    // ignore
+                }
+            }
+        }
     }
     private AtomicBoolean shuttingDown = new AtomicBoolean(false);
     
@@ -211,9 +224,13 @@ public class HttpGnipStream extends AbstractGnipStream {
     protected void doClose() {
         if(shuttingDown.getAndSet(true) == false) {
             logger.info("Shutting Down " + streamName);
+            
+            httpConsumer.closeInputStream();
+            
             // no aceptamos más trabajos.
             if(httpThread != null) {
                 httpThread.interrupt();
+                
                 waitForTermination(httpThread);
             }
             
