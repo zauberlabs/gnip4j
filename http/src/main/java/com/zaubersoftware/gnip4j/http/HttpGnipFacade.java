@@ -84,7 +84,7 @@ public class HttpGnipFacade implements GnipFacade {
      * 
      */
     private  HttpResponse handshake() {
-        final HttpGet get = new HttpGet("https://zaubersoftware-powertrack.gnip.com/data_collectors/1/track.json");
+        final HttpGet get = new HttpGet("https://" + domain + ".gnip.com/data_collectors/1/track.json");
         try {
             final HttpResponse response  = client.execute(get);
             
