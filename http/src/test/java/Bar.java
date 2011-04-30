@@ -53,11 +53,10 @@ public class Bar {
         Validate.notNull(domain, "Missing gnip.domain");
         
         try {
-            final GnipFacade gnip = new HttpGnipFacade(domain);
+            final GnipFacade gnip = new HttpGnipFacade();
             
             final GnipAuthentication auth = new InmutableGnipAuthentication(username, password);
-            
-            final GnipStream stream = gnip.createStream(1, auth);
+            final GnipStream stream = gnip.createStream(domain, 1, auth);
             stream.addObserver(new Closure<Activity>() {
                 private AtomicInteger i = new AtomicInteger();
                 @Override
@@ -71,6 +70,7 @@ public class Bar {
             System.out.println("Shutting down");
 
         }   catch(Throwable t) {
+            System.out.println(t.getMessage());
             t.printStackTrace();
         }
         

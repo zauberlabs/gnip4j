@@ -53,7 +53,7 @@ public abstract class AbstractGnipStream implements GnipStream {
             doClose();
         } finally {
             lock.lock();
-            try {
+            try { 
                 streamClosed.set(true);
                 emptyCondition.signalAll();
             } catch(final Throwable t) {

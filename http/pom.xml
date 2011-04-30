@@ -25,19 +25,9 @@
 		<!-- END: Zauber Commons -->
 		<!-- START: HTTP  -->
 		 <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.1</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.httpcomponents</groupId>
-                    <artifactId>httpcore</artifactId>
-                </exclusion>
-            </exclusions>
+                  <groupId>ar.com.zauber.leviathan</groupId>
+		  <artifactId>leviathan-api-httpclient</artifactId>
+		  <version>0.7-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>

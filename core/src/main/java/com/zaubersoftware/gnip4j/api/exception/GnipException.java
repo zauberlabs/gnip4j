@@ -48,7 +48,7 @@ public class GnipException extends RuntimeException {
      * @param message
      */
     public GnipException(final String message) {
-        // TODO: Auto-generated constructor stub
+        super(message);
     }
 
     /**

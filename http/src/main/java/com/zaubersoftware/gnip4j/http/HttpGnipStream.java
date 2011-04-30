@@ -15,11 +15,13 @@
  */
 package com.zaubersoftware.gnip4j.http;
 
-import static ar.com.zauber.leviathan.common.async.ThreadUtils.*;
+import static ar.com.zauber.leviathan.common.async.ThreadUtils.waitForTermination;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URI;
+import java.nio.charset.Charset;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -27,15 +29,27 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.commons.lang.UnhandledException;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ar.com.zauber.commons.validate.Validate;
+import ar.com.zauber.leviathan.common.CharsetStrategy;
 import ar.com.zauber.leviathan.common.async.AbstractJobScheduler;
 import ar.com.zauber.leviathan.common.async.JobQueue;
 import ar.com.zauber.leviathan.common.async.impl.BlockingQueueJobQueue;
+import ar.com.zauber.leviathan.impl.httpclient.HTTPClientURIFetcher;
+import ar.com.zauber.leviathan.impl.httpclient.charset.DefaultHttpCharsetStrategy;
 
+import com.zaubersoftware.gnip4j.api.GnipAuthentication;
+import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
+import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.impl.AbstractGnipStream;
 import com.zaubersoftware.gnip4j.api.impl.ActivityConsumer;
 import com.zaubersoftware.gnip4j.api.impl.JsonConsumer;
@@ -61,30 +75,43 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
  */
 public class HttpGnipStream extends AbstractGnipStream {
     private final Logger logger = LoggerFactory.getLogger(getClass());
-    
+    /** stream name for debugging propourse */
     private final String streamName;
+    private final URI streamURI;
     
     private final JobQueue<String> jsonQueue = new BlockingQueueJobQueue<String>(new LinkedBlockingQueue<String>());
     private final JobQueue<Activity> activityQueue = new BlockingQueueJobQueue<Activity>(new LinkedBlockingQueue<Activity>());
     private final Thread httpThread;
     private final Thread jsonThread;
     private final Thread processThread;
-    private final AbstractJobScheduler<String> stringScheduler = new JsonConsumer(jsonQueue, activityQueue);
-    private final AbstractJobScheduler<Activity> activityScheduler = new ActivityConsumer(activityQueue, Executors.newScheduledThreadPool(10), this);
-    private final HttpResponse response;
+    private final AbstractJobScheduler<String> stringScheduler = 
+            new JsonConsumer(jsonQueue, activityQueue);
+    private final AbstractJobScheduler<Activity> activityScheduler = 
+            new ActivityConsumer(activityQueue, Executors.newScheduledThreadPool(10), this);
+    private static final CharsetStrategy charsetStrategy = new DefaultHttpCharsetStrategy();   
     
-    /**
-     * Creates the HttpGnipStream.
-     * @param streamName Name for the stream used for debugging
-     */
-    public HttpGnipStream(final HttpResponse response, final String streamName) {
-        Validate.notNull(response, "response is null");
-        Validate.notBlank(streamName, "stream name is null");
-
-        this.response = response;
-        this.streamName = streamName;
-
-        httpThread = new Thread(new GnipHttpConsumer(), streamName + "-consumer-http-1");
+    /** Creates the HttpGnipStream. */
+    public HttpGnipStream(final DefaultHttpClient client, 
+                          final String domain,
+                          final long dataCollectorId, 
+                          final GnipAuthentication auth) {
+        Validate.notNull(client, "http client is null");
+        Validate.notBlank(domain, "domain is empty");
+        Validate.notNull(auth, "auth is null");
+        
+        final StringBuilder sb = new StringBuilder("https://");
+        sb.append(domain);
+        sb.append(".gnip.com/data_collectors/");
+        sb.append(dataCollectorId);
+        sb.append("/track.json");
+        streamURI = URI.create(sb.toString());
+        
+        streamName = String.format("%s-%d", domain, dataCollectorId);
+        httpThread = new Thread(new GnipHttpConsumer(handshake(client, auth, streamURI)), 
+                                streamName + "-consumer-http-1");
+        
+        
+        
         jsonThread = new Thread(stringScheduler, streamName + "consumer-json-1");
         processThread = new Thread(activityScheduler, streamName + "consumer-activity-1");
         
@@ -93,8 +120,46 @@ public class HttpGnipStream extends AbstractGnipStream {
         processThread.start();
     }
 
+    /** get the connection */
+    private  static HttpResponse handshake(final DefaultHttpClient client, 
+                                           final GnipAuthentication auth,
+                                           final URI streamUri)
+        throws AuthenticationGnipException, TransportGnipException {
+        client.getCredentialsProvider().setCredentials(
+                new AuthScope(streamUri.getHost(), AuthScope.ANY_PORT), 
+                new UsernamePasswordCredentials(auth.getUsername(), auth.getPassword()));
+        
+        final HttpGet get = new HttpGet(streamUri);
+        try {
+            final HttpResponse response  = client.execute(get);
+            
+            final StatusLine statusLine = response.getStatusLine();
+            final int statusCode = statusLine.getStatusCode();
+            if(statusCode == 401) {
+                throw new AuthenticationGnipException(statusLine.getReasonPhrase());
+            } else if(statusCode == 200) {
+                return response;
+            } else {
+                throw new TransportGnipException(
+                    String.format("Connection to %s: Unexpected status code: %s %s",
+                            streamUri, statusCode, statusLine.getReasonPhrase()));
+            }
+        } catch (ClientProtocolException e) {
+            throw new TransportGnipException("Protocol error", e);
+        } catch (IOException e) {
+            throw new TransportGnipException("Error", e);
+        }
+        
+    }
+    
     private class GnipHttpConsumer implements Runnable {
+        private final HttpResponse response;
 
+        public GnipHttpConsumer(final HttpResponse response) {
+            Validate.notNull(response);
+            this.response = response;
+        }
+        
         @Override
         public void run() {
             HttpEntity entity = null;
@@ -103,8 +168,10 @@ public class HttpGnipStream extends AbstractGnipStream {
             try {
                 entity = response.getEntity();
                 if (entity != null) {
-                    // TODO extract encoding from response
-                    is = new BufferedReader(new InputStreamReader(entity.getContent(), "utf-8"));
+                    final Charset charset = charsetStrategy.getCharset(HTTPClientURIFetcher.getMetaResponse(
+                                    streamURI, response, entity), null);
+                    // TODO Wrapp InputStream to count bytes and transfer rates 
+                    is = new BufferedReader(new InputStreamReader(entity.getContent(), charset));
                     String json;
                     while((json = is.readLine()) != null) {
                         jsonQueue.add(json);
@@ -147,15 +214,21 @@ public class HttpGnipStream extends AbstractGnipStream {
         if(shuttingDown.getAndSet(true) == false) {
             logger.info("Shutting Down " + streamName);
             // no aceptamos más trabajos.
-            httpThread.interrupt();
-            jsonThread.interrupt();
-            processThread.interrupt();
+            if(httpThread != null) {
+                httpThread.interrupt();
+                waitForTermination(httpThread);
+            }
+            if(jsonThread != null) {
+                jsonThread.interrupt();
+                waitForTermination(jsonThread);
+            }
+            if(processThread != null) {
+                processThread.interrupt();
+                waitForTermination(processThread);
+            }
             
-            waitForTermination(httpThread);
             jsonQueue.shutdown();
-            waitForTermination(jsonThread);
             activityQueue.shutdown();
-            waitForTermination(processThread);
         } else {
             logger.info("Already shutting Down " + streamName);
         }

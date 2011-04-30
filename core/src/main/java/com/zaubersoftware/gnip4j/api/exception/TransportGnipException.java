@@ -16,9 +16,9 @@
 package com.zaubersoftware.gnip4j.api.exception;
 
 /**
- * TODO: Description of the class, Comments in english by default  
- * 
- * 
+ * TODO: Description of the class, Comments in english by default
+ *
+ *
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
@@ -26,43 +26,20 @@ public class TransportGnipException extends GnipException {
 
     /**
      * Creates the TransportGnipException.
-     *
      */
-    public TransportGnipException() {
-        super();
-        // TODO: Auto-generated constructor stub
-    }
-
-    /**
-     * Creates the TransportGnipException.
-     *
-     * @param message
-     * @param cause
-     */
-    public TransportGnipException(String message, Throwable cause) {
+    public TransportGnipException(final String message, final Throwable cause) {
         super(message, cause);
-        // TODO: Auto-generated constructor stub
     }
 
-    /**
-     * Creates the TransportGnipException.
-     *
-     * @param message
-     */
-    public TransportGnipException(String message) {
+    /** Creates the TransportGnipException. */
+    public TransportGnipException(final String message) {
         super(message);
-        // TODO: Auto-generated constructor stub
     }
 
-    /**
-     * Creates the TransportGnipException.
-     *
-     * @param cause
-     */
-    public TransportGnipException(Throwable cause) {
+    /** Creates the TransportGnipException. */
+    public TransportGnipException(final Throwable cause) {
         super(cause);
-        // TODO: Auto-generated constructor stub
     }
 
-    
+
 }

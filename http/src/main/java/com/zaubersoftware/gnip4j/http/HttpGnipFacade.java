@@ -15,108 +15,90 @@
  */
 package com.zaubersoftware.gnip4j.http;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.concurrent.Executors;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.NotImplementedException;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.ClientProtocolException;
+import org.apache.http.HttpVersion;
 import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.params.ClientParamBean;
+import org.apache.http.conn.params.ConnManagerParamBean;
+import org.apache.http.conn.params.ConnRouteParamBean;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParamBean;
 import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParamBean;
 
 import ar.com.zauber.commons.validate.Validate;
+import ar.com.zauber.leviathan.impl.httpclient.GZipInterceptor;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.GnipStream;
-import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
-import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 
 /**
  * Http implementation for the {@link GnipFacade}  
- * 
  * 
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
 public class HttpGnipFacade implements GnipFacade {
-    private final String domain;
-    private final DefaultHttpClient client = new DefaultHttpClient();
-    private final CredentialsProvider credsProvider = new BasicCredentialsProvider();
-
-    /**
-     * Creates the HttpGnipFacade.
-     *
-     */
-    public HttpGnipFacade(final String domain) {
-        Validate.notBlank(domain, "you must provide a valid domain");
-        
-        this.domain = domain;
-        client.setCredentialsProvider(credsProvider);
-        
-        final HttpParams params = client.getParams();
-        new HttpConnectionParamBean(params);
-        params.setBooleanParameter("handleRedirect", true);
-        
+    private static final String userAgent = "Gnip4j (https://github.com/zaubersoftware/gnip4j/)";
+    private final DefaultHttpClient client;
+    
+    /** Creates the HttpGnipFacade. */
+    public HttpGnipFacade() {
+        this(createHttpClient());
     }
 
-    @Override
-    public final GnipStream createStream(final long dataCollectorId, final GnipAuthentication auth) {
-        credsProvider.setCredentials(
-                new AuthScope(domain + ".gnip.com", AuthScope.ANY_PORT), 
-                new UsernamePasswordCredentials(auth.getUsername(), auth.getPassword()));
-        return new HttpGnipStream(handshake(dataCollectorId), String.format("%s-%d", domain, dataCollectorId));
+    public HttpGnipFacade(final DefaultHttpClient client) {
+        Validate.notNull(client);
+        
+        this.client = client;
+    }
+
+    /** create the default http client */
+    private static DefaultHttpClient createHttpClient() {
+        final DefaultHttpClient  client = new DefaultHttpClient();
+        
+        final CredentialsProvider credsProvider = new BasicCredentialsProvider();
+        client.setCredentialsProvider(credsProvider);
+        final HttpParams params = client.getParams();
+        
+        final HttpProtocolParamBean httpProtocol = new HttpProtocolParamBean(params);
+        httpProtocol.setContentCharset("utf-8");
+        httpProtocol.setUserAgent(userAgent);
+        httpProtocol.setVersion(HttpVersion.HTTP_1_1);
+
+        final HttpConnectionParamBean bean = new HttpConnectionParamBean(params);
+        bean.setConnectionTimeout(60 * 10000); // timeout in milliseconds until a connection is established.
+        bean.setSoTimeout(20000); // a maximum period inactivity between two consecutive data packets
+        bean.setSocketBufferSize(8192); // the internal socket buffer used to buffer data while receiving / transmitting HTTP messages. 
+        bean.setTcpNoDelay(true); // http.connection.stalecheck. overhead de 30ms 
+        bean.setStaleCheckingEnabled(true); // determines whether Nagle's algorithm is to be used 
+        bean.setLinger(-1); // sets SO_LINGER with the specified linger time in seconds
+
+        final ClientParamBean clientParam = new ClientParamBean(params);
+        clientParam.setHandleRedirects(true);
+        clientParam.setRejectRelativeRedirect(true);
+        clientParam.setMaxRedirects(5);
+        clientParam.setAllowCircularRedirects(false);
+        
+        final ConnRouteParamBean connRoute = new ConnRouteParamBean(params);
+        // TODO proxy settings
+        
+        final ConnManagerParamBean connManager = new ConnManagerParamBean(params);
+        connManager.setMaxTotalConnections(20);
+        
+        // TODO GZIP saves bandwith but delays reception (compression buffers)
+        final GZipInterceptor gzip = new GZipInterceptor();
+        client.addRequestInterceptor(gzip);
+        client.addResponseInterceptor(gzip);
+        return client;
     }
     
-    /** get the connection */
-    private  HttpResponse handshake(long dataCollectorId) {
-        final StringBuilder sb = new StringBuilder("https://");
-        sb.append(domain);
-        sb.append(".gnip.com/data_collectors/");
-        sb.append(dataCollectorId);
-        sb.append("/track.json");
-        final HttpGet get = new HttpGet(sb.toString());
-        try {
-            final HttpResponse response  = client.execute(get);
-            
-            final StatusLine statusLine = response.getStatusLine();
-            final int statusCode = statusLine.getStatusCode();
-            if(statusCode == 401) {
-                throw new AuthenticationGnipException(statusLine.getReasonPhrase());
-            } else if(statusCode == 200) {
-                return response;
-            } else {
-                System.out.println(statusCode);
-                System.out.println(statusCode);
-                throw new TransportGnipException("... TODO ....");
-            }
-        } catch (ClientProtocolException e) {
-            throw new NotImplementedException(e);
-        } catch (IOException e) {
-            throw new NotImplementedException(e);
-        }
-        
+    
+    @Override
+    public final GnipStream createStream(final String domain,
+            final long dataCollectorId, final GnipAuthentication auth) {
+        return new HttpGnipStream(client, domain, dataCollectorId, auth);
     }
-
-    /**
-     * @param response
-     * @return
-     */
-    private Object HttpGnipStream(HttpResponse response) {
-        // TODO: Auto-generated method stub
-        return null;
-    }
-
-
+    
 }
