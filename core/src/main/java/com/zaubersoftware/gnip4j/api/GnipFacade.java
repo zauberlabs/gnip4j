@@ -30,5 +30,5 @@ public interface GnipFacade {
      * 
      * @return the stream
      */
-    GnipStream createStream(GnipAuthentication auth);
+    GnipStream createStream(long dataCollectorId, GnipAuthentication auth);
 }

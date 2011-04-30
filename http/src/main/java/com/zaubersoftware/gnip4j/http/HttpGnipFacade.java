@@ -72,19 +72,21 @@ public class HttpGnipFacade implements GnipFacade {
     }
 
     @Override
-    public final GnipStream createStream(final GnipAuthentication auth) {
+    public final GnipStream createStream(final long dataCollectorId, final GnipAuthentication auth) {
         credsProvider.setCredentials(
                 new AuthScope(domain + ".gnip.com", AuthScope.ANY_PORT), 
                 new UsernamePasswordCredentials(auth.getUsername(), auth.getPassword()));
-        return new HttpGnipStream(handshake());
+        return new HttpGnipStream(handshake(dataCollectorId));
     }
     
-    /**
-     * @return 
-     * 
-     */
-    private  HttpResponse handshake() {
-        final HttpGet get = new HttpGet("https://" + domain + ".gnip.com/data_collectors/1/track.json");
+    /** get the connection */
+    private  HttpResponse handshake(long dataCollectorId) {
+        final StringBuilder sb = new StringBuilder("https://");
+        sb.append(domain);
+        sb.append(".gnip.com/data_collectors/");
+        sb.append(dataCollectorId);
+        sb.append("/track.json");
+        final HttpGet get = new HttpGet(sb.toString());
         try {
             final HttpResponse response  = client.execute(get);
             
