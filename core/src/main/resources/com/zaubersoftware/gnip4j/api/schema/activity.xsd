@@ -2,7 +2,98 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="https://labs.zaubersoftware.com/ns/2011/05/gnip4j/activity" xmlns:activity="https://labs.zaubersoftware.com/ns/2011/05/gnip4j/activity">
   <xs:element name="activity">
     <xs:complexType>
+      <xs:sequence>
+        <xs:element name="location">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="geo">
+                <xs:complexType>
+                  <xs:attribute name="type" use="required" type="xs:string"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="country_code" use="required" type="xs:string"/>
+            <xs:attribute name="displayName" use="required" type="xs:string"/>
+            <xs:attribute name="objectType" use="required" type="xs:string"/>
+            <xs:attribute name="streetAddress" use="required" type="xs:string"/>
+            <xs:attribute name="link" use="required" type="xs:anyURI"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element ref="activity:actor"/>
+        <xs:element name="geo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" ref="activity:coordinates"/>
+            </xs:sequence>
+            <xs:attribute name="type" use="required" type="xs:string"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element ref="activity:generator"/>
+        <xs:element ref="activity:object"/>
+        <xs:element ref="activity:provider"/>
+      </xs:sequence>
       <xs:attribute name="verb" use="required" type="xs:string"/>
+      <xs:attribute name="postedTime" use="required" type="xs:dateTime"/>
+      <xs:attribute name="body" use="required" type="xs:string"/>
+      <xs:attribute name="objectType" use="required" type="xs:string"/>
+      <xs:attribute name="id" use="required" type="xs:ID"/>
+      <xs:attribute name="link" use="required" type="xs:anyURI"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="actor">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="location">
+          <xs:complexType>
+            <xs:attribute name="displayName" use="required" type="xs:string"/>
+            <xs:attribute name="objectType" use="required" type="xs:string"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="activity:languages"/>
+        <xs:element maxOccurs="unbounded" ref="activity:links"/>
+      </xs:sequence>
+      <xs:attribute name="postedTime" use="required" type="xs:dateTime"/>
+      <xs:attribute name="displayName" use="required" type="xs:string"/>
+      <xs:attribute name="preferredUsername" use="required" type="xs:string"/>
+      <xs:attribute name="utcOffset" use="required" type="xs:int"/>
+      <xs:attribute name="objectType" use="required" type="xs:string"/>
+      <xs:attribute name="statusesCount" use="required" type="xs:int"/>
+      <xs:attribute name="listedCount" use="required" type="xs:integer"/>
+      <xs:attribute name="friendsCount" use="required" type="xs:integer"/>
+      <xs:attribute name="followersCount" use="required" type="xs:integer"/>
+      <xs:attribute name="summary" use="required" type="xs:string"/>
+      <xs:attribute name="link" use="required" type="xs:anyURI"/>
+      <xs:attribute name="image" use="required" type="xs:anyURI"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="languages" type="xs:string"/>
+  <xs:element name="links">
+    <xs:complexType>
+      <xs:attribute name="href" use="required" type="xs:anyURI"/>
+      <xs:attribute name="rel" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="coordinates" type="xs:double"/>
+  <xs:element name="generator">
+    <xs:complexType>
+      <xs:attribute name="displayName" use="required" type="xs:string"/>
+      <xs:attribute name="link" use="required" type="xs:anyURI"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="object">
+    <xs:complexType>
+      <xs:attribute name="postedTime" use="required" type="xs:dateTime"/>
+      <xs:attribute name="id" use="required" type="xs:ID"/>
+      <xs:attribute name="objectType" use="required" type="xs:string"/>
+      <xs:attribute name="link" use="required" type="xs:anyURI"/>
+      <xs:attribute name="summary" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="provider">
+    <xs:complexType>
+      <xs:attribute name="displayName" use="required" type="xs:string"/>
+      <xs:attribute name="objectType" use="required" type="xs:string"/>
+      <xs:attribute name="link" use="required" type="xs:anyURI"/>
     </xs:complexType>
   </xs:element>
 </xs:schema>

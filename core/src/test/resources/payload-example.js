@@ -1,4 +1,3 @@
-var response = 
 {
 		  "verb": "post",
 		  "location": {
@@ -86,4 +85,4 @@ var response =
 		    "objectType": "service",
 		    "link": "http://www.twitter.com"
 		  }
-		};
+		}

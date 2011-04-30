@@ -152,6 +152,7 @@ public class HttpGnipStream extends AbstractGnipStream {
         
     }
     
+    /** consumes the http input stream from the stream one tweet per line */
     private class GnipHttpConsumer implements Runnable {
         private final HttpResponse response;
 

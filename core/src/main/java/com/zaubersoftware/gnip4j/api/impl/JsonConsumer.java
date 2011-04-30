@@ -23,6 +23,7 @@ import java.util.concurrent.Future;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ar.com.zauber.commons.dao.Transformer;
 import ar.com.zauber.commons.validate.Validate;
 import ar.com.zauber.leviathan.common.async.AbstractJobScheduler;
 import ar.com.zauber.leviathan.common.async.JobQueue;
@@ -38,8 +39,8 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
  * @since Apr 29, 2011
  */
 public class JsonConsumer extends AbstractJobScheduler<String> {
-    private JobQueue<Activity> activityQueue;
-
+    private final JobQueue<Activity> activityQueue;
+    private final Transformer<String, Activity> transformer = new JsonToActivityTransformer();
     /**
      * Creates the JsonToDomainJobScheduler.
      *
@@ -54,9 +55,7 @@ public class JsonConsumer extends AbstractJobScheduler<String> {
 
     @Override
     protected final void doJob(final String json) throws InterruptedException {
-        final Activity activity = new Activity();
-        activity.setVerb(json);
-        activityQueue.add(activity);
+        activityQueue.add(transformer.transform(json));
     }
 
     @Override
