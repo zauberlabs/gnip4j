@@ -34,7 +34,7 @@ import ar.com.zauber.leviathan.common.async.JobQueue;
 import ar.com.zauber.leviathan.common.async.impl.BlockingQueueJobQueue;
 
 import com.zaubersoftware.gnip4j.api.impl.AbstractGnipStream;
-import com.zaubersoftware.gnip4j.api.impl.ActivityHandlerConsumer;
+import com.zaubersoftware.gnip4j.api.impl.ActivityConsumer;
 import com.zaubersoftware.gnip4j.api.impl.JsonConsumer;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 
@@ -63,7 +63,7 @@ public class HttpGnipStream extends AbstractGnipStream {
     private final Thread jsonThread;
     private final Thread processThread;
     private final AbstractJobScheduler<String> stringScheduler = new JsonConsumer(jsonQueue, activityQueue);
-    private final AbstractJobScheduler<Activity> activityScheduler = new ActivityHandlerConsumer(activityQueue, Executors.newScheduledThreadPool(10), this);
+    private final AbstractJobScheduler<Activity> activityScheduler = new ActivityConsumer(activityQueue, Executors.newScheduledThreadPool(10), this);
     
     private final HttpResponse response;
     

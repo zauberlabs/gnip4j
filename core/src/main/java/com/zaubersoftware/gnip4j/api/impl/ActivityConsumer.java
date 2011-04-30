@@ -32,7 +32,7 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
-public class ActivityHandlerConsumer extends AbstractJobScheduler<Activity> {
+public class ActivityConsumer extends AbstractJobScheduler<Activity> {
     private final ExecutorService executors;
     private GnipStream stream;
 
@@ -42,7 +42,7 @@ public class ActivityHandlerConsumer extends AbstractJobScheduler<Activity> {
      * @param queue
      * @param httpGnipStream 
      */
-    public ActivityHandlerConsumer(final JobQueue<Activity> queue, final ExecutorService executors, final GnipStream stream) {
+    public ActivityConsumer(final JobQueue<Activity> queue, final ExecutorService executors, final GnipStream stream) {
         super(queue);
         Validate.notNull(executors);
         
