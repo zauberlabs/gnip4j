@@ -31,6 +31,7 @@
         <xs:element ref="activity:generator"/>
         <xs:element ref="activity:object"/>
         <xs:element ref="activity:provider"/>
+        <xs:element ref="activity:gnip"/>
       </xs:sequence>
       <xs:attribute name="verb" use="required" type="xs:string"/>
       <xs:attribute name="postedTime" use="required" type="xs:dateTime"/>
@@ -94,6 +95,25 @@
       <xs:attribute name="displayName" use="required" type="xs:string"/>
       <xs:attribute name="objectType" use="required" type="xs:string"/>
       <xs:attribute name="link" use="required" type="xs:anyURI"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="gnip">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="activity:language"/>
+        <xs:element maxOccurs="unbounded" ref="activity:matching_rules"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="language">
+    <xs:complexType>
+      <xs:attribute name="value" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="matching_rules">
+    <xs:complexType>
+      <xs:attribute name="value" use="required" type="xs:string"/>
+      <xs:attribute name="tag" use="required" type="xs:string"/>
     </xs:complexType>
   </xs:element>
 </xs:schema>

@@ -66,6 +66,16 @@ activity = element activity {
         attribute displayName {xsd:string},
         attribute objectType {xsd:string},
         attribute link {xsd:anyURI}
-      }
+    },
+    #TODO Twitter Entities
+    element gnip {
+        element language {
+            attribute value {xsd:string}
+        },
+        element matching_rules {
+            attribute value {xsd:string},
+            attribute tag {xsd:string}
+        }+
+    }
     
 }
