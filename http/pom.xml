@@ -6,7 +6,7 @@
 		<groupId>com.zaubersoftware.gnip4j</groupId>
 		<version>0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>ar.com.zauber.gnip4j</groupId>
+	<groupId>com.zaubersoftware.gnip4j</groupId>
 	<artifactId>gnip4j-http</artifactId>
 	<packaging>jar</packaging>
 	<name>Zauber::Gnip4j::HTTP Client</name>
