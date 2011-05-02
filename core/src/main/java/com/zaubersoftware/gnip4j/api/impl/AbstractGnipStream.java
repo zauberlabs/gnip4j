@@ -30,8 +30,8 @@ import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 
 /**
- * TODO: Description of the class, Comments in english by default
- *
+ * Abstract skeleton implementation of the {@link GnipStream} interface.
+ * This is the base class of all the {@link GnipStream} implementations.
  *
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
@@ -39,14 +39,14 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
 public abstract class AbstractGnipStream implements GnipStream {
     private final Lock lock = new ReentrantLock();
     private final Condition emptyCondition  = lock.newCondition(); 
-    protected final AtomicBoolean streamClosed = new AtomicBoolean(false);
+    private final AtomicBoolean streamClosed = new AtomicBoolean(false);
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private Closure<Activity> closure = new NullClosure<Activity>();
     
     @Override
-    public final void addObserver(final Closure<Activity> closure) {
-        if(closure != null) {
-            this.closure  = closure;
+    public final void addObserver(final Closure<Activity> observerClosure) {
+        if(observerClosure != null) {
+            this.closure  = observerClosure;
         }
     }
 

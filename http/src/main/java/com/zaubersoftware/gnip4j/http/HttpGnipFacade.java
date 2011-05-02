@@ -15,6 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.http;
 
+import javax.validation.constraints.NotNull;
+
 import org.apache.http.HttpVersion;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.params.ClientParamBean;
@@ -40,7 +42,7 @@ import com.zaubersoftware.gnip4j.api.GnipStream;
  * @since Apr 29, 2011
  */
 public class HttpGnipFacade implements GnipFacade {
-    private static final String userAgent = "Gnip4j (https://github.com/zaubersoftware/gnip4j/)";
+    private static final String USER_AGENT = "Gnip4j (https://github.com/zaubersoftware/gnip4j/)";
     private final DefaultHttpClient client;
     
     /** Creates the HttpGnipFacade. */
@@ -48,7 +50,12 @@ public class HttpGnipFacade implements GnipFacade {
         this(createHttpClient());
     }
 
-    public HttpGnipFacade(final DefaultHttpClient client) {
+    /**
+     * Creates the HttpGnipFacade.
+     *
+     * @param client
+     */
+    public HttpGnipFacade(@NotNull final DefaultHttpClient client) {
         Validate.notNull(client);
         
         this.client = client;
@@ -64,12 +71,12 @@ public class HttpGnipFacade implements GnipFacade {
         
         final HttpProtocolParamBean httpProtocol = new HttpProtocolParamBean(params);
         httpProtocol.setContentCharset("utf-8");
-        httpProtocol.setUserAgent(userAgent);
+        httpProtocol.setUserAgent(USER_AGENT);
         httpProtocol.setVersion(HttpVersion.HTTP_1_1);
 
         final HttpConnectionParamBean bean = new HttpConnectionParamBean(params);
         bean.setConnectionTimeout(60 * 10000); // timeout in milliseconds until a connection is established.
-        bean.setSoTimeout(20000); // a maximum period inactivity between two consecutive data packets
+        bean.setSoTimeout(60000); // a maximum period inactivity between two consecutive data packets
         bean.setSocketBufferSize(8192); // the internal socket buffer used to buffer data while receiving / transmitting HTTP messages. 
         bean.setTcpNoDelay(true); // http.connection.stalecheck. overhead de 30ms 
         bean.setStaleCheckingEnabled(true); // determines whether Nagle's algorithm is to be used 

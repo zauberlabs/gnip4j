@@ -72,7 +72,7 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
-public class HttpGnipStream extends AbstractGnipStream {
+public final class HttpGnipStream extends AbstractGnipStream {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     /** stream name for debugging propourse */
     private final String streamName;
@@ -81,7 +81,6 @@ public class HttpGnipStream extends AbstractGnipStream {
     private final Thread httpThread;
     private final GnipHttpConsumer httpConsumer;
     private final ExecutorService activityService = Executors.newScheduledThreadPool(10);
-    private static final CharsetStrategy charsetStrategy = new DefaultHttpCharsetStrategy();   
     
     /** Creates the HttpGnipStream. */
     public HttpGnipStream(final DefaultHttpClient client, 
@@ -143,8 +142,13 @@ public class HttpGnipStream extends AbstractGnipStream {
     private class GnipHttpConsumer implements Runnable {
         private final HttpResponse response;
         private InputStream is = null;
-        final ObjectMapper mapper = new ObjectMapper();
+        private final ObjectMapper mapper = new ObjectMapper();
         
+        /**
+         * Creates the GnipHttpConsumer.
+         *
+         * @param response
+         */
         public GnipHttpConsumer(final HttpResponse response) {
             Validate.notNull(response);
             this.response = response;
@@ -162,8 +166,6 @@ public class HttpGnipStream extends AbstractGnipStream {
             try {
                 entity = response.getEntity();
                 if (entity != null) {
-                    final Charset charset = charsetStrategy.getCharset(HTTPClientURIFetcher.getMetaResponse(
-                                    streamURI, response, entity), null);
                     // TODO Wrapp InputStream to count bytes and transfer rates 
                     is = entity.getContent();
                     final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
@@ -207,6 +209,9 @@ public class HttpGnipStream extends AbstractGnipStream {
             }
         }
         
+        /**
+         * Cleanly close the input stream
+         */
         void closeInputStream() {
             if(is != null) {
                 try {
@@ -222,12 +227,12 @@ public class HttpGnipStream extends AbstractGnipStream {
     
     @Override
     protected void doClose() {
-        if(shuttingDown.getAndSet(true) == false) {
+        if(!shuttingDown.getAndSet(true)) {
             logger.info("Shutting Down " + streamName);
             
             httpConsumer.closeInputStream();
             
-            // no aceptamos más trabajos.
+            //jobs are no longer accepted
             if(httpThread != null) {
                 httpThread.interrupt();
                 

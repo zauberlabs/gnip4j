@@ -55,7 +55,6 @@ public class Bar {
                 @Override
                 public void execute(final Activity t) {
                     System.out.println(t.getBody());
-                    stream.close();
                 }
             });
             stream.await();
