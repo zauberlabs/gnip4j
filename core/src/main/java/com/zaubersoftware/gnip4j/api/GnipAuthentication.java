@@ -18,13 +18,13 @@ package com.zaubersoftware.gnip4j.api;
 /**
  * Gnip Authentication  
  * 
- * TODO future OAuth?
- * 
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
 public interface GnipAuthentication {
- 
+
+    //TODO Future OAuth?
+    
     /** @return the username */
     String getUsername();
     

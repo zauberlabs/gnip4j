@@ -61,6 +61,15 @@ public class HttpGnipFacade implements GnipFacade {
         this.client = client;
     }
 
+    @Override
+    public final GnipStream createStream(
+            @NotNull final String domain,
+            @NotNull final long dataCollectorId, 
+            @NotNull final GnipAuthentication auth) {
+        //TODO Add caching
+        return new HttpGnipStream(client, domain, dataCollectorId, auth);
+    }
+    
     /** create the default http client */
     private static DefaultHttpClient createHttpClient() {
         final DefaultHttpClient  client = new DefaultHttpClient();
@@ -70,14 +79,15 @@ public class HttpGnipFacade implements GnipFacade {
         final HttpParams params = client.getParams();
         
         final HttpProtocolParamBean httpProtocol = new HttpProtocolParamBean(params);
-        httpProtocol.setContentCharset("utf-8");
+        httpProtocol.setContentCharset("UTF-8");
         httpProtocol.setUserAgent(USER_AGENT);
         httpProtocol.setVersion(HttpVersion.HTTP_1_1);
 
         final HttpConnectionParamBean bean = new HttpConnectionParamBean(params);
         bean.setConnectionTimeout(60 * 10000); // timeout in milliseconds until a connection is established.
         bean.setSoTimeout(60000); // a maximum period inactivity between two consecutive data packets
-        bean.setSocketBufferSize(8192); // the internal socket buffer used to buffer data while receiving / transmitting HTTP messages. 
+        bean.setSocketBufferSize(8192); // the internal socket buffer used to buffer data while 
+                                        // receiving / transmitting HTTP messages. 
         bean.setTcpNoDelay(true); // http.connection.stalecheck. overhead de 30ms 
         bean.setStaleCheckingEnabled(true); // determines whether Nagle's algorithm is to be used 
         bean.setLinger(-1); // sets SO_LINGER with the specified linger time in seconds
@@ -100,12 +110,4 @@ public class HttpGnipFacade implements GnipFacade {
         client.addResponseInterceptor(gzip);
         return client;
     }
-    
-    
-    @Override
-    public final GnipStream createStream(final String domain,
-            final long dataCollectorId, final GnipAuthentication auth) {
-        return new HttpGnipStream(client, domain, dataCollectorId, auth);
-    }
-    
 }
