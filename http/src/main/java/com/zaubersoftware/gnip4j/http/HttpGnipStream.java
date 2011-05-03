@@ -43,6 +43,7 @@ import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ar.com.zauber.commons.dao.Closure;
 import ar.com.zauber.commons.validate.Validate;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
@@ -202,7 +203,10 @@ public final class HttpGnipStream extends AbstractGnipStream {
                             activityService.execute(new Runnable() {
                                 @Override
                                 public void run() {
-                                    getClosure().execute(activity);
+                                    final Closure<Activity> closure = getClosure();
+                                    if (closure != null) {
+                                        closure.execute(activity);
+                                    }
                                 }
                             });
                         }
