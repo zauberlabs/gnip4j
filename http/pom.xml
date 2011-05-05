@@ -18,19 +18,7 @@
 			<version>${project.version}</version>
 		</dependency>
 
-		<!-- BEGIN: Zauber Commons -->
-		<dependency>
-			<groupId>ar.com.zauber.commons</groupId>
-			<artifactId>commons-base</artifactId>
-		</dependency>
-		<!-- END: Zauber Commons -->
 		<!-- START: HTTP -->
-                <!--
-		<dependency>
-			<groupId>ar.com.zauber.leviathan</groupId>
-			<artifactId>leviathan-api-httpclient</artifactId>
-			<version>0.7-SNAPSHOT</version>
-		</dependency>-->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore</artifactId>

@@ -15,9 +15,6 @@
  */
 package com.zaubersoftware.gnip4j.api;
 
-import ar.com.zauber.commons.dao.Closure;
-
-import com.zaubersoftware.gnip4j.api.model.Activity;
 
 /**
  * <p>
@@ -34,7 +31,7 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
  */
 public interface GnipStream {
 
-    void addObserver(Closure<Activity> closure);
+    void addObserver(StreamNotification notification);
 
     /** release the stream  */
     void close();

@@ -16,12 +16,6 @@
                 	<artifactId>validation-api</artifactId>
                 </dependency>
 
-		<!-- BEGIN: Zauber Commons -->
-		<dependency>
-		  <groupId>ar.com.zauber.commons</groupId>
-		  <artifactId>commons-base</artifactId>
-		</dependency>
-		<!-- END: Zauber Commons -->
                 <dependency>
                   <groupId>org.codehaus.jackson</groupId> 
                   <artifactId>jackson-core-asl</artifactId> 

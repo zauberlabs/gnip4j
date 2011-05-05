@@ -200,7 +200,7 @@ public final class HttpGnipStream extends AbstractGnipStream {
                             activityService.execute(new Runnable() {
                                 @Override
                                 public void run() {
-                                    getClosure().execute(activity);
+                                    getNotification().notify(activity, HttpGnipStream.this);
                                 }
                             });
                         }
