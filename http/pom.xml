@@ -13,8 +13,8 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>${project.groupId}</groupId>
 			<artifactId>gnip4j-core</artifactId>
+			<groupId>${project.groupId}</groupId>
 			<version>${project.version}</version>
 		</dependency>
 
@@ -25,11 +25,12 @@
 		</dependency>
 		<!-- END: Zauber Commons -->
 		<!-- START: HTTP -->
+                <!--
 		<dependency>
 			<groupId>ar.com.zauber.leviathan</groupId>
 			<artifactId>leviathan-api-httpclient</artifactId>
 			<version>0.7-SNAPSHOT</version>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore</artifactId>

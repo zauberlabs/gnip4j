@@ -15,8 +15,6 @@
  */
 package com.zaubersoftware.gnip4j.http;
 
-import static ar.com.zauber.leviathan.common.async.ThreadUtils.*;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -292,5 +290,26 @@ public final class HttpGnipStream extends AbstractGnipStream {
         } else {
             logger.info("Already shutting Down " + streamName);
         }
+    }
+    
+    /** espera que termine un thread */
+    public static boolean waitForTermination(final Thread thread) {
+        boolean wait = true;
+        
+        // esperamos que el scheduler consuma todos los trabajos
+        while(wait && thread.isAlive()) {
+            try {
+                thread.join();
+                wait = false;
+            } catch (InterruptedException e) {
+                try {
+                    // si justo tenemos un bug, evitamos comermos  todo el cpu
+                    Thread.sleep(200);
+                } catch (InterruptedException e1) {
+                    // nada que  hacer
+                }
+            }
+        }
+        return wait;
     }
 }

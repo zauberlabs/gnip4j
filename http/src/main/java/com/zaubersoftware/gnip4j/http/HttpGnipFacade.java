@@ -29,7 +29,6 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParamBean;
 
 import ar.com.zauber.commons.validate.Validate;
-import ar.com.zauber.leviathan.impl.httpclient.GZipInterceptor;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.GnipFacade;
