@@ -18,9 +18,8 @@
 
 		<!-- BEGIN: Zauber Commons -->
 		<dependency>
-		  <groupId>ar.com.zauber.leviathan</groupId>
-		  <artifactId>leviathan-api-common</artifactId>
-		  <version>0.7-SNAPSHOT</version>
+		  <groupId>ar.com.zauber.commons</groupId>
+		  <artifactId>commons-base</artifactId>
 		</dependency>
 		<!-- END: Zauber Commons -->
                 <dependency>
