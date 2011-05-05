@@ -11,6 +11,11 @@
 	<packaging>jar</packaging>
 	<name>Zauber::Gnip4j::Core</name>
 	<dependencies>
+		<dependency>
+                	<groupId>javax.validation</groupId>
+                	<artifactId>validation-api</artifactId>
+                </dependency>
+
 		<!-- BEGIN: Zauber Commons -->
 		<dependency>
 		  <groupId>ar.com.zauber.leviathan</groupId>

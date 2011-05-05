@@ -141,10 +141,6 @@
       			<version>${slf4j.version}</version>
 		      <scope>test</scope>
 	    	</dependency>
-		<dependency>
-                	<groupId>javax.validation</groupId>
-                	<artifactId>validation-api</artifactId>
-                </dependency>	
 	</dependencies>
 	<properties>
 		<zauber.commons.version>3.47</zauber.commons.version>
