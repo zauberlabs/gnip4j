@@ -16,10 +16,7 @@
 package com.zaubersoftware.gnip4j.http;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.apache.commons.lang.Validate;
 import org.junit.Test;
-
-import ar.com.zauber.commons.dao.Closure;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.GnipFacade;
@@ -44,9 +41,15 @@ public class TestDriver {
         final String password = System.getProperty("gnip.password");
         final String domain = System.getProperty("gnip.domain");
         
-        Validate.notNull(username, "Missing gnip.username");
-        Validate.notNull(password, "Missing gnip.password");
-        Validate.notNull(domain, "Missing gnip.domain");
+        if(username == null) {
+            throw new IllegalArgumentException("Missing gnip.username");
+        }
+        if(password == null) {
+            throw new IllegalArgumentException("Missing gnip.password");
+        }
+        if(domain == null) {
+            throw new IllegalArgumentException("Missing gnip.domain");
+        }
         
         try {
             final GnipFacade gnip = new HttpGnipFacade();

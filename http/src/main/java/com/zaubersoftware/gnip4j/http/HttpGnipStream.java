@@ -41,8 +41,6 @@ import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ar.com.zauber.commons.validate.Validate;
-
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
 import com.zaubersoftware.gnip4j.api.exception.GnipException;
@@ -92,9 +90,15 @@ public final class HttpGnipStream extends AbstractGnipStream {
             @NotNull final String domain,
             @NotNull final long dataCollectorId, 
             @NotNull final GnipAuthentication auth) {
-        Validate.notNull(client, "The HTTP client cannot be null");
-        Validate.notBlank(domain, "The domain cannot be empty");
-        Validate.notNull(auth, "The Gnip authentication cannot null");
+        if(client == null) {
+            throw new IllegalArgumentException("The HTTP client cannot be null");
+        }
+        if(domain == null) {
+            throw new IllegalArgumentException("The domain cannot be empty");
+        }
+        if(auth == null) {
+            throw new IllegalArgumentException("The Gnip authentication cannot null");
+        }
         
         final StringBuilder sb = new StringBuilder("https://");
         sb.append(domain);
@@ -174,7 +178,9 @@ public final class HttpGnipStream extends AbstractGnipStream {
          * @param response
          */
         public GnipHttpConsumer(final HttpResponse response) {
-            Validate.notNull(response);
+            if(response == null) {
+                throw new IllegalArgumentException("response is null");
+            }
             this.response = response;
             
             mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
