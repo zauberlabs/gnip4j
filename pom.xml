@@ -10,7 +10,7 @@
 	<name>Zauber::Gnip4j</name>
 	<groupId>com.zaubersoftware.gnip4j</groupId>
 	<artifactId>zauber-gnip4j-parent</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<scm>
@@ -30,23 +30,15 @@
 
 	<repositories>
 		<repository>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
+			<releases><enabled>true</enabled></releases>
+			<snapshots><enabled>false</enabled></snapshots>
 			<id>zauber-code-releases</id>
 			<name>Zauber Code Releases</name>
 			<url>https://repo1.zaubersoftware.com/zauber/code/releases</url>
 		</repository>
 		<repository>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
+			<releases><enabled>false</enabled></releases>
+			<snapshots><enabled>true</enabled></snapshots>
 			<id>zauber-code-snapshots</id>
 			<name>Zauber Code Snapshots</name>
 			<url>https://repo1.zaubersoftware.com/zauber/code/snapshots</url>
@@ -135,143 +127,13 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-site-plugin</artifactId>
-				<version>2.1.1</version>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.doxia</groupId>
-						<artifactId>doxia-module-twiki</artifactId>
-						<version>1.1.3</version>
-					</dependency>
-				</dependencies>
-
-			</plugin>
-
-			<!-- DocBook (with thanks to Spring Batch's config!) -->
-			<plugin>
-				<groupId>com.agilejava.docbkx</groupId>
-				<artifactId>docbkx-maven-plugin</artifactId>
-				<version>2.0.8</version>
-				<executions>
-					<execution>
-						<id>single-page</id>
-						<goals>
-							<goal>generate-html</goal>
-						</goals>
-						<configuration>
-							<htmlCustomization>${basedir}/src/docbkx/resources/xsl/html.xsl</htmlCustomization>
-							<postProcess>
-								<move todir="${basedir}/target/site/reference/html-single">
-									<fileset dir="${basedir}/target/docbkx/html">
-										<include name="index.html" />
-									</fileset>
-								</move>
-								<copy todir="${basedir}/target/site/reference/html-single">
-									<fileset dir="${basedir}/src/docbkx/resources">
-										<include name="**/*.css" />
-										<include name="**/*.png" />
-										<include name="**/*.gif" />
-										<include name="**/*.jpg" />
-									</fileset>
-								</copy>
-								<copy todir="${basedir}/target/site/reference/html-single">
-									<fileset dir="${basedir}/src/site/docbook/reference">
-										<include name="**/*.png" />
-										<include name="**/*.gif" />
-										<include name="**/*.jpg" />
-									</fileset>
-								</copy>
-							</postProcess>
-						</configuration>
-						<phase>pre-site</phase>
-					</execution>
-					<execution>
-						<id>single-pdf</id>
-						<goals>
-							<goal>generate-pdf</goal>
-						</goals>
-						<configuration>
-							<imgSrcPath>src/site/docbook/reference/</imgSrcPath>
-							<admonGraphicsPath>src/docbkx/resources/images/</admonGraphicsPath>
-							<postProcess>
-								<copy file="${basedir}/target/docbkx/pdf/index.pdf"
-									tofile="${basedir}/target/site/reference/pdf/zauber-commons-docs.pdf"
-									failonerror="false" />
-							</postProcess>
-						</configuration>
-						<phase>pre-site</phase>
-					</execution>
-					<execution>
-						<id>multi-page</id>
-						<goals>
-							<goal>generate-html</goal>
-						</goals>
-						<configuration>
-							<chunkedOutput>true</chunkedOutput>
-							<htmlCustomization>${basedir}/src/docbkx/resources/xsl/html_chunk.xsl</htmlCustomization>
-							<postProcess>
-								<move todir="${basedir}/target/site/reference">
-									<fileset dir="${basedir}/target/docbkx">
-										<include name="**/*.html" />
-									</fileset>
-								</move>
-								<copy todir="${basedir}/target/site/reference/html">
-									<fileset dir="${basedir}/src/docbkx/resources">
-										<include name="**/*.css" />
-										<include name="**/*.png" />
-										<include name="**/*.gif" />
-										<include name="**/*.jpg" />
-									</fileset>
-								</copy>
-								<copy todir="${basedir}/target/site/reference/html">
-									<fileset dir="${basedir}/src/site/docbook/reference">
-										<include name="**/*.png" />
-										<include name="**/*.gif" />
-										<include name="**/*.jpg" />
-									</fileset>
-								</copy>
-							</postProcess>
-						</configuration>
-						<phase>pre-site</phase>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.docbook</groupId>
-						<artifactId>docbook-xml</artifactId>
-						<version>4.4</version>
-						<scope>runtime</scope>
-					</dependency>
-					<dependency>
-						<groupId>org.apache.xmlgraphics</groupId>
-						<artifactId>fop</artifactId>
-						<version>0.93</version>
-					</dependency>
-				</dependencies>
-				<configuration>
-					<includes>index.xml</includes>
-					<chunkedOutput>false</chunkedOutput>
-					<draftWatermarkImage />
-					<htmlStylesheet>css/html.css</htmlStylesheet>
-					<sourceDirectory>${basedir}/src/site/docbook/reference</sourceDirectory>
-					<foCustomization>${basedir}/src/docbkx/resources/xsl/fopdf.xsl</foCustomization>
-					<xincludeSupported>true</xincludeSupported>
-					<entities>
-						<entity>
-							<name>version</name>
-							<value>${project.version}</value>
-						</entity>
-					</entities>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 	<dependencies>
 		<dependency>
 	      		<artifactId>junit</artifactId>
 	      		<groupId>junit</groupId>
+                        <scope>test</scope>
 		</dependency>
     		<dependency>
       			<groupId>org.slf4j</groupId>
@@ -312,76 +174,70 @@
               <version>1.8.0</version> 
             </dependency>
 
-
-		<!-- BEGIN: Zauber Commons -->
-		<dependency>
-			<groupId>ar.com.zauber.commons</groupId>
-			<artifactId>commons-base</artifactId>
-			<version>${zauber.commons.version}</version>
-		</dependency>
+            <!-- BEGIN: Zauber Commons -->
+            <dependency>
+                    <groupId>ar.com.zauber.commons</groupId>
+                    <artifactId>commons-base</artifactId>
+                    <version>${zauber.commons.version}</version>
+            </dependency>
 		<!-- END: Zauber Commons -->
 
-		      <!-- Logging -->
-      <dependency>
+	    <!-- Logging -->
+          <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+          </dependency>
+          <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
+            <artifactId>slf4j-log4j12</artifactId>
             <version>${slf4j.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-log4j12</artifactId>
-        <version>${slf4j.version}</version>
-        <scope>runtime</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>jcl-over-slf4j</artifactId>
-        <version>${slf4j.version}</version>
-        <scope>runtime</scope>
-      </dependency>
-      <dependency>
-        <groupId>log4j</groupId>
-        <artifactId>log4j</artifactId>
-        <version>1.2.16</version>
-        <exclusions>
-          <exclusion>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>javax.jms</groupId>
-            <artifactId>jms</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>com.sun.jmx</groupId>
-            <artifactId>jmxri</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>com.sun.jdmk</groupId>
-            <artifactId>jmxtools</artifactId>
-          </exclusion>
-        </exclusions>
-        <scope>runtime</scope>
-      </dependency>
+            <scope>runtime</scope>
+          </dependency>
+          <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+            <exclusions>
+              <exclusion>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+              </exclusion>
+              <exclusion>
+                <groupId>javax.jms</groupId>
+                <artifactId>jms</artifactId>
+              </exclusion>
+              <exclusion>
+                <groupId>com.sun.jmx</groupId>
+                <artifactId>jmxri</artifactId>
+              </exclusion>
+              <exclusion>
+                <groupId>com.sun.jdmk</groupId>
+                <artifactId>jmxtools</artifactId>
+              </exclusion>
+            </exclusions>
+          </dependency>
       		<!-- END Logging -->
 		<!-- BEGIN: Testing -->
 		<dependency>
 			<artifactId>junit</artifactId>
 			<groupId>junit</groupId>
 			<version>4.7</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
 			<version>1.8.5</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<version>1.8.5</version>
-			<scope>test</scope>
 		</dependency>
 		<!-- END: Testing -->
 		<dependency>
