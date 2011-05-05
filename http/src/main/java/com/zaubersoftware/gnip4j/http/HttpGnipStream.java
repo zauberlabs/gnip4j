@@ -41,12 +41,6 @@ import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-<<<<<<< HEAD
-import ar.com.zauber.commons.dao.Closure;
-import ar.com.zauber.commons.validate.Validate;
-
-=======
->>>>>>> 5a5a7a974a8ba305c8c2f18e649b487f300ac00f
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
 import com.zaubersoftware.gnip4j.api.exception.GnipException;
@@ -173,7 +167,6 @@ public final class HttpGnipStream extends AbstractGnipStream {
      * Consumes the HTTP input stream from the stream one {@link Activity} per line 
      */
     private class GnipHttpConsumer implements Runnable {
-        private final Logger logger = LoggerFactory.getLogger(GnipHttpConsumer.class);
         private final ObjectMapper mapper = new ObjectMapper();
         private HttpResponse response;
         private InputStream is = null;
@@ -209,6 +202,7 @@ public final class HttpGnipStream extends AbstractGnipStream {
                         logger.debug("Starting to consume activity stream...");
                         while(!Thread.interrupted()) {
                             final Activity activity = parser.readValueAs(Activity.class);
+                            logger.trace("Notifying activity {}", activity.getBody());
                             activityService.execute(new Runnable() {
                                 @Override
                                 public void run() {
