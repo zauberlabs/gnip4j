@@ -15,6 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.api;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Facade to the Gnip Streaming API  
  * 
@@ -23,12 +25,16 @@ package com.zaubersoftware.gnip4j.api;
  */
 public interface GnipFacade {
 
+    //TODO Deprecate this method and replace it for one that receives a URI Strategy instead of the domain.
     /**
      * Gnip provides access to the data with a streaming HTTP implementation
      * that allows you to consume data in near real-time over a single
      * persistent HTTP connection/request.
      * 
-     * @return the stream
+     * @param domain The domain name for the power track API.
+     * @param dataCollectorId
+     * @param auth
+     * @return
      */
-    GnipStream createStream(final String domain, long dataCollectorId, GnipAuthentication auth);
+    GnipStream createStream(@NotNull String domain, long dataCollectorId, @NotNull GnipAuthentication auth);
 }

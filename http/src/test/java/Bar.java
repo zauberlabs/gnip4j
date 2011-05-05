@@ -50,16 +50,23 @@ public class Bar {
             final GnipFacade gnip = new HttpGnipFacade();
             
             final GnipAuthentication auth = new InmutableGnipAuthentication(username, password);
+            System.out.println("-- Creating stream");
             final GnipStream stream = gnip.createStream(domain, 1, auth);
+            final AtomicInteger counter = new AtomicInteger();
             stream.addObserver(new Closure<Activity>() {
                 @Override
                 public void execute(final Activity t) {
-                    System.out.println(t.getBody());
-                    stream.close();
+                    final int i = counter.getAndIncrement();
+                    if (i >= 10) {
+                        System.out.println("-- Closing stream.");
+                        stream.close();
+                    }
+                    System.out.println(i + "-" + t.getBody());
                 }
             });
+            System.out.println("-- Awaiting for strem to terminate");
             stream.await();
-            System.out.println("Shutting down");
+            System.out.println("-- Shutting down");
 
         }   catch(Throwable t) {
             System.out.println(t.getMessage());

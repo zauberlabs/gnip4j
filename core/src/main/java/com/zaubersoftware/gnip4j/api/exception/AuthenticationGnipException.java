@@ -63,4 +63,6 @@ public class AuthenticationGnipException extends GnipException {
         super(cause);
         // TODO: Auto-generated constructor stub
     }
+    
+    //TODO Add the user credentials that were trying to be authenticated
 }

@@ -41,5 +41,5 @@ public class TransportGnipException extends GnipException {
         super(cause);
     }
 
-
+    //TODO Add support for transport information error, for example, status code
 }
