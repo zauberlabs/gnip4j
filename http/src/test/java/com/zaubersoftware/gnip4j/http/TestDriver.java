@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.zaubersoftware.gnip4j.http;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.apache.commons.lang.Validate;
 import org.junit.Test;
-
-import ar.com.zauber.commons.dao.Closure;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.GnipStream;
+import com.zaubersoftware.gnip4j.api.StreamNotification;
 import com.zaubersoftware.gnip4j.api.impl.InmutableGnipAuthentication;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.http.HttpGnipFacade;
@@ -34,7 +33,7 @@ import com.zaubersoftware.gnip4j.http.HttpGnipFacade;
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
-public class Bar {
+public class TestDriver {
 
     @Test
     public void testname() throws Exception {
@@ -42,9 +41,15 @@ public class Bar {
         final String password = System.getProperty("gnip.password");
         final String domain = System.getProperty("gnip.domain");
         
-        Validate.notNull(username, "Missing gnip.username");
-        Validate.notNull(password, "Missing gnip.password");
-        Validate.notNull(domain, "Missing gnip.domain");
+        if(username == null) {
+            throw new IllegalArgumentException("Missing gnip.username");
+        }
+        if(password == null) {
+            throw new IllegalArgumentException("Missing gnip.password");
+        }
+        if(domain == null) {
+            throw new IllegalArgumentException("Missing gnip.domain");
+        }
         
         try {
             final GnipFacade gnip = new HttpGnipFacade();
@@ -53,15 +58,15 @@ public class Bar {
             System.out.println("-- Creating stream");
             final GnipStream stream = gnip.createStream(domain, 1, auth);
             final AtomicInteger counter = new AtomicInteger();
-            stream.addObserver(new Closure<Activity>() {
+            stream.addObserver(new StreamNotification() {
                 @Override
-                public void execute(final Activity t) {
+                public void notify(final Activity activity, final GnipStream stream) {
                     final int i = counter.getAndIncrement();
                     if (i >= 10) {
                         System.out.println("-- Closing stream.");
                         stream.close();
                     }
-                    System.out.println(i + "-" + t.getBody());
+                    System.out.println(i + "-" + activity.getBody());
                 }
             });
             System.out.println("-- Awaiting for strem to terminate");
@@ -72,8 +77,5 @@ public class Bar {
             System.out.println(t.getMessage());
             t.printStackTrace();
         }
-        
-        
-        
     }
 }

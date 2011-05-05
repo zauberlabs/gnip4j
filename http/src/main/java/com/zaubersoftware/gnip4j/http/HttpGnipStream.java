@@ -15,8 +15,6 @@
  */
 package com.zaubersoftware.gnip4j.http;
 
-import static ar.com.zauber.leviathan.common.async.ThreadUtils.*;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -43,9 +41,12 @@ import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+<<<<<<< HEAD
 import ar.com.zauber.commons.dao.Closure;
 import ar.com.zauber.commons.validate.Validate;
 
+=======
+>>>>>>> 5a5a7a974a8ba305c8c2f18e649b487f300ac00f
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
 import com.zaubersoftware.gnip4j.api.exception.GnipException;
@@ -95,9 +96,15 @@ public final class HttpGnipStream extends AbstractGnipStream {
             @NotNull final String domain,
             @NotNull final long dataCollectorId, 
             @NotNull final GnipAuthentication auth) {
-        Validate.notNull(client, "The HTTP client cannot be null");
-        Validate.notBlank(domain, "The domain cannot be empty");
-        Validate.notNull(auth, "The Gnip authentication cannot null");
+        if(client == null) {
+            throw new IllegalArgumentException("The HTTP client cannot be null");
+        }
+        if(domain == null) {
+            throw new IllegalArgumentException("The domain cannot be empty");
+        }
+        if(auth == null) {
+            throw new IllegalArgumentException("The Gnip authentication cannot null");
+        }
         
         final StringBuilder sb = new StringBuilder("https://");
         sb.append(domain);
@@ -177,7 +184,9 @@ public final class HttpGnipStream extends AbstractGnipStream {
          * @param response
          */
         public GnipHttpConsumer(final HttpResponse response) {
-            Validate.notNull(response);
+            if(response == null) {
+                throw new IllegalArgumentException("response is null");
+            }
             this.response = response;
             
             mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -203,10 +212,7 @@ public final class HttpGnipStream extends AbstractGnipStream {
                             activityService.execute(new Runnable() {
                                 @Override
                                 public void run() {
-                                    final Closure<Activity> closure = getClosure();
-                                    if (closure != null) {
-                                        closure.execute(activity);
-                                    }
+                                    getNotification().notify(activity, HttpGnipStream.this);
                                 }
                             });
                         }
@@ -296,5 +302,26 @@ public final class HttpGnipStream extends AbstractGnipStream {
         } else {
             logger.info("Already shutting Down " + streamName);
         }
+    }
+    
+    /** espera que termine un thread */
+    public static boolean waitForTermination(final Thread thread) {
+        boolean wait = true;
+        
+        // esperamos que el scheduler consuma todos los trabajos
+        while(wait && thread.isAlive()) {
+            try {
+                thread.join();
+                wait = false;
+            } catch (InterruptedException e) {
+                try {
+                    // si justo tenemos un bug, evitamos comermos  todo el cpu
+                    Thread.sleep(200);
+                } catch (InterruptedException e1) {
+                    // nada que  hacer
+                }
+            }
+        }
+        return wait;
     }
 }

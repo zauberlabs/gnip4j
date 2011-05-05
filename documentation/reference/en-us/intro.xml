@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+]>
+<chapter xml:id="intro" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <title>Introduction</title>
+
+  <section xml:id="intro-what-is-zauber-commons">
+    <title>What is Zauber Commons?</title>
+
+    <para>Zauber Commons...
+    is an <link linkend="intro-why-use-it-usable-learnable">easy-to-use</link>
+    productivity tool </para>
+
+    </section>
+</chapter>

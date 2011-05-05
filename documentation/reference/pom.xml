@@ -1,0 +1,210 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+            <groupId>com.zaubersoftware.gnip4j.documentation</groupId>
+            <artifactId>gnip4j-documentation-parent</artifactId>
+		<version>0.0-SNAPSHOT</version>
+	</parent>
+	<groupId>com.zaubersoftware.gnip4j.documentation</groupId>
+	<artifactId>gnip4j-documentation-reference</artifactId>
+	<packaging>jar</packaging>
+	<name>Zauber::Gnip4j::Documentation:: Reference</name>
+  <properties>
+    <translation>en-US</translation>
+    <docname>gnip4j-reference</docname>
+  </properties> 
+
+   <profiles>
+    <!-- mvn compile -->
+    <profile>
+      <id>all</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jboss.maven.plugins</groupId>
+            <artifactId>maven-jdocbook-plugin</artifactId>
+            <version>2.3.5</version>
+            <extensions>true</extensions>
+            <configuration>
+              <formats>
+                <format>
+                  <formatName>pdf</formatName>
+                  <stylesheetResource>classpath:/xslt/org/jboss/pdf.xsl</stylesheetResource>
+                  <finalName>${docname}.pdf</finalName>
+                </format>
+                <format>
+                  <formatName>html</formatName>
+                  <stylesheetResource>classpath:/xslt/org/jboss/xhtml.xsl</stylesheetResource>
+                  <finalName>index.html</finalName>
+                </format>
+                <format>
+                  <formatName>html_single</formatName>
+                  <stylesheetResource>classpath:/xslt/org/jboss/xhtml-single.xsl</stylesheetResource>
+                  <finalName>index.html</finalName>
+                </format>
+              </formats>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- mvn compile -Phtml -->
+    <profile>
+      <id>html</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jboss.maven.plugins</groupId>
+            <artifactId>maven-jdocbook-plugin</artifactId>
+            <version>2.2.0</version>
+            <extensions>true</extensions>
+            <configuration>
+              <formats>
+                <format>
+                  <formatName>html</formatName>
+                  <stylesheetResource>classpath:/xslt/org/jboss/xhtml.xsl</stylesheetResource>
+                  <finalName>index.html</finalName>
+                </format>
+              </formats>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- mvn compile -Phtml-single -->
+    <profile>
+      <id>html-single</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jboss.maven.plugins</groupId>
+            <artifactId>maven-jdocbook-plugin</artifactId>
+            <version>2.2.0</version>
+            <extensions>true</extensions>
+            <configuration>
+              <formats>
+                <format>
+                  <formatName>html_single</formatName>
+                  <stylesheetResource>classpath:/xslt/org/jboss/xhtml-single.xsl</stylesheetResource>
+                  <finalName>index.html</finalName>
+                </format>
+              </formats>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- mvn compile -Ppdf -->
+    <profile>
+      <id>pdf</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jboss.maven.plugins</groupId>
+            <artifactId>maven-jdocbook-plugin</artifactId>
+            <version>2.2.0</version>
+            <extensions>true</extensions>
+            <configuration>
+              <formats>
+                <format>
+                  <formatName>pdf</formatName>
+                  <stylesheetResource>classpath:/xslt/org/jboss/pdf.xsl</stylesheetResource>
+                  <finalName>${docname}.pdf</finalName>
+                </format>
+              </formats>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+  </profiles>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jboss.maven.plugins</groupId>
+        <artifactId>maven-jdocbook-plugin</artifactId>
+        <version>2.3.5</version>
+        <extensions>true</extensions>
+        <dependencies>
+          <dependency>
+            <groupId>org.jboss</groupId>
+            <artifactId>jbossorg-docbook-xslt</artifactId>
+            <!--Non-namespaced version for DocBook 4.5 compatibility. For XSD namespaced version, implement jbossorg-docbook-xslt-ns-->
+            <version>1.1.1</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <sourceDocumentName>${docname}.xml</sourceDocumentName>
+          <sourceDirectory>.</sourceDirectory>
+          <imageResource>
+            <directory>${translation}</directory>
+            <includes>
+              <include>images/*</include>
+            </includes>
+          </imageResource>
+          <options>
+            <xincludeSupported>true</xincludeSupported>
+            <xmlTransformerType>saxon</xmlTransformerType>
+            <!-- needed for uri-resolvers; can be ommitted if using 'current' uri scheme -->
+            <!--     could also locate the docbook dependency and inspect its version... -->
+            <docbookVersion>1.72.0</docbookVersion>
+            <transformerParameters>
+              <property>
+                <name>javax.xml.parsers.DocumentBuilderFactory</name>
+                <value>org.apache.xerces.jaxp.DocumentBuilderFactoryImpl</value>
+              </property>
+              <property>
+                <name>javax.xml.parsers.SAXParserFactory</name>
+                <value>org.apache.xerces.jaxp.SAXParserFactoryImpl</value>
+              </property>
+            </transformerParameters>
+          </options>
+        </configuration>
+      </plugin>
+      
+    </plugins>
+    <defaultGoal>compile</defaultGoal>
+  </build>
+  <pluginRepositories>
+    <pluginRepository>
+          <id>jboss-public-repository-group</id>
+          <name>JBoss Public Maven Repository Group</name>
+          <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+          <layout>default</layout>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>false</enabled></snapshots>
+    </pluginRepository>
+ </pluginRepositories>
+ <repositories>
+    <repository>
+          <id>jboss-public-repository-group</id>
+          <name>JBoss Public Maven Repository Group</name>
+          <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+          <layout>default</layout>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>false</enabled></snapshots>
+    </repository>
+
+ </repositories>
+  
+
+
+</project>

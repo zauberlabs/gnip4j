@@ -23,10 +23,8 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ar.com.zauber.commons.dao.Closure;
-import ar.com.zauber.commons.dao.closure.NullClosure;
-
 import com.zaubersoftware.gnip4j.api.GnipStream;
+import com.zaubersoftware.gnip4j.api.StreamNotification;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 
 /**
@@ -41,12 +39,17 @@ public abstract class AbstractGnipStream implements GnipStream {
     private final Condition emptyCondition  = lock.newCondition(); 
     private final AtomicBoolean streamClosed = new AtomicBoolean(false);
     private final Logger logger = LoggerFactory.getLogger(getClass());
-    private Closure<Activity> closure = new NullClosure<Activity>();
+    private StreamNotification notification = new StreamNotification() {
+        @Override
+        public void notify(final Activity activity, final GnipStream stream) {
+            // nothing to do
+        }
+    };
     
     @Override
-    public final void addObserver(final Closure<Activity> observerClosure) {
-        if(observerClosure != null) {
-            this.closure  = observerClosure;
+    public final void addObserver(final StreamNotification notification) {
+        if(notification != null) {
+            this.notification  = notification;
         }
     }
 
@@ -83,8 +86,8 @@ public abstract class AbstractGnipStream implements GnipStream {
             lock.unlock();
         }
     }
-    
-    public final Closure<Activity> getClosure() {
-        return closure;
+
+    public StreamNotification getNotification() {
+        return notification;
     }
 }

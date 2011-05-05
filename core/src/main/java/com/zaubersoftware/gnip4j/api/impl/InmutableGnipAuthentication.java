@@ -17,8 +17,6 @@ package com.zaubersoftware.gnip4j.api.impl;
 
 import javax.validation.constraints.NotNull;
 
-import org.apache.commons.lang.Validate;
-
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 
 /**
@@ -39,8 +37,12 @@ public final class InmutableGnipAuthentication implements GnipAuthentication {
      * @param password
      */
     public InmutableGnipAuthentication(@NotNull final String username, @NotNull final String password) {
-        Validate.notNull(username, "The username cannot be null");
-        Validate.notNull(password, "The password cannot be null");
+        if(username == null) {
+            throw new IllegalArgumentException("The username cannot be null");
+        }
+        if(password == null) {
+            throw new IllegalArgumentException("The password cannot be null");
+        }
             
         this.username = username;
         this.password = password;
