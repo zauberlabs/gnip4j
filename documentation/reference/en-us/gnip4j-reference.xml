@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+]>
+<book xmlns:xi="http://www.w3.org/2001/XInclude">
+  <info>
+    <title>Zauber Commons - Reference Documentation</title>
+    <productname>Zauber Commons</productname>
+    <releaseinfo>4.0.0.M1</releaseinfo>
+
+    <authorgroup>
+      <author>
+        <personname>Juan F. Codagnone</personname>
+      </author>
+    </authorgroup>
+
+    <legalnotice>
+      <para>Copyright 2011 Zauber S.A. All Rights Reserved.</para>
+
+      <para>Copies of this document may be made for your own use and for
+      distribution to others, provided that you do not charge any fee for such
+      copies and further provided that each copy contains this Copyright
+      Notice, whether distributed in print or electronically.</para>
+    </legalnotice>
+  </info>
+    
+  <toc></toc>
+
+  <xi:include href="preface.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+  <part xml:id="welcome">
+    <title>Welcome to Gnip4j</title>
+
+    <partintro>
+      <para>Welcome to gnip4j! In this part of the reference guide we 
+      will explore everything you need to know in order to use gnip4j 
+      effectively.  We've designed this part so that you can read each chapter
+      consecutively and stop at any time. However, the more you read, the more 
+      you'll learn and the easier you'll find it to work with gnip4j.</para>
+    </partintro>
+  </part>
+  <part>
+    <title>Modules</title>
+    <!-- Modulos -->
+ <!--   <xi:include href="stream.xml"/>   -->
+  </part>
+
+    <part xml:id="appendices">
+    <title>Appendices</title>
+
+    <partintro>
+      <para>The fourth and final part of the reference guide provides
+      appendices and background information that does not neatly belong within
+      the other parts. The information is intended to be treated as a
+      reference and not read consecutively.</para>
+    </partintro>
+  </part>
+
+<!--   <xi:include href="revision-history.xml" />-->
+</book>

@@ -74,6 +74,7 @@
 	<modules>
     		<module>core</module>
 		<module>http</module>
+		<module>documentation</module>
   	</modules>
 
 	<build>
