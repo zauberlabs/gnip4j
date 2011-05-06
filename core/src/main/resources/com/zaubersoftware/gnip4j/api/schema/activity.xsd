@@ -116,4 +116,20 @@
       <xs:attribute name="tag" use="required" type="xs:string"/>
     </xs:complexType>
   </xs:element>
+  <xs:element name="rules">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="activity:rule"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="rule">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="activity:value"/>
+      </xs:sequence>
+      <xs:attribute name="tag" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="value" type="xs:string"/>
 </xs:schema>

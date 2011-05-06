@@ -3,7 +3,7 @@ datatypes xsd = "http://www.w3.org/2001/XMLSchema-datatypes"
 default namespace = "https://labs.zaubersoftware.com/ns/2011/05/gnip4j/activity"
 
 
-start = activity
+start = activity 
 
 
 activity = element activity {
@@ -77,5 +77,13 @@ activity = element activity {
             attribute tag {xsd:string}
         }+
     }
-    
+}
+
+rules = element rules {
+    element rule {
+        attribute tag {xsd:string},
+        element value {
+            text
+        }
+    }*
 }
