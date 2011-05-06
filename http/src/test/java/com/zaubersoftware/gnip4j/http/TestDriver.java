@@ -66,7 +66,7 @@ public class TestDriver {
                         System.out.println("-- Closing stream.");
                         stream.close();
                     }
-                    System.out.println(i + "-" + activity.getBody());
+                    System.out.println(i + "-" + activity.getBody() + " " + activity.getGnip().getMatchingRules());
                 }
             });
             System.out.println("-- Awaiting for strem to terminate");

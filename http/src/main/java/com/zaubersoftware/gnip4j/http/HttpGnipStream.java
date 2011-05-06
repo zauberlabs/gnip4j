@@ -184,8 +184,10 @@ public final class HttpGnipStream extends AbstractGnipStream {
             
             mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             final AnnotationIntrospector introspector = new JaxbAnnotationIntrospector();
-            mapper.getDeserializationConfig().withAnnotationIntrospector(introspector);
-            mapper.getSerializationConfig().withAnnotationIntrospector(introspector);
+            mapper.setDeserializationConfig(
+                    mapper.getDeserializationConfig().withAnnotationIntrospector(introspector));
+            mapper.setSerializationConfig(
+                    mapper.getSerializationConfig().withAnnotationIntrospector(introspector));
         }
         
         @Override
