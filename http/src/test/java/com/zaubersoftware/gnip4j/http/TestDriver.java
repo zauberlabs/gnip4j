@@ -22,6 +22,8 @@ import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
+import com.zaubersoftware.gnip4j.api.exception.GnipException;
+import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.impl.InmutableGnipAuthentication;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.http.HttpGnipFacade;
@@ -67,6 +69,24 @@ public class TestDriver {
                         stream.close();
                     }
                     System.out.println(i + "-" + activity.getBody() + " " + activity.getGnip().getMatchingRules());
+                }
+
+                @Override
+                public void notifyConnectionError(TransportGnipException e) {
+                    // TODO: Auto-generated method stub
+                    
+                }
+
+                @Override
+                public void notifyReConnectionError(GnipException e) {
+                    // TODO: Auto-generated method stub
+                    
+                }
+
+                @Override
+                public void notifyReConnection(int attempt, long waitTime) {
+                    // TODO: Auto-generated method stub
+                    
                 }
             });
             System.out.println("-- Awaiting for strem to terminate");

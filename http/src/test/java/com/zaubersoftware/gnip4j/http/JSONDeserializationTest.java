@@ -18,11 +18,8 @@ package com.zaubersoftware.gnip4j.http;
 import static org.junit.Assert.*;
 
 import java.io.InputStream;
-import java.io.Reader;
-import java.io.StringReader;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.AnnotationIntrospector;
 import org.codehaus.jackson.map.DeserializationConfig;
@@ -31,7 +28,6 @@ import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.model.MatchingRules;
 

@@ -25,6 +25,8 @@ import org.slf4j.LoggerFactory;
 
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
+import com.zaubersoftware.gnip4j.api.exception.GnipException;
+import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 
 /**
@@ -44,6 +46,26 @@ public abstract class AbstractGnipStream implements GnipStream {
         public void notify(final Activity activity, final GnipStream stream) {
             // nothing to do
         }
+
+        @Override
+        public void notifyConnectionError(TransportGnipException e) {
+            // TODO: Auto-generated method stub
+            
+        }
+
+        @Override
+        public void notifyReConnectionError(GnipException e) {
+            // TODO: Auto-generated method stub
+            
+        }
+
+        @Override
+        public void notifyReConnection(int attempt, long waitTime) {
+            // TODO: Auto-generated method stub
+            
+        }
+        
+        
     };
     
     @Override
