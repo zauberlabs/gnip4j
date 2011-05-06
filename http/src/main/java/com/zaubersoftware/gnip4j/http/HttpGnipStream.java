@@ -21,6 +21,7 @@ import java.net.URI;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.validation.constraints.NotNull;
 
@@ -170,6 +171,7 @@ public final class HttpGnipStream extends AbstractGnipStream {
         private final ObjectMapper mapper = new ObjectMapper();
         private HttpResponse response;
         private InputStream is = null;
+        private AtomicInteger reConnectionAttempt = new AtomicInteger();
         
         /**
          * Creates the GnipHttpConsumer.
@@ -217,7 +219,13 @@ public final class HttpGnipStream extends AbstractGnipStream {
                 } catch(final IOException e) {
                     if(!shuttingDown.get()) {
                         logger.warn("There was a problem with the channel.", e);
-                        //TODO add observer notification
+                        activityService.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                getNotification().notifyConnectionError(
+                                        new TransportGnipException("There was a problem with the channel", e));
+                            }
+                        });
                     }
                 } finally {
                     try {
@@ -269,12 +277,25 @@ public final class HttpGnipStream extends AbstractGnipStream {
          */
         private void reconnect() {
             try {
+                final int attempt = reConnectionAttempt.incrementAndGet();
+                // TODO Add exponetial backoff
+                activityService.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        getNotification().notifyReConnection(attempt, 0L);
+                    }
+                });
                 logger.debug("Re-connecting stream with Gnip.");
                 response = handshake(client, auth, streamURI, logger);
                 logger.debug("The re-connection has been successfully established");
             } catch (final GnipException e) {
                 logger.error("The re-connection could not be established", e);
-                //TODO add re-connection error observer
+                activityService.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        getNotification().notifyReConnectionError(e);
+                    }
+                });
             }
         }
     }
@@ -290,7 +311,6 @@ public final class HttpGnipStream extends AbstractGnipStream {
             //jobs are no longer accepted
             if(httpThread != null) {
                 httpThread.interrupt();
-                
                 waitForTermination(httpThread);
             }
             
