@@ -353,7 +353,7 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
                 activityService.execute(new Runnable() {
                     @Override
                     public void run() {
-                        getNotification().notifyReConnection(attempt, 0L);
+                        getNotification().notifyReConnection(attempt, reConnectionWaitTime);
                     }
                 });
                 logger.debug("Re-connecting stream with Gnip.");
