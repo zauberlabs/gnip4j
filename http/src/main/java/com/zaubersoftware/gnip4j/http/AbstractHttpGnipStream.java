@@ -226,8 +226,8 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
      * Consumes the HTTP input stream from the stream one {@link Activity} per line 
      */
     private class GnipHttpConsumer implements Runnable {
-        private static final long MAX_RE_CONNECTION_WAIT_TIME = 1 * 60 * 1000; // 1 minute
-        private static final long INITIAL_RE_CONNECTION_WAIT_TIME = 100;    
+        private static final long MAX_RE_CONNECTION_WAIT_TIME = 5 * 60 * 1000; // 5 minutes
+        private static final long INITIAL_RE_CONNECTION_WAIT_TIME = 250;    
         
         private final ObjectMapper mapper = new ObjectMapper();
         private final AtomicInteger reConnectionAttempt = new AtomicInteger();
@@ -342,7 +342,7 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
             try {
                 final int attempt = reConnectionAttempt.incrementAndGet();
                 logger.debug("Waiting for {} ms till next re-connection", reConnectionWaitTime);
-                reConnectionWaitTime = (long) (reConnectionWaitTime * 1.10);
+                reConnectionWaitTime = (long) (reConnectionWaitTime * 2);
                 reConnectionWaitTime = (reConnectionWaitTime > MAX_RE_CONNECTION_WAIT_TIME) 
                     ? MAX_RE_CONNECTION_WAIT_TIME : reConnectionWaitTime;
                 try {
