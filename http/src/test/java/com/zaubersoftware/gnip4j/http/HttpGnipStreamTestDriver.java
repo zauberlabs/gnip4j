@@ -74,6 +74,7 @@ public final class HttpGnipStreamTestDriver {
             @Override
             public void notifyConnectionError(final TransportGnipException e) {
                 System.out.println(String.format("ConnectionError: %s", e.getMessage()));
+                stream.setResponse(new BasicHttpResponse(new ProtocolVersion("HTTP", 1, 1), 505, "TEST!"));
             }
             
             @Override
