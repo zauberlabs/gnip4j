@@ -21,22 +21,23 @@ import org.junit.Test;
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.GnipStream;
-import com.zaubersoftware.gnip4j.api.StreamNotification;
-import com.zaubersoftware.gnip4j.api.exception.GnipException;
-import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
+import com.zaubersoftware.gnip4j.api.StreamNotificationAdapter;
 import com.zaubersoftware.gnip4j.api.impl.InmutableGnipAuthentication;
 import com.zaubersoftware.gnip4j.api.model.Activity;
-import com.zaubersoftware.gnip4j.http.HttpGnipFacade;
 
 /**
- * TODO: Description of the class, Comments in english by default  
- * 
+ * Test Driver that tests the flows using a real connections 
  * 
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
-public class TestDriver {
+public final class TestDriver {
 
+    /**
+     * Entry point for the test driver
+     * 
+     * @throws Exception
+     */
     @Test
     public void testname() throws Exception {
         final String username = System.getProperty("gnip.username");
@@ -60,7 +61,7 @@ public class TestDriver {
             System.out.println("-- Creating stream");
             final GnipStream stream = gnip.createStream(domain, 1, auth);
             final AtomicInteger counter = new AtomicInteger();
-            stream.addObserver(new StreamNotification() {
+            stream.addObserver(new StreamNotificationAdapter() {
                 @Override
                 public void notify(final Activity activity, final GnipStream stream) {
                     final int i = counter.getAndIncrement();
@@ -70,27 +71,9 @@ public class TestDriver {
                     }
                     System.out.println(i + "-" + activity.getBody() + " " + activity.getGnip().getMatchingRules());
                 }
-
-                @Override
-                public void notifyConnectionError(TransportGnipException e) {
-                    // TODO: Auto-generated method stub
-                    
-                }
-
-                @Override
-                public void notifyReConnectionError(GnipException e) {
-                    // TODO: Auto-generated method stub
-                    
-                }
-
-                @Override
-                public void notifyReConnection(int attempt, long waitTime) {
-                    // TODO: Auto-generated method stub
-                    
-                }
             });
             System.out.println("-- Awaiting for strem to terminate");
-            stream.await();
+            stream.openAndAwait();
             System.out.println("-- Shutting down");
 
         }   catch(Throwable t) {

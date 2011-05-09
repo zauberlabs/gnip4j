@@ -26,34 +26,46 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 
 /**
- * Default extension of {@link AbstractHttpGnipStream} that uses 
- * the {@link DefaultHttpClient} to implement the 
- * {@link AbstractHttpGnipStream#getResponse(HttpUriRequest)} 
+ * TODO: Description of the class, Comments in english by default  
+ * 
  * 
  * @author Guido Marucci Blas
  * @since May 9, 2011
  */
-public final class HttpGnipStream extends AbstractHttpGnipStream {
+public final class MockHttpGnipStream extends AbstractHttpGnipStream {
 
+    private HttpResponse response = null;
+    
     /**
-     * Creates the HttpGnipStream.
+     * Creates the MockHttpGnipStream.
      *
      * @param client
      * @param domain
      * @param dataCollectorId
      * @param auth
      */
-    public HttpGnipStream(
+    public MockHttpGnipStream(
             @NotNull final DefaultHttpClient client, 
             @NotNull final String domain, 
             final long dataCollectorId,
-            @NotNull final GnipAuthentication auth) {
+            @NotNull final GnipAuthentication auth,
+            final HttpResponse response) {
         super(client, domain, dataCollectorId, auth);
+        this.response = response;
     }
 
+    /**
+     * Sets the response. 
+     *
+     * @param response <code>HttpResponse</code> with the response.
+     */
+    public void setResponse(final HttpResponse response) {
+        this.response = response;
+    }
+    
     @Override
-    protected HttpResponse getResponse(@NotNull final HttpUriRequest request) throws IOException {
-        return getHttpClient().execute(request);
+    protected HttpResponse getResponse(final HttpUriRequest request) throws IOException {
+        return response;
     }
 
 }
