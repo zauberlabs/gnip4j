@@ -45,7 +45,7 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
  * @author Guido Marucci Blas
  * @since May 9, 2011
  */
-public class HttpGnipStreamTest {
+public final class HttpGnipStreamTestDriver {
 
     @Test
     public void testReConnection() throws Exception {
