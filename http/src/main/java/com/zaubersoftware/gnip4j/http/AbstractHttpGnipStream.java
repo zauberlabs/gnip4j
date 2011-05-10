@@ -268,6 +268,9 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
                         logger.debug("Starting to consume activity stream...");
                         while(!Thread.interrupted()) {
                             final Activity activity = parser.readValueAs(Activity.class);
+                            if (activity == null) {
+                                continue;
+                            }
                             logger.trace("Notifying activity {}", activity.getBody());
                             activityService.execute(new Runnable() {
                                 @Override
