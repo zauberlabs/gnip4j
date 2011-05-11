@@ -264,6 +264,21 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
                     if (entity != null) {
                         // TODO Wrapp InputStream to count bytes and transfer rates 
                         is = entity.getContent();
+//                      is = new TeeInputStream(is, new OutputStream() {
+//                      private final byte []bytes = new byte[4096 * 4];
+//                      private int i  = 0;
+//                      @Override
+//                      public void write(final int b) throws IOException {
+//                          if(i < bytes.length && b != '\n') {
+//                              bytes[i++] = (byte) b;
+//                          } else {
+//                              System.out.println(i);
+//                              System.out.println("--------> " + new String(bytes, 0, i, "UTF-8"));
+//                              i = 0;
+//                          }
+//                      }
+//                  });
+
                         final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
                         logger.debug("Starting to consume activity stream...");
                         while(!Thread.interrupted()) {
