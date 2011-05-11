@@ -114,11 +114,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="urls" type="xs:anyURI"/>
+  <xs:element name="urls">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="activity:indices"/>
+      </xs:sequence>
+      <xs:attribute name="expanded_url" use="required" type="xs:anyURI"/>
+      <xs:attribute name="url" use="required" type="xs:anyURI"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="indices" type="xs:int"/>
   <xs:element name="user_mentions">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="activity:indices"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="activity:indices"/>
       </xs:sequence>
       <xs:attribute name="screen_name" use="required" type="xs:string"/>
       <xs:attribute name="id_str" use="required" type="xs:string"/>
@@ -126,8 +135,14 @@
       <xs:attribute name="id" use="required" type="xs:nonNegativeInteger"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="indices" type="xs:int"/>
-  <xs:element name="hashtags" type="xs:string"/>
+  <xs:element name="hashtags">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="activity:indices"/>
+      </xs:sequence>
+      <xs:attribute name="text" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="gnip">
     <xs:complexType>
       <xs:sequence>

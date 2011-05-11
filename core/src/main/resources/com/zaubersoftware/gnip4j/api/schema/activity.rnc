@@ -77,15 +77,23 @@ activity = element activity {
         attribute link {xsd:anyURI}
     },
     element twitter_entities {
-        element urls { xsd:anyURI }+,
+        element urls {
+            attribute expanded_url {xsd:anyURI},
+            element indices {xsd:int}*,
+            attribute url {xsd:anyURI} 
+        
+        }+,
         element user_mentions {
-            element indices { xsd:int }+,
+            element indices { xsd:int }*,
             attribute screen_name { xsd:string },
             attribute id_str { xsd:string },
             attribute name { xsd:string },
             attribute id { xsd:nonNegativeInteger }
         }+,
-        element hashtags { xsd:string }+
+        element hashtags { 
+            attribute text {xsd:string},
+            element indices  {xsd:int}*
+         }+
     },
     element gnip {
         element language {
