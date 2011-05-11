@@ -15,6 +15,10 @@
  */
 package com.zaubersoftware.gnip4j.api;
 
+import javax.validation.constraints.NotNull;
+
+import com.zaubersoftware.gnip4j.api.exception.GnipException;
+import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 
 /**
@@ -25,6 +29,34 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
  */
 public interface StreamNotification {
 
-    /** notification */
-    void notify(Activity activity, GnipStream stream);
+    /**
+     * Notifies the arrival of a new {@link Activity}
+     * 
+     * @param activity The new arrived activity.
+     * @param stream The stream used to suck the activities.
+     */
+    void notify(@NotNull Activity activity, @NotNull GnipStream stream);
+    
+    /**
+     * Notifies a connection error.
+     * 
+     * @param e The exception that cause the error.
+     */
+    void notifyConnectionError(@NotNull TransportGnipException e);
+    
+    /**
+     * Notifies an error that occurs while trying to re-establish a connection with Gnip
+     * 
+     * @param e The exception that cause ther error.
+     */
+    void notifyReConnectionError(@NotNull GnipException e);
+    
+    /**
+     * Notifies a re-connection attempt with Gnip
+     * 
+     * @param attempt The amount of re-connection attempts including this notification. Once a reconnection
+     * has been established the counter will be reset.
+     * @param waitTime The amount of time to be waited before trying to reconnect.
+     */
+    void notifyReConnection(int attempt, long waitTime);
 }

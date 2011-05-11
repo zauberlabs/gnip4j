@@ -25,6 +25,7 @@ import org.slf4j.LoggerFactory;
 
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
+import com.zaubersoftware.gnip4j.api.StreamNotificationAdapter;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 
 /**
@@ -39,7 +40,7 @@ public abstract class AbstractGnipStream implements GnipStream {
     private final Condition emptyCondition  = lock.newCondition(); 
     private final AtomicBoolean streamClosed = new AtomicBoolean(false);
     private final Logger logger = LoggerFactory.getLogger(getClass());
-    private StreamNotification notification = new StreamNotification() {
+    private StreamNotification notification = new StreamNotificationAdapter() {
         @Override
         public void notify(final Activity activity, final GnipStream stream) {
             // nothing to do
@@ -47,12 +48,12 @@ public abstract class AbstractGnipStream implements GnipStream {
     };
     
     @Override
-    public final void addObserver(final StreamNotification notification) {
-        if(notification != null) {
-            this.notification  = notification;
+    public final void addObserver(final StreamNotification streamNotification) {
+        if(streamNotification != null) {
+            this.notification  = streamNotification;
         }
     }
-
+    
     @Override
     public final void close() {
         try {
@@ -70,6 +71,12 @@ public abstract class AbstractGnipStream implements GnipStream {
         }
     }
 
+    @Override
+    public final void openAndAwait() throws InterruptedException {
+        open();
+        await();
+    }
+    
     /**  template method for close */
     protected void doClose() {
         

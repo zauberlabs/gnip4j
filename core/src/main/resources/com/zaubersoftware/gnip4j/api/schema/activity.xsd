@@ -3,6 +3,7 @@
   <xs:element name="activity">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" ref="activity:inReplyTo"/>
         <xs:element name="location">
           <xs:complexType>
             <xs:sequence>
@@ -31,6 +32,7 @@
         <xs:element ref="activity:generator"/>
         <xs:element ref="activity:object"/>
         <xs:element ref="activity:provider"/>
+        <xs:element ref="activity:twitter_entities"/>
         <xs:element ref="activity:gnip"/>
       </xs:sequence>
       <xs:attribute name="verb" use="required" type="xs:string"/>
@@ -38,6 +40,11 @@
       <xs:attribute name="body" use="required" type="xs:string"/>
       <xs:attribute name="objectType" use="required" type="xs:string"/>
       <xs:attribute name="id" use="required" type="xs:ID"/>
+      <xs:attribute name="link" use="required" type="xs:anyURI"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="inReplyTo">
+    <xs:complexType>
       <xs:attribute name="link" use="required" type="xs:anyURI"/>
     </xs:complexType>
   </xs:element>
@@ -65,6 +72,7 @@
       <xs:attribute name="summary" use="required" type="xs:string"/>
       <xs:attribute name="link" use="required" type="xs:anyURI"/>
       <xs:attribute name="image" use="required" type="xs:anyURI"/>
+      <xs:attribute name="id" use="required" type="xs:string"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="languages" type="xs:string"/>
@@ -97,6 +105,29 @@
       <xs:attribute name="link" use="required" type="xs:anyURI"/>
     </xs:complexType>
   </xs:element>
+  <xs:element name="twitter_entities">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="activity:urls"/>
+        <xs:element maxOccurs="unbounded" ref="activity:user_mentions"/>
+        <xs:element maxOccurs="unbounded" ref="activity:hashtags"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="urls" type="xs:anyURI"/>
+  <xs:element name="user_mentions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="activity:indices"/>
+      </xs:sequence>
+      <xs:attribute name="screen_name" use="required" type="xs:string"/>
+      <xs:attribute name="id_str" use="required" type="xs:string"/>
+      <xs:attribute name="name" use="required" type="xs:string"/>
+      <xs:attribute name="id" use="required" type="xs:nonNegativeInteger"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="indices" type="xs:int"/>
+  <xs:element name="hashtags" type="xs:string"/>
   <xs:element name="gnip">
     <xs:complexType>
       <xs:sequence>

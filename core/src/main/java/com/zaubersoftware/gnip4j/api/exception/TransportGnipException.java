@@ -15,18 +15,21 @@
  */
 package com.zaubersoftware.gnip4j.api.exception;
 
+import java.io.IOException;
+
 /**
- * TODO: Description of the class, Comments in english by default
- *
+ * Represents an exception that was caused by a transport error.
  *
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
 public class TransportGnipException extends GnipException {
 
-    /**
-     * Creates the TransportGnipException.
-     */
+    
+    /** <code>serialVersionUID</code> */
+    private static final long serialVersionUID = 3682753762097222234L;
+
+    /** Creates the TransportGnipException. */
     public TransportGnipException(final String message, final Throwable cause) {
         super(message, cause);
     }
@@ -41,5 +44,15 @@ public class TransportGnipException extends GnipException {
         super(cause);
     }
 
-    //TODO Add support for transport information error, for example, status code
+    /**
+     * Checks if the error was caused by a network exception.
+     * 
+     * @return True if the error was caused by a newtork exception
+     */
+    public final boolean isNetworkError() {
+        return (getCause() != null) ? getCause() instanceof IOException : false;
+    }
+    
+    //TODO Add support for transport information error, for example, status code Maybe by subclassing this
+    //exception in HttpRequestGnipException
 }

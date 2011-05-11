@@ -31,8 +31,29 @@ package com.zaubersoftware.gnip4j.api;
  */
 public interface GnipStream {
 
+    /**
+     * Adds a {@link StreamNotification} observer
+     * 
+     * @param notification an implementation of {@link StreamNotification}.
+     */
     void addObserver(StreamNotification notification);
 
+    /** 
+     * Opens the stream 
+     * 
+     * @throws IllegalStateException if the stream is already opened.
+     */
+    void open();
+    
+    /**
+     * Opens the stream and await for termination
+     * 
+     * @throws IllegalStateException if the stream is already opened.
+     * @see GnipStream#open()
+     * @see GnipStream#await()
+     */
+    void openAndAwait() throws InterruptedException;
+    
     /** release the stream  */
     void close();
 
