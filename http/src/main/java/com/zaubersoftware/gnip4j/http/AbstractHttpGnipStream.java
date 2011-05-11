@@ -284,6 +284,7 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
                         while(!Thread.interrupted()) {
                             final Activity activity = parser.readValueAs(Activity.class);
                             if (activity == null) {
+                                logger.warn("Activity parsed from stream is null. Should not happen!");
                                 continue;
                             }
                             logger.trace("Notifying activity {}", activity.getBody());
