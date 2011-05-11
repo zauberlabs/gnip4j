@@ -72,7 +72,7 @@ public final class TestDriver {
                     System.out.println(i + "-" + activity.getBody() + " " + activity.getGnip().getMatchingRules());
                 }
             });
-            System.out.println("-- Awaiting for strem to terminate");
+            System.out.println("-- Awaiting for stream to terminate");
             stream.openAndAwait();
             System.out.println("-- Shutting down");
 
