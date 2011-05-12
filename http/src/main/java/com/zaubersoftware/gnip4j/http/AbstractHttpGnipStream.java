@@ -380,6 +380,7 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
                 logger.debug("The re-connection has been successfully established");
                 
                 reConnectionAttempt.set(0);
+                reConnectionWaitTime = INITIAL_RE_CONNECTION_WAIT_TIME;
                 
             } catch (final GnipException e) {
                 logger.error("The re-connection could not be established", e);
