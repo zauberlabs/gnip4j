@@ -94,7 +94,7 @@ public abstract class AbstractGnipStream implements GnipStream {
         }
     }
 
-    public StreamNotification getNotification() {
+    public final StreamNotification getNotification() {
         return notification;
     }
 }
