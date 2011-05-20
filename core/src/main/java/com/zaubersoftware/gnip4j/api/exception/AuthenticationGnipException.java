@@ -16,9 +16,9 @@
 package com.zaubersoftware.gnip4j.api.exception;
 
 /**
- * TODO: Description of the class, Comments in english by default  
- * 
- * 
+ * TODO: Description of the class, Comments in english by default
+ *
+ *
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
@@ -39,7 +39,7 @@ public class AuthenticationGnipException extends GnipException {
      * @param message
      * @param cause
      */
-    public AuthenticationGnipException(String message, Throwable cause) {
+    public AuthenticationGnipException(final String message, final Throwable cause) {
         super(message, cause);
         // TODO: Auto-generated constructor stub
     }
@@ -49,9 +49,8 @@ public class AuthenticationGnipException extends GnipException {
      *
      * @param message
      */
-    public AuthenticationGnipException(String message) {
+    public AuthenticationGnipException(final String message) {
         super(message);
-        // TODO: Auto-generated constructor stub
     }
 
     /**
@@ -59,10 +58,9 @@ public class AuthenticationGnipException extends GnipException {
      *
      * @param cause
      */
-    public AuthenticationGnipException(Throwable cause) {
+    public AuthenticationGnipException(final Throwable cause) {
         super(cause);
-        // TODO: Auto-generated constructor stub
     }
-    
+
     //TODO Add the user credentials that were trying to be authenticated
 }
