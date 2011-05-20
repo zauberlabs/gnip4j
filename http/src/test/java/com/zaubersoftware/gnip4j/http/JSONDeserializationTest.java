@@ -46,7 +46,8 @@ import com.zaubersoftware.gnip4j.api.model.MatchingRules;
 public final class JSONDeserializationTest {
     private ObjectMapper mapper;
     private JAXBContext ctx; 
-    
+
+    /** setup test */
     @Before
     public void setUp() throws Exception {
         
@@ -61,6 +62,7 @@ public final class JSONDeserializationTest {
         ctx = JAXBContext.newInstance(Activity.class.getPackage().getName());
     }
 
+    /** test a complete unmarshal from the json */
     @Test
     public void testGetGnip() throws Exception {
         final InputStream is = getClass().getClassLoader().getResourceAsStream(
@@ -82,6 +84,7 @@ public final class JSONDeserializationTest {
         }
     }
     
+    /** regression test for a NPE exception */
     @Test
     public void testNPE() throws Exception {
         final InputStream is = getClass().getClassLoader().getResourceAsStream(
