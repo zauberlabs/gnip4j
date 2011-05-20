@@ -97,7 +97,7 @@ public class HttpGnipFacade implements GnipFacade {
         clientParam.setMaxRedirects(5);
         clientParam.setAllowCircularRedirects(false);
         
-        final ConnRouteParamBean connRoute = new ConnRouteParamBean(params);
+//        final ConnRouteParamBean connRoute = new ConnRouteParamBean(params);
         // TODO proxy settings
         
         final ConnManagerParamBean connManager = new ConnManagerParamBean(params);
