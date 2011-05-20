@@ -16,13 +16,13 @@
 package com.zaubersoftware.gnip4j.api.exception;
 
 /**
- * TODO: Description of the class, Comments in english by default
- *
+ * There was a problem with remote authentication.
  *
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
 public class AuthenticationGnipException extends GnipException {
+    private static final long serialVersionUID = -5679596104912905821L;
 
     /**
      * Creates the AuthenticationGnipException.
@@ -30,34 +30,19 @@ public class AuthenticationGnipException extends GnipException {
      */
     public AuthenticationGnipException() {
         super();
-        // TODO: Auto-generated constructor stub
     }
 
-    /**
-     * Creates the AuthenticationGnipException.
-     *
-     * @param message
-     * @param cause
-     */
+    /** Creates the AuthenticationGnipException. */
     public AuthenticationGnipException(final String message, final Throwable cause) {
         super(message, cause);
-        // TODO: Auto-generated constructor stub
     }
 
-    /**
-     * Creates the AuthenticationGnipException.
-     *
-     * @param message
-     */
+    /** Creates the AuthenticationGnipException. */
     public AuthenticationGnipException(final String message) {
         super(message);
     }
 
-    /**
-     * Creates the AuthenticationGnipException.
-     *
-     * @param cause
-     */
+    /** Creates the AuthenticationGnipException. */
     public AuthenticationGnipException(final Throwable cause) {
         super(cause);
     }
