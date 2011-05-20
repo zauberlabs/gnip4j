@@ -25,6 +25,12 @@ package com.zaubersoftware.gnip4j.api;
  * <p>
  * Implementations SHOULD handle reconnections and timeouts.
  * </p>
+ * <p>
+ *    You should first call to {@link #addObserver(StreamNotification)} and
+ *    the {@link #open()}/{{@link #openAndAwait()}} the stream.
+ *    When you don't wan't any more data, call to {@link #close()} to release
+ *    all the stream resources. 
+ * </p>
  * 
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
