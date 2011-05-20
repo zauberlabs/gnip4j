@@ -13,15 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zaubersoftware.gnip4j.http.drivers;
+package com.zaubersoftware.gnip4j;
+
+import static org.mockito.Mockito.mock;
 
 import java.io.IOException;
 
 import javax.validation.constraints.NotNull;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.http.AbstractHttpGnipStream;
@@ -39,12 +41,11 @@ public final class MockHttpGnipStream extends AbstractHttpGnipStream {
     
     /** Creates the MockHttpGnipStream. */
     public MockHttpGnipStream(
-            @NotNull final DefaultHttpClient client, 
             @NotNull final String domain, 
             final long dataCollectorId,
             @NotNull final GnipAuthentication auth,
             final HttpResponse response) {
-        super(client, domain, dataCollectorId, auth);
+        super(mock(HttpClient.class), domain, dataCollectorId, auth);
         this.response = response;
     }
 

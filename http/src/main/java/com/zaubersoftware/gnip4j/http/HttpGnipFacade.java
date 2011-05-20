@@ -65,7 +65,6 @@ public class HttpGnipFacade implements GnipFacade {
             @NotNull final String domain,
             @NotNull final long dataCollectorId, 
             @NotNull final GnipAuthentication auth) {
-        //TODO Add caching
         return new HttpGnipStream(client, domain, dataCollectorId, auth);
     }
     

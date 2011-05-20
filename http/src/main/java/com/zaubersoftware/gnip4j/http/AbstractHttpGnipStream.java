@@ -15,6 +15,7 @@
  */
 package com.zaubersoftware.gnip4j.http;
 import static com.zaubersoftware.gnip4j.http.ErrorCodes.*;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -31,6 +32,7 @@ import org.apache.http.StatusLine;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -77,7 +79,7 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
     /** stream name for debugging propourse */
     private final String streamName;
     private final URI streamURI;
-    private final DefaultHttpClient client;
+    private final HttpClient client;
     private final GnipAuthentication auth;
     private final ExecutorService activityService = Executors.newScheduledThreadPool(10);
     private GnipHttpConsumer httpConsumer;
@@ -92,7 +94,7 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
     
     /** Creates the HttpGnipStream. */
     public AbstractHttpGnipStream(
-            @NotNull final DefaultHttpClient client, 
+            @NotNull final HttpClient client, 
             @NotNull final String domain,
             @NotNull final long dataCollectorId, 
             @NotNull final GnipAuthentication auth) {
@@ -184,8 +186,8 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
         }
     }
     
-    /** @return the {@link DefaultHttpClient} */
-    protected final DefaultHttpClient getHttpClient() {
+    /** @return the {@link HttpClient} */
+    protected final HttpClient getHttpClient() {
         return client;
     }
     
@@ -208,10 +210,13 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
         throws AuthenticationGnipException, TransportGnipException {
         logger.debug("Handshaking with Gnip to establish a new stream connection");
         logger.trace("\t-- Setting Gnip credentials");
-        client.getCredentialsProvider().setCredentials(
-                new AuthScope(streamURI.getHost(), AuthScope.ANY_PORT), 
-                new UsernamePasswordCredentials(auth.getUsername(), auth.getPassword()));
-        
+        if(client instanceof DefaultHttpClient) {
+            ((DefaultHttpClient)client).getCredentialsProvider().setCredentials(
+                    new AuthScope(streamURI.getHost(), AuthScope.ANY_PORT), 
+                    new UsernamePasswordCredentials(auth.getUsername(), auth.getPassword()));
+        } else {
+            logger.warn("Unknown intance of HttpClient: {}. Credentials weren't set.", client.getClass());
+        }
         final HttpGet get = new HttpGet(streamURI);
         try {
             logger.trace("\t-- Executing get request to URI {}", streamURI);
