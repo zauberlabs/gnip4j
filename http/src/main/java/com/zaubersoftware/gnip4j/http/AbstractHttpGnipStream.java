@@ -44,6 +44,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
+import com.zaubersoftware.gnip4j.api.StreamNotification;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
 import com.zaubersoftware.gnip4j.api.exception.GnipException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
@@ -115,7 +116,16 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
     }
 
     @Override
-    public final void open() {
+    protected final String getStreamName() {
+        return streamName;
+    }
+    
+    @Override
+    public final void open(final StreamNotification notification) {
+        if(notification == null) {
+            throw new IllegalArgumentException(getStreamName() + " does not support null observers");
+        } 
+        
         if (httpConsumer != null) {
             throw new IllegalStateException("The stream is open");
         }

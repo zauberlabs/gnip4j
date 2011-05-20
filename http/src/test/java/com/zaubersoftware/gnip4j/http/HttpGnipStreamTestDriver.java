@@ -65,7 +65,7 @@ public final class HttpGnipStreamTestDriver {
         final AtomicInteger count = new AtomicInteger(0);
         final MockHttpGnipStream stream = new MockHttpGnipStream(client, "test", 1, auth, response);
         final AtomicBoolean reConnected = new AtomicBoolean(false);
-        stream.addObserver(new StreamNotification() {
+        final StreamNotification n = new StreamNotification() {
             @Override
             public void notifyReConnectionError(final GnipException e) {
                 System.out.println(String.format("ReConnectionError: %s", e.getMessage()));
@@ -103,8 +103,8 @@ public final class HttpGnipStreamTestDriver {
                     stream.close();
                 }
             }
-        });
-        stream.openAndAwait();
+        };
+        stream.openAndAwait(n);
     }
     
     

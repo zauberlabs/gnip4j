@@ -16,6 +16,7 @@
 package com.zaubersoftware.gnip4j.api;
 
 
+
 /**
  * <p>
  * A Stream for the Gnip. Once created with {@link GnipFacade} you más register
@@ -36,29 +37,25 @@ package com.zaubersoftware.gnip4j.api;
  * @since Apr 29, 2011
  */
 public interface GnipStream {
-
-    /**
-     * Adds a {@link StreamNotification} observer
-     * 
-     * @param notification an implementation of {@link StreamNotification}.
-     */
-    void addObserver(StreamNotification notification);
-
-    /** 
-     * Opens the stream 
-     * 
-     * @throws IllegalStateException if the stream is already opened.
-     */
-    void open();
     
     /**
-     * Opens the stream and await for termination
+     * Opens the stream, register an observer, and await for termination (block current thread) 
      * 
      * @throws IllegalStateException if the stream is already opened.
      * @see GnipStream#open()
      * @see GnipStream#await()
      */
-    void openAndAwait() throws InterruptedException;
+    void openAndAwait(final StreamNotification notification) throws InterruptedException;
+    
+    
+    /** 
+     * Opens the stream. If you need to wait for the ending of this stream call
+     * {@link #await()}. 
+     * 
+     * @throws IllegalStateException if the stream is already opened.
+     */
+    void open(StreamNotification notification);
+    
     
     /** release the stream  */
     void close();

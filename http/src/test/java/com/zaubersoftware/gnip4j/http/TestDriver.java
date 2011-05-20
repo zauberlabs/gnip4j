@@ -61,7 +61,7 @@ public final class TestDriver {
             System.out.println("-- Creating stream");
             final GnipStream stream = gnip.createStream(domain, 1, auth);
             final AtomicInteger counter = new AtomicInteger();
-            stream.addObserver(new StreamNotificationAdapter() {
+            StreamNotificationAdapter n = new StreamNotificationAdapter() {
                 @Override
                 public void notify(final Activity activity, final GnipStream stream) {
                     final int i = counter.getAndIncrement();
@@ -71,9 +71,9 @@ public final class TestDriver {
                     }
                     System.out.println(i + "-" + activity.getBody() + " " + activity.getGnip().getMatchingRules());
                 }
-            });
+            };
             System.out.println("-- Awaiting for stream to terminate");
-            stream.openAndAwait();
+            stream.openAndAwait(n);
             System.out.println("-- Shutting down");
 
         }   catch(Throwable t) {

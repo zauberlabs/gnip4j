@@ -41,39 +41,40 @@ public abstract class AbstractGnipStream implements GnipStream {
     private final AtomicBoolean streamClosed = new AtomicBoolean(false);
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private StreamNotification notification = new StreamNotificationAdapter() {
+        private final AtomicBoolean first = new AtomicBoolean(true);
+        
         @Override
         public void notify(final Activity activity, final GnipStream stream) {
             // nothing to do
+            if(first.getAndSet(false)) {
+                logger.warn("Stream `{}' had been openned, but no observer was registered.",
+                        new Object[]{getStreamName()});
+            }
         }
     };
     
-    @Override
-    public final void addObserver(final StreamNotification streamNotification) {
-        if(streamNotification != null) {
-            this.notification  = streamNotification;
-        }
-    }
     
     @Override
     public final void close() {
-        try {
-            doClose();
-        } finally {
-            lock.lock();
-            try { 
-                streamClosed.set(true);
-                emptyCondition.signalAll();
-            } catch(final Throwable t) {
-                logger.error("decrementing active jobs. should not happen ", t);
+        if(!streamClosed.getAndSet(true)) {
+            try {
+                doClose();
             } finally {
-                lock.unlock();
+                lock.lock();
+                try { 
+                    emptyCondition.signalAll();
+                } catch(final Throwable t) {
+                    logger.error("decrementing active jobs. should not happen ", t);
+                } finally {
+                    lock.unlock();
+                }
             }
         }
     }
 
     @Override
-    public final void openAndAwait() throws InterruptedException {
-        open();
+    public final void openAndAwait(final StreamNotification n) throws InterruptedException {
+        open(n);
         await();
     }
     
@@ -97,4 +98,7 @@ public abstract class AbstractGnipStream implements GnipStream {
     public final StreamNotification getNotification() {
         return notification;
     }
+    
+    /** @return the stream name. Used for tracing propourses */
+    protected abstract String getStreamName(); 
 }
