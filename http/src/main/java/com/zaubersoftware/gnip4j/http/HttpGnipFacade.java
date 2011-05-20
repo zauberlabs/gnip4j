@@ -15,13 +15,14 @@
  */
 package com.zaubersoftware.gnip4j.http;
 
+import static com.zaubersoftware.gnip4j.http.ErrorCodes.ERROR_NULL_HTTPCLIENT;
+
 import javax.validation.constraints.NotNull;
 
 import org.apache.http.HttpVersion;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.params.ClientParamBean;
 import org.apache.http.conn.params.ConnManagerParamBean;
-import org.apache.http.conn.params.ConnRouteParamBean;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParamBean;
@@ -31,7 +32,6 @@ import org.apache.http.params.HttpProtocolParamBean;
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.GnipStream;
-
 /**
  * Http implementation for the {@link GnipFacade}  
  * 
@@ -54,7 +54,7 @@ public class HttpGnipFacade implements GnipFacade {
      */
     public HttpGnipFacade(@NotNull final DefaultHttpClient client) {
         if(client == null) {
-            throw new IllegalArgumentException("client is null");
+            throw new IllegalArgumentException(ERROR_NULL_HTTPCLIENT);
         }
         
         this.client = client;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 package com.zaubersoftware.gnip4j.http;
-
+import static com.zaubersoftware.gnip4j.http.ErrorCodes.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -90,27 +90,20 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
         }
     };
     
-    /**
-     * Creates the HttpGnipStream.
-     *
-     * @param client
-     * @param domain
-     * @param dataCollectorId
-     * @param auth
-     */
+    /** Creates the HttpGnipStream. */
     public AbstractHttpGnipStream(
             @NotNull final DefaultHttpClient client, 
             @NotNull final String domain,
             @NotNull final long dataCollectorId, 
             @NotNull final GnipAuthentication auth) {
         if(client == null) {
-            throw new IllegalArgumentException("The HTTP client cannot be null");
+            throw new IllegalArgumentException(ERROR_NULL_HTTPCLIENT);
         }
-        if(domain == null) {
-            throw new IllegalArgumentException("The domain cannot be empty");
+        if(domain == null || domain.trim().length() == 0) {
+            throw new IllegalArgumentException(ERROR_EMPTY_DOMAIN);
         }
         if(auth == null) {
-            throw new IllegalArgumentException("The Gnip authentication cannot null");
+            throw new IllegalArgumentException(ERROR_NULL_AUTH);
         }
         
         final StringBuilder sb = new StringBuilder("https://");
