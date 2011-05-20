@@ -17,8 +17,6 @@ package com.zaubersoftware.gnip4j.api;
 
 import org.junit.Test;
 
-import com.zaubersoftware.gnip4j.api.exception.GnipException;
-import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 
 
