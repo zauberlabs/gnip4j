@@ -37,4 +37,22 @@ public class TransportGnipExceptionTest {
         assertFalse(new TransportGnipException(new IllegalArgumentException()).isNetworkError());
         assertTrue(new TransportGnipException("ioio", new IOException("no network")).isNetworkError());
     }
+    
+    /** test */
+    @Test
+    public final void testException() {
+        assertNull(new GnipException().getMessage());
+    }
+
+    
+    /** test */
+    @Test
+    public final void testAuthenticationGnipException() {
+        assertNull(new AuthenticationGnipException().getMessage());
+        assertEquals("x", new AuthenticationGnipException("x").getMessage());
+        final IOException e = new IOException();
+        assertEquals(e, new AuthenticationGnipException(e).getCause());
+        assertEquals(e, new AuthenticationGnipException("f", e).getCause());
+    }
+
 }
