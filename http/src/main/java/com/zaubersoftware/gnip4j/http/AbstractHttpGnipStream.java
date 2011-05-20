@@ -44,7 +44,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
+import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
+import com.zaubersoftware.gnip4j.api.StreamNotificationAdapter;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
 import com.zaubersoftware.gnip4j.api.exception.GnipException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
@@ -71,6 +73,7 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
  */
 public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
     private final Logger logger = LoggerFactory.getLogger(getClass());
+    
     /** stream name for debugging propourse */
     private final String streamName;
     private final URI streamURI;
@@ -79,6 +82,13 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
     private final ExecutorService activityService = Executors.newScheduledThreadPool(10);
     private GnipHttpConsumer httpConsumer;
     private Thread httpThread;
+
+    private StreamNotification notification = new StreamNotificationAdapter() {
+        @Override
+        public void notify(final Activity activity, final GnipStream stream) {
+            logger.warn("No notification is registed for stream {}", getStreamName());
+        }
+    };
     
     /**
      * Creates the HttpGnipStream.
@@ -124,7 +134,9 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
     public final void open(final StreamNotification notification) {
         if(notification == null) {
             throw new IllegalArgumentException(getStreamName() + " does not support null observers");
-        } 
+        }  else {
+            this.notification  = notification;
+        }
         
         if (httpConsumer != null) {
             throw new IllegalStateException("The stream is open");
@@ -305,7 +317,7 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
                             activityService.execute(new Runnable() {
                                 @Override
                                 public void run() {
-                                    getNotification().notify(activity, AbstractHttpGnipStream.this);
+                                    notification.notify(activity, AbstractHttpGnipStream.this);
                                 }
                             });
                         }
@@ -317,7 +329,7 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
                         activityService.execute(new Runnable() {
                             @Override
                             public void run() {
-                                getNotification().notifyConnectionError(
+                                notification.notifyConnectionError(
                                         new TransportGnipException("There was a problem with the channel", e));
                             }
                         });
@@ -389,7 +401,7 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
                 activityService.execute(new Runnable() {
                     @Override
                     public void run() {
-                        getNotification().notifyReConnection(attempt, reConnectionWaitTime);
+                        notification.notifyReConnection(attempt, reConnectionWaitTime);
                     }
                 });
                 logger.debug("Re-connecting stream with Gnip.");
@@ -404,7 +416,7 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
                 activityService.execute(new Runnable() {
                     @Override
                     public void run() {
-                        getNotification().notifyReConnectionError(e);
+                        notification.notifyReConnectionError(e);
                     }
                 });
             }

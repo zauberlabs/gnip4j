@@ -25,8 +25,6 @@ import org.slf4j.LoggerFactory;
 
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
-import com.zaubersoftware.gnip4j.api.StreamNotificationAdapter;
-import com.zaubersoftware.gnip4j.api.model.Activity;
 
 /**
  * Abstract skeleton implementation of the {@link GnipStream} interface.
@@ -40,19 +38,6 @@ public abstract class AbstractGnipStream implements GnipStream {
     private final Condition emptyCondition  = lock.newCondition(); 
     private final AtomicBoolean streamClosed = new AtomicBoolean(false);
     private final Logger logger = LoggerFactory.getLogger(getClass());
-    private StreamNotification notification = new StreamNotificationAdapter() {
-        private final AtomicBoolean first = new AtomicBoolean(true);
-        
-        @Override
-        public void notify(final Activity activity, final GnipStream stream) {
-            // nothing to do
-            if(first.getAndSet(false)) {
-                logger.warn("Stream `{}' had been openned, but no observer was registered.",
-                        new Object[]{getStreamName()});
-            }
-        }
-    };
-    
     
     @Override
     public final void close() {
@@ -95,10 +80,6 @@ public abstract class AbstractGnipStream implements GnipStream {
         }
     }
 
-    public final StreamNotification getNotification() {
-        return notification;
-    }
-    
     /** @return the stream name. Used for tracing propourses */
     protected abstract String getStreamName(); 
 }
