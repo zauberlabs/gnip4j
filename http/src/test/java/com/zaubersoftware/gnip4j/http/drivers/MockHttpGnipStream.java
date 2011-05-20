@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zaubersoftware.gnip4j.http;
+package com.zaubersoftware.gnip4j.http.drivers;
 
 import java.io.IOException;
 
@@ -24,6 +24,7 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
+import com.zaubersoftware.gnip4j.http.AbstractHttpGnipStream;
 
 /**
  * TODO: Description of the class, Comments in english by default  

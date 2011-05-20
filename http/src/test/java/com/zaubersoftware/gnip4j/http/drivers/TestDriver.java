@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zaubersoftware.gnip4j.http;
+package com.zaubersoftware.gnip4j.http.drivers;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Test;
@@ -24,6 +24,7 @@ import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.StreamNotificationAdapter;
 import com.zaubersoftware.gnip4j.api.impl.InmutableGnipAuthentication;
 import com.zaubersoftware.gnip4j.api.model.Activity;
+import com.zaubersoftware.gnip4j.http.HttpGnipFacade;
 
 /**
  * Test Driver that tests the flows using a real connections 
