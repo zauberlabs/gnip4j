@@ -25,10 +25,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.http.AbstractHttpGnipStream;
+import com.zaubersoftware.gnip4j.http.HttpGnipFacade;
 
 /**
- * TODO: Description of the class, Comments in english by default  
- * 
+ * Mock {@link HttpGnipFacade}.  
  * 
  * @author Guido Marucci Blas
  * @since May 9, 2011
@@ -37,14 +37,7 @@ public final class MockHttpGnipStream extends AbstractHttpGnipStream {
 
     private HttpResponse response = null;
     
-    /**
-     * Creates the MockHttpGnipStream.
-     *
-     * @param client
-     * @param domain
-     * @param dataCollectorId
-     * @param auth
-     */
+    /** Creates the MockHttpGnipStream. */
     public MockHttpGnipStream(
             @NotNull final DefaultHttpClient client, 
             @NotNull final String domain, 
@@ -55,11 +48,6 @@ public final class MockHttpGnipStream extends AbstractHttpGnipStream {
         this.response = response;
     }
 
-    /**
-     * Sets the response. 
-     *
-     * @param response <code>HttpResponse</code> with the response.
-     */
     public void setResponse(final HttpResponse response) {
         this.response = response;
     }
