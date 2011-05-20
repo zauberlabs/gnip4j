@@ -287,6 +287,10 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
                                 logger.warn("Activity parsed from stream is null. Should not happen!");
                                 continue;
                             }
+                            if (activity.getBody() == null) {
+                                logger.warn("Activity with id {} and link {} has a null body",
+                                        activity.getId(), activity.getLink());
+                            }
                             logger.trace("Notifying activity {}", activity.getBody());
                             activityService.execute(new Runnable() {
                                 @Override
@@ -308,13 +312,15 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
                             }
                         });
                     }
+                } catch (final Exception e) {
+                    logger.warn("Unexpected exception while consuming activity stream", e);
                 } finally {
                     try {
                         if(is != null) {
                             try {
                                 is.close();
                                 is = null;
-                            } catch (IOException e) {
+                            } catch (final IOException e) {
                                 // ignore
                             }
                         }
@@ -323,7 +329,7 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
                             if(entity != null) {
                                 try {
                                     EntityUtils.consume(entity);
-                                } catch (IOException e) {
+                                } catch (final IOException e) {
                                     // ignore
                                 }
                             }
@@ -358,6 +364,7 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
          * Re-connects the stream
          */
         private void reconnect() {
+            logger.debug("Reconnecting ...");
             try {
                 final int attempt = reConnectionAttempt.incrementAndGet();
                 logger.debug("Waiting for {} ms till next re-connection", reConnectionWaitTime);
