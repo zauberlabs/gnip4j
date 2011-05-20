@@ -16,13 +16,14 @@
 package com.zaubersoftware.gnip4j.api.exception;
 
 /**
- * TODO: Description of the class, Comments in english by default
- *
+ * Base exception
  *
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
 public class GnipException extends RuntimeException {
+    /** <code>serialVersionUID</code> */
+    private static final long serialVersionUID = 7264815091470201543L;
 
     /**
      * Creates the GnipException.
