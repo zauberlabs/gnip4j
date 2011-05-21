@@ -195,7 +195,7 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
     /** Template method that obtains the {@link HttpResponse} for the given {@link HttpUriRequest} */
     protected abstract HttpResponse getResponse(@NotNull HttpUriRequest request) throws IOException;
     
-    /** Performs the handshake to establish a new stream connection with Gnip. */
+    /** Get a remote resource from Gnip. */
     private HttpResponse getResouce(final URI uri)
         throws AuthenticationGnipException, TransportGnipException {
         logger.debug("Setting up connection for {}", uri);
@@ -221,7 +221,7 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
             if (statusCode == 401) {
                 throw new AuthenticationGnipException(statusLine.getReasonPhrase());
             } else if (statusCode == 200) {
-                logger.debug("The handshake was successfully done for {}", uri);
+                logger.debug("The connection was successfully done for {}", uri);
                 return response;
             } else {
                 throw new TransportGnipException(
@@ -293,18 +293,19 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
 //                  });
 
                         final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
-                        logger.debug("Starting to consume activity stream...");
+                        logger.debug("Starting to consume activity stream {} ...", streamName);
                         while(!Thread.interrupted()) {
                             final Activity activity = parser.readValueAs(Activity.class);
                             if (activity == null) {
-                                logger.warn("Activity parsed from stream is null. Should not happen!");
+                                logger.warn("Activity parsed from stream {} is null. Should not happen!",
+                                        streamName);
                                 continue;
                             }
                             if (activity.getBody() == null) {
-                                logger.warn("Activity with id {} and link {} has a null body",
-                                        activity.getId(), activity.getLink());
+                                logger.warn("{}: Activity with id {} and link {} has a null body",
+                                        new Object[]{streamName, activity.getId(), activity.getLink()});
                             }
-                            logger.trace("Notifying activity {}", activity.getBody());
+                            logger.trace("{}: Notifying activity {}", streamName, activity.getBody());
                             activityService.execute(new Runnable() {
                                 @Override
                                 public void run() {
@@ -312,21 +313,23 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
                                 }
                             });
                         }
-                        logger.debug("The activity stream is no longer being consumed.");
+                        logger.debug("{}: The activity stream is no longer being consumed.", streamName);
                     }            
                 } catch(final IOException e) {
                     if(!shuttingDown.get()) {
-                        logger.warn("There was a problem with the channel.", e);
+                        logger.warn("There was a problem with the channel." + streamName, e);
                         activityService.execute(new Runnable() {
                             @Override
                             public void run() {
                                 notification.notifyConnectionError(
-                                        new TransportGnipException("There was a problem with the channel", e));
+                                        new TransportGnipException("There was a problem with the channel "
+                                                + streamName, e));
                             }
                         });
                     }
                 } catch (final Exception e) {
-                    logger.warn("Unexpected exception while consuming activity stream", e);
+                    logger.warn("Unexpected exception while consuming activity stream "
+                            + streamName, e);
                 } finally {
                     try {
                         if(is != null) {
@@ -359,9 +362,7 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
             }
         }
         
-        /**
-         * Cleanly close the input stream
-         */
+        /** Cleanly close the input stream */
         void closeInputStream() {
             if(is != null) {
                 try {
@@ -373,14 +374,12 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
             }
         }
         
-        /**
-         * Re-connects the stream
-         */
+        /** Re-connects the stream */
         private void reconnect() {
-            logger.debug("Reconnecting ...");
+            logger.debug("{}: Reconnecting...", streamName);
             try {
                 final int attempt = reConnectionAttempt.incrementAndGet();
-                logger.debug("Waiting for {} ms till next re-connection", reConnectionWaitTime);
+                logger.debug("{}: Waiting for {} ms till next re-connection", streamName, reConnectionWaitTime);
                 reConnectionWaitTime = (long) (reConnectionWaitTime * 2);
                 reConnectionWaitTime = (reConnectionWaitTime > MAX_RE_CONNECTION_WAIT_TIME) 
                     ? MAX_RE_CONNECTION_WAIT_TIME : reConnectionWaitTime;
@@ -395,15 +394,15 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
                         notification.notifyReConnection(attempt, reConnectionWaitTime);
                     }
                 });
-                logger.debug("Re-connecting stream with Gnip.");
+                logger.debug("{}: Re-connecting stream with Gnip.", streamName);
                 response = getResouce(streamURI);
-                logger.debug("The re-connection has been successfully established");
+                logger.debug("{}: The re-connection has been successfully established", streamName);
                 
                 reConnectionAttempt.set(0);
                 reConnectionWaitTime = INITIAL_RE_CONNECTION_WAIT_TIME;
                 
             } catch (final GnipException e) {
-                logger.error("The re-connection could not be established", e);
+                logger.error(streamName + ": The re-connection could not be established", e);
                 activityService.execute(new Runnable() {
                     @Override
                     public void run() {
