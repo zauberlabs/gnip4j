@@ -35,14 +35,7 @@ import com.zaubersoftware.gnip4j.api.GnipAuthentication;
  */
 public final class HttpGnipStream extends AbstractHttpGnipStream {
 
-    /**
-     * Creates the HttpGnipStream.
-     *
-     * @param client
-     * @param domain
-     * @param dataCollectorId
-     * @param auth
-     */
+    /** Creates the HttpGnipStream. */
     public HttpGnipStream(
             @NotNull final DefaultHttpClient client, 
             @NotNull final String domain, 
