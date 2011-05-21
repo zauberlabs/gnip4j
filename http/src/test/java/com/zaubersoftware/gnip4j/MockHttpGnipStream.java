@@ -26,8 +26,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpUriRequest;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
-import com.zaubersoftware.gnip4j.http.AbstractHttpGnipStream;
 import com.zaubersoftware.gnip4j.http.HttpGnipFacade;
+import com.zaubersoftware.gnip4j.http.HttpGnipStream;
 
 /**
  * Mock {@link HttpGnipFacade}.  
@@ -35,7 +35,7 @@ import com.zaubersoftware.gnip4j.http.HttpGnipFacade;
  * @author Guido Marucci Blas
  * @since May 9, 2011
  */
-public final class MockHttpGnipStream extends AbstractHttpGnipStream {
+public final class MockHttpGnipStream extends HttpGnipStream {
 
     private HttpResponse response = null;
     
