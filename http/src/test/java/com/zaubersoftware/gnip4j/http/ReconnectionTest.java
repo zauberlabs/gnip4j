@@ -50,14 +50,14 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
  */
 public final class ReconnectionTest {
     /** test */
-    @Test
+    @Test(timeout = 20000)
     public void testReConnection() throws Exception {
         // ignore framework warnings
         Logger root = Logger.getRootLogger();
         root.setLevel(Level.OFF);
         
         final ActivityNetworkExceptionInputStream instream = new ActivityNetworkExceptionInputStream(
-            "com/zaubersoftware/gnip4j/payload/payload-example-2.js");
+            "payload-example-2.js");
         final GnipAuthentication auth = new InmutableGnipAuthentication("test", "test");
         final StatusLine statusLine = new BasicStatusLine(new ProtocolVersion("HTTP", 1, 1), 200, "");
         final HttpEntity entity = new InputStreamEntity(instream, 10000);
@@ -82,8 +82,7 @@ public final class ReconnectionTest {
                 out.append(String.format("Connection attempt %d wait time %d\n", attempt, waitTime));
                 if (attempt > 2) {
                     response.setEntity(new InputStreamEntity(new ActivityNetworkExceptionInputStream(
-                            getClass().getClassLoader().getResourceAsStream(
-                            "com/zaubersoftware/gnip4j/payload/payload-example-2.js")), 10000));
+                            "payload-example-2.js"), 10000));
                     stream.setResponse(response);
                     instream.setThrowException(false);
                     reConnected.set(true);
