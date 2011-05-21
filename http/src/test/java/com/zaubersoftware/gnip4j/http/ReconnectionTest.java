@@ -30,6 +30,7 @@ import org.apache.http.message.BasicHttpResponse;
 import org.apache.http.message.BasicStatusLine;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.zaubersoftware.gnip4j.MockHttpGnipStream;
@@ -110,8 +111,13 @@ public final class ReconnectionTest {
             }
         };
         stream.openAndAwait(n);
-        
-        assertEquals(IOUtils.toString(getClass().getClassLoader().getResourceAsStream("reconnectlog.txt")), 
-                out.toString());
+        final String s = out.toString();
+        final String expected = IOUtils.toString(getClass().getClassLoader()
+                .getResourceAsStream("reconnectlog.txt"));
+        if (!expected.equals(s)
+                && !expected.replace("Connection attempt 4 wait time 250",
+                        "Connection attempt 4 wait time 4000").equals(s)) {
+            Assert.fail(s);
+        }
     }
 }
