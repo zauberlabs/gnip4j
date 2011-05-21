@@ -32,6 +32,7 @@ import org.apache.http.StatusLine;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -137,7 +138,7 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
             throw new IllegalStateException("The stream is open");
         }
         
-        this.httpConsumer = new GnipHttpConsumer(handshake());
+        this.httpConsumer = new GnipHttpConsumer(getResouce(streamURI));
         this.httpThread = new Thread(httpConsumer, streamName + "-consumer-http");
         httpThread.start();
     }
@@ -191,49 +192,41 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
         return client;
     }
     
-    /**
-     * Template method that obtains the {@link HttpResponse} for the given {@link HttpUriRequest}
-     * 
-     * @param request
-     * @return
-     */
+    /** Template method that obtains the {@link HttpResponse} for the given {@link HttpUriRequest} */
     protected abstract HttpResponse getResponse(@NotNull HttpUriRequest request) throws IOException;
     
-    /**
-     * Performs the handshake to establish a new stream connection with Gnip.
-     * 
-     * @return
-     * @throws AuthenticationGnipException
-     * @throws TransportGnipException
-     */
-    private HttpResponse handshake()
+    /** Performs the handshake to establish a new stream connection with Gnip. */
+    private HttpResponse getResouce(final URI uri)
         throws AuthenticationGnipException, TransportGnipException {
-        logger.debug("Handshaking with Gnip to establish a new stream connection");
-        logger.trace("\t-- Setting Gnip credentials");
+        logger.debug("Setting up connection for {}", uri);
         if(client instanceof DefaultHttpClient) {
-            ((DefaultHttpClient)client).getCredentialsProvider().setCredentials(
-                    new AuthScope(streamURI.getHost(), AuthScope.ANY_PORT), 
+            final DefaultHttpClient dclient = (DefaultHttpClient)client;
+            final CredentialsProvider credentialsProvider = dclient.getCredentialsProvider();
+            
+            logger.trace("\t-- Setting Gnip credentials. User {}", auth.getUsername());
+            credentialsProvider.setCredentials(
+                    new AuthScope(uri.getHost(), AuthScope.ANY_PORT), 
                     new UsernamePasswordCredentials(auth.getUsername(), auth.getPassword()));
         } else {
             logger.warn("Unknown intance of HttpClient: {}. Credentials weren't set.", client.getClass());
         }
-        final HttpGet get = new HttpGet(streamURI);
+        final HttpGet get = new HttpGet(uri);
         try {
-            logger.trace("\t-- Executing get request to URI {}", streamURI);
+            logger.trace("\t-- Executing get request to URI {}", uri);
             final HttpResponse response  = getResponse(get);
             
             final StatusLine statusLine = response.getStatusLine();
             final int statusCode = statusLine.getStatusCode();
-            logger.trace("\t-- Response status code {}", statusCode);
+            logger.trace("\t-- Response status code {} for {}", statusCode, uri);
             if (statusCode == 401) {
                 throw new AuthenticationGnipException(statusLine.getReasonPhrase());
             } else if (statusCode == 200) {
-                logger.debug("The handshake was successfully done");
+                logger.debug("The handshake was successfully done for {}", uri);
                 return response;
             } else {
                 throw new TransportGnipException(
                     String.format("Connection to %s: Unexpected status code: %s %s",
-                            streamURI, statusCode, statusLine.getReasonPhrase()));
+                            uri, statusCode, statusLine.getReasonPhrase()));
             }
         } catch (final ClientProtocolException e) {
             throw new TransportGnipException("Protocol error", e);
@@ -403,7 +396,7 @@ public abstract class AbstractHttpGnipStream extends AbstractGnipStream {
                     }
                 });
                 logger.debug("Re-connecting stream with Gnip.");
-                response = handshake();
+                response = getResouce(streamURI);
                 logger.debug("The re-connection has been successfully established");
                 
                 reConnectionAttempt.set(0);
