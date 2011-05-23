@@ -9,7 +9,7 @@
 	<name>Zauber::Gnip4j</name>
 	<groupId>com.zaubersoftware.gnip4j</groupId>
 	<artifactId>zauber-gnip4j-parent</artifactId>
-	<version>0.0M1</version>
+	<version>0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<scm>
