@@ -40,9 +40,9 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParamBean;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
-import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
+import com.zaubersoftware.gnip4j.api.support.http.AbstractRemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;
 import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
@@ -53,7 +53,7 @@ import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
  * @author Juan F. Codagnone
  * @since May 21, 2011
  */
-public class HttpClientRemoteResourceProvider implements RemoteResourceProvider {
+public class HttpClientRemoteResourceProvider extends AbstractRemoteResourceProvider {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private static final String USER_AGENT = "Gnip4j (https://github.com/zaubersoftware/gnip4j/)";
     private final DefaultHttpClient client;
@@ -104,16 +104,8 @@ public class HttpClientRemoteResourceProvider implements RemoteResourceProvider 
             final StatusLine statusLine = response.getStatusLine();
             final int statusCode = statusLine.getStatusCode();
             logger.trace("\t-- Response status code {} for {}", statusCode, uri);
-            if (statusCode == 401) {
-                throw new AuthenticationGnipException(statusLine.getReasonPhrase());
-            } else if (statusCode == 200) {
-                logger.debug("The connection was successfully done for {}", uri);
-                return new HttpResponseReleaseInputStream(response);
-            } else {
-                throw new TransportGnipException(
-                    String.format("Connection to %s: Unexpected status code: %s %s",
-                            uri, statusCode, statusLine.getReasonPhrase()));
-            }
+            validateStatusLine(uri, statusCode, statusLine.getReasonPhrase());
+            return new HttpResponseReleaseInputStream(response);
         } catch (final ClientProtocolException e) {
             throw new TransportGnipException("Protocol error", e);
         } catch (final IOException e) {
