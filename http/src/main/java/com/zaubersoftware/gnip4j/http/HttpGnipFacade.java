@@ -15,25 +15,14 @@
  */
 package com.zaubersoftware.gnip4j.http;
 
-import static com.zaubersoftware.gnip4j.http.ErrorCodes.ERROR_NULL_HTTPCLIENT;
+import static com.zaubersoftware.gnip4j.http.ErrorCodes.*;
+
+import java.util.concurrent.Executors;
 
 import javax.validation.constraints.NotNull;
 
-import org.apache.http.HttpVersion;
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.params.ClientParamBean;
-import org.apache.http.conn.params.ConnManagerParamBean;
-import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.HttpConnectionParamBean;
-import org.apache.http.params.HttpParams;
-import org.apache.http.params.HttpProtocolParamBean;
-
-import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.GnipStream;
-import com.zaubersoftware.gnip4j.api.model.Rule;
 /**
  * Http implementation for the {@link GnipFacade}  
  * 
@@ -41,69 +30,22 @@ import com.zaubersoftware.gnip4j.api.model.Rule;
  * @since Apr 29, 2011
  */
 public class HttpGnipFacade implements GnipFacade {
-    private static final String USER_AGENT = "Gnip4j (https://github.com/zaubersoftware/gnip4j/)";
-    private final DefaultHttpClient client;
-    
-    /** Creates the HttpGnipFacade. */
-    public HttpGnipFacade() {
-        this(createHttpClient());
-    }
+    private final RemoteResourceProvider facade;
 
     /** Creates the HttpGnipFacade. */
-    public HttpGnipFacade(@NotNull final DefaultHttpClient client) {
-        if(client == null) {
+    public HttpGnipFacade(final RemoteResourceProvider facade) {
+        if(facade == null) {
             throw new IllegalArgumentException(ERROR_NULL_HTTPCLIENT);
         }
-        
-        this.client = client;
+        this.facade = facade; 
     }
 
+    
     @Override
     public final GnipStream createStream(
             @NotNull final String domain,
-            @NotNull final long dataCollectorId, 
-            @NotNull final GnipAuthentication auth) {
-        return new HttpGnipStream(client, domain, dataCollectorId, auth);
+            @NotNull final long dataCollectorId) {
+        return new HttpGnipStream(facade, domain, dataCollectorId, Executors.newFixedThreadPool(10));
     }
 
-    /** create the default http client */
-    private static DefaultHttpClient createHttpClient() {
-        final DefaultHttpClient  client = new DefaultHttpClient();
-        
-        final CredentialsProvider credsProvider = new BasicCredentialsProvider();
-        client.setCredentialsProvider(credsProvider);
-        final HttpParams params = client.getParams();
-        
-        final HttpProtocolParamBean httpProtocol = new HttpProtocolParamBean(params);
-        httpProtocol.setContentCharset("UTF-8");
-        httpProtocol.setUserAgent(USER_AGENT);
-        httpProtocol.setVersion(HttpVersion.HTTP_1_1);
-
-        final HttpConnectionParamBean bean = new HttpConnectionParamBean(params);
-        bean.setConnectionTimeout(60 * 10000); // timeout in milliseconds until a connection is established.
-        bean.setSoTimeout(60000); // a maximum period inactivity between two consecutive data packets
-        bean.setSocketBufferSize(8192); // the internal socket buffer used to buffer data while 
-                                        // receiving / transmitting HTTP messages. 
-        bean.setTcpNoDelay(true); // http.connection.stalecheck. overhead de 30ms 
-        bean.setStaleCheckingEnabled(true); // determines whether Nagle's algorithm is to be used 
-        bean.setLinger(-1); // sets SO_LINGER with the specified linger time in seconds
-
-        final ClientParamBean clientParam = new ClientParamBean(params);
-        clientParam.setHandleRedirects(true);
-        clientParam.setRejectRelativeRedirect(true);
-        clientParam.setMaxRedirects(5);
-        clientParam.setAllowCircularRedirects(false);
-        
-//        final ConnRouteParamBean connRoute = new ConnRouteParamBean(params);
-        // TODO proxy settings
-        
-        final ConnManagerParamBean connManager = new ConnManagerParamBean(params);
-        connManager.setMaxTotalConnections(20);
-        
-        // TODO GZIP saves bandwith but delays reception (compression buffers)
-        final GZipInterceptor gzip = new GZipInterceptor();
-        client.addRequestInterceptor(gzip);
-        client.addResponseInterceptor(gzip);
-        return client;
-    }
 }

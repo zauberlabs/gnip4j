@@ -16,12 +16,13 @@
 package com.zaubersoftware.gnip4j.http;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 import static com.zaubersoftware.gnip4j.http.ErrorCodes.*;
 
-import org.apache.http.impl.client.DefaultHttpClient;
+import java.util.concurrent.ExecutorService;
+
 import org.junit.Test;
 
-import com.zaubersoftware.gnip4j.api.impl.InmutableGnipAuthentication;
 
 /**
  * Tests input validations
@@ -47,7 +48,7 @@ public class ValidationTest {
     @Test
     public final void streamNullClient() {
         try {
-            new HttpGnipStream(null, "x", 12L, new InmutableGnipAuthentication("foo", "bar"));
+            new HttpGnipStream(null, "x", 12L, mock(ExecutorService.class));
             fail();
         } catch(IllegalArgumentException e) {
             assertEquals(ERROR_NULL_HTTPCLIENT, e.getMessage());
@@ -59,22 +60,23 @@ public class ValidationTest {
     @Test
     public final void streamEmptyDomain() {
         try {
-            new HttpGnipStream(new DefaultHttpClient(), " \t", 12L, new InmutableGnipAuthentication("foo", "bar"));
+            new HttpGnipStream(mock(RemoteResourceProvider.class), 
+                    " \t", 12L, mock(ExecutorService.class));
             fail();
         } catch(IllegalArgumentException e) {
             assertEquals(ERROR_EMPTY_DOMAIN, e.getMessage());
         }
     }
     
-
     /** test */
     @Test
-    public final void streamNullAuth() {
+    public final void streamNullExecutorService() {
         try {
-            new HttpGnipStream(new DefaultHttpClient(), "f", 12L, null);
+            new HttpGnipStream(mock(RemoteResourceProvider.class), 
+                    "xxx \t", 12L, null);
             fail();
         } catch(IllegalArgumentException e) {
-            assertEquals(ERROR_NULL_AUTH, e.getMessage());
+            assertEquals(ERROR_NULL_ACTIVITY_SERVICE, e.getMessage());
         }
     }
 }

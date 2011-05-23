@@ -15,21 +15,25 @@
  */
 package com.zaubersoftware.gnip4j.http;
 
+import java.net.URI;
+
+import org.apache.http.HttpResponse;
+
+import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
+import com.zaubersoftware.gnip4j.api.exception.GnipException;
+import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
+
 /**
- * Error codes
+ * Remote implementation
  * 
  * 
  * @author Juan F. Codagnone
- * @since May 20, 2011
+ * @since May 22, 2011
  */
-public interface ErrorCodes {
+public interface RemoteResourceProvider {
 
-    /** error code */
-    String ERROR_NULL_HTTPCLIENT = "The HTTP client cannot be null";
-    /** error code */
-    String ERROR_EMPTY_DOMAIN = "The domain cannot be empty";
-    /** error code */
-    String ERROR_NULL_AUTH = "The Gnip authentication cannot be null";
-    /** error code */
-    String ERROR_NULL_ACTIVITY_SERVICE = "The activity ExecutorService cannot be null";
+    /** Get a remote resource from Gnip. Throws exception on error (ej: network not reacheable, 401, 404) */
+    HttpResponse getResouce(final URI uri)
+            throws AuthenticationGnipException, TransportGnipException, GnipException;
+
 }
