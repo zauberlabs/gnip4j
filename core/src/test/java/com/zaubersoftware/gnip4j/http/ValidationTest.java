@@ -17,11 +17,15 @@ package com.zaubersoftware.gnip4j.http;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
-import static com.zaubersoftware.gnip4j.http.ErrorCodes.*;
+import static com.zaubersoftware.gnip4j.api.impl.ErrorCodes.*;
 
 import java.util.concurrent.ExecutorService;
 
 import org.junit.Test;
+
+import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
+import com.zaubersoftware.gnip4j.api.impl.DefaultGnipFacade;
+import com.zaubersoftware.gnip4j.api.impl.DefaultGnipStream;
 
 
 /**
@@ -37,7 +41,7 @@ public class ValidationTest {
     @Test
     public final void facadeNullClient() {
         try {
-            new HttpGnipFacade(null);
+            new DefaultGnipFacade(null);
             fail();
         } catch(IllegalArgumentException e) {
             assertEquals(ERROR_NULL_HTTPCLIENT, e.getMessage());
@@ -48,7 +52,7 @@ public class ValidationTest {
     @Test
     public final void streamNullClient() {
         try {
-            new HttpGnipStream(null, "x", 12L, mock(ExecutorService.class));
+            new DefaultGnipStream(null, "x", 12L, mock(ExecutorService.class));
             fail();
         } catch(IllegalArgumentException e) {
             assertEquals(ERROR_NULL_HTTPCLIENT, e.getMessage());
@@ -60,7 +64,7 @@ public class ValidationTest {
     @Test
     public final void streamEmptyDomain() {
         try {
-            new HttpGnipStream(mock(RemoteResourceProvider.class), 
+            new DefaultGnipStream(mock(RemoteResourceProvider.class), 
                     " \t", 12L, mock(ExecutorService.class));
             fail();
         } catch(IllegalArgumentException e) {
@@ -72,7 +76,7 @@ public class ValidationTest {
     @Test
     public final void streamNullExecutorService() {
         try {
-            new HttpGnipStream(mock(RemoteResourceProvider.class), 
+            new DefaultGnipStream(mock(RemoteResourceProvider.class), 
                     "xxx \t", 12L, null);
             fail();
         } catch(IllegalArgumentException e) {

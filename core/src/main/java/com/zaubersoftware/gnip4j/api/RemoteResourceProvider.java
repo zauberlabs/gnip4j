@@ -13,27 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zaubersoftware.gnip4j.http;
+package com.zaubersoftware.gnip4j.api;
 
+import java.io.InputStream;
 import java.net.URI;
 
-import org.apache.http.HttpResponse;
-
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
-import com.zaubersoftware.gnip4j.api.exception.GnipException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 
 /**
- * Remote implementation
- * 
+ * Facade to the Network (HTTP)
  * 
  * @author Juan F. Codagnone
  * @since May 22, 2011
  */
 public interface RemoteResourceProvider {
 
-    /** Get a remote resource from Gnip. Throws exception on error (ej: network not reacheable, 401, 404) */
-    HttpResponse getResouce(final URI uri)
-            throws AuthenticationGnipException, TransportGnipException, GnipException;
+    /** Get a remote resource from Gnip. */
+    InputStream getResouce(final URI uri) throws AuthenticationGnipException, TransportGnipException;
 
 }

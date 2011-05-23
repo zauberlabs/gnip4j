@@ -33,6 +33,9 @@ public final class ActivityNetworkExceptionInputStream extends FilterInputStream
     /** Creates the ActivityExceptionInputStream. */
     public ActivityNetworkExceptionInputStream(final InputStream in, final int bytesBeforeError) {
         super(in);
+        if(in == null) {
+            throw new IllegalArgumentException("Null resource!");
+        }
         this.bytesBefore = bytesBeforeError;
     }
     

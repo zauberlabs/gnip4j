@@ -21,10 +21,10 @@ import org.junit.Test;
 import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.StreamNotificationAdapter;
+import com.zaubersoftware.gnip4j.api.impl.DefaultGnipFacade;
 import com.zaubersoftware.gnip4j.api.impl.InmutableGnipAuthentication;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.http.HttpClientRemoteResourceProvider;
-import com.zaubersoftware.gnip4j.http.HttpGnipFacade;
 
 /**
  * Test Driver that tests the flows using a real connections 
@@ -56,7 +56,7 @@ public final class TestDriver {
         }
         
         try {
-            final GnipFacade gnip = new HttpGnipFacade(
+            final GnipFacade gnip = new DefaultGnipFacade(
                     new HttpClientRemoteResourceProvider(
                             new InmutableGnipAuthentication(username, password)));
             

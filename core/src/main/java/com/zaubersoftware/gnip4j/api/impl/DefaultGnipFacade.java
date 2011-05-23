@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zaubersoftware.gnip4j.http;
+package com.zaubersoftware.gnip4j.api.impl;
 
-import static com.zaubersoftware.gnip4j.http.ErrorCodes.*;
+import static com.zaubersoftware.gnip4j.api.impl.ErrorCodes.*;
 
 import java.util.concurrent.Executors;
 
@@ -23,17 +23,18 @@ import javax.validation.constraints.NotNull;
 
 import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.GnipStream;
+import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
 /**
  * Http implementation for the {@link GnipFacade}  
  * 
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
-public class HttpGnipFacade implements GnipFacade {
+public class DefaultGnipFacade implements GnipFacade {
     private final RemoteResourceProvider facade;
 
     /** Creates the HttpGnipFacade. */
-    public HttpGnipFacade(final RemoteResourceProvider facade) {
+    public DefaultGnipFacade(final RemoteResourceProvider facade) {
         if(facade == null) {
             throw new IllegalArgumentException(ERROR_NULL_HTTPCLIENT);
         }
@@ -45,7 +46,7 @@ public class HttpGnipFacade implements GnipFacade {
     public final GnipStream createStream(
             @NotNull final String domain,
             @NotNull final long dataCollectorId) {
-        return new HttpGnipStream(facade, domain, dataCollectorId, Executors.newFixedThreadPool(10));
+        return new DefaultGnipStream(facade, domain, dataCollectorId, Executors.newFixedThreadPool(10));
     }
 
 }

@@ -15,9 +15,10 @@
  */
 package com.zaubersoftware.gnip4j.http;
 
-import static com.zaubersoftware.gnip4j.http.ErrorCodes.*;
+import static com.zaubersoftware.gnip4j.api.impl.ErrorCodes.*;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 
 import javax.validation.constraints.NotNull;
@@ -41,13 +42,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
+import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 
 /**
  * TODO Descripcion de la clase. Los comenterios van en castellano.
- * 
- * 
+ *
+ *
  * @author Juan F. Codagnone
  * @since May 21, 2011
  */
@@ -64,7 +66,7 @@ public class HttpClientRemoteResourceProvider implements RemoteResourceProvider 
 
     /** Creates the HttpGnipFacade. */
     public HttpClientRemoteResourceProvider(
-            @NotNull final DefaultHttpClient client, 
+            @NotNull final DefaultHttpClient client,
             @NotNull final GnipAuthentication authentication) {
         if(client == null) {
             throw new IllegalArgumentException(ERROR_NULL_HTTPCLIENT);
@@ -72,33 +74,33 @@ public class HttpClientRemoteResourceProvider implements RemoteResourceProvider 
         if(authentication == null) {
             throw new IllegalArgumentException(ERROR_NULL_AUTH);
         }
-        
+
         this.authentication = authentication;
         this.client = client;
     }
 
 
     @Override
-    public final HttpResponse getResouce(final URI uri)
+    public final InputStream getResouce(final URI uri)
         throws AuthenticationGnipException, TransportGnipException {
         logger.debug("Setting up connection for {}", uri);
         if(client instanceof DefaultHttpClient) {
-            final DefaultHttpClient dclient = (DefaultHttpClient)client;
+            final DefaultHttpClient dclient = client;
             final CredentialsProvider credentialsProvider = dclient.getCredentialsProvider();
-            
+
             logger.trace("\t-- Setting Gnip credentials. User {}", authentication.getUsername());
             credentialsProvider.setCredentials(
-                    new AuthScope(uri.getHost(), AuthScope.ANY_PORT), 
+                    new AuthScope(uri.getHost(), AuthScope.ANY_PORT),
                     new UsernamePasswordCredentials(authentication.getUsername(), authentication.getPassword()));
         } else {
             logger.warn("Unknown intance of HttpClient: {}. Credentials weren't set.", client.getClass());
         }
-                
+
         final HttpGet get = new HttpGet(uri);
         try {
             logger.trace("\t-- Executing get request to URI {}", uri);
             final HttpResponse response  = client.execute(get);
-            
+
             final StatusLine statusLine = response.getStatusLine();
             final int statusCode = statusLine.getStatusCode();
             logger.trace("\t-- Response status code {} for {}", statusCode, uri);
@@ -106,7 +108,7 @@ public class HttpClientRemoteResourceProvider implements RemoteResourceProvider 
                 throw new AuthenticationGnipException(statusLine.getReasonPhrase());
             } else if (statusCode == 200) {
                 logger.debug("The connection was successfully done for {}", uri);
-                return response;
+                return new HttpResponseReleaseInputStream(response);
             } else {
                 throw new TransportGnipException(
                     String.format("Connection to %s: Unexpected status code: %s %s",
@@ -118,15 +120,15 @@ public class HttpClientRemoteResourceProvider implements RemoteResourceProvider 
             throw new TransportGnipException("Error", e);
         }
     }
-    
+
     /** create the default http client */
     private static DefaultHttpClient createHttpClient() {
         final DefaultHttpClient  client = new DefaultHttpClient();
-        
+
         final CredentialsProvider credsProvider = new BasicCredentialsProvider();
         client.setCredentialsProvider(credsProvider);
         final HttpParams params = client.getParams();
-        
+
         final HttpProtocolParamBean httpProtocol = new HttpProtocolParamBean(params);
         httpProtocol.setContentCharset("UTF-8");
         httpProtocol.setUserAgent(USER_AGENT);
@@ -135,10 +137,10 @@ public class HttpClientRemoteResourceProvider implements RemoteResourceProvider 
         final HttpConnectionParamBean bean = new HttpConnectionParamBean(params);
         bean.setConnectionTimeout(60 * 10000); // timeout in milliseconds until a connection is established.
         bean.setSoTimeout(60000); // a maximum period inactivity between two consecutive data packets
-        bean.setSocketBufferSize(8192); // the internal socket buffer used to buffer data while 
-                                        // receiving / transmitting HTTP messages. 
-        bean.setTcpNoDelay(true); // http.connection.stalecheck. overhead de 30ms 
-        bean.setStaleCheckingEnabled(true); // determines whether Nagle's algorithm is to be used 
+        bean.setSocketBufferSize(8192); // the internal socket buffer used to buffer data while
+                                        // receiving / transmitting HTTP messages.
+        bean.setTcpNoDelay(true); // http.connection.stalecheck. overhead de 30ms
+        bean.setStaleCheckingEnabled(true); // determines whether Nagle's algorithm is to be used
         bean.setLinger(-1); // sets SO_LINGER with the specified linger time in seconds
 
         final ClientParamBean clientParam = new ClientParamBean(params);
@@ -146,13 +148,13 @@ public class HttpClientRemoteResourceProvider implements RemoteResourceProvider 
         clientParam.setRejectRelativeRedirect(true);
         clientParam.setMaxRedirects(5);
         clientParam.setAllowCircularRedirects(false);
-        
+
 //        final ConnRouteParamBean connRoute = new ConnRouteParamBean(params);
         // TODO proxy settings
-        
+
         final ConnManagerParamBean connManager = new ConnManagerParamBean(params);
         connManager.setMaxTotalConnections(20);
-        
+
         // TODO GZIP saves bandwith but delays reception (compression buffers)
         final GZipInterceptor gzip = new GZipInterceptor();
         client.addRequestInterceptor(gzip);

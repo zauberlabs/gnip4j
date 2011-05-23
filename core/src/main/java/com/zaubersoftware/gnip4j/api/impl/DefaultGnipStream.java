@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zaubersoftware.gnip4j.http;
-import static com.zaubersoftware.gnip4j.http.ErrorCodes.*;
+package com.zaubersoftware.gnip4j.api.impl;
+import static com.zaubersoftware.gnip4j.api.impl.ErrorCodes.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,9 +25,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.validation.constraints.NotNull;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.util.EntityUtils;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.AnnotationIntrospector;
 import org.codehaus.jackson.map.DeserializationConfig;
@@ -37,11 +34,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.zaubersoftware.gnip4j.api.GnipStream;
+import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
 import com.zaubersoftware.gnip4j.api.StreamNotificationAdapter;
 import com.zaubersoftware.gnip4j.api.exception.GnipException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
-import com.zaubersoftware.gnip4j.api.impl.AbstractGnipStream;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 
 /**
@@ -62,7 +59,7 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
-public class HttpGnipStream extends AbstractGnipStream {
+public class DefaultGnipStream extends AbstractGnipStream {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     
     /** stream name for debugging propourse */
@@ -81,7 +78,7 @@ public class HttpGnipStream extends AbstractGnipStream {
     };
     
     /** Creates the HttpGnipStream. */
-    public HttpGnipStream(
+    public DefaultGnipStream(
             @NotNull final RemoteResourceProvider client, 
             @NotNull final String domain,
             @NotNull final long dataCollectorId,
@@ -188,21 +185,18 @@ public class HttpGnipStream extends AbstractGnipStream {
         private final AtomicInteger reConnectionAttempt = new AtomicInteger();
         private long reConnectionWaitTime = INITIAL_RE_CONNECTION_WAIT_TIME;
         
-        
-        private HttpEntity entity;
-        private HttpResponse response;
-        private InputStream is = null;
+        private InputStream is;
         
         /**
          * Creates the GnipHttpConsumer.
          *
          * @param response
          */
-        public GnipHttpConsumer(final HttpResponse response) {
+        public GnipHttpConsumer(final InputStream response) {
             if(response == null) {
                 throw new IllegalArgumentException("response is null");
             }
-            this.response = response;
+            this.is = response;
             
             mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             final AnnotationIntrospector introspector = new JaxbAnnotationIntrospector();
@@ -214,16 +208,14 @@ public class HttpGnipStream extends AbstractGnipStream {
         
         @Override
         public void run() {
-            while (!shuttingDown.get() && !Thread.interrupted()) {
-                try {
-                    if(response == null) {
-                        reconnect();
-                    } 
-                    if(response != null) {
-                        entity = response.getEntity();
-                        if (entity != null) {
+            try {
+                while (!shuttingDown.get() && !Thread.interrupted()) {
+                    try {
+                        if(is == null) {
+                            reconnect();
+                        } 
+                        if(is != null) {
                             // TODO Wrapp InputStream to count bytes and transfer rates 
-                            is = entity.getContent();
     
                             final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
                             logger.debug("Starting to consume activity stream {} ...", streamName);
@@ -242,60 +234,48 @@ public class HttpGnipStream extends AbstractGnipStream {
                                 activityService.execute(new Runnable() {
                                     @Override
                                     public void run() {
-                                        notification.notify(activity, HttpGnipStream.this);
+                                        notification.notify(activity, DefaultGnipStream.this);
                                     }
                                 });
                             }
                             logger.debug("{}: The activity stream is no longer being consumed.", streamName);
+                        }            
+                    } catch(final IOException e) {
+                        final String msg = "I/O error in channel " + streamName + ": " + e.getLocalizedMessage();
+                        if(logger.isWarnEnabled()) {
+                            logger.warn(msg, e);
                         }
-                    }            
-                } catch(final IOException e) {
-                    final String msg = "I/O error in channel " + streamName + ": " + e.getLocalizedMessage();
-                    if(logger.isWarnEnabled()) {
-                        logger.warn(msg, e);
+                        if(!shuttingDown.get()) {
+                            activityService.execute(new Runnable() {
+                                @Override
+                                public void run() {
+                                    notification.notifyConnectionError(new TransportGnipException(msg, e));
+                                }
+                            });
+                        }
+                    } catch (final Exception e) {
+                        if(logger.isWarnEnabled()) {
+                            logger.warn("Unexpected exception while consuming activity stream "
+                                + streamName + ": " + e.getMessage(), e);
+                        }
+                    } finally {
+                        closeInputStream();
                     }
-                    if(!shuttingDown.get()) {
-                        activityService.execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                notification.notifyConnectionError(new TransportGnipException(msg, e));
-                            }
-                        });
-                    }
-                } catch (final Exception e) {
-                    if(logger.isWarnEnabled()) {
-                        logger.warn("Unexpected exception while consuming activity stream "
-                            + streamName + ": " + e.getMessage(), e);
-                    }
-                } finally {
-                    closeInputStream();
                 }
+            } finally {
+                close();
             }
-            
-            close();
         }
         
         /** Cleanly close the input stream */
         void closeInputStream() {
-            try {
-                if(is != null) {
-                    try {
-                        is.close();
-                        is = null;
-                    } catch (IOException e) {
-                        // ignore
-                    }
+            if(is != null) {
+                try {
+                    is.close();
+                } catch(IOException e) {
+                    throw new TransportGnipException(e);
                 }
-            } finally {
-                if(entity != null) {
-                    try {
-                        EntityUtils.consume(entity);
-                        entity = null;
-                        response = null;
-                    } catch (final IOException e) {
-                        // ignore
-                    }
-                }
+                is = null;
             }
         }
         
@@ -320,7 +300,7 @@ public class HttpGnipStream extends AbstractGnipStream {
                     throw new GnipException(streamName + ": waiting for reconnection", e);
                 }
                 logger.debug("{}: Re-connecting stream with Gnip: {}", streamName, streamURI);
-                response = client.getResouce(streamURI);
+                is = client.getResouce(streamURI);
                 logger.debug("{}: The re-connection has been successfully established", streamName);
                 
                 reConnectionAttempt.set(0);
