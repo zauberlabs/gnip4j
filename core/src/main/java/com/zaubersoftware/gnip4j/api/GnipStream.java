@@ -26,36 +26,11 @@ package com.zaubersoftware.gnip4j.api;
  * <p>
  * Implementations SHOULD handle reconnections and timeouts.
  * </p>
- * <p>
- *    You should first call to {@link #addObserver(StreamNotification)} and
- *    the {@link #open()}/{{@link #openAndAwait()}} the stream.
- *    When you don't wan't any more data, call to {@link #close()} to release
- *    all the stream resources. 
- * </p>
  * 
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
 public interface GnipStream {
-    
-    /**
-     * Opens the stream, register an observer, and await for termination (block current thread) 
-     * 
-     * @throws IllegalStateException if the stream is already opened.
-     * @see GnipStream#open()
-     * @see GnipStream#await()
-     */
-    void openAndAwait(final StreamNotification notification) throws InterruptedException;
-    
-    
-    /** 
-     * Opens the stream. If you need to wait for the ending of this stream call
-     * {@link #await()}. 
-     * 
-     * @throws IllegalStateException if the stream is already opened.
-     */
-    void open(StreamNotification notification);
-    
     
     /** release the stream  */
     void close();

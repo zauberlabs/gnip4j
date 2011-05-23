@@ -110,7 +110,6 @@ public class DefaultGnipStream extends AbstractGnipStream {
         return streamName;
     }
     
-    @Override
     public final void open(final StreamNotification notification) {
         if(notification == null) {
             throw new IllegalArgumentException(getStreamName() + " does not support null observers");

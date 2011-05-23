@@ -30,16 +30,6 @@ import com.zaubersoftware.gnip4j.api.StreamNotification;
 public final class GnipStreamStub implements GnipStream {
 
     private final Logger logger = LoggerFactory.getLogger(GnipStreamStub.class);
-    
-    @Override
-    public void open(final StreamNotification notification) {
-        logger.debug("The Stream has been opened");
-    }
-
-    @Override
-    public void openAndAwait(final StreamNotification notification) throws InterruptedException {
-        logger.debug("The Stream has been opened. Now waiting for termination");
-    }
 
     @Override
     public void close() {

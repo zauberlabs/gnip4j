@@ -25,7 +25,6 @@ import javax.validation.constraints.NotNull;
  */
 public interface GnipFacade {
 
-    //TODO Deprecate this method and replace it for one that receives a URI Strategy instead of the domain.
     /**
      * Gnip provides access to the data with a streaming HTTP implementation
      * that allows you to consume data in near real-time over a single
@@ -36,5 +35,6 @@ public interface GnipFacade {
      * @param auth
      * @return
      */
-    GnipStream createStream(@NotNull String domain, long dataCollectorId);
+    GnipStream createStream(@NotNull String domain, long dataCollectorId,
+                            @NotNull StreamNotification observer);
 }

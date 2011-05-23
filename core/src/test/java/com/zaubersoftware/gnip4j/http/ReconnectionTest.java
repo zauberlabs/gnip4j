@@ -15,7 +15,6 @@
  */
 package com.zaubersoftware.gnip4j.http;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.util.ArrayList;
@@ -91,7 +90,8 @@ public final class ReconnectionTest {
                 }
             }
         };
-        stream.openAndAwait(n);
+        stream.open(n);
+        stream.await();
         final String s = out.toString();
         final String expected = IOUtils.toString(getClass().getClassLoader()
                 .getResourceAsStream("reconnectlog.txt"));

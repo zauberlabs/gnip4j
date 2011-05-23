@@ -57,12 +57,6 @@ public abstract class AbstractGnipStream implements GnipStream {
         }
     }
 
-    @Override
-    public final void openAndAwait(final StreamNotification n) throws InterruptedException {
-        open(n);
-        await();
-    }
-    
     /**  template method for close */
     protected void doClose() {
         

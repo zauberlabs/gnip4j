@@ -24,6 +24,7 @@ import javax.validation.constraints.NotNull;
 import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
+import com.zaubersoftware.gnip4j.api.StreamNotification;
 /**
  * Http implementation for the {@link GnipFacade}  
  * 
@@ -45,8 +46,12 @@ public class DefaultGnipFacade implements GnipFacade {
     @Override
     public final GnipStream createStream(
             @NotNull final String domain,
-            @NotNull final long dataCollectorId) {
-        return new DefaultGnipStream(facade, domain, dataCollectorId, Executors.newFixedThreadPool(10));
+            @NotNull final long dataCollectorId,
+            @NotNull final StreamNotification observer) {
+        final DefaultGnipStream stream = new DefaultGnipStream(facade, domain, dataCollectorId, 
+                Executors.newFixedThreadPool(10));
+        stream.open(observer);
+        return stream;
     }
 
 }
