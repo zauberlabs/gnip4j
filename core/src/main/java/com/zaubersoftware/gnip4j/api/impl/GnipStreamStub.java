@@ -32,17 +32,12 @@ public final class GnipStreamStub implements GnipStream {
     private final Logger logger = LoggerFactory.getLogger(GnipStreamStub.class);
     
     @Override
-    public void addObserver(final StreamNotification notification) {
-        logger.debug("A new StreamNotification has been added");
-    }
-
-    @Override
-    public void open() {
+    public void open(final StreamNotification notification) {
         logger.debug("The Stream has been opened");
     }
 
     @Override
-    public void openAndAwait() throws InterruptedException {
+    public void openAndAwait(final StreamNotification notification) throws InterruptedException {
         logger.debug("The Stream has been opened. Now waiting for termination");
     }
 
