@@ -31,9 +31,8 @@ public interface GnipFacade {
      * persistent HTTP connection/request.
      * 
      * @param domain The domain name for the power track API.
-     * @param dataCollectorId
-     * @param auth
-     * @return
+     * @param dataCollectorId collector id
+     * @return a reference to the stream so it can be closed
      */
     GnipStream createStream(@NotNull String domain, long dataCollectorId,
                             @NotNull StreamNotification observer);
