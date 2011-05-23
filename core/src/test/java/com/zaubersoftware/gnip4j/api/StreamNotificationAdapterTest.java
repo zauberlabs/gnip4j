@@ -38,6 +38,6 @@ public class StreamNotificationAdapterTest {
         };
         n.notifyConnectionError(null);
         n.notifyReConnectionError(null);
-        n.notifyReConnection(-1, -1000);
+        n.notifyReConnectionAttempt(-1, -1000);
     }
 }

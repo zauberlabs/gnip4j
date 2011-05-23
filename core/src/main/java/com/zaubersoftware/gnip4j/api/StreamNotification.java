@@ -52,11 +52,11 @@ public interface StreamNotification {
     void notifyReConnectionError(@NotNull GnipException e);
     
     /**
-     * Notifies a re-connection attempt with Gnip
+     * Notifies a re-connection attempt with Gnip. This is called before the waiting time.
      * 
      * @param attempt The amount of re-connection attempts including this notification. Once a reconnection
      * has been established the counter will be reset.
      * @param waitTime The amount of time to be waited before trying to reconnect.
      */
-    void notifyReConnection(int attempt, long waitTime);
+    void notifyReConnectionAttempt(int attempt, long waitTime);
 }
