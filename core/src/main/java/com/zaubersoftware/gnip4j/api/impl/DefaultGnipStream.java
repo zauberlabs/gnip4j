@@ -30,8 +30,6 @@ import org.codehaus.jackson.map.AnnotationIntrospector;
 import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
@@ -40,6 +38,8 @@ import com.zaubersoftware.gnip4j.api.StreamNotificationAdapter;
 import com.zaubersoftware.gnip4j.api.exception.GnipException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.model.Activity;
+import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;
+import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
 /**
  * Implementation acording   

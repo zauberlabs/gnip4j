@@ -15,11 +15,10 @@
  */
 package com.zaubersoftware.gnip4j.api.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
+import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;
+import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
 /**
  * Stub implementation of {@link GnipStream} 

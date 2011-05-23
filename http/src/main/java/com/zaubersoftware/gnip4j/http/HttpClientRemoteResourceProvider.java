@@ -38,13 +38,13 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParamBean;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParamBean;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
+import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;
+import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
 /**
  * TODO Descripcion de la clase. Los comenterios van en castellano.
