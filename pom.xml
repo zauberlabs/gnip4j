@@ -26,6 +26,30 @@
 		</license>
 	</licenses>
 
+  <developers>
+     <developer>
+        <id>juan</id>
+        <name>Juan F. Codagnone</name>
+        <url>http://juan.zaubersoftware.com/</url>
+        <organization>Zauber S.A.</organization>
+        <organizationUrl>http://www.zaubersoftware.com/</organizationUrl>
+        <roles>
+            <role>developer</role>
+          </roles>
+          <timezone>-3</timezone>
+     </developer>
+     <developer>
+        <id>guido</id>
+        <name>Guido Marucci Blas</name>
+        <organization>Zauber S.A.</organization>
+        <organizationUrl>http://www.zaubersoftware.com/</organizationUrl>
+        <roles>
+            <role>developer</role>
+          </roles>
+          <timezone>-3</timezone>
+     </developer>
+
+  </developers>
 
 	<repositories>
 		<repository>
