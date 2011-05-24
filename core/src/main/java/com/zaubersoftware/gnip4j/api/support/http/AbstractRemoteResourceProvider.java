@@ -28,7 +28,8 @@ import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
  * @since May 23, 2011
  */
 public abstract class AbstractRemoteResourceProvider implements RemoteResourceProvider {
-
+    protected static final String USER_AGENT = "Gnip4j (https://github.com/zaubersoftware/gnip4j/)";
+    
     /** validate responses */
     public final void validateStatusLine(final URI uri, final int statusCode, final String reason) {
         if (statusCode == 200) {

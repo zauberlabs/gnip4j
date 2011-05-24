@@ -55,7 +55,6 @@ import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
  */
 public class HttpClientRemoteResourceProvider extends AbstractRemoteResourceProvider {
     private final Logger logger = LoggerFactory.getLogger(getClass());
-    private static final String USER_AGENT = "Gnip4j (https://github.com/zaubersoftware/gnip4j/)";
     private final DefaultHttpClient client;
     private final GnipAuthentication authentication;
 
