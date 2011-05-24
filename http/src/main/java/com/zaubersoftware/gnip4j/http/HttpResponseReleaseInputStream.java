@@ -22,23 +22,22 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 
+import com.zaubersoftware.gnip4j.api.support.http.AbstractReleaseInputStream;
+
 /**
  * {@link InputStream} that knows how to release the resources of httpclient classes.  
  * 
  * @author Juan F. Codagnone
  * @since May 23, 2011
  */
-public final class HttpResponseReleaseInputStream extends InputStream {
-    private InputStream target;
+public final class HttpResponseReleaseInputStream extends AbstractReleaseInputStream {
     private HttpEntity entity;
 
     /** constructor */
     public HttpResponseReleaseInputStream(final HttpResponse response) throws IOException {
-        if(response == null) {
-            throw new IllegalArgumentException("null argument");
-        }
+        super(response.getEntity().getContent());
+        
         entity = response.getEntity();
-        target = entity.getContent();
     }
 
     @Override
@@ -63,58 +62,5 @@ public final class HttpResponseReleaseInputStream extends InputStream {
             }
         }
     }
-    @Override
-    public int read() throws IOException {
-        return target.read();
-    }
 
-    @Override
-    public int hashCode() {
-        return target.hashCode();
-    }
-
-    @Override
-    public int read(final byte[] b) throws IOException {
-        return target.read(b);
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
-        return target.equals(obj);
-    }
-
-    @Override
-    public int read(final byte[] b, final int off, final int len) throws IOException {
-        return target.read(b, off, len);
-    }
-
-    @Override
-    public long skip(final long n) throws IOException {
-        return target.skip(n);
-    }
-
-    @Override
-    public int available() throws IOException {
-        return target.available();
-    }
-
-    @Override
-    public String toString() {
-        return target.toString();
-    }
-
-    @Override
-    public void mark(final int readlimit) {
-        target.mark(readlimit);
-    }
-
-    @Override
-    public void reset() throws IOException {
-        target.reset();
-    }
-
-    @Override
-    public boolean markSupported() {
-        return target.markSupported();
-    }
 }
