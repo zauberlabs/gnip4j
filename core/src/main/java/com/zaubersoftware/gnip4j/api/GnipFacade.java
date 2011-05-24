@@ -15,6 +15,10 @@
  */
 package com.zaubersoftware.gnip4j.api;
 
+import java.util.concurrent.ExecutorService;
+
+import com.zaubersoftware.gnip4j.api.model.Activity;
+
 /**
  * Facade to the Gnip Streaming API  
  * 
@@ -23,15 +27,22 @@ package com.zaubersoftware.gnip4j.api;
  */
 public interface GnipFacade {
 
+    /** @see #createStream(String, long, StreamNotification, ExecutorService) */
+    GnipStream createStream(String domain, long dataCollectorId,
+            StreamNotification observer);
+    
     /**
      * Gnip provides access to the data with a streaming HTTP implementation
      * that allows you to consume data in near real-time over a single
      * persistent HTTP connection/request.
      * 
-     * @param domain The domain name for the power track API.
-     * @param dataCollectorId collector id
-     * @return a reference to the stream so it can be closed
+     * @param domain The domain name for the power track API. (For example: acme)
+     * @param dataCollectorId collector id (id for the data collector)
+     * @param observer {@link StreamNotification} used to notify the {@link Activity}s.
+     * @param executorService {@link ExecutorService} used to process {@link Activity}
+     * @return a reference to the stream so it can be closed 
      */
     GnipStream createStream(String domain, long dataCollectorId,
-                            StreamNotification observer);
+                            StreamNotification observer, 
+                            ExecutorService executorService);
 }

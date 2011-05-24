@@ -17,6 +17,7 @@ package com.zaubersoftware.gnip4j.api.impl;
 
 import static com.zaubersoftware.gnip4j.api.impl.ErrorCodes.*;
 
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import com.zaubersoftware.gnip4j.api.GnipFacade;
@@ -31,7 +32,8 @@ import com.zaubersoftware.gnip4j.api.StreamNotification;
  */
 public class DefaultGnipFacade implements GnipFacade {
     private final RemoteResourceProvider facade;
-
+    private int streamDefaultWorkers = 10;
+    
     /** Creates the HttpGnipFacade. */
     public DefaultGnipFacade(final RemoteResourceProvider facade) {
         if(facade == null) {
@@ -46,10 +48,45 @@ public class DefaultGnipFacade implements GnipFacade {
             final String domain,
             final long dataCollectorId,
             final StreamNotification observer) {
+        final ExecutorService executor = Executors.newFixedThreadPool(streamDefaultWorkers);
+        final GnipStream target = createStream(domain, dataCollectorId, observer, executor);
+        
+        return new GnipStream() {
+            @Override
+            public void close() {
+                try {
+                    target.close();
+                } finally {
+                    executor.shutdown();
+                }
+            }
+            
+            @Override
+            public void await() throws InterruptedException {
+                target.await();
+            }
+        }; 
+    }
+    
+    @Override
+    public final GnipStream createStream(final String domain, final long dataCollectorId,
+            final StreamNotification observer, final ExecutorService executor) {
         final DefaultGnipStream stream = new DefaultGnipStream(facade, domain, dataCollectorId, 
-                Executors.newFixedThreadPool(10));
+                executor);
         stream.open(observer);
         return stream;
     }
 
+    
+    public final int getStreamDefaultWorkers() {
+        return streamDefaultWorkers;
+    }
+    
+    /** @see #getStreamDefaultWorkers() */
+    public final void setStreamDefaultWorkers(final int streamDefaultWorkers) {
+        if(streamDefaultWorkers < 1) {
+            throw new IllegalArgumentException("Must be >= 1");
+        }
+        this.streamDefaultWorkers = streamDefaultWorkers;
+    }
 }
