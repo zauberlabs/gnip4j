@@ -23,8 +23,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.validation.constraints.NotNull;
-
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.AnnotationIntrospector;
 import org.codehaus.jackson.map.DeserializationConfig;
@@ -79,10 +77,10 @@ public class DefaultGnipStream extends AbstractGnipStream {
     
     /** Creates the HttpGnipStream. */
     public DefaultGnipStream(
-            @NotNull final RemoteResourceProvider client, 
-            @NotNull final String domain,
-            @NotNull final long dataCollectorId,
-            @NotNull final ExecutorService activityService) {
+            final RemoteResourceProvider client, 
+            final String domain,
+            final long dataCollectorId,
+            final ExecutorService activityService) {
         if(client == null) {
             throw new IllegalArgumentException(ERROR_NULL_HTTPCLIENT);
         }

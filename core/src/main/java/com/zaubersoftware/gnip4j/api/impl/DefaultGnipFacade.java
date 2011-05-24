@@ -19,8 +19,6 @@ import static com.zaubersoftware.gnip4j.api.impl.ErrorCodes.*;
 
 import java.util.concurrent.Executors;
 
-import javax.validation.constraints.NotNull;
-
 import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
@@ -45,9 +43,9 @@ public class DefaultGnipFacade implements GnipFacade {
     
     @Override
     public final GnipStream createStream(
-            @NotNull final String domain,
-            @NotNull final long dataCollectorId,
-            @NotNull final StreamNotification observer) {
+            final String domain,
+            final long dataCollectorId,
+            final StreamNotification observer) {
         final DefaultGnipStream stream = new DefaultGnipStream(facade, domain, dataCollectorId, 
                 Executors.newFixedThreadPool(10));
         stream.open(observer);

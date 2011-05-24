@@ -27,8 +27,6 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
-import javax.validation.constraints.NotNull;
-
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
@@ -50,7 +48,7 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
     private int readTimeout = 10000;
     
     /** Creates the JRERemoteResourceProvider. */
-    public JRERemoteResourceProvider(@NotNull final GnipAuthentication authentication) {
+    public JRERemoteResourceProvider(final GnipAuthentication authentication) {
         if(authentication == null) {
             throw new IllegalArgumentException(ErrorCodes.ERROR_NULL_AUTH);
         }

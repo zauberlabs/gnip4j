@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 
-import javax.validation.constraints.NotNull;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
@@ -65,8 +64,8 @@ public class HttpClientRemoteResourceProvider extends AbstractRemoteResourceProv
 
     /** Creates the HttpGnipFacade. */
     public HttpClientRemoteResourceProvider(
-            @NotNull final DefaultHttpClient client,
-            @NotNull final GnipAuthentication authentication) {
+            final DefaultHttpClient client,
+            final GnipAuthentication authentication) {
         if(client == null) {
             throw new IllegalArgumentException(ERROR_NULL_HTTPCLIENT);
         }

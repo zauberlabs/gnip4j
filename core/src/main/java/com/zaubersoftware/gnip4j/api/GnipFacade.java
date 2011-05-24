@@ -15,8 +15,6 @@
  */
 package com.zaubersoftware.gnip4j.api;
 
-import javax.validation.constraints.NotNull;
-
 /**
  * Facade to the Gnip Streaming API  
  * 
@@ -34,6 +32,6 @@ public interface GnipFacade {
      * @param dataCollectorId collector id
      * @return a reference to the stream so it can be closed
      */
-    GnipStream createStream(@NotNull String domain, long dataCollectorId,
-                            @NotNull StreamNotification observer);
+    GnipStream createStream(String domain, long dataCollectorId,
+                            StreamNotification observer);
 }

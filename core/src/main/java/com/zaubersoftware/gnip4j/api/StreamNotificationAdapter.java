@@ -15,8 +15,6 @@
  */
 package com.zaubersoftware.gnip4j.api;
 
-import javax.validation.constraints.NotNull;
-
 import com.zaubersoftware.gnip4j.api.exception.GnipException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.model.Activity;
@@ -32,12 +30,12 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
 public abstract class StreamNotificationAdapter implements StreamNotification {
 
     @Override
-    public void notifyConnectionError(@NotNull final TransportGnipException e) {
+    public void notifyConnectionError(final TransportGnipException e) {
         // Do nothing
     }
 
     @Override
-    public void notifyReConnectionError(@NotNull final GnipException e) {
+    public void notifyReConnectionError(final GnipException e) {
         // Do nothing
     }
 
