@@ -32,7 +32,7 @@ import com.zaubersoftware.gnip4j.api.StreamNotification;
  */
 public class DefaultGnipFacade implements GnipFacade {
     private final RemoteResourceProvider facade;
-    private int streamDefaultWorkers = 10;
+    private int streamDefaultWorkers = Runtime.getRuntime().availableProcessors();
     
     /** Creates the HttpGnipFacade. */
     public DefaultGnipFacade(final RemoteResourceProvider facade) {
@@ -50,7 +50,6 @@ public class DefaultGnipFacade implements GnipFacade {
             final StreamNotification observer) {
         final ExecutorService executor = Executors.newFixedThreadPool(streamDefaultWorkers);
         final GnipStream target = createStream(domain, dataCollectorId, observer, executor);
-        
         return new GnipStream() {
             @Override
             public void close() {
