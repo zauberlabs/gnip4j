@@ -32,11 +32,11 @@
           <sourceDocumentName>${docname}.xml</sourceDocumentName>
           <sourceDirectory>.</sourceDirectory>
           <imageResource>
-            <directory>en-US</directory>
-            <includes>
-              <include>images/*</include>
-            </includes>
+            <directory>${basedir}/en-US/images</directory>
           </imageResource>
+          <cssResource>
+             <directory>${basedir}/en-US/css</directory>
+          </cssResource>
           <options>
             <xincludeSupported>true</xincludeSupported>
             <xmlTransformerType>saxon</xmlTransformerType>

@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+]>
+<chapter xml:id="commons-base" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Commons Base</title>
+    
+    <section xml:id="commons-base-overview">
+        <title>Overview</title>
+        
+        <para>...
+        </para>
+        <itemizedlist>
+            <listitem><para><emphasis role="bold">Functors
+            </emphasis>: Objects that encapsulates functional logic.</para></listitem>
+        </itemizedlist>
+        
+        <note>
+	        <title>Dependencies</title>
+	        <para><emphasis role="bold">Commons Base</emphasis>
+	            has no dependencies like Spring or other mayor technologies.</para>
+        </note>
+                <programlisting language="Java">
+import ar.com.zauber.commons.base.Predicate;
+import ar.com.zauber.commons.base.predicate.*;
+String name = "Shirley";
+Predicate&lt;String&gt; nameEmma = new EqualsPredicate( "Emma" );
+Predicate&lt;String&gt; nameShirley = new EqualsPredicate( "Shirley" );
+// Testing all predicates for "Shirley"
+System.out.println( "Is Name Emma?: " + nameEmma.evaluate( name ) );
+System.out.println( "Is Name Shirley?: " + nameShirley.evaluate( name ) );</programlisting>
+                    
+    </section>    
+</chapter>

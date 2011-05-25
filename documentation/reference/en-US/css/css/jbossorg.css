@@ -1,0 +1,90 @@
+@import url("documentation.css");
+@import url("docnav.css");
+@import url("reports.css");
+@import url("extensions.css");
+@import url("codehighlight.css");
+
+a:focus{ border:0;}
+body {
+    background:none repeat scroll 0 0 #F6F6F6;
+    margin:0 auto;
+    font-family:'Lucida Grande', Geneva, Verdana, Arial, sans-serif;
+    font-size:12px;
+    max-width:55em;
+    padding:0em 2em;
+    color:#333;
+    line-height:150%;
+    text-align:justify;
+}
+
+/* Links */
+div.toc a:link {
+	color:#597C9F;
+	font-size:13px;
+	text-decoration:none;
+}
+/* 
+a:link {color:#0066cc;}
+*/ 
+a:visited {color:#6699cc;}
+
+div.longdesc-link {
+    float:right;
+    color:#999;
+}
+
+/* Headings */
+
+h1, h2, h3, h4, h5, h6 {
+    color:#4a5d75;
+    line-height:130%;
+    margin-top:0em;
+    font-family:'Lucida Grande', Geneva, Verdana, Arial, sans-serif;
+    background-color:transparent;
+}
+
+h1 {
+	background:none repeat scroll 0 0 #EAEAEA;
+	border-bottom:1px dotted #DDDDDD;
+	color:#0085AF;
+	font-size:2em;
+	font-weight:normal;
+	line-height:1.2em;
+	margin-top:4px;
+	padding:24px;
+	text-shadow:1px 1px 0 #FFFFFF;
+}
+
+h2 {font-size:1.6em;}
+
+h3 {
+    font-size:1.3em;
+    padding-top:0em;
+    padding-bottom:0em;
+}
+
+h4 {
+    font-size:1.1em;
+    padding-top:0em;
+    padding-bottom:0em;
+}
+
+h5.formalpara {
+    font-size:1em;
+    margin-top:2em;
+    margin-bottom:.8em;
+}
+.book div.titlepage div.toc{
+	margin:-7px 0 0;
+	padding:5px 25px;
+}
+/* Element rules */
+
+hr {
+    border-collapse:collapse;
+    border-style:none;
+    border-top:1px dotted #ccc;
+    width:100% !important;
+}
+
+sup {color:#999;}

@@ -4,13 +4,14 @@
 ]>
 <book xmlns:xi="http://www.w3.org/2001/XInclude">
   <info>
-    <title>Zauber Commons - Reference Documentation</title>
-    <productname>Zauber Commons</productname>
-    <releaseinfo>4.0.0.M1</releaseinfo>
+    <title>Gnip4j Reference Documentation</title>
+    <productname>Gnup4j</productname>
+    <releaseinfo>0.0</releaseinfo>
 
     <authorgroup>
       <author>
         <personname>Juan F. Codagnone</personname>
+        <personname>Guido Marucci Blas</personname>
       </author>
     </authorgroup>
 
@@ -26,35 +27,14 @@
     
   <toc></toc>
 
-  <xi:include href="preface.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-
   <part xml:id="welcome">
     <title>Welcome to Gnip4j</title>
 
     <partintro>
       <para>Welcome to gnip4j! In this part of the reference guide we 
       will explore everything you need to know in order to use gnip4j 
-      effectively.  We've designed this part so that you can read each chapter
-      consecutively and stop at any time. However, the more you read, the more 
-      you'll learn and the easier you'll find it to work with gnip4j.</para>
+      effectively.</para>
     </partintro>
+    <xi:include href="usage.xml"/>
   </part>
-  <part>
-    <title>Modules</title>
-    <!-- Modulos -->
- <!--   <xi:include href="stream.xml"/>   -->
-  </part>
-
-    <part xml:id="appendices">
-    <title>Appendices</title>
-
-    <partintro>
-      <para>The fourth and final part of the reference guide provides
-      appendices and background information that does not neatly belong within
-      the other parts. The information is intended to be treated as a
-      reference and not read consecutively.</para>
-    </partintro>
-  </part>
-
-<!--   <xi:include href="revision-history.xml" />-->
 </book>
