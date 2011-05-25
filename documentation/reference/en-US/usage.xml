@@ -2,10 +2,10 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 ]>
-<chapter xml:id="commons-base" xmlns:xlink="http://www.w3.org/1999/xlink">
+<chapter xml:id="usage" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>Commons Base</title>
     
-    <section xml:id="commons-base-overview">
+    <section xml:id="usage-overview">
         <title>Overview</title>
         
         <para>...
