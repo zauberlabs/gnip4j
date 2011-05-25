@@ -12,6 +12,5 @@
 
         <modules>
             <module>site</module>
-            <module>reference</module>
         </modules>
 </project>

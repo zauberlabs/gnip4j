@@ -1,41 +1,22 @@
 
 ---++ What is gnip4j?
 
-Gnip4j is an Open Source (ASFL 2.0) library to access [[http://gnip.com/][Gnip]] data from the Java
-language.
+Gnip4j is an Open Source (ASFL 2.0) library to access and process Activities (tweets)
+from from the [[http://docs.gnip.com/w/page/23724581/Gnip-Full-Documentation][Gnip API Documentation v2.2]]
+from the data from the Java language. 
 
 
 ---++ Features
    * 100% Pure Java - works on any Java Platform version 1.6 or later 
-   * Minimal dependencies : (depends on commons-httpclient)
+   * Minimal dependencies: 
+      * The [[http://jackson.codehaus.org/][Jackson JSON library]] is the only requiered dependecy
+      * Optionally if =slf4-api= is present in the classpath, logging is supported.
+      * Optionally [[http://hc.apache.org/httpcomponents-client-ga/][Apache HttpClient]] is supported. 
    * Out-of-the-box gzip support
    * Push model via Streaming (asynchronous processing)
-   * Monitoring Support (JMX)
    * Error handling support (and exponential-backoff reconnections)
+   * TODO: Monitoring Support (JMX)
 
-
----++ How To use it
-
-For more information refer to the [[reference/latest/][Gnip4j Reference Guide]].
-
----+++ Maven Integration
-
-Add to your dependency Managment:
-
-<verbatim> <dependencyManagment>
-   ....
-</dependencyManagment></verbatim>
-
-and 
-
-<verbatim><dependency>
-
-</dependency></verbatim>
----+++ Code Snippet
-   
-<verbatim>
-...
-</verbatim>
 
 ---++ How To Contribute
 

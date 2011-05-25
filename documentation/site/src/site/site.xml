@@ -35,12 +35,30 @@
          urchinTracker();
        </script>
        <script defer="true" type="text/javascript" src="scripts/js/pngfix.js"></script>
-       <link rel="alternate" type="text/xml" title="RSS" href="http://feeds2.feedburner.com/ZauberCode"/>
+       <link href="https://github.com/zaubersoftware/gnip4j/commits/master.atom" rel="alternate" title="Recent Commits to gnip4j:master" type="application/atom+xml" />
     </head>
 
     <menu name="Main">
       <item name="Welcome" href="index.html"/>
+      <item name="Usage"   href="usage.html"/>
     </menu>
 
+    <menu name="Get gnip4j">
+      <item name="Download" href="download.html"/>
+      <item name="License" href="license.html"/>
+    </menu>
+
+
+    <menu name="Developers">
+      <item name="Team Members" href="team-list.html"/>
+    </menu>
+
+    <menu name="Project Infrastructure">
+      <item name="Mailing List" href="mail-lists.html"/>
+      <item name="Issue Tracker" href="issue-tracking.html"/>
+      <item name="SCM" href="source-repository.html" />
+    </menu>
+
+ 
   </body>
 </project>
