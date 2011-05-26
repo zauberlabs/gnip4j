@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Enumeration;
 
+import javax.management.RuntimeErrorException;
+
 import com.zaubersoftware.gnip4j.api.support.logging.nil.NilLoggerFactory;
 import com.zaubersoftware.gnip4j.api.support.logging.slf4j.SLF4JTargetLoggerFactory;
 import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
@@ -61,8 +63,7 @@ public final class LoggerFactory {
                 targetLoggerFactory = new NilLoggerFactory();
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return targetLoggerFactory;
     }
