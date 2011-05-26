@@ -80,7 +80,7 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
             doConfiguration(uc);
             uc.connect();
             
-            validateStatusLine(uri, huc.getResponseCode(), huc.getResponseMessage());
+            validateStatusLine(uri, huc == null ? 200 : huc.getResponseCode(), huc.getResponseMessage());
             
             InputStream is = uc.getInputStream(); 
             final String encoding = uc.getContentEncoding();
