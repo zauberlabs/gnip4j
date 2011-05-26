@@ -1,7 +1,9 @@
 ---+ How To use gnip4j
 
-For more information refer to the Gnip4j Reference Guide:
-   * [[reference/current/]HTML
+For more information refer to the Gnip4j Reference Guide. Available formats:
+   * [[http://code.zaubersoftware.com/gnip4j/reference/current/html/index.html][HTML Multiples pages]]
+   * [[http://code.zaubersoftware.com/gnip4j/reference/current/html_single/index.html][HTML Single page]]
+   * [[http://code.zaubersoftware.com/gnip4j/reference/current/pdf/gnip4j-reference.pdf][PDF]] 
 
 ---++ Maven Integration
 

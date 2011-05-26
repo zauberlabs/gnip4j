@@ -15,7 +15,7 @@ from the data from the Java language.
    * Out-of-the-box gzip support
    * Push model via Streaming (asynchronous processing)
    * Error handling support (and exponential-backoff reconnections)
-   * TODO: Monitoring Support (JMX)
+   * Monitoring Support (JMX)
 
 
 ---++ How To Contribute
@@ -23,6 +23,7 @@ from the data from the Java language.
 [[http://help.github.com/pull-requests/][Send pull requests]] using GitHub
 ( https://github.com/zaubersoftware/gnip4j ).
 
+Had an Issue? Fill it in https://github.com/zaubersoftware/gnip4j/issues .
 
 ---++ License
 
