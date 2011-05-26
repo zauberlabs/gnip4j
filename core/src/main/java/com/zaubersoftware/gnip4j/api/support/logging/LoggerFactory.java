@@ -19,8 +19,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Enumeration;
 
-import javax.management.RuntimeErrorException;
-
 import com.zaubersoftware.gnip4j.api.support.logging.nil.NilLoggerFactory;
 import com.zaubersoftware.gnip4j.api.support.logging.slf4j.SLF4JTargetLoggerFactory;
 import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
