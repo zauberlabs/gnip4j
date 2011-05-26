@@ -96,6 +96,9 @@ public final class ReconnectionTest {
         final String expected = IOUtils.toString(getClass().getClassLoader()
                 .getResourceAsStream("reconnectlog.txt"));
         Assert.assertEquals(expected, s);
+        Assert.assertEquals("transferedBytes = 8000\ntransferedActivities = 4\n"
+                + "numberOfSucessfulReconnections = 1\nnumberOfReconnections = 4", 
+                stream.getStreamStats().toString());
     }
 }
 

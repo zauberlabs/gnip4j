@@ -36,6 +36,10 @@ import com.zaubersoftware.gnip4j.api.StreamNotificationAdapter;
 import com.zaubersoftware.gnip4j.api.exception.GnipException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.model.Activity;
+import com.zaubersoftware.gnip4j.api.stats.DefaultStreamStats;
+import com.zaubersoftware.gnip4j.api.stats.ModifiableStreamStats;
+import com.zaubersoftware.gnip4j.api.stats.StreamStats;
+import com.zaubersoftware.gnip4j.api.stats.StreamStatsInputStream;
 import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;
 import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
@@ -67,13 +71,17 @@ public class DefaultGnipStream extends AbstractGnipStream {
     private final ExecutorService activityService;
     private GnipHttpConsumer httpConsumer;
     private Thread httpThread;
-
+    private ModifiableStreamStats stats = new DefaultStreamStats();
+    
     private StreamNotification notification = new StreamNotificationAdapter() {
         @Override
         public void notify(final Activity activity, final GnipStream stream) {
             logger.warn("No notification is registed for stream {}", getStreamName());
         }
     };
+    
+    private boolean captureStats = true;
+    
     
     /** Creates the HttpGnipStream. */
     public DefaultGnipStream(
@@ -174,7 +182,11 @@ public class DefaultGnipStream extends AbstractGnipStream {
     
     /** @return the stream {@link InputStream} */
     private InputStream getStreamInputStream() {
-        return client.getResouce(streamURI);
+        InputStream ret = client.getResouce(streamURI);
+        if(captureStats) {
+            ret = new StreamStatsInputStream(stats, ret);
+        }
+        return ret;
     }
     /** 
      * Consumes the HTTP input stream from the stream one {@link Activity} per line 
@@ -283,6 +295,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
         
         /** Re-connects the stream */
         private void reconnect() {
+            stats.incrementNumberOfReconnectionsAttempt();
             logger.debug("{}: Reconnecting...", streamName);
             try {
                 final int attempt = reConnectionAttempt.incrementAndGet();
@@ -307,6 +320,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
                 
                 reConnectionAttempt.set(0);
                 reConnectionWaitTime = INITIAL_RE_CONNECTION_WAIT_TIME;
+                stats.incrementNumberOfSuccessfulReconnections();
                 
             } catch (final Throwable e) {
                 logger.error(streamName + ": The re-connection could not be established", e);
@@ -321,5 +335,17 @@ public class DefaultGnipStream extends AbstractGnipStream {
         }
     }
     private AtomicBoolean shuttingDown = new AtomicBoolean(false);
+
+
+    public final boolean isCaptureStats() {
+        return captureStats;
+    }
+
+    public final void setCaptureStats(final boolean captureStats) {
+        this.captureStats = captureStats;
+    }
     
+    public final StreamStats getStreamStats() {
+        return stats;
+    }
 }

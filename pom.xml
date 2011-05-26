@@ -127,6 +127,7 @@
 						<include>**/*.java</include>
 					</includes>
 					<excludes>
+						<exclude>**/commonsio/*.java</exclude>
 						<exclude>target/**</exclude>
 						<exclude>.gitignore</exclude>
 						<exclude>**/*.txt</exclude>
