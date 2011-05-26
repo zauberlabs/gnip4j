@@ -82,17 +82,13 @@ public class HttpClientRemoteResourceProvider extends AbstractRemoteResourceProv
     public final InputStream getResouce(final URI uri)
         throws AuthenticationGnipException, TransportGnipException {
         logger.debug("Setting up connection for {}", uri);
-        if(client instanceof DefaultHttpClient) {
-            final DefaultHttpClient dclient = client;
-            final CredentialsProvider credentialsProvider = dclient.getCredentialsProvider();
+        final DefaultHttpClient dclient = client;
+        final CredentialsProvider credentialsProvider = dclient.getCredentialsProvider();
 
-            logger.trace("\t-- Setting Gnip credentials. User {}", authentication.getUsername());
-            credentialsProvider.setCredentials(
-                    new AuthScope(uri.getHost(), AuthScope.ANY_PORT),
-                    new UsernamePasswordCredentials(authentication.getUsername(), authentication.getPassword()));
-        } else {
-            logger.warn("Unknown intance of HttpClient: {}. Credentials weren't set.", client.getClass());
-        }
+        logger.trace("\t-- Setting Gnip credentials. User {}", authentication.getUsername());
+        credentialsProvider.setCredentials(
+                new AuthScope(uri.getHost(), AuthScope.ANY_PORT),
+                new UsernamePasswordCredentials(authentication.getUsername(), authentication.getPassword()));
 
         final HttpGet get = new HttpGet(uri);
         try {
