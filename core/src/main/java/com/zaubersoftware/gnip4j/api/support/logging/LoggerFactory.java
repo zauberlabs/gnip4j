@@ -26,8 +26,7 @@ import com.zaubersoftware.gnip4j.api.support.logging.slf4j.SLF4JTargetLoggerFact
 import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
 /**
- * TODO Descripcion de la clase. Los comenterios van en castellano.
- * 
+ * Decides what SPI implementation is used for logging.
  * 
  * @author Juan F. Codagnone
  * @since May 23, 2011
