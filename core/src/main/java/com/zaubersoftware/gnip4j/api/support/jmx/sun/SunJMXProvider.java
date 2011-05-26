@@ -57,6 +57,7 @@ public class SunJMXProvider implements JMXProvider {
         }
     }
 
+    /** @return the MBean name */
     private ObjectName getStreamName(final GnipStream stream) {
         final String name =  "com.zaubersoftware.gnip4j.streams."
             + stream.getStreamName() + ":type=StreamStats";
