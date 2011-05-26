@@ -2,7 +2,7 @@
 ---++ What is gnip4j?
 
 Gnip4j is an Open Source (ASFL 2.0) library to access and process Activities (tweets)
-from from the [[http://docs.gnip.com/w/page/23724581/Gnip-Full-Documentation][Gnip API Documentation v2.2]]
+from from the [[http://docs.gnip.com/w/page/23724581/Gnip-Full-Documentation][Gnip API]]
 from the data from the Java language. 
 
 
