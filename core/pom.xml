@@ -51,14 +51,54 @@
         </dependency>
         <!-- END: Logging -->
 
-		<dependency>
-			<groupId>trang</groupId>
-			<artifactId>trang</artifactId>
-			<version>20081028</version>
-			<scope>provided</scope>
-		</dependency>
 	</dependencies>
 
+
+  <profiles>
+    <!-- mvn compile -->
+    <profile>
+      <id>generate</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <dependencies>
+	<dependency>
+		<groupId>trang</groupId>
+		<artifactId>trang</artifactId>
+		<version>20081028</version>
+		<scope>provided</scope>
+	</dependency>
+
+      </dependencies>
+      <build>
+	<plugins>
+		<plugin>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>exec-maven-plugin</artifactId>
+			<version>1.1</version>
+			<executions>
+				<execution>
+					<goals>
+						<goal>java</goal>
+					</goals>
+				</execution>
+			</executions>
+			<configuration>
+				<mainClass>com.thaiopensource.relaxng.translate.Driver</mainClass>
+				<arguments>
+					<argument>-I</argument>
+					<argument>rnc</argument>
+					<argument>-O</argument>
+					<argument>xsd</argument>
+					<argument>src/main/resources/com/zaubersoftware/gnip4j/api/schema/activity.rnc</argument>
+					<argument>src/main/resources/com/zaubersoftware/gnip4j/api/schema/activity.xsd</argument>
+				</arguments>
+			</configuration>
+		</plugin>
+	</plugins>
+       </build>
+    </profile>
+  </profiles>
 	<build>
 		<plugins>
 			<plugin>
@@ -76,29 +116,6 @@
 					<packageName>com.zaubersoftware.gnip4j.api.model</packageName>
 					<schemaDirectory>src/main/resources/com/zaubersoftware/gnip4j/api/schema</schemaDirectory>
 					<schemaFiles>activity.xsd</schemaFiles>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.1</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>java</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<mainClass>com.thaiopensource.relaxng.translate.Driver</mainClass>
-					<arguments>
-						<argument>-I</argument>
-						<argument>rnc</argument>
-						<argument>-O</argument>
-						<argument>xsd</argument>
-						<argument>src/main/resources/com/zaubersoftware/gnip4j/api/schema/activity.rnc</argument>
-						<argument>src/main/resources/com/zaubersoftware/gnip4j/api/schema/activity.xsd</argument>
-					</arguments>
 				</configuration>
 			</plugin>
 		</plugins>
