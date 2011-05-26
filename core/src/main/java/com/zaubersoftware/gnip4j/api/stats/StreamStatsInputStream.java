@@ -33,18 +33,12 @@ public class StreamStatsInputStream extends TeeInputStream {
     public StreamStatsInputStream(final ModifiableStreamStats stats,
             final InputStream target) {
         super(target, new OutputStream() {
-//            private final byte[] buffer = new byte[4096 * 4];
-//            private int i = 0;
-
             @Override
             public void write(final int b) throws IOException {
                 stats.incrementTransferedBytes();
                 
-                if (b != '\n') {
-//                    buffer[i++] = (byte) b;
-                } else {
+                if (b == '\n') {
                     stats.incrementTransferedActivities();
-//                    i = 0;
                 }
             }
         });
