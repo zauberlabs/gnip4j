@@ -112,7 +112,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
     }
 
     @Override
-    protected final String getStreamName() {
+    public final String getStreamName() {
         return streamName;
     }
 

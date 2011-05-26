@@ -24,6 +24,7 @@ import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
+import com.zaubersoftware.gnip4j.api.support.jmx.JMXProvider;
 /**
  * Http implementation for the {@link GnipFacade}  
  * 
@@ -33,6 +34,7 @@ import com.zaubersoftware.gnip4j.api.StreamNotification;
 public class DefaultGnipFacade implements GnipFacade {
     private final RemoteResourceProvider facade;
     private int streamDefaultWorkers = Runtime.getRuntime().availableProcessors();
+    private boolean useJMX = true;
     
     /** Creates the HttpGnipFacade. */
     public DefaultGnipFacade(final RemoteResourceProvider facade) {
@@ -64,6 +66,11 @@ public class DefaultGnipFacade implements GnipFacade {
             public void await() throws InterruptedException {
                 target.await();
             }
+            
+            @Override
+            public final String getStreamName() {
+                return target.getStreamName();
+            }
         }; 
     }
     
@@ -73,7 +80,31 @@ public class DefaultGnipFacade implements GnipFacade {
         final DefaultGnipStream stream = new DefaultGnipStream(facade, domain, dataCollectorId, 
                 executor);
         stream.open(observer);
-        return stream;
+        GnipStream ret = stream;
+        if(useJMX) {
+            ret = new GnipStream() {
+                @Override
+                public String getStreamName() {
+                    return stream.getStreamName();
+                }
+                
+                @Override
+                public void close() {
+                    try {
+                        stream.close();
+                    } finally {
+                        JMXProvider.getProvider().unregister(stream);
+                    }
+                }
+                
+                @Override
+                public void await() throws InterruptedException {
+                    stream.await();
+                }
+            };
+            JMXProvider.getProvider().registerBean(stream, stream.getStreamStats());
+        }
+        return ret;
     }
 
     
@@ -88,4 +119,15 @@ public class DefaultGnipFacade implements GnipFacade {
         }
         this.streamDefaultWorkers = streamDefaultWorkers;
     }
+
+
+    public final boolean isUseJMX() {
+        return useJMX;
+    }
+
+
+    public final void setUseJMX(final boolean useJMX) {
+        this.useJMX = useJMX;
+    }
+    
 }

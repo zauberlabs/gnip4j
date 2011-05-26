@@ -73,5 +73,5 @@ public abstract class AbstractGnipStream implements GnipStream {
     }
 
     /** @return the stream name. Used for tracing propourses */
-    protected abstract String getStreamName(); 
+    public abstract String getStreamName(); 
 }

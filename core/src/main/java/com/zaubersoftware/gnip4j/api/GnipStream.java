@@ -40,4 +40,7 @@ public interface GnipStream {
      * to be shutdown because of some catastrofic issue.
      */
     void await() throws InterruptedException;
+    
+    /** @return an identification for this stream */
+    String getStreamName();
 }

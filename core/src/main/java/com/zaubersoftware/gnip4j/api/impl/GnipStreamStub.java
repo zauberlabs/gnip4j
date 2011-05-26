@@ -26,9 +26,21 @@ import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
  * @since May 23, 2011
  */
 public final class GnipStreamStub implements GnipStream {
-
     private final Logger logger = LoggerFactory.getLogger(GnipStreamStub.class);
+    private final String name;
 
+    /**
+     * Creates the GnipStreamStub.
+     *
+     */
+    public GnipStreamStub(final String name) {
+        if(name == null) {
+            throw new IllegalArgumentException("null name");
+        }
+        
+        this.name = name;
+    }
+    
     @Override
     public void close() {
         logger.debug("The stream has been closed");
@@ -37,6 +49,11 @@ public final class GnipStreamStub implements GnipStream {
     @Override
     public void await() throws InterruptedException {
         logger.debug("Awaiting for stream termination");
+    }
+
+    @Override
+    public String getStreamName() {
+        return name;
     }
 
 }
