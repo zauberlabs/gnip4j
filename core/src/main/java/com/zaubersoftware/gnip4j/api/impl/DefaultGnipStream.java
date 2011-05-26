@@ -107,7 +107,8 @@ public class DefaultGnipStream extends AbstractGnipStream {
     protected final String getStreamName() {
         return streamName;
     }
-    
+
+    /** open the stream */
     public final void open(final StreamNotification notification) {
         if(notification == null) {
             throw new IllegalArgumentException(getStreamName() + " does not support null observers");
@@ -119,7 +120,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
             throw new IllegalStateException("The stream is open");
         }
         
-        this.httpConsumer = new GnipHttpConsumer(client.getResouce(streamURI));
+        this.httpConsumer = new GnipHttpConsumer(getStreamInputStream());
         this.httpThread = new Thread(httpConsumer, streamName + "-consumer-http");
         httpThread.start();
     }
@@ -171,6 +172,10 @@ public class DefaultGnipStream extends AbstractGnipStream {
     }
     
     
+    /** @return the stream {@link InputStream} */
+    private InputStream getStreamInputStream() {
+        return client.getResouce(streamURI);
+    }
     /** 
      * Consumes the HTTP input stream from the stream one {@link Activity} per line 
      */
@@ -297,7 +302,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
                     throw new GnipException(streamName + ": waiting for reconnection", e);
                 }
                 logger.debug("{}: Re-connecting stream with Gnip: {}", streamName, streamURI);
-                is = client.getResouce(streamURI);
+                is = getStreamInputStream();
                 logger.debug("{}: The re-connection has been successfully established", streamName);
                 
                 reConnectionAttempt.set(0);
