@@ -5,9 +5,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,14 +21,14 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * A Proxy stream which acts as expected, that is it passes the method 
- * calls on to the proxied stream and doesn't change which methods are 
- * being called. 
+ * A Proxy stream which acts as expected, that is it passes the method
+ * calls on to the proxied stream and doesn't change which methods are
+ * being called.
  * <p>
  * It is an alternative base class to FilterInputStream
- * to increase reusability, because FilterInputStream changes the 
+ * to increase reusability, because FilterInputStream changes the
  * methods being called, such as read(byte[]) to read(byte[], int, int).
- * 
+ *
  * @author Stephen Colebourne
  * @version $Id: ProxyInputStream.java 610010 2008-01-08 14:50:59Z niallp $
  */
@@ -36,10 +36,10 @@ public abstract class ProxyInputStream extends FilterInputStream {
 
     /**
      * Constructs a new ProxyInputStream.
-     * 
+     *
      * @param proxy  the InputStream to delegate to
      */
-    public ProxyInputStream(InputStream proxy) {
+    public ProxyInputStream(final InputStream proxy) {
         super(proxy);
         // the proxy is stored in a protected superclass variable named 'in'
     }
@@ -49,6 +49,7 @@ public abstract class ProxyInputStream extends FilterInputStream {
      * @return the byte read or -1 if the end of stream
      * @throws IOException if an I/O error occurs
      */
+    @Override
     public int read() throws IOException {
         return in.read();
     }
@@ -59,7 +60,8 @@ public abstract class ProxyInputStream extends FilterInputStream {
      * @return the number of bytes read or -1 if the end of stream
      * @throws IOException if an I/O error occurs
      */
-    public int read(byte[] bts) throws IOException {
+    @Override
+    public int read(final byte[] bts) throws IOException {
         return in.read(bts);
     }
 
@@ -71,7 +73,8 @@ public abstract class ProxyInputStream extends FilterInputStream {
      * @return the number of bytes read or -1 if the end of stream
      * @throws IOException if an I/O error occurs
      */
-    public int read(byte[] bts, int st, int end) throws IOException {
+    @Override
+    public int read(final byte[] bts, final int st, final int end) throws IOException {
         return in.read(bts, st, end);
     }
 
@@ -81,7 +84,8 @@ public abstract class ProxyInputStream extends FilterInputStream {
      * @return the number of bytes to skipped or -1 if the end of stream
      * @throws IOException if an I/O error occurs
      */
-    public long skip(long ln) throws IOException {
+    @Override
+    public long skip(final long ln) throws IOException {
         return in.skip(ln);
     }
 
@@ -90,6 +94,7 @@ public abstract class ProxyInputStream extends FilterInputStream {
      * @return the number of available bytes
      * @throws IOException if an I/O error occurs
      */
+    @Override
     public int available() throws IOException {
         return in.available();
     }
@@ -98,6 +103,7 @@ public abstract class ProxyInputStream extends FilterInputStream {
      * Invokes the delegate's <code>close()</code> method.
      * @throws IOException if an I/O error occurs
      */
+    @Override
     public void close() throws IOException {
         in.close();
     }
@@ -106,7 +112,8 @@ public abstract class ProxyInputStream extends FilterInputStream {
      * Invokes the delegate's <code>mark(int)</code> method.
      * @param idx read ahead limit
      */
-    public synchronized void mark(int idx) {
+    @Override
+    public synchronized void mark(final int idx) {
         in.mark(idx);
     }
 
@@ -114,6 +121,7 @@ public abstract class ProxyInputStream extends FilterInputStream {
      * Invokes the delegate's <code>reset()</code> method.
      * @throws IOException if an I/O error occurs
      */
+    @Override
     public synchronized void reset() throws IOException {
         in.reset();
     }
@@ -122,6 +130,7 @@ public abstract class ProxyInputStream extends FilterInputStream {
      * Invokes the delegate's <code>markSupported()</code> method.
      * @return true if mark is supported, otherwise false
      */
+    @Override
     public boolean markSupported() {
         return in.markSupported();
     }
