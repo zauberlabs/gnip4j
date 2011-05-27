@@ -43,7 +43,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 </verbatim>
 
-gnip4j includes software from the ...
+gnip4j includes portions of software from licenced by the Apache Fundation (package
+=com.zaubersoftware.gnip4j.api.stats.commonsio=).
 
 ---++ Who is using gnip4j?
 
