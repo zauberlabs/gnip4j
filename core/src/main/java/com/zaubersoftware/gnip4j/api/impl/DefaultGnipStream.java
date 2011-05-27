@@ -117,11 +117,11 @@ public class DefaultGnipStream extends AbstractGnipStream {
     }
 
     /** open the stream */
-    public final void open(final StreamNotification observer) {
-        if(observer == null) {
+    public final void open(final StreamNotification notification) {
+        if(notification == null) {
             throw new IllegalArgumentException(getStreamName() + " does not support null observers");
         }  else {
-            this.notification  = observer;
+            this.notification  = notification;
         }
         
         if (httpConsumer != null) {

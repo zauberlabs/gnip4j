@@ -15,6 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.api;
 
+import com.zaubersoftware.gnip4j.api.stats.StreamStats;
+
 
 
 /**
@@ -43,4 +45,7 @@ public interface GnipStream {
     
     /** @return an identification for this stream */
     String getStreamName();
+    
+    /** @return stream stats */
+    StreamStats getStreamStats();
 }

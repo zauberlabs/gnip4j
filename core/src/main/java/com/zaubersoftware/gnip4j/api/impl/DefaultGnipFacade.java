@@ -24,6 +24,7 @@ import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
+import com.zaubersoftware.gnip4j.api.stats.StreamStats;
 import com.zaubersoftware.gnip4j.api.support.jmx.JMXProvider;
 /**
  * Http implementation for the {@link GnipFacade}  
@@ -71,6 +72,11 @@ public class DefaultGnipFacade implements GnipFacade {
             public final String getStreamName() {
                 return target.getStreamName();
             }
+            
+            @Override
+            public StreamStats getStreamStats() {
+                return target.getStreamStats();
+            }
         }; 
     }
     
@@ -100,6 +106,11 @@ public class DefaultGnipFacade implements GnipFacade {
                 @Override
                 public void await() throws InterruptedException {
                     stream.await();
+                }
+                
+                @Override
+                public StreamStats getStreamStats() {
+                    return stream.getStreamStats();
                 }
             };
             JMXProvider.getProvider().registerBean(stream, stream.getStreamStats());

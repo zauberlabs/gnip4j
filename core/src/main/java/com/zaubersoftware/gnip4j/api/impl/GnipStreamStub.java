@@ -16,6 +16,8 @@
 package com.zaubersoftware.gnip4j.api.impl;
 
 import com.zaubersoftware.gnip4j.api.GnipStream;
+import com.zaubersoftware.gnip4j.api.stats.DefaultStreamStats;
+import com.zaubersoftware.gnip4j.api.stats.StreamStats;
 import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;
 import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
@@ -54,6 +56,13 @@ public final class GnipStreamStub implements GnipStream {
     @Override
     public String getStreamName() {
         return name;
+    }
+
+    private final StreamStats stats = new DefaultStreamStats();
+    
+    @Override
+    public StreamStats getStreamStats() {
+        return stats;
     }
 
 }
