@@ -9,7 +9,7 @@
         Monitoring is an important part of any piece of software. 
     </para>
     <section>
-        <title>Recolecting Stats</title>
+        <title>Recollecting Stats</title>
         <para>
             By default, <literal>DefaultGnipFacade</literal> stream's collects stats about the state of the stream.
             
@@ -35,7 +35,7 @@ System.out.println("Last Activity Date: " + new Date(stats.getLastTransferedActi
     <section>
         <title>JMX</title>
         <para>
-            The stream stats is exported using JMX by default (if platform supoorts it).
+            The stream stats is exported using JMX by default (if platform supports it).
             These stats are located in the MBean named <literal>com.zaubersoftware.gnip4j.streams.DDDDDDD-ID</literal>
             where <literal>DDDDDDD</literal> is the stream domain, and <literal>ID</literal> is the collector's id.
         </para>

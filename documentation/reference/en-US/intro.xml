@@ -23,7 +23,7 @@ from the <ulink url="http://docs.gnip.com/w/page/23724581/Gnip-Full-Documentatio
                 <listitem><para><literal>gnip4-core</literal>: Self-Contained implementation of the API.</para></listitem>
                 <listitem><para><literal>gnip4-http</literal>: Provides an implementation that uses 
                 <ulink url="http://hc.apache.org/httpcomponents-client-ga/">Apache HttpClient</ulink>
-                instead of standar <ulink url="http://download.oracle.com/javase/6/docs/api/java/net/URLConnection.html">JDK UrlConnection</ulink> to connect to the Gnip host.</para></listitem>
+                instead of standard <ulink url="http://download.oracle.com/javase/6/docs/api/java/net/URLConnection.html">JDK UrlConnection</ulink> to connect to the Gnip host.</para></listitem>
             </itemizedlist>
         </para>
         
@@ -69,7 +69,7 @@ from the <ulink url="http://docs.gnip.com/w/page/23724581/Gnip-Full-Documentatio
         <title>Library dependencies</title>
         <para>We had tried to keep dependencies to the bare minimum: No Apache's commons-lang, 
         no Google's guava, no Spring in the <literal>gnip4j-core</literal> artifact. 
-        The only mandatory dependecies are the <ulink url="http://jackson.codehaus.org">Jackson's JSON parser</ulink>.
+        The only mandatory dependencies are the <ulink url="http://jackson.codehaus.org">Jackson's JSON parser</ulink>.
         </para>
         <para>
          The other modules, may have broader dependencies (for example <literal>gnip4j-http</literal> has <literal>commons-client</literal>).
@@ -77,14 +77,14 @@ from the <ulink url="http://docs.gnip.com/w/page/23724581/Gnip-Full-Documentatio
         <section>
             <title>Service Provider Interfaces</title>
             <para>
-                The library looks up at runtime if there are some clases available so it can provide
+                The library looks up at run-time if there are some classes available so it can provide
                 an advanced feature. This is implemented as <ulink url="http://en.wikipedia.org/wiki/Service_provider_interface">SPIs</ulink>.
             </para>
             <section>
                 <title>Logging</title>
                 <para>
                     Gnip4j use extensively logging to help developers trace all the actions. When the 
-                    library is first used it searchs for <ulink url="http://www.slf4j.org/">SLF4j</ulink>.
+                    library is first used it searches for <ulink url="http://www.slf4j.org/">SLF4j</ulink>.
                     If it is present (gnip4j searches for the class <literal>org.slf4j.Logger</literal>)
                     then slf4j will be used. If it isn't present then logging is not used at all. 
                 </para>
@@ -140,7 +140,7 @@ log4j.appender.stdout.layout.ConversionPattern=%d{mm\:ss,SSS} [%t] %-5p %c{1} - 
                 <title>JMX</title>
                 <para>
                     Gnip4j exports some stats using JMX. As not all JRE supports JMX; this is
-                    feature is provided as SPI. If JMX is not avaible, then gnip4j won't export
+                    feature is provided as SPI. If JMX is not available, then gnip4j won't export
                     any information.  
                 </para>
             </section>

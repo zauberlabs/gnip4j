@@ -19,7 +19,7 @@
         <section>
             <title>Getting Stream domain and data collector id</title>
             <para>
-                If you log-in into your gnip accout, and you reach to the following screen:
+                If you log-in into your gnip account, and you reach to the following screen:
             </para>
             <para>
             <inlinemediaobject>
@@ -39,7 +39,7 @@
         <title>Consuming the stream</title>
         <para>
         First you must have an instance of <literal>GnipFacade</literal>. Usually you will have
-        an unique instance of the facade and multiples streams for diferent data collectors.
+        an unique instance of the facade and multiples streams for different data collectors.
         </para>
         <programlisting language="Java"><![CDATA[final String domain = "acme-powertrack";
 final String username = "acme";
@@ -96,13 +96,13 @@ stream.await();]]></programlisting>
     </para>
     <para>
         gnip4j handles errors in the stream (for example: unexpected data format, network problems) reconnecting
-        using an exponetial backoff algorithm. User is notified about these actions.
+        using an exponential back off algorithm. User is notified about these actions.
     </para>
     </section>
     <section>
         <title>Activity Processing</title>
         <para>
-         For the processing of the stream, one thread wich  read from the remote socket is launched,
+         For the processing of the stream, one thread which  read from the remote socket is launched,
          and it also parses the json. After the parsing, it delegates the execution to an 
          <ulink url="http://download.oracle.com/javase/6/docs/api/java/util/concurrent/ExecutorService.html">ExecutorService</ulink>
           </para>
