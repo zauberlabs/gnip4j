@@ -86,9 +86,9 @@ from the <ulink url="http://docs.gnip.com/w/page/23724581/Gnip-Full-Documentatio
                     Gnip4j use extensively logging to help developers trace all the actions. When the 
                     library is first used it searches for <ulink url="http://www.slf4j.org/">SLF4j</ulink>.
                     If it is present (gnip4j searches for the class <literal>org.slf4j.Logger</literal>)
-                    then slf4j will be used. If it isn't present then logging is not used at all. 
+                    then slf4j will be used. If it is not present then logging will not be used at all. 
                 </para>
-                <para>For more information, take a look at the code at the package: <literal>com.zaubersoftware.gnip4j.api.support.logging</literal>.</para>
+                <para>For more information, take a look at the code at package: <literal>com.zaubersoftware.gnip4j.api.support.logging</literal>.</para>
                 <section>
                     <title>Example: configuring gnip4p &amp; slf4j  &amp;  Log4j </title>
                     <programlisting language="XML"><![CDATA[<!-- BEGIN: Logging -->
@@ -125,7 +125,7 @@ log4j.appender.stdout.layout.ConversionPattern=%d{mm\:ss,SSS} [%t] %-5p %c{1} - 
                 </para>
                 <para>
                     For now the default SPI implementation uses <literal>sun.misc.BASE64Encoder</literal>,
-                    but as this won't be available in all JRE implementations (for example: Android),
+                    but as this will not be available in all JRE implementations (for example: Android),
                     there is room for others SPI implementations. Package:
                     <literal>com.zaubersoftware.gnip4j.api.support.base64</literal>.
                 </para>

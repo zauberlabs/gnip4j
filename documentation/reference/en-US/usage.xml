@@ -14,12 +14,12 @@
         <title>Consuming activities from the PowerTrack Stream</title>
         <para>
             To consume an <ulink url="http://docs.gnip.com/w/page/23724581/Gnip-Full-Documentation#StreamingHTTP">activity stream</ulink>
-            you first need to know the subdomain name of the stream, and it's id of the data collector. 
+            you first need to know the subdomain name of the stream, and it's data collector id. 
         </para>
         <section>
             <title>Getting Stream domain and data collector id</title>
             <para>
-                If you log-in into your gnip account, and you reach to the following screen:
+                If you log-in into your gnip account, you should reach to the following screen:
             </para>
             <para>
             <inlinemediaobject>
@@ -50,7 +50,7 @@ final GnipFacade gnip = new DefaultGnipFacade(
             new InmutableGnipAuthentication(username, password)));]]></programlisting>
     <para></para>
 <para><literal>JRERemoteResourceProvider</literal> is an implementation of <literal>RemoteResourceProvider</literal>
-that connect to to the remote HTTP Server. If you are using gnip4j as a part of a integration-test / big unit test,
+that connects to the remote HTTP Server. If you are using gnip4j as a part of a integration-test / big unit test,
 you will probably want to mock that implementation so it does not connect to network.</para>    
 <para>
     After creating the facade, you must retrieve a <literal>GnipStream</literal>.
@@ -79,7 +79,7 @@ stream.await();]]></programlisting>
         until the stream is closed (for example a simple java main or a test). 
     </para>
     <para>
-     As you may see, all the activity in the stream is notified using the observer interface 
+     As you may see, all the activities in the stream are notified using the observer interface 
      <literal>StreamNotification</literal>.  
     </para>
     <programlisting language="Java"><![CDATA[public interface StreamNotification {
