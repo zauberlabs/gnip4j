@@ -1,3 +1,4 @@
+// THIS FILE HAD BEEN MODIFIED BY Juan F. Codagnone. TO COMPLY WITH THE CODING STYLE.
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
