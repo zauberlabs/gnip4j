@@ -3,32 +3,76 @@
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 ]>
 <chapter xml:id="usage" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Commons Base</title>
-    
-    <section xml:id="usage-overview">
-        <title>Overview</title>
-        
-        <para>...
+    <title>API Usage</title>
+
+    <para>
+    Gnip4j provides an anemic interface to access Gnip services. This interface is called
+    <literal>GnipFacade</literal> (<literal>DefaultGnipFacade</literal> is one of the available
+    implementations).
+    </para>    
+    <section>
+        <title>Consuming activities from the PowerTrack Stream</title>
+        <para>
+            To consume an <ulink url="http://docs.gnip.com/w/page/23724581/Gnip-Full-Documentation#StreamingHTTP">activity stream</ulink>
+            you first need to know the subdomain name of the stream, and it's id of the data collector. 
         </para>
-        <itemizedlist>
-            <listitem><para><emphasis role="bold">Functors
-            </emphasis>: Objects that encapsulates functional logic.</para></listitem>
-        </itemizedlist>
-        
-        <note>
-	        <title>Dependencies</title>
-	        <para><emphasis role="bold">Commons Base</emphasis>
-	            has no dependencies like Spring or other mayor technologies.</para>
-        </note>
-                <programlisting language="Java">
-import ar.com.zauber.commons.base.Predicate;
-import ar.com.zauber.commons.base.predicate.*;
-String name = "Shirley";
-Predicate&lt;String&gt; nameEmma = new EqualsPredicate( "Emma" );
-Predicate&lt;String&gt; nameShirley = new EqualsPredicate( "Shirley" );
-// Testing all predicates for "Shirley"
-System.out.println( "Is Name Emma?: " + nameEmma.evaluate( name ) );
-System.out.println( "Is Name Shirley?: " + nameShirley.evaluate( name ) );</programlisting>
-                    
-    </section>    
+        <section>
+            <title>Getting Stream domain and data collector id</title>
+            <para>
+                If you log-in into your gnip accout, and you reach to the following screen:
+            </para>
+            <para>
+            <inlinemediaobject>
+                <imageobject>
+                    <imagedata fileref="./images/powertrackdashboard.jpg" 
+                        align="center" valign="middle"/>
+                </imageobject>
+            </inlinemediaobject>
+            </para>
+            <para>
+            In this example, the username is <literal>acme</literal>, the hostname <literal>acme-powertrack</literal>,
+            and the data collector id is <literal>1</literal>.
+            </para>
+        </section>
+    </section>
+    <section>
+        <title>Consuming the stream</title>
+        <para>
+        First you must have an instance of <literal>GnipFacade</literal>. Usually you will have
+        an unique instance of the facade and multiples streams for diferent data collectors.
+        </para>
+        <programlisting language="Java"><![CDATA[final String domain = "acme-powertrack";
+final String username = "acme";
+final String password = "******";
+
+final GnipFacade gnip = new DefaultGnipFacade(
+    new JRERemoteResourceProvider(
+            new InmutableGnipAuthentication(username, password)));]]></programlisting>
+    <para></para>
+<para><literal>JRERemoteResourceProvider</literal> is an implementation of <literal>RemoteResourceProvider</literal>
+that connecto to the remote HTTP Server. If you are using gnip4j as a part of a integration-test / big unit test,
+you will probably mock that implementation so it does not connect to network.</para>    
+<para>
+    After creating the facade, you must retrieve a <literal>GnipStream</literal>.
+</para>
+<programlisting language="Java"><![CDATA[final long dataCollectorId = 1;
+final AtomicInteger counter = new AtomicInteger();
+final StreamNotificationAdapter observer = new StreamNotificationAdapter() {
+    @Override
+    public void notify(final Activity activity, final GnipStream stream) {
+        final int i = counter.getAndIncrement();
+        System.out.println(i + "-" + activity.getBody() 
+                             + " " + activity.getGnip().getMatchingRules());
+        if (i >= 10) {
+            stream.close();
+        }
+    }
+};
+final GnipStream stream = gnip.createStream(domain, dataCollectorId, observer);
+stream.await();]]></programlisting>
+    <para>
+        When you don't wan't to process any more activity you <emphasis role="bold">MUST</emphasis> call
+        the <literal>close</literal> method to release resources (the http socket, some threads, JMX registrations). 
+    </para>
+    </section>
 </chapter>

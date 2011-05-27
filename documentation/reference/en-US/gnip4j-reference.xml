@@ -35,6 +35,8 @@
       will explore everything you need to know in order to use gnip4j 
       effectively.</para>
     </partintro>
+    <xi:include href="intro.xml"/>
     <xi:include href="usage.xml"/>
+    <xi:include href="monitoring.xml"/>
   </part>
 </book>

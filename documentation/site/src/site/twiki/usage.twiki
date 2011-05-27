@@ -38,7 +38,7 @@ and add to your project:
 If you need logging adding =slf4j= as a dependency.
  
 ---++ Code Snippet
----+++ Consuming 10 Activities from the stream
+---+++ Consuming ten Activities from the stream
    
 <verbatim>final String domain = "acme-powertrack";
 final String username = "acme";
