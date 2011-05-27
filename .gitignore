@@ -6,3 +6,4 @@ target
 .springBeans
 velocity.log
 .DS_Store
+*.bak
