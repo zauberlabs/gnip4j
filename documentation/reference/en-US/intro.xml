@@ -32,7 +32,8 @@ from the <ulink url="http://docs.gnip.com/w/page/23724581/Gnip-Full-Documentatio
             <para>
                 Following the best practices of <ulink url="http://maven.apache.org/">Maven</ulink>, 
                 it is recommended to declare all the available artifacts in the  <ulink url="http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html">dependencyManagement</ulink>:
-                                <programlisting><![CDATA[<dependencyManagment>
+            </para>
+                                <programlisting language="XML"><![CDATA[<dependencyManagment>
    <dependency>
       <groupId>com.zaubersoftware.gnip4j</groupId>
       <artifactId>gnip4j-core</artifactId>
@@ -47,22 +48,21 @@ from the <ulink url="http://docs.gnip.com/w/page/23724581/Gnip-Full-Documentatio
 ...
 <properties>
     <gnip4j.version>0.0</gnip4j.version>
-</properties>]]></programlisting>
+</properties>]]></programlisting><para>
             
             And then in the <literal><![CDATA[<dependencies>]]></literal> section
             of the module that need to use gnip4j add the core dependency:
-            
+        </para>
             <programlisting><![CDATA[<dependency>
     <groupId>com.zaubersoftware.gnip4j</groupId>
     <artifactId>gnip4j-core</artifactId>
 </dependency>]]></programlisting>
 
             If want to use the <literal>gnip-http</literal> artifact then you need to also add:
-            <programlisting><![CDATA[<dependency>
+            <programlisting language="XML"><![CDATA[<dependency>
     <groupId>com.zaubersoftware.gnip4j</groupId>
     <artifactId>gnip4j-http</artifactId>
 </dependency>]]></programlisting>
-          </para>
         </section>
     </section>
     <section>        
@@ -91,7 +91,7 @@ from the <ulink url="http://docs.gnip.com/w/page/23724581/Gnip-Full-Documentatio
                 <para>For more information, take a look at the code at the package: <literal>com.zaubersoftware.gnip4j.api.support.logging</literal>.</para>
                 <section>
                     <title>Example: configuring gnip4p &amp; slf4j  &amp;  Log4j </title>
-                    <programlisting><![CDATA[<!-- BEGIN: Logging -->
+                    <programlisting language="XML"><![CDATA[<!-- BEGIN: Logging -->
 <dependency>
     <groupId>org.slf4j</groupId>
     <artifactId>slf4j-log4j12</artifactId>

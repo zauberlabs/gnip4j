@@ -11,6 +11,8 @@
     <authorgroup>
       <author>
         <personname>Juan F. Codagnone</personname>
+      </author>
+      <author>
         <personname>Guido Marucci Blas</personname>
       </author>
     </authorgroup>
@@ -38,5 +40,6 @@
     <xi:include href="intro.xml"/>
     <xi:include href="usage.xml"/>
     <xi:include href="monitoring.xml"/>
+    <xi:include href="mule.xml"/>
   </part>
 </book>

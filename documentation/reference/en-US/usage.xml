@@ -50,14 +50,14 @@ final GnipFacade gnip = new DefaultGnipFacade(
             new InmutableGnipAuthentication(username, password)));]]></programlisting>
     <para></para>
 <para><literal>JRERemoteResourceProvider</literal> is an implementation of <literal>RemoteResourceProvider</literal>
-that connecto to the remote HTTP Server. If you are using gnip4j as a part of a integration-test / big unit test,
-you will probably mock that implementation so it does not connect to network.</para>    
+that connect to to the remote HTTP Server. If you are using gnip4j as a part of a integration-test / big unit test,
+you will probably want to mock that implementation so it does not connect to network.</para>    
 <para>
     After creating the facade, you must retrieve a <literal>GnipStream</literal>.
 </para>
 <programlisting language="Java"><![CDATA[final long dataCollectorId = 1;
 final AtomicInteger counter = new AtomicInteger();
-final StreamNotificationAdapter observer = new StreamNotificationAdapter() {
+final StreamNotification observer = new StreamNotificationAdapter() {
     @Override
     public void notify(final Activity activity, final GnipStream stream) {
         final int i = counter.getAndIncrement();
@@ -71,8 +71,44 @@ final StreamNotificationAdapter observer = new StreamNotificationAdapter() {
 final GnipStream stream = gnip.createStream(domain, dataCollectorId, observer);
 stream.await();]]></programlisting>
     <para>
-        When you don't wan't to process any more activity you <emphasis role="bold">MUST</emphasis> call
+        When you don't want to process any more activity you <emphasis role="bold">MUST</emphasis> call
         the <literal>close</literal> method to release resources (the http socket, some threads, JMX registrations). 
     </para>
+    <para>
+        The <literal>await</literal> method is provided for those programs that need to wait
+        until the stream is closed (for example a simple java main or a test). 
+    </para>
+    <para>
+     As you may see, all the activity in the stream is notified using the observer interface 
+     <literal>StreamNotification</literal>.  
+    </para>
+    <programlisting language="Java"><![CDATA[public interface StreamNotification {
+    void notify(Activity activity, GnipStream stream);
+    
+    void notifyConnectionError(TransportGnipException e);
+    
+    void notifyReConnectionError(GnipException e);
+    
+    void notifyReConnectionAttempt(int attempt, long waitTime);
+}]]></programlisting>
+    <para>
+        The implementation <literal>StreamNotificationAdapter</literal> is provided to ease usage. 
+    </para>
+    <para>
+        gnip4j handles errors in the stream (for example: unexpected data format, network problems) reconnecting
+        using an exponetial backoff algorithm. User is notified about these actions.
+    </para>
+    </section>
+    <section>
+        <title>Activity Processing</title>
+        <para>
+         For the processing of the stream, one thread wich  read from the remote socket is launched,
+         and it also parses the json. After the parsing, it delegates the execution to an 
+         <ulink url="http://download.oracle.com/javase/6/docs/api/java/util/concurrent/ExecutorService.html">ExecutorService</ulink>
+          </para>
+          <para>
+          If none executor service was provided, an internal executor service is created for that stream 
+          
+          </para>
     </section>
 </chapter>
