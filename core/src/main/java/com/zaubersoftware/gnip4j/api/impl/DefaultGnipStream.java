@@ -24,8 +24,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.codehaus.jackson.JsonParser;
+import org.codehaus.jackson.JsonParser.Feature;
+import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.AnnotationIntrospector;
 import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.DeserializationContext;
+import org.codehaus.jackson.map.DeserializationProblemHandler;
+import org.codehaus.jackson.map.JsonDeserializer;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
 
@@ -63,6 +68,12 @@ import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
  */
 public class DefaultGnipStream extends AbstractGnipStream {
     private final Logger logger = LoggerFactory.getLogger(getClass());
+    
+    public static final ObjectMapper getObjectMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        return mapper;
+    }
     
     /** stream name for debugging propourse */
     private final String streamName;
@@ -195,7 +206,6 @@ public class DefaultGnipStream extends AbstractGnipStream {
         private static final long MAX_RE_CONNECTION_WAIT_TIME = 5 * 60 * 1000; // 5 minutes
         private static final long INITIAL_RE_CONNECTION_WAIT_TIME = 250;    
         
-        private final ObjectMapper mapper = new ObjectMapper();
         private final AtomicInteger reConnectionAttempt = new AtomicInteger();
         private long reConnectionWaitTime = INITIAL_RE_CONNECTION_WAIT_TIME;
         
@@ -211,15 +221,9 @@ public class DefaultGnipStream extends AbstractGnipStream {
                 throw new IllegalArgumentException("response is null");
             }
             this.is = response;
-            
-            mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            final AnnotationIntrospector introspector = new JaxbAnnotationIntrospector();
-            mapper.setDeserializationConfig(
-                    mapper.getDeserializationConfig().withAnnotationIntrospector(introspector));
-            mapper.setSerializationConfig(
-                    mapper.getSerializationConfig().withAnnotationIntrospector(introspector));
         }
         
+         
         @Override
         public void run() {
             try {
@@ -229,9 +233,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
                             reconnect();
                         } 
                         if(is != null) {
-                            // TODO Wrapp InputStream to count bytes and transfer rates 
-    
-                            final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
+                            final JsonParser parser =  getObjectMapper().getJsonFactory().createJsonParser(is);
                             logger.debug("Starting to consume activity stream {} ...", streamName);
                             while(!Thread.interrupted()) {
                                 final Activity activity = parser.readValueAs(Activity.class);
@@ -267,7 +269,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
                                 }
                             });
                         }
-                    } catch (final Exception e) {
+                    } catch (final Throwable e) {
                         if(logger.isWarnEnabled()) {
                             logger.warn("Unexpected exception while consuming activity stream "
                                 + streamName + ": " + e.getMessage(), e);

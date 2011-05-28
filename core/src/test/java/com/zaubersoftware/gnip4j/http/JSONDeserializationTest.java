@@ -33,8 +33,11 @@ import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.zaubersoftware.gnip4j.api.impl.DefaultGnipFacade;
+import com.zaubersoftware.gnip4j.api.impl.DefaultGnipStream;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.model.MatchingRules;
+import com.zaubersoftware.gnip4j.api.stats.DefaultStreamStats;
 
 
 /**
@@ -51,14 +54,7 @@ public final class JSONDeserializationTest {
     @Before
     public void setUp() throws Exception {
         
-        mapper = new ObjectMapper();
-        final AnnotationIntrospector introspector = new JaxbAnnotationIntrospector();
-        mapper.setDeserializationConfig(
-                mapper.getDeserializationConfig().withAnnotationIntrospector(introspector));
-        mapper.setSerializationConfig(
-                mapper.getSerializationConfig().withAnnotationIntrospector(introspector));
-        //TODO This configuration should be removed once the JSON is fully supported
-        mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        mapper = DefaultGnipStream.getObjectMapper();
         ctx = JAXBContext.newInstance(Activity.class.getPackage().getName());
     }
 

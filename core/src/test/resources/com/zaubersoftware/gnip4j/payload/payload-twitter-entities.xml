@@ -8,7 +8,7 @@
         <links rel="me" href="http://www.sfngroup.com"/>
     </actor>
     <generator link="http://twitter.com" displayName="web"/>
-    <object summary="GREAT!-&amp;gt; Coke asks people to tweet their #1thing that would change the world http://bit.ly/itsC30 ~via @SashaHalima @BrandRepublic #in" link="http://twitter.com/LeslyCardec/statuses/68323667712540672" objectType="note" id="object:search.twitter.com,2005:68323667712540672" postedTime="2011-05-11T11:36:46.000-03:00"/>
+    <object summary="GREAT!-&amp;gt; Coke asks people to tweet their #1thing that would change the world http://bit.ly/itsC30 ~via @SashaHalima @BrandRepublic #in" link="http://twitter.com/LeslyCardec/statuses/68323667712540672" id="object:search.twitter.com,2005:68323667712540672" objectType="note" postedTime="2011-05-11T11:36:46.000-03:00"/>
     <provider link="http://www.twitter.com" objectType="service" displayName="Twitter"/>
     <twitter_entities>
         <urls url="http://bit.ly/itsC30" expanded_url="http://google.com">
@@ -35,5 +35,6 @@
     <gnip>
         <language value="en"/>
         <matching_rules value="coke"/>
+        <urls expanded_url="http://wallblog.co.uk/2011/05/11/coke-asks-world-to-tweet-the-1thing-that-would-change-the-world/" url="http://bit.ly/itsC30"/>
     </gnip>
 </activity>

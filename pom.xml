@@ -70,6 +70,7 @@
 	<modules>
     		<module>core</module>
 		<module>http</module>
+		<module>mule</module>
 		<module>documentation</module>
   	</modules>
 
@@ -153,7 +154,7 @@
 		</dependency>
 	</dependencies>
 	<properties>
-		<doxia.version>1.1</doxia.version>
+		<jackson.version>1.8.0</jackson.version>
 		<slf4j.version>1.6.1</slf4j.version>
 
 		<sonar.mantis.id>44</sonar.mantis.id>
@@ -166,17 +167,17 @@
             <dependency>
               <groupId>org.codehaus.jackson</groupId> 
               <artifactId>jackson-core-asl</artifactId> 
-              <version>1.8.0</version> 
+              <version>${jackson.version}</version> 
             </dependency>
             <dependency>
               <groupId>org.codehaus.jackson</groupId> 
               <artifactId>jackson-mapper-asl</artifactId> 
-              <version>1.8.0</version> 
+              <version>${jackson.version}</version> 
             </dependency>
             <dependency>
               <groupId>org.codehaus.jackson</groupId> 
               <artifactId>jackson-xc</artifactId> 
-              <version>1.8.0</version> 
+              <version>${jackson.version}</version> 
             </dependency>
 
 	    <!-- Logging -->

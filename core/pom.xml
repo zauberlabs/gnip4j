@@ -53,9 +53,8 @@
 
 	</dependencies>
 
-
+<!--
   <profiles>
-    <!-- mvn compile -->
     <profile>
       <id>generate</id>
       <activation>
@@ -119,5 +118,5 @@
 				</configuration>
 			</plugin>
 		</plugins>
-	</build>
+	</build>-->
 </project>
