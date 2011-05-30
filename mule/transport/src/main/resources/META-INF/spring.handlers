@@ -1,1 +1,1 @@
-http\://www.mulesoft.org/schema/mule/gnip=org.mule.transport.gnip.config.GnipNamespaceHandler
+http\://labs.zaubersoftware.com/schema/gnip4j/transport=org.mule.transport.gnip.config.GnipNamespaceHandler

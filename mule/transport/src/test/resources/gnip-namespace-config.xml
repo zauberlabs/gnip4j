@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mule xmlns="http://www.mulesoft.org/schema/mule/core"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:gnip="http://www.mulesoft.org/schema/mule/gnip"
+       xmlns:gnip="http://labs.zaubersoftware.com/schema/gnip4j/transport"
     xsi:schemaLocation="
        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.1/mule.xsd
-       http://www.mulesoft.org/schema/mule/gnip http://labs.zaubersoftware.com/schema/gnip4j/transport/0.0/mule-gnip.xsd">
+       http://labs.zaubersoftware.com/schema/gnip4j/transport http://labs.zaubersoftware.com/schema/gnip4j/transport/0.0/mule-gnip.xsd">
 
     <gnip:connector name="gnipConnector" username="foo" password="bar"/> 
     
