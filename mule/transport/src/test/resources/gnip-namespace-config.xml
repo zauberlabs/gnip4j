@@ -4,7 +4,7 @@
        xmlns:gnip="http://www.mulesoft.org/schema/mule/gnip"
     xsi:schemaLocation="
        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.1/mule.xsd
-       http://www.mulesoft.org/schema/mule/gnip http://www.mulesoft.org/schema/mule/gnip/3.1/mule-gnip.xsd">
+       http://www.mulesoft.org/schema/mule/gnip http://labs.zaubersoftware.com/schema/gnip4j/transport/0.0/mule-gnip.xsd">
 
     <gnip:connector name="gnipConnector" username="foo" password="bar"/> 
     
