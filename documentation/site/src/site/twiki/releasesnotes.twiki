@@ -1,0 +1,10 @@
+---+ Releases Notes
+
+Gnip4j is distributed under the [[http://www.apache.org/licenses/LICENSE-2.0][Apache License, versión 2.0]] license. 
+Gnip4j is distributed in using the
+[[http://repo1.maven.org/maven2/com/zaubersoftware/gnip4j][Maven Central Repository]]
+
+---++ Versions
+---+++ Gnip4j 0.0
+
+Initial Release. Only the streaming API is supported.

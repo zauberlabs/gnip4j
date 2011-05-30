@@ -44,7 +44,7 @@
     </menu>
 
     <menu name="Get gnip4j">
-      <item name="Download" href="download.html"/>
+      <item name="Releases Notes" href="releasesnotes.html"/>
       <item name="License" href="license.html"/>
     </menu>
 
@@ -54,7 +54,7 @@
     </menu>
 
     <menu name="Project Infrastructure">
-      <item name="Mailing List" href="mail-lists.html"/>
+<!--       <item name="Mailing List" href="mail-lists.html"/> -->
       <item name="Issue Tracker" href="issue-tracking.html"/>
       <item name="SCM" href="source-repository.html" />
     </menu>
