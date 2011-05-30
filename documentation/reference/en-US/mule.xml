@@ -6,6 +6,53 @@
     <title>Mule Integration</title>
     
     <para>
-        XX 
+        Gnip4j provides a Mule Transport to receive incoming activities from a stream. 
+        The following example will print incoming activities ids:   
     </para>
+    <para><literal>mule-config.xml</literal></para>
+    <programlisting language="XML" ><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:gnip="http://labs.zaubersoftware.com/schema/gnip4j/transport"
+    xsi:schemaLocation="
+       http://www.mulesoft.org/schema/mule/core
+       http://www.mulesoft.org/schema/mule/core/3.1/mule.xsd
+       http://labs.zaubersoftware.com/schema/gnip4j/transport
+       http://labs.zaubersoftware.com/schema/gnip4j/transport/0.0/mule-gnip.xsd">
+
+    <gnip:connector name="gnipConnector" username="${gnip.username}"
+                                         password="${gnip.password}"/> 
+    
+    <flow name="incomingGnip">
+        <gnip:inbound-endpoint  address="gnip://${gnip.domain}/${gnip.datacollector}" />
+        <logger level="ERROR"  message="activity arrived  #[bean:id]"/>
+    </flow>
+</mule>]]></programlisting><para><literal>pom.xml</literal></para>
+<programlisting language="XML" ><![CDATA[...
+  <dependencies>
+    <dependency>
+        <groupId>com.zaubersoftware.gnip4j.mule</groupId>
+        <artifactId>gnip4j-mule-transport</artifactId>
+        <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+    <plugin>
+        <groupId>org.mule.tools</groupId>
+        <artifactId>maven-mule-plugin</artifactId>
+        <version>1.5</version>
+        <extensions>true</extensions>
+        <configuration>
+            <inclusions>
+                <inclusion>
+                    <groupId>com.zaubersoftware.gnip4j.mule</groupId>
+                    <artifactId>gnip4j-mule-transport</artifactId>
+                </inclusion>
+            </inclusions>
+        </configuration>
+    </plugin>
+    </plugins>
+  </build>]]></programlisting>
 </chapter>

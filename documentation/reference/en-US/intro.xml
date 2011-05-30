@@ -24,6 +24,7 @@ from the <ulink url="http://docs.gnip.com/w/page/23724581/Gnip-Full-Documentatio
                 <listitem><para><literal>gnip4-http</literal>: Provides an implementation that uses 
                 <ulink url="http://hc.apache.org/httpcomponents-client-ga/">Apache HttpClient</ulink>
                 instead of standard <ulink url="http://download.oracle.com/javase/6/docs/api/java/net/URLConnection.html">JDK UrlConnection</ulink> to connect to the Gnip host.</para></listitem>
+                <listitem><para><literal>gnip4j-mule-transport</literal>: Provides a <ulink url="http://www.mulesoft.org/">Mule ESB</ulink> transport</para></listitem>
             </itemizedlist>
         </para>
         
@@ -42,6 +43,11 @@ from the <ulink url="http://docs.gnip.com/w/page/23724581/Gnip-Full-Documentatio
    <dependency>
       <groupId>com.zaubersoftware.gnip4j</groupId>
       <artifactId>gnip4j-http</artifactId>
+      <version>${gnip4j.version}</version>
+   </dependency>
+   <dependency>
+      <groupId>com.zaubersoftware.gnip4j.mule</groupId>
+      <artifactId>gnip4j-mule-transport</artifactId>
       <version>${gnip4j.version}</version>
    </dependency>
 </dependencyManagment>
