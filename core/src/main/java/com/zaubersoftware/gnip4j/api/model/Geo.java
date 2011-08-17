@@ -18,17 +18,15 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = { "coordinates" })
 public class Geo {
-    @JsonIgnore(value = true)
+    @XmlAttribute(required = true)
     private double []coordinates;
     @XmlAttribute(required = true)
     private String type;
 
-    @JsonIgnore
     public final double []getCoordinates() {
         return coordinates;
     }
 
-    @JsonIgnore
     public void setCoordinates(final double []coordinates) {
         this.coordinates = coordinates;
     }
