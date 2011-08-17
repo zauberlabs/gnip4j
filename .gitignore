@@ -7,3 +7,6 @@ target
 velocity.log
 .DS_Store
 *.bak
+*.iml
+*.ipr
+*.iws
