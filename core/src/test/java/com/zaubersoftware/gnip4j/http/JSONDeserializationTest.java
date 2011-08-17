@@ -79,7 +79,25 @@ public final class JSONDeserializationTest {
             is.close();
         }
     }
-    
+
+    /** test a complete unmarshal from the json */
+    @Test
+    public void testGeoCoordinates() throws Exception {
+        final InputStream is = getClass().getClassLoader().getResourceAsStream(
+        "com/zaubersoftware/gnip4j/payload/payload-example-geo.json");
+        try  {
+            final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
+            final Activity activity = parser.readValueAs(Activity.class);
+
+            assertNotNull(activity.getGeo());
+            assertNotNull(activity.getGeo().getCoordinates());
+            assertEquals(-34.58501869, activity.getGeo().getCoordinates()[0], 0.001);
+            assertEquals(-58.43946468, activity.getGeo().getCoordinates()[1], 0.001);
+        } finally {
+            is.close();
+        }
+    }
+
     /** regression test for a NPE exception */
     @Test
     public void testNPE() throws Exception {
@@ -99,9 +117,14 @@ public final class JSONDeserializationTest {
             o.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             StringWriter ww = new StringWriter();
             o.marshal(activity, ww);
-            assertEquals(IOUtils.toString(expectedIs), ww.toString());
+            assertEquals(removeTimeZoneFields(IOUtils.toString(expectedIs)), removeTimeZoneFields(ww.toString()));
         } finally {
             is.close();
         }
     }
+
+    private String removeTimeZoneFields(String input) {
+        return input.replaceAll("postedTime=\"[\\d-T:\\.]*\"", "");
+    }
+
 }
