@@ -56,6 +56,11 @@ public final class JMXTest {
                 return getClass().getClassLoader().getResourceAsStream(
                         "com/zaubersoftware/gnip4j/payload/payload-example.js");
             }
+            
+            @Override
+            public void postResource(final URI uri, Object resource) {
+            	
+            }
         };
         final GnipFacade f = new DefaultGnipFacade(resources);
         final GnipStream stream = f.createStream("acme", 1, observer);

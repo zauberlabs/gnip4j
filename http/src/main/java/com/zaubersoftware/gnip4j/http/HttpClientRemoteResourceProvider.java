@@ -147,4 +147,10 @@ public class HttpClientRemoteResourceProvider extends AbstractRemoteResourceProv
         client.addResponseInterceptor(gzip);
         return client;
     }
+
+	@Override
+	public void postResource(URI uri, Object resource)
+			throws AuthenticationGnipException, TransportGnipException {
+		//TODO(apetresc): Implement POST for Apache HTTP client as well.
+	}
 }

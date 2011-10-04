@@ -138,6 +138,11 @@ class MockRemoteResourceProvider implements RemoteResourceProvider {
         }
         
     }
+    
+    @Override
+    public void postResource(final URI uri, Object resource) {
+    	
+    }
 }
 
 class MockExecutorService implements ExecutorService {

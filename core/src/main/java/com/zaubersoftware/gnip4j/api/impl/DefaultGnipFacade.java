@@ -32,6 +32,8 @@ import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
 import com.zaubersoftware.gnip4j.api.exception.GnipException;
+import com.zaubersoftware.gnip4j.api.model.ObjectFactory;
+import com.zaubersoftware.gnip4j.api.model.Rule;
 import com.zaubersoftware.gnip4j.api.model.Rules;
 import com.zaubersoftware.gnip4j.api.stats.StreamStats;
 import com.zaubersoftware.gnip4j.api.support.jmx.JMXProvider;
@@ -158,6 +160,22 @@ public class DefaultGnipFacade implements GnipFacade {
 		} catch (IOException e) {
 			throw new GnipException(e);
 		}
+    }
+    
+    public final void addRule(String domain, long dataCollectorId, Rule rule) {
+    	Rules rules = new ObjectFactory().createRules();
+    	rules.getRules().add(rule);
+    	
+    	try {
+    		facade.postResource(
+    				new URI(String.format(
+    						"https://%s.gnip.com/data_collectors/%d/rules.json",
+    						domain,
+    						dataCollectorId)),
+    				rules);
+    	} catch (URISyntaxException e) {
+    		throw new GnipException("The domain or collector ID were invalid", e);
+    	}
     }
 
     public final boolean isUseJMX() {
