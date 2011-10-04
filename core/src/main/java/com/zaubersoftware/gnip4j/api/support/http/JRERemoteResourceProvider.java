@@ -17,6 +17,7 @@ package com.zaubersoftware.gnip4j.api.support.http;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.HttpURLConnection;
@@ -26,6 +27,8 @@ import java.net.URLConnection;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
+
+import org.codehaus.jackson.map.ObjectMapper;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
@@ -60,7 +63,7 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
     }
     
     @Override
-    public final InputStream getResouce(final URI uri) throws AuthenticationGnipException,
+    public final InputStream getResource(final URI uri) throws AuthenticationGnipException,
             TransportGnipException {
         
         try {
@@ -96,6 +99,51 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
         } catch (IOException e) {
             throw new TransportGnipException(e);
         }
+    }
+    
+    @Override
+    public final void postResource(final URI uri, Object resource) throws AuthenticationGnipException,
+    		TransportGnipException {
+    	
+    	OutputStream outStream = null;
+    	try {
+    		final URLConnection uc = uri.toURL().openConnection();
+    		HttpURLConnection huc = null;
+    		
+    		if (uc instanceof HttpURLConnection) {
+    			huc = (HttpURLConnection) uc;
+    		}
+    		uc.setAllowUserInteraction(false);
+    		uc.setDefaultUseCaches(false);
+    		uc.setConnectTimeout(connectTimeout);
+    		uc.setReadTimeout(readTimeout);
+    		uc.setDoOutput(true); // Needed in order to make a POST request
+            uc.setRequestProperty("Accept-Encoding", "gzip, deflate"); 
+            uc.setRequestProperty("User-Agent", USER_AGENT);
+            uc.setRequestProperty("Authorization", "Basic " + encoder.encode(authentication));
+            uc.setRequestProperty("Content-type", "application/json");
+            doConfiguration(uc);
+            
+            outStream = uc.getOutputStream();
+            outStream.write(new ObjectMapper().writeValueAsString(resource).getBytes());
+            
+            if (huc != null) {
+            	validateStatusLine(uri, huc.getResponseCode(), huc.getResponseMessage());
+            }
+            
+    	} catch (MalformedURLException e) {
+    		throw new TransportGnipException(e);
+    	} catch (IOException e) {
+    		throw new TransportGnipException(e);
+    	} finally {
+    		try {
+    			outStream.close();
+    		} catch (IOException e) {
+    			
+    		} catch (NullPointerException e) {
+    			// It failed before it even opened the stream
+    		}
+    	}
     }
 
     /** template method for configuring the URLConnection */

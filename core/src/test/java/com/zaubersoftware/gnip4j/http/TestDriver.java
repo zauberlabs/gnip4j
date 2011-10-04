@@ -22,7 +22,7 @@ import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.StreamNotificationAdapter;
 import com.zaubersoftware.gnip4j.api.impl.DefaultGnipFacade;
-import com.zaubersoftware.gnip4j.api.impl.InmutableGnipAuthentication;
+import com.zaubersoftware.gnip4j.api.impl.ImmutableGnipAuthentication;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.support.http.JRERemoteResourceProvider;
 
@@ -58,7 +58,7 @@ public final class TestDriver {
         try {
             final GnipFacade gnip = new DefaultGnipFacade(
                     new JRERemoteResourceProvider(
-                            new InmutableGnipAuthentication(username, password)));
+                            new ImmutableGnipAuthentication(username, password)));
             
             System.out.println("-- Creating stream");
             final AtomicInteger counter = new AtomicInteger();
@@ -77,7 +77,6 @@ public final class TestDriver {
             System.out.println("-- Awaiting for stream to terminate");
             stream.await();
             System.out.println("-- Shutting down");
-
         }   catch(Throwable t) {
             System.out.println(t.getMessage());
             t.printStackTrace();

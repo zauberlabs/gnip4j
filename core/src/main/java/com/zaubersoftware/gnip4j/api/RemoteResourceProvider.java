@@ -30,6 +30,8 @@ import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 public interface RemoteResourceProvider {
 
     /** Get a remote resource from Gnip. */
-    InputStream getResouce(final URI uri) throws AuthenticationGnipException, TransportGnipException;
+    InputStream getResource(final URI uri) throws AuthenticationGnipException, TransportGnipException;
 
+    /** Post a remote resource to Gnip. */
+    void postResource(final URI uri, Object resource) throws AuthenticationGnipException, TransportGnipException;
 }

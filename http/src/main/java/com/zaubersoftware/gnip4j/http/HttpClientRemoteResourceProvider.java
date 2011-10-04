@@ -19,6 +19,7 @@ import static com.zaubersoftware.gnip4j.api.impl.ErrorCodes.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 
 
@@ -30,13 +31,19 @@ import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.params.ClientParamBean;
 import org.apache.http.conn.params.ConnManagerParamBean;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParamBean;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParamBean;
+import org.apache.http.util.EntityUtils;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
@@ -79,7 +86,7 @@ public class HttpClientRemoteResourceProvider extends AbstractRemoteResourceProv
 
 
     @Override
-    public final InputStream getResouce(final URI uri)
+    public final InputStream getResource(final URI uri)
         throws AuthenticationGnipException, TransportGnipException {
         logger.debug("Setting up connection for {}", uri);
         final DefaultHttpClient dclient = client;
@@ -147,4 +154,49 @@ public class HttpClientRemoteResourceProvider extends AbstractRemoteResourceProv
         client.addResponseInterceptor(gzip);
         return client;
     }
+
+	@Override
+	public void postResource(URI uri, Object resource)
+			throws AuthenticationGnipException, TransportGnipException {
+		
+		logger.debug("Setting up a POST request for {}", uri);
+		final DefaultHttpClient dclient = client;
+		final CredentialsProvider credentialsProvider = dclient.getCredentialsProvider();
+		
+        logger.trace("\t-- Setting Gnip credentials. User {}", authentication.getUsername());
+        credentialsProvider.setCredentials(
+        		new AuthScope(uri.getHost(), AuthScope.ANY_PORT),
+        		new UsernamePasswordCredentials(authentication.getUsername(),authentication.getPassword()));
+        
+        HttpResponse response = null;
+        try {
+	        final HttpPost post = new HttpPost(uri);
+	        post.setEntity(new StringEntity(new ObjectMapper().writeValueAsString(resource)));
+	        post.setHeader("Content-type", "application/json");
+	        
+	        response = dclient.execute(post);
+	        
+	        final StatusLine statusLine = response.getStatusLine();
+	        final int statusCode = statusLine.getStatusCode();
+	        logger.trace("\t-- Response status code {} for POST {}", statusCode, uri);
+	        validateStatusLine(uri, statusCode, statusLine.getReasonPhrase());
+        } catch (JsonGenerationException e) {
+			throw new TransportGnipException(e);
+		} catch (JsonMappingException e) {
+			throw new TransportGnipException(e);
+		} catch (UnsupportedEncodingException e) {
+			throw new TransportGnipException(e);
+		} catch (IOException e) {
+			throw new TransportGnipException(e);
+		} finally {
+			// We need to fully read in this response in order to release the connection
+			// back to the SingleClientConnManager.
+			try {
+				EntityUtils.consume(response.getEntity());
+			} catch (IOException e) {
+				logger.warn("Wasn't able to completely read POST response.");
+			}
+        }
+        
+	}
 }

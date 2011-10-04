@@ -18,6 +18,8 @@ package com.zaubersoftware.gnip4j.api;
 import java.util.concurrent.ExecutorService;
 
 import com.zaubersoftware.gnip4j.api.model.Activity;
+import com.zaubersoftware.gnip4j.api.model.Rule;
+import com.zaubersoftware.gnip4j.api.model.Rules;
 
 /**
  * Facade to the Gnip Streaming API  
@@ -45,4 +47,7 @@ public interface GnipFacade {
     GnipStream createStream(String domain, long dataCollectorId,
                             StreamNotification observer, 
                             ExecutorService executorService);
+    
+    Rules getRules(String domain, long dataCollectorId);
+    void addRule(String domain, long dataCollectorId, Rule rule);
 }

@@ -16,7 +16,6 @@
 package com.zaubersoftware.gnip4j.api.support.jmx.spi;
 
 import com.zaubersoftware.gnip4j.api.GnipStream;
-import com.zaubersoftware.gnip4j.api.impl.DefaultGnipStream;
 import com.zaubersoftware.gnip4j.api.stats.StreamStats;
 
 /**

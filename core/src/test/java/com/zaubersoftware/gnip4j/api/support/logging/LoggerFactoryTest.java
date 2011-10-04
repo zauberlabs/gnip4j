@@ -15,8 +15,6 @@
  */
 package com.zaubersoftware.gnip4j.api.support.logging;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 
