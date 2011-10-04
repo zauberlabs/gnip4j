@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.codehaus.jackson.annotate.JsonAutoDetect;
+
 
 /**
  * <p>Java class for anonymous complex type.
@@ -19,9 +21,10 @@ import javax.xml.bind.annotation.XmlType;
     "rule"
 })
 @XmlRootElement(name = "rules")
+@JsonAutoDetect
 public final class Rules {
 
-    private List<Rule> rule;
+    private List<Rule> rules;
 
     /**
      * Gets the value of the rule property.
@@ -35,7 +38,7 @@ public final class Rules {
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getRule().add(newItem);
+     *    getRules().add(newItem);
      * </pre>
      *
      *
@@ -45,11 +48,11 @@ public final class Rules {
      *
      *
      */
-    public List<Rule> getRule() {
-        if (rule == null) {
-            rule = new ArrayList<Rule>();
+    public List<Rule> getRules() {
+        if (rules == null) {
+            rules = new ArrayList<Rule>();
         }
-        return rule;
+        return rules;
     }
 
 }

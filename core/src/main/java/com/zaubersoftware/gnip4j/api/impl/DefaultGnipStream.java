@@ -185,7 +185,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
     
     /** @return the stream {@link InputStream} */
     private InputStream getStreamInputStream() {
-        InputStream ret = client.getResouce(streamURI);
+        InputStream ret = client.getResource(streamURI);
         if(captureStats) {
             ret = new StreamStatsInputStream(stats, ret);
         }

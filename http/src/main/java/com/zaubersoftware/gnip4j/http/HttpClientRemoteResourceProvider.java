@@ -79,7 +79,7 @@ public class HttpClientRemoteResourceProvider extends AbstractRemoteResourceProv
 
 
     @Override
-    public final InputStream getResouce(final URI uri)
+    public final InputStream getResource(final URI uri)
         throws AuthenticationGnipException, TransportGnipException {
         logger.debug("Setting up connection for {}", uri);
         final DefaultHttpClient dclient = client;

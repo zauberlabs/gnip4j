@@ -77,7 +77,6 @@ public final class TestDriver {
             System.out.println("-- Awaiting for stream to terminate");
             stream.await();
             System.out.println("-- Shutting down");
-
         }   catch(Throwable t) {
             System.out.println(t.getMessage());
             t.printStackTrace();

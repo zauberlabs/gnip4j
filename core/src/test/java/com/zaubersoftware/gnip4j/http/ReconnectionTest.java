@@ -122,7 +122,7 @@ class MockRemoteResourceProvider implements RemoteResourceProvider {
     }
 
     @Override
-    public InputStream getResouce(final URI uri)
+    public InputStream getResource(final URI uri)
             throws AuthenticationGnipException, TransportGnipException {
         final Object []response = responses.get(i.getAndIncrement());
         

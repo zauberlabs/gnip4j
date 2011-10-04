@@ -51,7 +51,7 @@ public final class JMXTest {
         final RemoteResourceProvider resources = new RemoteResourceProvider() {
             
             @Override
-            public InputStream getResouce(final URI uri) throws AuthenticationGnipException,
+            public InputStream getResource(final URI uri) throws AuthenticationGnipException,
                     TransportGnipException {
                 return getClass().getClassLoader().getResourceAsStream(
                         "com/zaubersoftware/gnip4j/payload/payload-example.js");
