@@ -30,7 +30,7 @@ import com.zaubersoftware.gnip4j.api.GnipAuthentication;
  * @author Juan F. Codagnone
  * @since May 20, 2011
  */
-public class InmutableGnipAuthenticationTest {
+public class ImmutableGnipAuthenticationTest {
 
     /** test getters */
     @Test
@@ -38,7 +38,7 @@ public class InmutableGnipAuthenticationTest {
         final String user = "foo";
         final String pass = "bar";
         
-        final GnipAuthentication a  = new InmutableGnipAuthentication(user, pass);
+        final GnipAuthentication a  = new ImmutableGnipAuthentication(user, pass);
         assertEquals(user, a.getUsername());
         assertEquals(pass, a.getPassword());
     }
@@ -46,14 +46,14 @@ public class InmutableGnipAuthenticationTest {
     /** test null argument */
     @Test(expected = IllegalArgumentException.class)
     public final void testNullUser() {
-        new InmutableGnipAuthentication(null, "xx");
+        new ImmutableGnipAuthentication(null, "xx");
         Assert.fail();
     }
     
     /** test null argument */
     @Test(expected = IllegalArgumentException.class)
     public final void testNullPass() {
-        new InmutableGnipAuthentication("xx", null);
+        new ImmutableGnipAuthentication("xx", null);
         Assert.fail();
     }
 }

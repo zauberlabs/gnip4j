@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.zaubersoftware.gnip4j.api.impl.InmutableGnipAuthentication;
+import com.zaubersoftware.gnip4j.api.impl.ImmutableGnipAuthentication;
 import com.zaubersoftware.gnip4j.api.support.base64.spi.Base64PasswordEncoder;
 import com.zaubersoftware.gnip4j.api.support.base64.sun.SunBase64PasswordEncoder;
 
@@ -36,6 +36,6 @@ public class Base64PasswordEncoderTest {
     @Test
     public final void foo() {
         assertEquals("anVhbjpqdWFu",
-          new SunBase64PasswordEncoder().encode(new InmutableGnipAuthentication("juan", "juan")));
+          new SunBase64PasswordEncoder().encode(new ImmutableGnipAuthentication("juan", "juan")));
     }
 }

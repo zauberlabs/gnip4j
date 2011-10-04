@@ -22,7 +22,7 @@ import org.mule.transport.AbstractConnector;
 
 import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.impl.DefaultGnipFacade;
-import com.zaubersoftware.gnip4j.api.impl.InmutableGnipAuthentication;
+import com.zaubersoftware.gnip4j.api.impl.ImmutableGnipAuthentication;
 import com.zaubersoftware.gnip4j.api.support.http.JRERemoteResourceProvider;
 
 /**
@@ -47,7 +47,7 @@ public class GnipConnector extends AbstractConnector {
     @Override
     public final void doInitialise() throws InitialisationException {
         facade = new DefaultGnipFacade(new JRERemoteResourceProvider(
-                new InmutableGnipAuthentication(username, password)));
+                new ImmutableGnipAuthentication(username, password)));
 
     }
 
