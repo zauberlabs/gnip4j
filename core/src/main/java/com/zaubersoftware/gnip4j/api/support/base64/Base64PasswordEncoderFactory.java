@@ -16,7 +16,7 @@
 package com.zaubersoftware.gnip4j.api.support.base64;
 
 import com.zaubersoftware.gnip4j.api.support.base64.spi.Base64PasswordEncoder;
-import com.zaubersoftware.gnip4j.api.support.base64.sun.SunBase64PasswordEncoder;
+import com.zaubersoftware.gnip4j.api.support.base64.spi.Base64PasswordEncoderImpl;
 
 /**
  * Lookups de implementation for {@link Base64PasswordEncoder}.
@@ -28,7 +28,7 @@ public final class Base64PasswordEncoderFactory {
     private static Base64PasswordEncoder target;
     
     static {
-        target = new SunBase64PasswordEncoder();
+        target = new Base64PasswordEncoderImpl();
     }
     
     /** Creates the Base64PasswordEncoderFactory. */
