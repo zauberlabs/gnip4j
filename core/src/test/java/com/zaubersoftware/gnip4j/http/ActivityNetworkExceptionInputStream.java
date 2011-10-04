@@ -18,7 +18,6 @@ package com.zaubersoftware.gnip4j.http;
 import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 
 /**

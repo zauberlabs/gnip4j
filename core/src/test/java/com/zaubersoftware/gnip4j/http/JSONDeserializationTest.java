@@ -26,18 +26,13 @@ import javax.xml.bind.Marshaller;
 
 import org.apache.commons.io.IOUtils;
 import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.map.AnnotationIntrospector;
-import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.zaubersoftware.gnip4j.api.impl.DefaultGnipFacade;
 import com.zaubersoftware.gnip4j.api.impl.DefaultGnipStream;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.model.MatchingRules;
-import com.zaubersoftware.gnip4j.api.stats.DefaultStreamStats;
 
 
 /**
