@@ -22,7 +22,8 @@ import org.codehaus.jackson.annotate.JsonProperty;
 @XmlType(name = "", propOrder = {
     "language",
     "matchingRules",
-    "urls"
+    "urls",
+    "kloutScore"
 })
 @XmlRootElement(name = "gnip")
 public class Gnip {
@@ -34,6 +35,9 @@ public class Gnip {
     private List<MatchingRules> matchingRules;
     @XmlElement(required = true)
     private List<Url> urls;
+    @XmlElement(name = "klout_score", required = false)
+    @JsonProperty(value = "klout_score")
+    private Float kloutScore;
 
     /**
      * Gets the value of the language property.
@@ -93,5 +97,9 @@ public class Gnip {
             urls  = new ArrayList<Url>();
         }
         return urls;
+    }
+    
+    public final Float getKloutScore() {
+    	return kloutScore;
     }
 }
