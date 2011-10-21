@@ -32,4 +32,6 @@ public interface RemoteResourceProvider {
     /** Get a remote resource from Gnip. */
     InputStream getResource(final URI uri) throws AuthenticationGnipException, TransportGnipException;
 
+    /** Post a remote resource to Gnip. */
+    void postResource(final URI uri, Object resource) throws AuthenticationGnipException, TransportGnipException;
 }

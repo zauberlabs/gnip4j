@@ -17,6 +17,7 @@ package com.zaubersoftware.gnip4j.api.support.http;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.HttpURLConnection;
@@ -26,6 +27,8 @@ import java.net.URLConnection;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
+
+import org.codehaus.jackson.map.ObjectMapper;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
@@ -44,8 +47,8 @@ import com.zaubersoftware.gnip4j.api.support.base64.spi.Base64PasswordEncoder;
 public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
     private final GnipAuthentication authentication;
     private final Base64PasswordEncoder encoder = Base64PasswordEncoderFactory.getEncoder();
-    private int connectTimeout = 10000;
-    private int readTimeout = 10000;
+    private final int connectTimeout = 10000;
+    private final int readTimeout = 10000;
     
     /** Creates the JRERemoteResourceProvider. */
     public JRERemoteResourceProvider(final GnipAuthentication authentication) {
@@ -91,10 +94,55 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
                 is = new InflaterInputStream(is, new Inflater(true));
             }
             return new JREReleaseInputStream(uc, is);
-        } catch (MalformedURLException e) {
+        } catch (final MalformedURLException e) {
             throw new TransportGnipException(e);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             throw new TransportGnipException(e);
+        }
+    }
+    
+    @Override
+    public final void postResource(final URI uri, final Object resource) throws AuthenticationGnipException,
+            TransportGnipException {
+        
+        OutputStream outStream = null;
+        try {
+            final URLConnection uc = uri.toURL().openConnection();
+            HttpURLConnection huc = null;
+            
+            if (uc instanceof HttpURLConnection) {
+                huc = (HttpURLConnection) uc;
+            }
+            uc.setAllowUserInteraction(false);
+            uc.setDefaultUseCaches(false);
+            uc.setConnectTimeout(connectTimeout);
+            uc.setReadTimeout(readTimeout);
+            uc.setDoOutput(true); // Needed in order to make a POST request
+            uc.setRequestProperty("Accept-Encoding", "gzip, deflate"); 
+            uc.setRequestProperty("User-Agent", USER_AGENT);
+            uc.setRequestProperty("Authorization", "Basic " + encoder.encode(authentication));
+            uc.setRequestProperty("Content-type", "application/json");
+            doConfiguration(uc);
+            
+            outStream = uc.getOutputStream();
+            outStream.write(new ObjectMapper().writeValueAsString(resource).getBytes());
+            
+            if (huc != null) {
+                validateStatusLine(uri, huc.getResponseCode(), huc.getResponseMessage());
+            }
+            
+        } catch (final MalformedURLException e) {
+            throw new TransportGnipException(e);
+        } catch (final IOException e) {
+            throw new TransportGnipException(e);
+        } finally {
+            try {
+                if (outStream != null) {
+                    outStream.close();
+                }
+            } catch (final IOException e) {
+                // Nothing to be done here!
+            }
         }
     }
 

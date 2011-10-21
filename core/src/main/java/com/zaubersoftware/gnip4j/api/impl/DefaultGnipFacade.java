@@ -17,13 +17,24 @@ package com.zaubersoftware.gnip4j.api.impl;
 
 import static com.zaubersoftware.gnip4j.api.impl.ErrorCodes.*;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import org.codehaus.jackson.JsonParser;
+import org.codehaus.jackson.JsonProcessingException;
 
 import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
+import com.zaubersoftware.gnip4j.api.exception.GnipException;
+import com.zaubersoftware.gnip4j.api.model.ObjectFactory;
+import com.zaubersoftware.gnip4j.api.model.Rule;
+import com.zaubersoftware.gnip4j.api.model.Rules;
 import com.zaubersoftware.gnip4j.api.stats.StreamStats;
 import com.zaubersoftware.gnip4j.api.support.jmx.JMXProvider;
 /**
@@ -130,7 +141,44 @@ public class DefaultGnipFacade implements GnipFacade {
         }
         this.streamDefaultWorkers = streamDefaultWorkers;
     }
-
+    
+    @Override
+    public final Rules getRules(final String domain, final long dataCollectorId) {
+        try {
+            final InputStream gnipRestResponseStream = facade.getResource(new URI(String.format(
+                    "https://%s.gnip.com/data_collectors/%d/rules.json",
+                    domain,
+                    dataCollectorId)));
+            final JsonParser parser =  DefaultGnipStream.getObjectMapper()
+                    .getJsonFactory().createJsonParser(gnipRestResponseStream);
+            final Rules rules = parser.readValueAs(Rules.class);
+            gnipRestResponseStream.close();
+            return rules;
+        } catch (final URISyntaxException e) {
+            throw new GnipException("The domain or collector ID were invalid", e);
+        } catch (final JsonProcessingException e) {
+            throw new GnipException("Unexpected response from Gnip REST API", e);
+        } catch (final IOException e) {
+            throw new GnipException(e);
+        }
+    }
+    
+    @Override
+    public final void addRule(final String domain, final long dataCollectorId, final Rule rule) {
+        final Rules rules = new ObjectFactory().createRules();
+        rules.getRules().add(rule);
+        
+        try {
+            facade.postResource(
+                    new URI(String.format(
+                            "https://%s.gnip.com/data_collectors/%d/rules.json",
+                            domain,
+                            dataCollectorId)),
+                            rules);
+        } catch (final URISyntaxException e) {
+            throw new GnipException("The domain or collector ID were invalid", e);
+        }
+    }
 
     public final boolean isUseJMX() {
         return useJMX;

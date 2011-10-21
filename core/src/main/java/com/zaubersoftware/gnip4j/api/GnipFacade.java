@@ -18,6 +18,8 @@ package com.zaubersoftware.gnip4j.api;
 import java.util.concurrent.ExecutorService;
 
 import com.zaubersoftware.gnip4j.api.model.Activity;
+import com.zaubersoftware.gnip4j.api.model.Rule;
+import com.zaubersoftware.gnip4j.api.model.Rules;
 
 /**
  * Facade to the Gnip Streaming API  
@@ -45,4 +47,30 @@ public interface GnipFacade {
     GnipStream createStream(String domain, long dataCollectorId,
                             StreamNotification observer, 
                             ExecutorService executorService);
+    
+    /**
+     * Gnip provides a REST interface to the rules configured for each data collector.
+     * They can be modified either through this interface, or through the UI. These
+     * views are synchronized.
+     *
+     * @param domain The domain name for the power track API. (For example: acme)
+     * @param dataCollectorId collector id (id for the data collector)
+     * @return The Rules object for all the rules configured on this tracker.
+     */
+    Rules getRules(String domain, long dataCollectorId);
+    
+    /**
+     * Gnip provides a REST interface to the rules configured for each data collector.
+     * They can be modified either through this interface, or through the UI. These
+     * views are synchronized.
+     * 
+     * Rules should be added one at a time, according to Gnip's documentation on best
+     * practices, so this method only lets you change one Rule. It can, of course, be
+     * called many times.
+     * 
+     * @param domain The domain name for the power track API. (For example: acme)
+     * @param dataCollectorId collector id (id for the data collector)
+     * @param rule The Rule object to add to the tracker.
+     */
+    void addRule(String domain, long dataCollectorId, Rule rule);
 }
