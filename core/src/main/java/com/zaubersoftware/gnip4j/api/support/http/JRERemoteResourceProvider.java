@@ -60,7 +60,7 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
     }
     
     @Override
-    public final InputStream getResouce(final URI uri) throws AuthenticationGnipException,
+    public final InputStream getResource(final URI uri) throws AuthenticationGnipException,
             TransportGnipException {
         
         try {

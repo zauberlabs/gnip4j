@@ -26,6 +26,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
+
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
@@ -62,7 +63,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     
     public static final ObjectMapper getObjectMapper() {
-        ObjectMapper mapper = new ObjectMapper();
+        final ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return mapper;
     }
@@ -74,7 +75,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
     private final ExecutorService activityService;
     private GnipHttpConsumer httpConsumer;
     private Thread httpThread;
-    private ModifiableStreamStats stats = new DefaultStreamStats();
+    private final ModifiableStreamStats stats = new DefaultStreamStats();
     
     private StreamNotification notification = new StreamNotificationAdapter() {
         @Override
@@ -149,11 +150,11 @@ public class DefaultGnipStream extends AbstractGnipStream {
             try {
                 thread.join();
                 wait = false;
-            } catch (InterruptedException e) {
+            } catch (final InterruptedException e) {
                 try {
                     // Avoid high CPU usage
                     Thread.sleep(200);
-                } catch (InterruptedException e1) {
+                } catch (final InterruptedException e1) {
                     // Nothing to be done
                 }
             }
@@ -185,7 +186,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
     
     /** @return the stream {@link InputStream} */
     private InputStream getStreamInputStream() {
-        InputStream ret = client.getResouce(streamURI);
+        InputStream ret = client.getResource(streamURI);
         if(captureStats) {
             ret = new StreamStatsInputStream(stats, ret);
         }
@@ -280,7 +281,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
             if(is != null) {
                 try {
                     is.close();
-                } catch(IOException e) {
+                } catch(final IOException e) {
                     throw new TransportGnipException(e);
                 }
                 is = null;
@@ -293,7 +294,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
             logger.debug("{}: Reconnecting...", streamName);
             try {
                 final int attempt = reConnectionAttempt.incrementAndGet();
-                reConnectionWaitTime = (long) (reConnectionWaitTime * 2);
+                reConnectionWaitTime = (reConnectionWaitTime * 2);
                 reConnectionWaitTime = (reConnectionWaitTime > MAX_RE_CONNECTION_WAIT_TIME) 
                     ? MAX_RE_CONNECTION_WAIT_TIME : reConnectionWaitTime;
                 activityService.execute(new Runnable() {
@@ -305,7 +306,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
                 logger.debug("{}: Waiting for {} ms till next re-connection", streamName, reConnectionWaitTime);
                 try {
                     Thread.sleep(reConnectionWaitTime);
-                } catch (InterruptedException e) {
+                } catch (final InterruptedException e) {
                     throw new GnipException(streamName + ": waiting for reconnection", e);
                 }
                 logger.debug("{}: Re-connecting stream with Gnip: {}", streamName, streamURI);
@@ -328,7 +329,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
             }
         }
     }
-    private AtomicBoolean shuttingDown = new AtomicBoolean(false);
+    private final AtomicBoolean shuttingDown = new AtomicBoolean(false);
 
 
     public final boolean isCaptureStats() {
@@ -339,6 +340,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
         this.captureStats = captureStats;
     }
     
+    @Override
     public final StreamStats getStreamStats() {
         return stats;
     }
