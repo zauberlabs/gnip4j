@@ -3,7 +3,7 @@
 	<parent>
             <groupId>com.zaubersoftware.gnip4j.documentation</groupId>
             <artifactId>gnip4j-documentation-parent</artifactId>
-	    <version>0.1-SNAPSHOT</version>
+	    <version>0.1</version>
 	</parent>
 	<groupId>com.zaubersoftware.gnip4j.documentation</groupId>
 	<artifactId>gnip4j-documentation-site</artifactId>

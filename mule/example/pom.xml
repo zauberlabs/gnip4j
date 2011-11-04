@@ -4,7 +4,7 @@
   <parent>
 	<groupId>com.zaubersoftware.gnip4j.mule</groupId>
 	<artifactId>gnip4j-mule-parent</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.1</version>
   </parent>
   <artifactId>gnip4j-mule-example</artifactId>
   <packaging>mule</packaging>
