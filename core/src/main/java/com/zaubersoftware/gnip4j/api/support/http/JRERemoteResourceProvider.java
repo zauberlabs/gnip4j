@@ -48,7 +48,7 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
     private final GnipAuthentication authentication;
     private final Base64PasswordEncoder encoder = Base64PasswordEncoderFactory.getEncoder();
     private final int connectTimeout = 10000;
-    private final int readTimeout = 10000;
+    private final int readTimeout = 35000;
     
     /** Creates the JRERemoteResourceProvider. */
     public JRERemoteResourceProvider(final GnipAuthentication authentication) {
