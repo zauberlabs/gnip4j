@@ -31,6 +31,7 @@ public final class Actor {
 
     @XmlElement(required = true)
     private Actor.Location location;
+    private String twitterTimeZone;
     private List<String> languages;
     @XmlElement(required = true)
     private List<Links> links;
@@ -74,6 +75,14 @@ public final class Actor {
      */
     public Actor.Location getLocation() {
         return location;
+    }
+
+    public String getTwitterTimeZone() {
+        return twitterTimeZone;
+    }
+
+    public void setTwitterTimeZone(String twitterTimeZone) {
+        this.twitterTimeZone = twitterTimeZone;
     }
 
     /**
