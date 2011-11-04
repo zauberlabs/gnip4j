@@ -49,6 +49,8 @@ public final class Actor {
     private int statusesCount;
     @XmlAttribute(required = true)
     private BigInteger listedCount;
+    @XmlAttribute(required = false)
+    private String twitterTimeZone;
     @XmlAttribute(required = true)
     private BigInteger friendsCount;
     @XmlAttribute(required = true)
@@ -74,6 +76,14 @@ public final class Actor {
      */
     public Actor.Location getLocation() {
         return location;
+    }
+
+    public String getTwitterTimeZone() {
+        return twitterTimeZone;
+    }
+
+    public void setTwitterTimeZone(final String twitterTimeZone) {
+        this.twitterTimeZone = twitterTimeZone;
     }
 
     /**
