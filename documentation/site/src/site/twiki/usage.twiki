@@ -23,7 +23,7 @@ Add to your dependency Managment:
 </dependencyManagment>
 ...
 <properties>
-    <gnip4j.version>0.0</gnip4j.version>
+    <gnip4j.version>0.1</gnip4j.version>
 </properties> </verbatim>
 
 and add to your project: 
