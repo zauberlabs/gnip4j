@@ -1,0 +1,44 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>zauber-gnip4j-parent</artifactId>
+		<groupId>com.zaubersoftware.gnip4j</groupId>
+		<version>0.2-SNAPSHOT</version>
+	</parent>
+	<groupId>com.zaubersoftware.gnip4j</groupId>
+	<artifactId>gnip4j-mock-server</artifactId>
+	<packaging>jar</packaging>
+	<name>Zauber::Gnip4j::Mock Server</name>
+	<dependencies>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+            <scope>provided</scope>
+            <optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+    		<groupId>org.jboss.netty</groupId>
+    		<artifactId>netty</artifactId>
+		</dependency>
+	    
+	    <!-- BEGIN: Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- END: Logging -->
+
+	</dependencies>
+</project>

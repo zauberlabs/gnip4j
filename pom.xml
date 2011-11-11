@@ -13,7 +13,7 @@
 	<packaging>pom</packaging>
 
 	<scm>
-                <url>https://github.com/zaubersoftware/gnip4j</url>
+        <url>https://github.com/zaubersoftware/gnip4j</url>
 		<connection>scm:git:git@github.com:zaubersoftware/gnip4j.git</connection>
 		<developerConnection>scm:git:git@github.com:zaubersoftware/gnip4j.git</developerConnection>
 	</scm>
@@ -68,11 +68,12 @@
 	</distributionManagement>
 
 	<modules>
-    		<module>core</module>
+    	<module>core</module>
 		<module>http</module>
 		<module>mule</module>
 		<module>documentation</module>
-  	</modules>
+  		<module>mock-server</module>
+    </modules>
 
 	<build>
                 <pluginManagement>
@@ -221,6 +222,12 @@
             </exclusions>
           </dependency>
       		<!-- END Logging -->
+
+      	<dependency>
+    		<groupId>org.jboss.netty</groupId>
+    		<artifactId>netty</artifactId>
+    		<version>3.2.6.Final</version>
+		</dependency>
 		<!-- BEGIN: Testing -->
 		<dependency>
 			<artifactId>junit</artifactId>
