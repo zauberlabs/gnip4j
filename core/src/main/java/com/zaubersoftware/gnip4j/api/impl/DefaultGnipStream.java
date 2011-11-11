@@ -27,6 +27,7 @@ import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import com.zaubersoftware.gnip4j.api.UriStrategy;
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
@@ -42,9 +43,9 @@ import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;
 import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
 /**
- * Implementation acording   
+ * Implementation acording
  * http://docs.gnip.com/w/page/23724581/Gnip-Full-Documentation#streaminghttp
- * 
+ *
  * <verbatim>
  *                                               Json
  *   +----------+   HTTP   +------------------+ (String) +--------------+        +-----------------+
@@ -55,19 +56,20 @@ import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
  *                                                  +--> | JsonConsumer |----+   | ActivityConsumer|
  *                                                       +--------------+        +-----------------+
  * </verbatim>
- * 
+ *
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
 public class DefaultGnipStream extends AbstractGnipStream {
-    private final Logger logger = LoggerFactory.getLogger(getClass());
-    
+
     public static final ObjectMapper getObjectMapper() {
         final ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return mapper;
     }
-    
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+
     /** stream name for debugging propourse */
     private final String streamName;
     private final URI streamURI;
@@ -76,40 +78,37 @@ public class DefaultGnipStream extends AbstractGnipStream {
     private GnipHttpConsumer httpConsumer;
     private Thread httpThread;
     private final ModifiableStreamStats stats = new DefaultStreamStats();
-    
+
     private StreamNotification notification = new StreamNotificationAdapter() {
         @Override
         public void notify(final Activity activity, final GnipStream stream) {
             logger.warn("No notification is registed for stream {}", getStreamName());
         }
     };
-    
+
     private boolean captureStats = true;
-    
-    
+
     /** Creates the HttpGnipStream. */
     public DefaultGnipStream(
-            final RemoteResourceProvider client, 
+            final RemoteResourceProvider client,
             final String domain,
             final long dataCollectorId,
-            final ExecutorService activityService) {
-        if(client == null) {
+            final ExecutorService activityService,
+            final UriStrategy baseUriStrategy) {
+        if (client == null) {
             throw new IllegalArgumentException(ERROR_NULL_HTTPCLIENT);
         }
-        if(domain == null || domain.trim().length() == 0) {
+        if (domain == null || domain.trim().length() == 0) {
             throw new IllegalArgumentException(ERROR_EMPTY_DOMAIN);
         }
-        if(activityService == null) {
+        if (activityService == null) {
             throw new IllegalArgumentException(ERROR_NULL_ACTIVITY_SERVICE);
         }
-        
-        final StringBuilder sb = new StringBuilder("https://");
-        sb.append(domain);
-        sb.append(".gnip.com/data_collectors/");
-        sb.append(dataCollectorId);
-        sb.append("/track.json");
-        this.streamURI = URI.create(sb.toString());
-        
+        if (baseUriStrategy == null) {
+            throw new IllegalArgumentException(ERROR_NULL_BASE_URI_STRATEGY);
+        }
+
+        this.streamURI = baseUriStrategy.createStreamUri(domain, dataCollectorId);
         this.client = client;
         this.streamName = String.format("%s-%d", domain, dataCollectorId);
         this.activityService = activityService;
@@ -127,25 +126,25 @@ public class DefaultGnipStream extends AbstractGnipStream {
         }  else {
             this.notification  = notification;
         }
-        
+
         if (httpConsumer != null) {
             throw new IllegalStateException("The stream is open");
         }
-        
+
         this.httpConsumer = new GnipHttpConsumer(getStreamInputStream());
         this.httpThread = new Thread(httpConsumer, streamName + "-consumer-http");
         httpThread.start();
     }
-    
+
     /**
      * Waits for a thread to terminate
-     * 
+     *
      * @param thread
      * @return
      */
     public static boolean waitForTermination(final Thread thread) {
         boolean wait = true;
-        
+
         while(wait && thread.isAlive()) {
             try {
                 thread.join();
@@ -161,29 +160,29 @@ public class DefaultGnipStream extends AbstractGnipStream {
         }
         return wait;
     }
-    
+
     @Override
     protected final void doClose() {
         if(!shuttingDown.getAndSet(true)) {
             logger.info("Shutting Down " + streamName);
-            
+
             httpConsumer.closeInputStream();
-            
+
             //jobs are no longer accepted
             if(httpThread != null) {
                 httpThread.interrupt();
-                if(!Thread.currentThread().equals(httpThread)) { // avoid deadlock in single thread env 
+                if(!Thread.currentThread().equals(httpThread)) { // avoid deadlock in single thread env
                     waitForTermination(httpThread);
                 }
             }
-            
+
             activityService.shutdown();
         } else {
             logger.info("Already shutting Down " + streamName);
         }
     }
-    
-    
+
+
     /** @return the stream {@link InputStream} */
     private InputStream getStreamInputStream() {
         InputStream ret = client.getResource(streamURI);
@@ -192,18 +191,18 @@ public class DefaultGnipStream extends AbstractGnipStream {
         }
         return ret;
     }
-    /** 
-     * Consumes the HTTP input stream from the stream one {@link Activity} per line 
+    /**
+     * Consumes the HTTP input stream from the stream one {@link Activity} per line
      */
     private class GnipHttpConsumer implements Runnable {
         private static final long MAX_RE_CONNECTION_WAIT_TIME = 5 * 60 * 1000; // 5 minutes
-        private static final long INITIAL_RE_CONNECTION_WAIT_TIME = 250;    
-        
+        private static final long INITIAL_RE_CONNECTION_WAIT_TIME = 250;
+
         private final AtomicInteger reConnectionAttempt = new AtomicInteger();
         private long reConnectionWaitTime = INITIAL_RE_CONNECTION_WAIT_TIME;
-        
+
         private InputStream is;
-        
+
         /**
          * Creates the GnipHttpConsumer.
          *
@@ -215,8 +214,8 @@ public class DefaultGnipStream extends AbstractGnipStream {
             }
             this.is = response;
         }
-        
-         
+
+
         @Override
         public void run() {
             try {
@@ -224,7 +223,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
                     try {
                         if(is == null) {
                             reconnect();
-                        } 
+                        }
                         if(is != null) {
                             final JsonParser parser =  getObjectMapper().getJsonFactory().createJsonParser(is);
                             logger.debug("Starting to consume activity stream {} ...", streamName);
@@ -248,7 +247,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
                                 });
                             }
                             logger.debug("{}: The activity stream is no longer being consumed.", streamName);
-                        }            
+                        }
                     } catch(final IOException e) {
                         final String msg = "I/O error in channel " + streamName + ": " + e.getLocalizedMessage();
                         if(logger.isWarnEnabled()) {
@@ -275,7 +274,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
                 close();
             }
         }
-        
+
         /** Cleanly close the input stream */
         void closeInputStream() {
             if(is != null) {
@@ -287,7 +286,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
                 is = null;
             }
         }
-        
+
         /** Re-connects the stream */
         private void reconnect() {
             stats.incrementNumberOfReconnectionsAttempt();
@@ -295,7 +294,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
             try {
                 final int attempt = reConnectionAttempt.incrementAndGet();
                 reConnectionWaitTime = (reConnectionWaitTime * 2);
-                reConnectionWaitTime = (reConnectionWaitTime > MAX_RE_CONNECTION_WAIT_TIME) 
+                reConnectionWaitTime = (reConnectionWaitTime > MAX_RE_CONNECTION_WAIT_TIME)
                     ? MAX_RE_CONNECTION_WAIT_TIME : reConnectionWaitTime;
                 activityService.execute(new Runnable() {
                     @Override
@@ -312,17 +311,17 @@ public class DefaultGnipStream extends AbstractGnipStream {
                 logger.debug("{}: Re-connecting stream with Gnip: {}", streamName, streamURI);
                 is = getStreamInputStream();
                 logger.debug("{}: The re-connection has been successfully established", streamName);
-                
+
                 reConnectionAttempt.set(0);
                 reConnectionWaitTime = INITIAL_RE_CONNECTION_WAIT_TIME;
                 stats.incrementNumberOfSuccessfulReconnections();
-                
+
             } catch (final Throwable e) {
                 logger.error(streamName + ": The re-connection could not be established", e);
                 activityService.execute(new Runnable() {
                     @Override
                     public void run() {
-                        notification.notifyReConnectionError(e instanceof GnipException 
+                        notification.notifyReConnectionError(e instanceof GnipException
                                 ? ((GnipException)e) : new GnipException(e));
                     }
                 });
@@ -339,7 +338,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
     public final void setCaptureStats(final boolean captureStats) {
         this.captureStats = captureStats;
     }
-    
+
     @Override
     public final StreamStats getStreamStats() {
         return stats;

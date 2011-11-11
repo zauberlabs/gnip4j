@@ -37,10 +37,12 @@ import org.junit.Test;
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
+import com.zaubersoftware.gnip4j.api.UriStrategy;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
 import com.zaubersoftware.gnip4j.api.exception.GnipException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.impl.DefaultGnipStream;
+import com.zaubersoftware.gnip4j.api.impl.DefaultUriStrategy;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 
 /**
@@ -50,6 +52,9 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
  * @since May 9, 2011
  */
 public final class ReconnectionTest {
+
+    private final UriStrategy uriStrategy = new DefaultUriStrategy();
+
     /** test */
     @Test//(timeout = 10000)
     public void testReConnection() throws Exception {
@@ -59,7 +64,7 @@ public final class ReconnectionTest {
 
         final AtomicInteger count = new AtomicInteger(0);
         final DefaultGnipStream stream = new DefaultGnipStream(
-                new MockRemoteResourceProvider(), "test", 1, new MockExecutorService());
+                new MockRemoteResourceProvider(), "test", 1, new MockExecutorService(), uriStrategy);
         final StringBuilder out = new StringBuilder();
         final StreamNotification n = new StreamNotification() {
             @Override
@@ -97,7 +102,7 @@ public final class ReconnectionTest {
                 .getResourceAsStream("reconnectlog.txt"));
         Assert.assertEquals(expected, s);
         Assert.assertEquals("transferedBytes = 8000\ntransferedActivities = 4\n"
-                + "numberOfSucessfulReconnections = 1\nnumberOfReconnections = 4", 
+                + "numberOfSucessfulReconnections = 1\nnumberOfReconnections = 4",
                 stream.getStreamStats().toString());
     }
 }
@@ -113,19 +118,19 @@ class MockRemoteResourceProvider implements RemoteResourceProvider {
                 "payload-example-2.js", 3525);
         final ActivityNetworkExceptionInputStream instream2 = new ActivityNetworkExceptionInputStream(
                 "payload-example-2.js", 3525);
-        
+
         responses.add(new Object[]{200, "Ok", instream});
         responses.add(new Object[]{505, "TEST!", null});
         responses.add(new Object[]{505, "TEST!", null});
         responses.add(new Object[]{505, "TEST!", null});
-        responses.add(new Object[]{200, "Ok", instream2});        
+        responses.add(new Object[]{200, "Ok", instream2});
     }
 
     @Override
     public InputStream getResource(final URI uri)
             throws AuthenticationGnipException, TransportGnipException {
         final Object []response = responses.get(i.getAndIncrement());
-        
+
         final int statusCode = (Integer) response[0];
         if (statusCode == 401) {
             throw new AuthenticationGnipException(response[1].toString());
@@ -136,12 +141,12 @@ class MockRemoteResourceProvider implements RemoteResourceProvider {
                 String.format("Connection to %s: Unexpected status code: %s %s",
                         uri, statusCode, response[1].toString()));
         }
-        
+
     }
-    
+
     @Override
-    public void postResource(final URI uri, Object resource) {
-    	
+    public void postResource(final URI uri, final Object resource) {
+
     }
 }
 

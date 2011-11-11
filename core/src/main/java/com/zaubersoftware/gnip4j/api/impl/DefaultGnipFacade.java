@@ -19,14 +19,13 @@ import static com.zaubersoftware.gnip4j.api.impl.ErrorCodes.*;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonProcessingException;
 
+import com.zaubersoftware.gnip4j.api.UriStrategy;
 import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
@@ -38,25 +37,37 @@ import com.zaubersoftware.gnip4j.api.model.Rules;
 import com.zaubersoftware.gnip4j.api.stats.StreamStats;
 import com.zaubersoftware.gnip4j.api.support.jmx.JMXProvider;
 /**
- * Http implementation for the {@link GnipFacade}  
- * 
+ * Http implementation for the {@link GnipFacade}
+ *
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
 public class DefaultGnipFacade implements GnipFacade {
+
+    private static final UriStrategy DEFAULT_BASE_URI_STRATEGY = new DefaultUriStrategy();
+
     private final RemoteResourceProvider facade;
     private int streamDefaultWorkers = Runtime.getRuntime().availableProcessors();
     private boolean useJMX = true;
-    
+    private final UriStrategy baseUriStrategy;
+
     /** Creates the HttpGnipFacade. */
-    public DefaultGnipFacade(final RemoteResourceProvider facade) {
+    public DefaultGnipFacade(final RemoteResourceProvider facade, final UriStrategy baseUriStrategy) {
         if(facade == null) {
             throw new IllegalArgumentException(ERROR_NULL_HTTPCLIENT);
         }
-        this.facade = facade; 
+        if (baseUriStrategy == null) {
+            throw new IllegalArgumentException(ERROR_NULL_BASE_URI_STRATEGY);
+        }
+        this.facade = facade;
+        this.baseUriStrategy = baseUriStrategy;
     }
 
-    
+    /** Creates the HttpGnipFacade. */
+    public DefaultGnipFacade(final RemoteResourceProvider facade) {
+        this(facade, DEFAULT_BASE_URI_STRATEGY);
+    }
+
     @Override
     public final GnipStream createStream(
             final String domain,
@@ -73,29 +84,28 @@ public class DefaultGnipFacade implements GnipFacade {
                     executor.shutdown();
                 }
             }
-            
+
             @Override
             public void await() throws InterruptedException {
                 target.await();
             }
-            
+
             @Override
             public final String getStreamName() {
                 return target.getStreamName();
             }
-            
+
             @Override
             public StreamStats getStreamStats() {
                 return target.getStreamStats();
             }
-        }; 
+        };
     }
-    
+
     @Override
     public final GnipStream createStream(final String domain, final long dataCollectorId,
             final StreamNotification observer, final ExecutorService executor) {
-        final DefaultGnipStream stream = new DefaultGnipStream(facade, domain, dataCollectorId, 
-                executor);
+        final DefaultGnipStream stream = createStream(domain, dataCollectorId, executor);
         stream.open(observer);
         GnipStream ret = stream;
         if(useJMX) {
@@ -104,7 +114,7 @@ public class DefaultGnipFacade implements GnipFacade {
                 public String getStreamName() {
                     return stream.getStreamName();
                 }
-                
+
                 @Override
                 public void close() {
                     try {
@@ -113,12 +123,12 @@ public class DefaultGnipFacade implements GnipFacade {
                         JMXProvider.getProvider().unregister(stream);
                     }
                 }
-                
+
                 @Override
                 public void await() throws InterruptedException {
                     stream.await();
                 }
-                
+
                 @Override
                 public StreamStats getStreamStats() {
                     return stream.getStreamStats();
@@ -129,11 +139,11 @@ public class DefaultGnipFacade implements GnipFacade {
         return ret;
     }
 
-    
+
     public final int getStreamDefaultWorkers() {
         return streamDefaultWorkers;
     }
-    
+
     /** @see #getStreamDefaultWorkers() */
     public final void setStreamDefaultWorkers(final int streamDefaultWorkers) {
         if(streamDefaultWorkers < 1) {
@@ -141,43 +151,29 @@ public class DefaultGnipFacade implements GnipFacade {
         }
         this.streamDefaultWorkers = streamDefaultWorkers;
     }
-    
+
     @Override
     public final Rules getRules(final String domain, final long dataCollectorId) {
         try {
-            final InputStream gnipRestResponseStream = facade.getResource(new URI(String.format(
-                    "https://%s.gnip.com/data_collectors/%d/rules.json",
-                    domain,
-                    dataCollectorId)));
+            final InputStream gnipRestResponseStream = facade.getResource(baseUriStrategy
+                    .createRulesUri(domain, dataCollectorId));
             final JsonParser parser =  DefaultGnipStream.getObjectMapper()
                     .getJsonFactory().createJsonParser(gnipRestResponseStream);
             final Rules rules = parser.readValueAs(Rules.class);
             gnipRestResponseStream.close();
             return rules;
-        } catch (final URISyntaxException e) {
-            throw new GnipException("The domain or collector ID were invalid", e);
         } catch (final JsonProcessingException e) {
             throw new GnipException("Unexpected response from Gnip REST API", e);
         } catch (final IOException e) {
             throw new GnipException(e);
         }
     }
-    
+
     @Override
     public final void addRule(final String domain, final long dataCollectorId, final Rule rule) {
         final Rules rules = new ObjectFactory().createRules();
         rules.getRules().add(rule);
-        
-        try {
-            facade.postResource(
-                    new URI(String.format(
-                            "https://%s.gnip.com/data_collectors/%d/rules.json",
-                            domain,
-                            dataCollectorId)),
-                            rules);
-        } catch (final URISyntaxException e) {
-            throw new GnipException("The domain or collector ID were invalid", e);
-        }
+        facade.postResource(baseUriStrategy.createRulesUri(domain, dataCollectorId), rules);
     }
 
     public final boolean isUseJMX() {
@@ -188,5 +184,19 @@ public class DefaultGnipFacade implements GnipFacade {
     public final void setUseJMX(final boolean useJMX) {
         this.useJMX = useJMX;
     }
-    
+
+    /**
+     * Creates a new {@link DefaultGnipStream}
+     *
+     * @param domain
+     * @param dataCollectorId
+     * @param executor
+     * @return
+     */
+    private DefaultGnipStream createStream(
+            final String domain,
+            final long dataCollectorId,
+            final ExecutorService executor) {
+            return new DefaultGnipStream(facade, domain, dataCollectorId, executor, baseUriStrategy);
+    }
 }

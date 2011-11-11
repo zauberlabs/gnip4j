@@ -17,8 +17,8 @@ package com.zaubersoftware.gnip4j.api.impl;
 
 /**
  * Error codes
- * 
- * 
+ *
+ *
  * @author Juan F. Codagnone
  * @since May 20, 2011
  */
@@ -32,4 +32,7 @@ public interface ErrorCodes {
     String ERROR_NULL_AUTH = "The Gnip authentication cannot be null";
     /** error code */
     String ERROR_NULL_ACTIVITY_SERVICE = "The activity ExecutorService cannot be null";
+    /** error code */
+    String ERROR_NULL_BASE_URI_STRATEGY = "The base URI strategy cannot be null";
+
 }
