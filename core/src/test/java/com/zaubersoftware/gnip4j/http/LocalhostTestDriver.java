@@ -1,0 +1,71 @@
+/*
+ * Copyright (c) 2011 Zauber S.A.  -- All rights reserved
+ */
+package com.zaubersoftware.gnip4j.http;
+
+import java.net.URI;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import org.junit.Test;
+
+import com.zaubersoftware.gnip4j.api.GnipFacade;
+import com.zaubersoftware.gnip4j.api.GnipStream;
+import com.zaubersoftware.gnip4j.api.StreamNotificationAdapter;
+import com.zaubersoftware.gnip4j.api.UriStrategy;
+import com.zaubersoftware.gnip4j.api.impl.DefaultGnipFacade;
+import com.zaubersoftware.gnip4j.api.impl.ImmutableGnipAuthentication;
+import com.zaubersoftware.gnip4j.api.model.Activity;
+import com.zaubersoftware.gnip4j.api.support.http.JRERemoteResourceProvider;
+
+/**
+ * TODO: Description of the class, Comments in english by default
+ *
+ *
+ * @author Guido Marucci Blas
+ * @since 11/11/2011
+ */
+public final class LocalhostTestDriver {
+
+    @Test
+    public void test() throws Exception {
+        try {
+            final UriStrategy uriStrategy = new UriStrategy() {
+
+                @Override
+                public URI createStreamUri(final String domain, final long dataCollectorId) {
+                    return URI.create("http://localhost:8080");
+                }
+
+                @Override
+                public URI createRulesUri(final String domain, final long dataCollectorId) {
+                    return null;
+                }
+            };
+            final JRERemoteResourceProvider resourceProvider = new JRERemoteResourceProvider(
+                    new ImmutableGnipAuthentication("foo", "bar"));
+            final GnipFacade gnip = new DefaultGnipFacade(resourceProvider, uriStrategy);
+
+            System.out.println("-- Creating stream");
+            final AtomicInteger counter = new AtomicInteger();
+            final StreamNotificationAdapter n = new StreamNotificationAdapter() {
+                @Override
+                public void notify(final Activity activity, final GnipStream stream) {
+                    final int i = counter.getAndIncrement();
+                    if (i >= 100000) {
+                        System.out.println("-- Closing stream.");
+                        stream.close();
+                    }
+                    System.out.println(i + "-" + activity.getBody() + " " + activity.getGnip().getMatchingRules());
+                }
+            };
+            final GnipStream stream = gnip.createStream("test-domain", 1, n);
+            System.out.println("-- Awaiting for stream to terminate");
+            stream.await();
+            System.out.println("-- Shutting down");
+
+        }   catch(final Throwable t) {
+            System.out.println(t.getMessage());
+            t.printStackTrace();
+        }
+    }
+}
