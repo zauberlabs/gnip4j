@@ -5,6 +5,8 @@ Gnip4j is distributed in using the
 [[http://repo1.maven.org/maven2/com/zaubersoftware/gnip4j][Maven Central Repository]]
 
 ---++ Versions
+---+++ Gnip4j 0.2
+   * Added UriStrategy to generate URI to connect to Gnip endpoint
 ---+++ Gnip4j 0.1
 
    * Fix "Usage" documentation (contributed by Adrian Petrescu)
