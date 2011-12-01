@@ -118,8 +118,10 @@ public final class JSONDeserializationTest {
         }
     }
 
-    private String removeTimeZoneFields(String input) {
+    /** used to compare xmls */
+    private String removeTimeZoneFields(final String input) {
         return input.replaceAll("postedTime=\"[\\d-\\+T:\\.]*\"", "");
     }
 
+    
 }
