@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "")
 @XmlRootElement(name = "object")
 public final class Object extends Activity {
-
+    private static final long serialVersionUID = 1L;
     
     
     

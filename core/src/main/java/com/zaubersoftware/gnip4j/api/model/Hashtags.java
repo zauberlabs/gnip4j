@@ -15,6 +15,7 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -35,8 +36,9 @@ import javax.xml.bind.annotation.XmlType;
     "indices"
 })
 @XmlRootElement(name = "hashtags")
-public final class Hashtags {
-
+public final class Hashtags implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     @XmlElement(type = Integer.class)
     private List<Integer> indices;
     @XmlAttribute(required = true)

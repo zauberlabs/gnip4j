@@ -15,6 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -37,7 +39,9 @@ import org.codehaus.jackson.annotate.JsonProperty;
     "expandedUrl"
 })
 @XmlRootElement(name = "gnip")
-public class Url {
+public class Url implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     @XmlAttribute(required = true)
     @XmlSchemaType(name = "anyURI")
     private String url;

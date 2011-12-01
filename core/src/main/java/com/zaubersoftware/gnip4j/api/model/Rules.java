@@ -15,6 +15,7 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,8 +38,9 @@ import org.codehaus.jackson.annotate.JsonAutoDetect;
 })
 @XmlRootElement(name = "rules")
 @JsonAutoDetect
-public final class Rules {
-
+public final class Rules implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     private List<Rule> rules;
 
     /**

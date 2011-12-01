@@ -15,6 +15,7 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +44,9 @@ import org.codehaus.jackson.annotate.JsonProperty;
 })
 @XmlRootElement(name = "user_mentions")
 @JsonAutoDetect
-public final class UserMentions {
-
+public final class UserMentions implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     @XmlElement(type = Integer.class)
     private List<Integer> indices;
     @XmlAttribute(name = "screen_name", required = true)

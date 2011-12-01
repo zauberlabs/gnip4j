@@ -15,6 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -35,8 +37,9 @@ import org.codehaus.jackson.annotate.JsonProperty;
         "generator", "object", "provider", "twitterEntities", "gnip" })
 @XmlRootElement(name = "activity")
 @JsonAutoDetect
-public class Activity {
-
+public class Activity implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     private InReplyTo inReplyTo;
     @XmlElement(required = true)
     private Activity.Location location;
@@ -207,8 +210,9 @@ public class Activity {
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = { "geo" })
-    public static class Location {
-
+    public static class Location implements Serializable {
+        private static final long serialVersionUID = 1L;
+        
         @XmlElement(required = true)
         private Geo geo;
         @XmlAttribute(name = "country_code", required = true)

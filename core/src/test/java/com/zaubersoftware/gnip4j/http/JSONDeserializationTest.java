@@ -17,7 +17,10 @@ package com.zaubersoftware.gnip4j.http;
 
 import static org.junit.Assert.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.io.StringWriter;
 import java.util.List;
 
@@ -25,6 +28,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
 import org.apache.commons.io.IOUtils;
+import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Before;
@@ -123,5 +127,17 @@ public final class JSONDeserializationTest {
         return input.replaceAll("postedTime=\"[\\d-\\+T:\\.]*\"", "");
     }
 
+    /**
+     * tests if the data "model" is serializable
+     */
+    @Test
+    public void testSerializable() throws IOException {
+        final InputStream is = getClass().getClassLoader().getResourceAsStream(
+                "com/zaubersoftware/gnip4j/payload/payload-example.js");
+        final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
+        final Activity activity = parser.readValueAs(Activity.class);
+        final ObjectOutputStream os = new ObjectOutputStream(new ByteArrayOutputStream());
+        os.writeObject(activity);
+    }
     
 }

@@ -15,6 +15,7 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -38,8 +39,9 @@ import org.codehaus.jackson.annotate.JsonProperty;
     "indices"
 })
 @XmlRootElement(name = "urls")
-public final class Urls {
-
+public final class Urls implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     @XmlElement(type = Integer.class)
     private List<Integer> indices;
     @XmlAttribute(name = "expanded_url", required = true)

@@ -15,6 +15,7 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,8 +43,9 @@ import org.codehaus.jackson.annotate.JsonProperty;
 })
 @XmlRootElement(name = "twitter_entities")
 @JsonAutoDetect
-public final class TwitterEntities {
-
+public final class TwitterEntities implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     @XmlElement(required = true)
     private List<Urls> urls;
     @XmlElement(name = "user_mentions", required = true)

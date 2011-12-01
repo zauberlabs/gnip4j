@@ -15,6 +15,7 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +42,9 @@ import org.codehaus.jackson.annotate.JsonProperty;
     "kloutScore"
 })
 @XmlRootElement(name = "gnip")
-public class Gnip {
-
+public class Gnip implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     @XmlElement(required = true)
     private Language language;
     @XmlElement(name = "matching_rules", required = true)
