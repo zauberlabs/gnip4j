@@ -119,7 +119,7 @@ public final class JSONDeserializationTest {
     }
 
     private String removeTimeZoneFields(String input) {
-        return input.replaceAll("postedTime=\"[\\d-T:\\.]*\"", "");
+        return input.replaceAll("postedTime=\"[\\d-\\+T:\\.]*\"", "");
     }
 
 }
