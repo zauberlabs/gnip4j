@@ -98,7 +98,6 @@ public class HttpGnipServerHandler extends SimpleChannelUpstreamHandler {
     @Override
     public void channelClosed(final ChannelHandlerContext ctx, final ChannelStateEvent e) throws Exception {
         super.channelClosed(ctx, e);
-        System.out.println("HOLAAAAAAAAA!");
     }
 
     @Override
