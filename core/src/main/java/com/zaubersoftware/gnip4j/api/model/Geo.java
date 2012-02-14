@@ -22,8 +22,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
 /**
  * <p>
  * Java class for anonymous complex type.
@@ -33,7 +31,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
  * this class.
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = { "coordinates" })
+@XmlType(name = "", propOrder = { "coordinates", "type" })
 public class Geo implements Serializable {
     private static final long serialVersionUID = 1L;
     
