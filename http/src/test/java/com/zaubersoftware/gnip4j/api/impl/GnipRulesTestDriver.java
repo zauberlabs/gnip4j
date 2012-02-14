@@ -21,22 +21,22 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.zaubersoftware.gnip4j.api.GnipFacade;
-import com.zaubersoftware.gnip4j.api.impl.DefaultGnipFacade;
-import com.zaubersoftware.gnip4j.api.impl.ImmutableGnipAuthentication;
 import com.zaubersoftware.gnip4j.api.model.Rule;
 import com.zaubersoftware.gnip4j.api.model.Rules;
-import com.zaubersoftware.gnip4j.http.HttpClientRemoteResourceProvider;
+import com.zaubersoftware.gnip4j.api.support.http.JRERemoteResourceProvider;
 
 public class GnipRulesTestDriver {
 
 	private GnipFacade gnip;
-	private String domain;
+	private String account;
+	private String streamName;
 	
 	@Before
 	public void setUp() {
-		final String username = System.getProperty("gnip.username");
+	    final String username = System.getProperty("gnip.username");
         final String password = System.getProperty("gnip.password");
-        domain = System.getProperty("gnip.domain");
+        account = System.getProperty("gnip.account");
+        streamName = System.getProperty("gnip.stream");
         
         if(username == null) {
             throw new IllegalArgumentException("Missing gnip.username");
@@ -44,17 +44,19 @@ public class GnipRulesTestDriver {
         if(password == null) {
             throw new IllegalArgumentException("Missing gnip.password");
         }
-        if(domain == null) {
-            throw new IllegalArgumentException("Missing gnip.domain");
+        if(account == null) {
+            throw new IllegalArgumentException("Missing gnip.account");
+        }
+        if(streamName == null) {
+            throw new IllegalArgumentException("Missing gnip.stream");
         }
         
-        gnip = new DefaultGnipFacade(new HttpClientRemoteResourceProvider(
-        		new ImmutableGnipAuthentication(username, password)));
+        gnip = new DefaultGnipFacade(new JRERemoteResourceProvider(new ImmutableGnipAuthentication(username, password)));
 	}
 	
 	@Test
 	public final void testGetRules() {
-        final Rules rules = gnip.getRules(domain, 1);
+        final Rules rules = gnip.getRules(account, streamName);
         
         for (final Rule rule : rules.getRules()) {
         	System.out.println("Found rule " + rule.getValue() + " with tag: " + rule.getTag());
@@ -66,9 +68,9 @@ public class GnipRulesTestDriver {
 		final Rule rule = new Rule();
 		rule.setValue("#neverevergonnahappen88");
 		
-		gnip.addRule(domain, 1, rule);
+		gnip.addRule(account, streamName, rule);
 		
-		final Rules rules = gnip.getRules(domain, 1);
+		final Rules rules = gnip.getRules(account, streamName);
 		boolean ruleAdded = false;
 		for (final Rule existingRule : rules.getRules()) {
 			if (existingRule.getValue().equals("#neverevergonnahappen88")) {

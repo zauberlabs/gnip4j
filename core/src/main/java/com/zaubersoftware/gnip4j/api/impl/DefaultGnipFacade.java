@@ -25,11 +25,11 @@ import java.util.concurrent.Executors;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonProcessingException;
 
-import com.zaubersoftware.gnip4j.api.UriStrategy;
 import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
+import com.zaubersoftware.gnip4j.api.UriStrategy;
 import com.zaubersoftware.gnip4j.api.exception.GnipException;
 import com.zaubersoftware.gnip4j.api.model.ObjectFactory;
 import com.zaubersoftware.gnip4j.api.model.Rule;
@@ -70,11 +70,11 @@ public class DefaultGnipFacade implements GnipFacade {
 
     @Override
     public final GnipStream createStream(
-            final String domain,
-            final long dataCollectorId,
+            final String account,
+            final String streamName,
             final StreamNotification observer) {
         final ExecutorService executor = Executors.newFixedThreadPool(streamDefaultWorkers);
-        final GnipStream target = createStream(domain, dataCollectorId, observer, executor);
+        final GnipStream target = createStream(account, streamName, observer, executor);
         return new GnipStream() {
             @Override
             public void close() {
@@ -103,9 +103,9 @@ public class DefaultGnipFacade implements GnipFacade {
     }
 
     @Override
-    public final GnipStream createStream(final String domain, final long dataCollectorId,
+    public final GnipStream createStream(final String account, final String streamName,
             final StreamNotification observer, final ExecutorService executor) {
-        final DefaultGnipStream stream = createStream(domain, dataCollectorId, executor);
+        final DefaultGnipStream stream = createStream(account, streamName, executor);
         stream.open(observer);
         GnipStream ret = stream;
         if(useJMX) {
@@ -153,10 +153,10 @@ public class DefaultGnipFacade implements GnipFacade {
     }
 
     @Override
-    public final Rules getRules(final String domain, final long dataCollectorId) {
+    public final Rules getRules(final String account, final String streamName) {
         try {
             final InputStream gnipRestResponseStream = facade.getResource(baseUriStrategy
-                    .createRulesUri(domain, dataCollectorId));
+                    .createRulesUri(account, streamName));
             final JsonParser parser =  DefaultGnipStream.getObjectMapper()
                     .getJsonFactory().createJsonParser(gnipRestResponseStream);
             final Rules rules = parser.readValueAs(Rules.class);
@@ -170,10 +170,10 @@ public class DefaultGnipFacade implements GnipFacade {
     }
 
     @Override
-    public final void addRule(final String domain, final long dataCollectorId, final Rule rule) {
+    public final void addRule(final String account, final String streamName, final Rule rule) {
         final Rules rules = new ObjectFactory().createRules();
         rules.getRules().add(rule);
-        facade.postResource(baseUriStrategy.createRulesUri(domain, dataCollectorId), rules);
+        facade.postResource(baseUriStrategy.createRulesUri(account, streamName), rules);
     }
 
     public final boolean isUseJMX() {
@@ -194,9 +194,9 @@ public class DefaultGnipFacade implements GnipFacade {
      * @return
      */
     private DefaultGnipStream createStream(
-            final String domain,
-            final long dataCollectorId,
+            final String account,
+            final String streamName,
             final ExecutorService executor) {
-            return new DefaultGnipStream(facade, domain, dataCollectorId, executor, baseUriStrategy);
+            return new DefaultGnipStream(facade, account, streamName, executor, baseUriStrategy);
     }
 }

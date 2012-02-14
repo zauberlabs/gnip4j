@@ -44,12 +44,12 @@ public final class LocalhostTestDriver {
             final UriStrategy uriStrategy = new UriStrategy() {
 
                 @Override
-                public URI createStreamUri(final String domain, final long dataCollectorId) {
+                public URI createStreamUri(final String domain, final String streamName) {
                     return URI.create("http://localhost:8080");
                 }
 
                 @Override
-                public URI createRulesUri(final String domain, final long dataCollectorId) {
+                public URI createRulesUri(final String domain, final String streamName) {
                     return null;
                 }
             };
@@ -70,7 +70,7 @@ public final class LocalhostTestDriver {
                     System.out.println(i + "-" + activity.getBody() + " " + activity.getGnip().getMatchingRules());
                 }
             };
-            final GnipStream stream = gnip.createStream("test-domain", 1, n);
+            final GnipStream stream = gnip.createStream("test-account", "test-stream", n);
             System.out.println("-- Awaiting for stream to terminate");
             stream.await();
             System.out.println("-- Shutting down");

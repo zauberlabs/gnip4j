@@ -35,28 +35,32 @@ import com.zaubersoftware.gnip4j.api.UriStrategy;
  * @since 11/11/2011
  */
 public final class DefaultUriStrategy implements UriStrategy {
-
-    public static final String BASE_GNIP_URI_FMT = "https://%s.gnip.com/data_collectors/%d";
-
-    /** The base URI Gnip format used to generate the final stream URI */
-    public static final String BASE_GNIP_STREAM_URI_FMT = BASE_GNIP_URI_FMT + "/track.json";
-
-    /** The base URI Gnip format used to generate the final rules URI */
-    public static final String BASE_GNIP_RULES_URI_FMT = BASE_GNIP_URI_FMT + "/rules.json";
+    public static final String BASE_GNIP_STREAM_URI = "https://stream.gnip.com:443/accounts/%s/publishers/twitter/streams/track/%s.json";
+    public static final String BASE_GNIP_RULES_URI = "https://api.gnip.com:443/accounts/%s/publishers/twitter/streams/track/%s/rules.json";
+    
 
     @Override
-    public URI createStreamUri(final String domain, final long dataCollectorId) {
-        if (domain == null || domain.trim().isEmpty()) {
-            throw new IllegalArgumentException("The domain cannot be null or empty");
+    public URI createStreamUri(final String account, String streamName) {
+        if (account == null || account.trim().isEmpty()) {
+            throw new IllegalArgumentException("The account cannot be null or empty");
         }
-        return URI.create(String.format(BASE_GNIP_STREAM_URI_FMT, domain.trim(), dataCollectorId));
+        if (streamName == null || streamName.trim().isEmpty()) {
+            throw new IllegalArgumentException("The streamName cannot be null or empty");
+        }
+        
+        
+        return URI.create(String.format(BASE_GNIP_STREAM_URI, account.trim(), streamName.trim()));
     }
 
     @Override
-    public URI createRulesUri(final String domain, final long dataCollectorId) {
-        if (domain == null || domain.trim().isEmpty()) {
-            throw new IllegalArgumentException("The domain cannot be null or empty");
+    public URI createRulesUri(final String account, String streamName) {
+        if (account == null || account.trim().isEmpty()) {
+            throw new IllegalArgumentException("The account cannot be null or empty");
         }
-        return URI.create(String.format(BASE_GNIP_RULES_URI_FMT, domain.trim(), dataCollectorId));
+        if (streamName == null || streamName.trim().isEmpty()) {
+            throw new IllegalArgumentException("The streamName cannot be null or empty");
+        }
+        
+        return URI.create(String.format(BASE_GNIP_RULES_URI, account.trim(), streamName.trim()));
     }
 }

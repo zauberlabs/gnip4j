@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zaubersoftware.gnip4j.http;
+package com.zaubersoftware.gnip4j.api.impl;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Test;
@@ -32,7 +32,7 @@ import com.zaubersoftware.gnip4j.api.support.http.JRERemoteResourceProvider;
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
-public final class TestDriver {
+public final class StreamTestDriver {
 
     /**
      * Entry point for the test driver
@@ -43,7 +43,8 @@ public final class TestDriver {
     public void testname() throws Exception {
         final String username = System.getProperty("gnip.username");
         final String password = System.getProperty("gnip.password");
-        final String domain = System.getProperty("gnip.domain");
+        final String account = System.getProperty("gnip.account");
+        final String streamName = System.getProperty("gnip.stream");
         
         if(username == null) {
             throw new IllegalArgumentException("Missing gnip.username");
@@ -51,14 +52,15 @@ public final class TestDriver {
         if(password == null) {
             throw new IllegalArgumentException("Missing gnip.password");
         }
-        if(domain == null) {
+        if(account == null) {
             throw new IllegalArgumentException("Missing gnip.domain");
+        }
+        if(streamName == null) {
+            throw new IllegalArgumentException("Missing gnip.stream");
         }
         
         try {
-            final GnipFacade gnip = new DefaultGnipFacade(
-                    new JRERemoteResourceProvider(
-                            new ImmutableGnipAuthentication(username, password)));
+            final GnipFacade gnip = new DefaultGnipFacade(new JRERemoteResourceProvider(new ImmutableGnipAuthentication(username, password)));
             
             System.out.println("-- Creating stream");
             final AtomicInteger counter = new AtomicInteger();
@@ -73,7 +75,7 @@ public final class TestDriver {
                     System.out.println(i + "-" + activity.getBody() + " " + activity.getGnip().getMatchingRules());
                 }
             };
-            final GnipStream stream = gnip.createStream(domain, 1, n);
+            final GnipStream stream = gnip.createStream(account, streamName, n);
             System.out.println("-- Awaiting for stream to terminate");
             stream.await();
             System.out.println("-- Shutting down");

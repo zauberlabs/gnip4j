@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zaubersoftware.gnip4j.http;
+package com.zaubersoftware.gnip4j.api.impl;
 
 import java.io.InputStream;
 import java.net.URI;
@@ -44,6 +44,7 @@ import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.impl.DefaultGnipStream;
 import com.zaubersoftware.gnip4j.api.impl.DefaultUriStrategy;
 import com.zaubersoftware.gnip4j.api.model.Activity;
+import com.zaubersoftware.gnip4j.http.ActivityNetworkExceptionInputStream;
 
 /**
  * Re connection algorithm test
@@ -63,8 +64,7 @@ public final class ReconnectionTest {
         root.setLevel(Level.OFF);
 
         final AtomicInteger count = new AtomicInteger(0);
-        final DefaultGnipStream stream = new DefaultGnipStream(
-                new MockRemoteResourceProvider(), "test", 1, new MockExecutorService(), uriStrategy);
+        final DefaultGnipStream stream = new DefaultGnipStream(new MockRemoteResourceProvider(), "account", "stream", new MockExecutorService(), uriStrategy);
         final StringBuilder out = new StringBuilder();
         final StreamNotification n = new StreamNotification() {
             @Override

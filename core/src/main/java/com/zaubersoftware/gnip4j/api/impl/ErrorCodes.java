@@ -27,7 +27,9 @@ public interface ErrorCodes {
     /** error code */
     String ERROR_NULL_HTTPCLIENT = "The HTTP client cannot be null";
     /** error code */
-    String ERROR_EMPTY_DOMAIN = "The domain cannot be empty";
+    String ERROR_EMPTY_ACCOUNT = "The account cannot be empty";
+    /** error code */
+    String ERROR_EMPTY_STREAM_NAME = "The stream name cannot be empty";
     /** error code */
     String ERROR_NULL_AUTH = "The Gnip authentication cannot be null";
     /** error code */

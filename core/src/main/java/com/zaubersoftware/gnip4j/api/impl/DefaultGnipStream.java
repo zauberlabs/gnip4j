@@ -27,11 +27,11 @@ import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import com.zaubersoftware.gnip4j.api.UriStrategy;
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
 import com.zaubersoftware.gnip4j.api.StreamNotificationAdapter;
+import com.zaubersoftware.gnip4j.api.UriStrategy;
 import com.zaubersoftware.gnip4j.api.exception.GnipException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.model.Activity;
@@ -91,15 +91,18 @@ public class DefaultGnipStream extends AbstractGnipStream {
     /** Creates the HttpGnipStream. */
     public DefaultGnipStream(
             final RemoteResourceProvider client,
-            final String domain,
-            final long dataCollectorId,
+            final String account,
+            final String streamName,
             final ExecutorService activityService,
             final UriStrategy baseUriStrategy) {
         if (client == null) {
             throw new IllegalArgumentException(ERROR_NULL_HTTPCLIENT);
         }
-        if (domain == null || domain.trim().length() == 0) {
-            throw new IllegalArgumentException(ERROR_EMPTY_DOMAIN);
+        if (account == null || account.trim().length() == 0) {
+            throw new IllegalArgumentException(ERROR_EMPTY_ACCOUNT);
+        }
+        if (streamName == null || streamName.trim().length() == 0) {
+            throw new IllegalArgumentException(ERROR_EMPTY_STREAM_NAME);
         }
         if (activityService == null) {
             throw new IllegalArgumentException(ERROR_NULL_ACTIVITY_SERVICE);
@@ -108,9 +111,9 @@ public class DefaultGnipStream extends AbstractGnipStream {
             throw new IllegalArgumentException(ERROR_NULL_BASE_URI_STRATEGY);
         }
 
-        this.streamURI = baseUriStrategy.createStreamUri(domain, dataCollectorId);
+        this.streamURI = baseUriStrategy.createStreamUri(account, streamName);
         this.client = client;
-        this.streamName = String.format("%s-%d", domain, dataCollectorId);
+        this.streamName = streamName;
         this.activityService = activityService;
     }
 
@@ -226,6 +229,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
                         }
                         if(is != null) {
                             final JsonParser parser =  getObjectMapper().getJsonFactory().createJsonParser(is);
+
                             logger.debug("Starting to consume activity stream {} ...", streamName);
                             while(!Thread.interrupted()) {
                                 final Activity activity = parser.readValueAs(Activity.class);

@@ -32,7 +32,7 @@ public interface UriStrategy {
      * @param dataCollectorId
      * @return
      */
-    URI createStreamUri(String domain, long dataCollectorId);
+    URI createStreamUri(String account, String streamName);
 
     /**
      * Generates a {@link URI} to connect against a Gnip endpoint to get/modify rules.
@@ -41,5 +41,5 @@ public interface UriStrategy {
      * @param dataCollectorId
      * @return
      */
-    URI createRulesUri(String domain, long dataCollectorId);
+    URI createRulesUri(String account, String streamName);
 }

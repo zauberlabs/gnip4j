@@ -63,9 +63,9 @@ public final class JMXTest {
             }
         };
         final GnipFacade f = new DefaultGnipFacade(resources);
-        final GnipStream stream = f.createStream("acme", 1, observer);
+        final GnipStream stream = f.createStream("acme", "stream", observer);
         stream.close();
-        f.createStream("acme", 1, observer);
+        f.createStream("acme", "stream", observer);
         stream.close();
         
     }

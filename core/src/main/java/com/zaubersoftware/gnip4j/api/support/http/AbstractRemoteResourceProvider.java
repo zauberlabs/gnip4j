@@ -32,6 +32,7 @@ public abstract class AbstractRemoteResourceProvider implements RemoteResourcePr
     
     /** validate responses */
     public final void validateStatusLine(final URI uri, final int statusCode, final String reason) {
+        System.out.println(uri);
         if (statusCode == 200 || statusCode == 201) {
             // nothing to do
         } else if (statusCode == 401) {
