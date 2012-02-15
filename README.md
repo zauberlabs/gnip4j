@@ -17,6 +17,85 @@ from the data from the Java language.
    * Monitoring Support (JMX)
    * [Mule ESB](http://www.mulesoft.org/) integration
 
+## How To use gnip4j
+
+For more information refer to the Gnip4j Reference Guide. Available formats:
+
+ * [HTML Multiples pages](http://code.zaubersoftware.com/gnip4j/reference/current/html/index.html)
+ * [HTML Single page](http://code.zaubersoftware.com/gnip4j/reference/current/html_single/index.html)
+ * [PDF](http://code.zaubersoftware.com/gnip4j/reference/current/pdf/gnip4j-reference.pdf) 
+
+## Maven Integration
+
+Add to your dependency Managment:
+
+```xml
+     <dependencyManagement>
+       <dependencies>
+        <dependency>
+           <groupId>com.zaubersoftware.gnip4j</groupId>
+           <artifactId>gnip4j-core</artifactId>
+           <version>${gnip4j.version}</version>
+        </dependency>
+        <dependency>
+           <groupId>com.zaubersoftware.gnip4j</groupId>
+           <artifactId>gnip4j-http</artifactId>
+           <version>${gnip4j.version}</version>
+        </dependency>
+      </dependencies>
+     </dependencyManagement>
+     ...
+     <properties>
+         <gnip4j.version>0.1</gnip4j.version>
+     </properties>
+```
+
+and add to your project: 
+
+```xml
+    <dependencies>
+       <dependency>
+        <groupId>com.zaubersoftware.gnip4j</groupId>
+        <artifactId>gnip4j-core</artifactId>
+       </dependency>
+    </dependencies>
+```
+
+If you need logging adding `slf4j` as a dependency.
+ 
+## Code Snippet
+
+### Consuming ten Activities from the stream
+   
+```java
+    final String domain = "acme-powertrack";
+    final String username = "acme";
+    final String password = "password";    
+
+    final GnipFacade gnip = new DefaultGnipFacade(
+            new JRERemoteResourceProvider(
+                    new InmutableGnipAuthentication(username, password)));    
+
+    System.out.println("-- Creating stream");
+    final AtomicInteger counter = new AtomicInteger();
+    final StreamNotificationAdapter observer = new StreamNotificationAdapter() {
+        @Override
+        public void notify(final Activity activity, final GnipStream stream) {
+            final int i = counter.getAndIncrement();
+            if (i >= 10) {
+                System.out.println("-- Closing stream.");
+                stream.close();
+            }
+            System.out.println(i + "-" + activity.getBody() 
+                                 + " " + activity.getGnip().getMatchingRules());
+        }
+    };
+    final GnipStream stream = gnip.createStream(domain, 1, observer);
+    System.out.println("-- Awaiting for stream to terminate");
+    stream.await();
+    System.out.println("-- Shutting down");
+```
+
 ## How To Contribute
 
 [Send pull requests](http://help.github.com/pull-requests/) using GitHub.
@@ -33,8 +112,8 @@ thus we thought that building a sister project Gnip4j would make perfect sense.
 We hope you find it useful too. [Contact us](http://www.zaubersoftware.com/en/contact/)
 if you want to contribute to this project or just have any specific requests.
 
-## License
 
+## License
 
 Copyright (c) 2011 Zauber S.A. <http://www.zaubersoftware.com/>
 
