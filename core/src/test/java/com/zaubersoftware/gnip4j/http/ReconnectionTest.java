@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zaubersoftware.gnip4j.api.impl;
+package com.zaubersoftware.gnip4j.http;
 
 import java.io.InputStream;
 import java.net.URI;
@@ -44,7 +44,6 @@ import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.impl.DefaultGnipStream;
 import com.zaubersoftware.gnip4j.api.impl.DefaultUriStrategy;
 import com.zaubersoftware.gnip4j.api.model.Activity;
-import com.zaubersoftware.gnip4j.http.ActivityNetworkExceptionInputStream;
 
 /**
  * Re connection algorithm test

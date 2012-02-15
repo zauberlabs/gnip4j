@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zaubersoftware.gnip4j.api.impl;
+package com.zaubersoftware.gnip4j.http;
 
 import static org.junit.Assert.*;
 
@@ -21,6 +21,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.zaubersoftware.gnip4j.api.GnipFacade;
+import com.zaubersoftware.gnip4j.api.impl.DefaultGnipFacade;
+import com.zaubersoftware.gnip4j.api.impl.ImmutableGnipAuthentication;
 import com.zaubersoftware.gnip4j.api.model.Rule;
 import com.zaubersoftware.gnip4j.api.model.Rules;
 import com.zaubersoftware.gnip4j.api.support.http.JRERemoteResourceProvider;

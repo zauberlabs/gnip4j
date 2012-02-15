@@ -23,6 +23,7 @@ import org.mule.api.lifecycle.CreateException;
 import org.mule.api.transport.Connector;
 import org.mule.transport.AbstractMessageReceiver;
 import org.mule.transport.ConnectException;
+import org.mule.util.UriParamFilter;
 
 import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.GnipStream;
@@ -44,10 +45,12 @@ public class GnipMessageReceiver extends AbstractMessageReceiver {
 
     @Override
     public final void doConnect() throws ConnectException {
-        final String subdomain = getEndpoint().getEndpointURI().getAuthority();
-        final long collectorId = Long.parseLong(getEndpoint().getEndpointURI().getPath().replaceAll("^[/]", ""));
+        String uri = getEndpointURI().getPath();
         
-        stream = getGnipFacade().createStream(subdomain, collectorId, new StreamNotificationAdapter() {
+        String account = uri.substring(uri.indexOf("accounts/") + "accounts/".length(), uri.indexOf("/publishers"));
+        String streamName = uri.substring(uri.indexOf("streams/track/") + "streams/track/".length(), uri.indexOf(".json"));
+        
+        stream = getGnipFacade().createStream(account, streamName, new StreamNotificationAdapter() {
             @Override
             public void notify(final Activity activity, final GnipStream stream) {
                 try {
