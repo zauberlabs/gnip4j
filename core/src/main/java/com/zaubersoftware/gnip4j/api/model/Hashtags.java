@@ -15,15 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -31,17 +24,8 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "indices"
-})
-@XmlRootElement(name = "hashtags")
-public final class Hashtags implements Serializable {
-    private static final long serialVersionUID = 1L;
-    
-    @XmlElement(type = Integer.class)
+public final class Hashtags{
     private List<Integer> indices;
-    @XmlAttribute(required = true)
     private String text;
 
     /**

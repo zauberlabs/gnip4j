@@ -15,16 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
@@ -34,25 +26,11 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "indices"
-})
-@XmlRootElement(name = "urls")
-public final class Urls implements Serializable {
-    private static final long serialVersionUID = 1L;
-    
-    @XmlElement(type = Integer.class)
+public final class Urls{
     private List<Integer> indices;
-    @XmlAttribute(name = "expanded_url", required = true)
-    @XmlSchemaType(name = "anyURI")
     @JsonProperty(value = "expanded_url")
     private String expandedUrl;
-    @XmlAttribute(required = true)
-    @XmlSchemaType(name = "anyURI")
     private String url;
-    @XmlAttribute(required = false)
-    @XmlSchemaType(name = "display_url")
     @JsonProperty("display_url")
     private String displayUrl;
     

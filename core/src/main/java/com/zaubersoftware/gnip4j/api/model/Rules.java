@@ -15,14 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 
@@ -32,15 +26,8 @@ import org.codehaus.jackson.annotate.JsonAutoDetect;
  *
  * <p>The following schema fragment specifies the expected content contained within this class.
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "rules"
-})
-@XmlRootElement(name = "rules")
 @JsonAutoDetect
-public final class Rules implements Serializable {
-    private static final long serialVersionUID = 1L;
-    
+public final class Rules {
     private List<Rule> rules;
 
     /**

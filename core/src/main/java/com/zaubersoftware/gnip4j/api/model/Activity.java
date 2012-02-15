@@ -15,65 +15,28 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-import java.io.Serializable;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = { "inReplyTo", "location", "actor", "geo",
-        "generator", "object", "provider", "twitterEntities", "gnip" })
-@XmlRootElement(name = "activity")
 @JsonAutoDetect
-public class Activity implements Serializable {
-    private static final long serialVersionUID = 1L;
-    
+public class Activity {
     private InReplyTo inReplyTo;
-    @XmlElement(required = true)
     private Activity.Location location;
-    @XmlElement(required = true)
     private Actor actor;
-    @XmlElement(required = true)
     private Geo geo;
-    @XmlElement(required = true)
     private Generator generator;
-    @XmlElement(required = true)
     private Object object;
-    @XmlElement(required = true)
     private Provider provider;
-    @XmlElement(name = "twitter_entities", required = true)
     @JsonProperty(value = "twitter_entities")
     private TwitterEntities twitterEntities;
-    @XmlElement(required = true)
     private Gnip gnip;
-    @XmlAttribute(required = true)
     private String verb;
-    @XmlAttribute(required = true)
-    @XmlSchemaType(name = "dateTime")
     private XMLGregorianCalendar postedTime;
-    @XmlAttribute(required = true)
     private String body;
-    @XmlAttribute(required = true)
     private String objectType;
-    @XmlAttribute(required = true)
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlID
-    @XmlSchemaType(name = "ID")
     private String id;
-    @XmlAttribute(required = true)
-    @XmlSchemaType(name = "anyURI")
     private String link;
 
     public final InReplyTo getInReplyTo() {
@@ -208,23 +171,12 @@ public class Activity implements Serializable {
      * The following schema fragment specifies the expected content contained
      * within this class.
      */
-    @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "", propOrder = { "geo" })
-    public static class Location implements Serializable {
-        private static final long serialVersionUID = 1L;
-        
-        @XmlElement(required = true)
+    public static class Location{
         private Geo geo;
-        @XmlAttribute(name = "country_code", required = true)
         private String countryCode;
-        @XmlAttribute(required = true)
         private String displayName;
-        @XmlAttribute(required = true)
         private String objectType;
-        @XmlAttribute(required = true)
         private String streetAddress;
-        @XmlAttribute(required = true)
-        @XmlSchemaType(name = "anyURI")
         private String link;
 
         

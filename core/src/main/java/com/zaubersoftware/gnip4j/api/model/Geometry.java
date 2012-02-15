@@ -15,39 +15,16 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-
-
 /**
- * <p>Java class for anonymous complex type.
- *
- * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * TODO Descripcion de la clase. Los comentarios van en castellano.
+ * 
+ * 
+ * @author Martin Silva
+ * @since Feb 15, 2012
  */
-public final class Language{
-    private String value;
-
-    /**
-     * Gets the value of the value property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
-    public String getValue() {
-        return value;
-    }
-
-    /**
-     * Sets the value of the value property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
-     */
-    public void setValue(final String value) {
-        this.value = value;
-    }
-
+public interface Geometry {
+    
+    
+    Geometries getType();
+    
 }

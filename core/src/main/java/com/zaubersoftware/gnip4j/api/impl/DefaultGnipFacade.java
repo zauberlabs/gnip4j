@@ -31,7 +31,6 @@ import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
 import com.zaubersoftware.gnip4j.api.UriStrategy;
 import com.zaubersoftware.gnip4j.api.exception.GnipException;
-import com.zaubersoftware.gnip4j.api.model.ObjectFactory;
 import com.zaubersoftware.gnip4j.api.model.Rule;
 import com.zaubersoftware.gnip4j.api.model.Rules;
 import com.zaubersoftware.gnip4j.api.stats.StreamStats;
@@ -171,8 +170,9 @@ public class DefaultGnipFacade implements GnipFacade {
 
     @Override
     public final void addRule(final String account, final String streamName, final Rule rule) {
-        final Rules rules = new ObjectFactory().createRules();
+        Rules rules = new Rules();
         rules.getRules().add(rule);
+        
         facade.postResource(baseUriStrategy.createRulesUri(account, streamName), rules);
     }
 

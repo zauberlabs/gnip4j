@@ -15,11 +15,6 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>
@@ -30,15 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  * this class.
  * 
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "")
-@XmlRootElement(name = "object")
 public final class Object extends Activity {
-    private static final long serialVersionUID = 1L;
-    
-    
-    
-    @XmlAttribute(required = true)
     private String summary;
     public String getSummary() {
         return summary;

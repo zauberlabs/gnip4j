@@ -15,18 +15,9 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -38,27 +29,14 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * <p>The following schema fragment specifies the expected content contained within this class.
  *
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "indices"
-})
-@XmlRootElement(name = "user_mentions")
 @JsonAutoDetect
-public final class UserMentions implements Serializable {
-    private static final long serialVersionUID = 1L;
-    
-    @XmlElement(type = Integer.class)
+public final class UserMentions{
     private List<Integer> indices;
-    @XmlAttribute(name = "screen_name", required = true)
     @JsonProperty(value = "screen_name")
     private String screenName;
-    @XmlAttribute(name = "id_str", required = true)
     @JsonProperty(value = "id_str")
     private String idStr;
-    @XmlAttribute(required = true)
     private String name;
-    @XmlAttribute(required = true)
-    @XmlSchemaType(name = "nonNegativeInteger")
     private BigInteger id;
 
     /**

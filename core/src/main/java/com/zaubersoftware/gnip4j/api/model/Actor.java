@@ -15,18 +15,10 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
@@ -36,51 +28,24 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * <p>The following schema fragment specifies the expected content contained within this class.
  *
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "location",
-    "languages",
-    "links"
-})
-@XmlRootElement(name = "actor")
-public final class Actor implements Serializable {
-    private static final long serialVersionUID = 1L;
+public final class Actor{
     
-    @XmlElement(required = true)
     private Actor.Location location;
     private List<String> languages;
-    @XmlElement(required = true)
     private List<Links> links;
-    @XmlAttribute(required = true)
-    @XmlSchemaType(name = "dateTime")
     private XMLGregorianCalendar postedTime;
-    @XmlAttribute(required = true)
     private String displayName;
-    @XmlAttribute(required = true)
     private String preferredUsername;
-    @XmlAttribute(required = true)
     private int utcOffset;
-    @XmlAttribute(required = true)
     private String objectType;
-    @XmlAttribute(required = true)
     private int statusesCount;
-    @XmlAttribute(required = true)
     private BigInteger listedCount;
-    @XmlAttribute(required = false)
     private String twitterTimeZone;
-    @XmlAttribute(required = true)
     private BigInteger friendsCount;
-    @XmlAttribute(required = true)
     private BigInteger followersCount;
-    @XmlAttribute(required = true)
     private String summary;
-    @XmlAttribute(required = true)
-    @XmlSchemaType(name = "anyURI")
     private String link;
-    @XmlAttribute(required = true)
-    @XmlSchemaType(name = "anyURI")
     private String image;
-    @XmlAttribute(required = true)
     private String id;
 
     /**
@@ -488,14 +453,8 @@ public final class Actor implements Serializable {
      *
      *
      */
-    @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "")
-    public static final class Location implements Serializable {
-        private static final long serialVersionUID = 1L;
-        
-        @XmlAttribute(required = true)
+    public static final class Location{
         private String displayName;
-        @XmlAttribute(required = true)
         private String objectType;
 
         /**

@@ -15,15 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
@@ -34,25 +27,11 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * <p>The following schema fragment specifies the expected content contained within this class.
  *
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "language",
-    "matchingRules",
-    "urls",
-    "kloutScore"
-})
-@XmlRootElement(name = "gnip")
-public class Gnip implements Serializable {
-    private static final long serialVersionUID = 1L;
-    
-    @XmlElement(required = true)
+public class Gnip{
     private Language language;
-    @XmlElement(name = "matching_rules", required = true)
     @JsonProperty(value = "matching_rules")
     private List<MatchingRules> matchingRules;
-    @XmlElement(required = true)
     private List<Url> urls;
-    @XmlElement(name = "klout_score", required = false)
     @JsonProperty(value = "klout_score")
     private Float kloutScore;
 

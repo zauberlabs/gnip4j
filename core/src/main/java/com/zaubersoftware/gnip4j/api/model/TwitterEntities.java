@@ -15,15 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -35,23 +28,12 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * <p>The following schema fragment specifies the expected content contained within this class.
  *
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "urls",
-    "userMentions",
-    "hashtags"
-})
-@XmlRootElement(name = "twitter_entities")
 @JsonAutoDetect
-public final class TwitterEntities implements Serializable {
-    private static final long serialVersionUID = 1L;
+public final class TwitterEntities{
     
-    @XmlElement(required = true)
     private List<Urls> urls;
-    @XmlElement(name = "user_mentions", required = true)
     @JsonProperty(value = "user_mentions")
     private List<UserMentions> userMentions;
-    @XmlElement(required = true)
     private List<Hashtags> hashtags;
 
     /**

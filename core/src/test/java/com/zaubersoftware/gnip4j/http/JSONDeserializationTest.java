@@ -28,14 +28,18 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
 import org.apache.commons.io.IOUtils;
+import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.zaubersoftware.gnip4j.api.impl.DefaultGnipStream;
+import com.zaubersoftware.gnip4j.api.model.Activities;
 import com.zaubersoftware.gnip4j.api.model.Activity;
+import com.zaubersoftware.gnip4j.api.model.Geo;
 import com.zaubersoftware.gnip4j.api.model.MatchingRules;
+import com.zaubersoftware.gnip4j.api.model.Point;
 
 
 /**
@@ -51,9 +55,7 @@ public final class JSONDeserializationTest {
     /** setup test */
     @Before
     public void setUp() throws Exception {
-        
         mapper = DefaultGnipStream.getObjectMapper();
-        ctx = JAXBContext.newInstance(Activity.class.getPackage().getName());
     }
 
     /** test a complete unmarshal from the json */
@@ -89,54 +91,38 @@ public final class JSONDeserializationTest {
 
             assertNotNull(activity.getGeo());
             assertNotNull(activity.getGeo().getCoordinates());
-            assertEquals(-34.58501869, activity.getGeo().getCoordinates()[0], 0.001);
-            assertEquals(-58.43946468, activity.getGeo().getCoordinates()[1], 0.001);
+            assertEquals(-34.58501869, ((Point)activity.getGeo().getCoordinates()).getLatitude(), 0.001);
+            assertEquals(-58.43946468, ((Point)activity.getGeo().getCoordinates()).getLongitude(), 0.001);
         } finally {
             is.close();
         }
     }
 
-    /** regression test for a NPE exception */
+
     @Test
-    public void testNPE() throws Exception {
-        final InputStream is = getClass().getClassLoader().getResourceAsStream(
-            "com/zaubersoftware/gnip4j/payload/payload-twitter-entities.js");
-        final InputStream expectedIs = getClass().getClassLoader().getResourceAsStream(
-            "com/zaubersoftware/gnip4j/payload/payload-twitter-entities.xml");
+    public void testDeserializeWithPolygonAndPoint() throws JsonParseException, IOException{
+        final InputStream is = getClass().getClassLoader().getResourceAsStream("com/zaubersoftware/gnip4j/payload/deserialize/geolocated-tweets.json");
         
-        try {
-            final String json = IOUtils.toString(is);
-            final JsonParser parser = mapper.getJsonFactory().createJsonParser(json);
-            final Activity activity = parser.readValueAs(Activity.class);
-            final StringWriter w = new StringWriter();
-            mapper.getJsonFactory().createJsonGenerator(w).writeObject(activity);
+        try  {
+            final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
+            final Activities activities = parser.readValueAs(Activities.class);
             
-            final Marshaller o = ctx.createMarshaller();
-            o.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            StringWriter ww = new StringWriter();
-            o.marshal(activity, ww);
-            assertEquals(removeTimeZoneFields(IOUtils.toString(expectedIs)), removeTimeZoneFields(ww.toString()));
+            
+            Geo geo1 = activities.getActivities().get(0).getGeo();
+            Geo geo2 = activities.getActivities().get(1).getGeo();
+            Geo geo3 = activities.getActivities().get(0).getLocation().getGeo();
+            Geo geo4 = activities.getActivities().get(1).getLocation().getGeo();
+            
+            assertNull(geo1);
+            assertEquals("lat: 35.11222481 lon: -78.99696934", geo2.getCoordinates().toString());
+            assertEquals("[[ lat: -0.5093057 lon: 51.286606 ][ lat: 0.334433 lon: 51.286606 ][ lat: 0.334433 lon: 51.691672 ][ lat: -0.5093057 lon: 51.691672 ]]", geo3.getCoordinates().toString());
+            
+            assertEquals("[[ lat: -79.058407 lon: 35.106225 ][ lat: -78.944666 lon: 35.106225 ][ lat: -78.944666 lon: 35.177993 ][ lat: -79.058407 lon: 35.177993 ]]", geo4.getCoordinates().toString());
+            
         } finally {
             is.close();
         }
     }
-
-    /** used to compare xmls */
-    private String removeTimeZoneFields(final String input) {
-        return input.replaceAll("postedTime=\"[\\d-\\+T:\\.]*\"", "");
-    }
-
-    /**
-     * tests if the data "model" is serializable
-     */
-    @Test
-    public void testSerializable() throws IOException {
-        final InputStream is = getClass().getClassLoader().getResourceAsStream(
-                "com/zaubersoftware/gnip4j/payload/payload-example.js");
-        final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
-        final Activity activity = parser.readValueAs(Activity.class);
-        final ObjectOutputStream os = new ObjectOutputStream(new ByteArrayOutputStream());
-        os.writeObject(activity);
-    }
+    
     
 }

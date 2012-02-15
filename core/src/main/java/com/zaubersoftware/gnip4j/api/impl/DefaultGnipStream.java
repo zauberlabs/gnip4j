@@ -24,8 +24,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.codehaus.jackson.JsonParser;
+import org.codehaus.jackson.Version;
 import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.module.SimpleModule;
 
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
@@ -35,6 +37,8 @@ import com.zaubersoftware.gnip4j.api.UriStrategy;
 import com.zaubersoftware.gnip4j.api.exception.GnipException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.model.Activity;
+import com.zaubersoftware.gnip4j.api.model.Geo;
+import com.zaubersoftware.gnip4j.api.model.GeoDeserializer;
 import com.zaubersoftware.gnip4j.api.stats.DefaultStreamStats;
 import com.zaubersoftware.gnip4j.api.stats.ModifiableStreamStats;
 import com.zaubersoftware.gnip4j.api.stats.StreamStats;
@@ -64,6 +68,11 @@ public class DefaultGnipStream extends AbstractGnipStream {
 
     public static final ObjectMapper getObjectMapper() {
         final ObjectMapper mapper = new ObjectMapper();
+        
+        SimpleModule gnipActivityModule = new SimpleModule("gnip.activity", new Version(1, 0, 0, null));
+        gnipActivityModule.addDeserializer(Geo.class, new GeoDeserializer(Geo.class));
+        mapper.registerModule(gnipActivityModule);
+        
         mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return mapper;
     }

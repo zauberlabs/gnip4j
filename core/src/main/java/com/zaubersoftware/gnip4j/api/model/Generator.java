@@ -15,14 +15,6 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-import java.io.Serializable;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -31,16 +23,8 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  *
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "")
-@XmlRootElement(name = "generator")
-public final class Generator implements Serializable {
-    private static final long serialVersionUID = 1L;
-    
-    @XmlAttribute(required = true)
+public final class Generator{
     private String displayName;
-    @XmlAttribute(required = true)
-    @XmlSchemaType(name = "anyURI")
     private String link;
 
     /**
