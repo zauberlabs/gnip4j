@@ -33,6 +33,7 @@ public class Point implements Geometry{
      * Creates the Point.
      *
      */
+    @SuppressWarnings("unused")
     private Point() {
     }
     

@@ -38,7 +38,6 @@ public class Polygon implements Geometry, Iterable<Point> {
      *
      */
     
-    @SuppressWarnings("unused") 
     Polygon() {
     }
     

@@ -17,17 +17,12 @@ package com.zaubersoftware.gnip4j.http;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectOutputStream;
-import java.io.StringWriter;
 import java.util.List;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-
-import org.apache.commons.io.IOUtils;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -50,7 +45,6 @@ import com.zaubersoftware.gnip4j.api.model.Point;
  */
 public final class JSONDeserializationTest {
     private ObjectMapper mapper;
-    private JAXBContext ctx; 
 
     /** setup test */
     @Before
@@ -121,6 +115,33 @@ public final class JSONDeserializationTest {
             
         } finally {
             is.close();
+        }
+    }
+    
+    /*USE THIS TEST TO TEST ENCODING OF JsonParser
+     * Run this test with -Dfile.encoding=UTF-8 and then with another encoding, and compare the file results
+     * */
+    public void utfDesearilzationTest() throws JsonParseException, IOException{
+        InputStream in = getClass().getClassLoader().getResourceAsStream("com/zaubersoftware/gnip4j/payload/deserialize/utf8_tweets.json");
+        
+        try  {
+            final JsonParser parser = mapper.getJsonFactory().createJsonParser(in);
+            final Activities activities = parser.readValueAs(Activities.class);
+            
+            
+            String body0 = activities.getActivities().get(0).getBody();
+            String body1 = activities.getActivities().get(1).getBody();
+            String body2 = activities.getActivities().get(2).getBody();
+
+            FileOutputStream fileOutputStream = new FileOutputStream(new File("tweets"));
+            
+            fileOutputStream.write(body0.getBytes("UTF-8"));
+            fileOutputStream.write(body1.getBytes("UTF-8"));
+            fileOutputStream.write(body2.getBytes("UTF-8"));
+            
+            
+        } finally {
+            //text.close();
         }
     }
     
