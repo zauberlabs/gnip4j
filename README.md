@@ -10,7 +10,6 @@ from the data from the Java language.
    * Minimal dependencies: 
       * The [Jackson JSON library](http://jackson.codehaus.org/) is the only requiered dependecy
       * Optionally if `slf4-api` is present in the classpath, logging is supported.
-      * Optionally [Apache HttpClient](http://hc.apache.org/httpcomponents-client-ga/) is supported. 
    * Out-of-the-box gzip support
    * Push model via Streaming (asynchronous processing)
    * Error handling support (and exponential-backoff reconnections)
