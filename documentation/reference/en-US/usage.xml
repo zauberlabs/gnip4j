@@ -1,88 +1,100 @@
-<?xml version='1.0' encoding='utf-8' ?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-]>
-<chapter xml:id="usage" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>API Usage</title>
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter xml:id="usage">
+  <title>API Usage</title>
 
-    <para>
-    Gnip4j provides an anemic interface to access Gnip services. This interface is called
-    <literal>GnipFacade</literal> (<literal>DefaultGnipFacade</literal> is one of the available
-    implementations).
-    </para>    
+  <para>Gnip4j provides an anemic interface to access Gnip services. This
+  interface is called <literal>GnipFacade</literal>
+  (<literal>DefaultGnipFacade</literal> is one of the available
+  implementations).</para>
+
+  <section>
+    <title>Consuming activities from the PowerTrack Stream</title>
+
+    <para>To consume an <ulink
+    url="http://docs.gnip.com/w/page/23724581/Gnip-Full-Documentation#StreamingHTTP">activity
+    stream</ulink> you first need to know the subdomain name of the stream,
+    and it's data collector id.</para>
+
     <section>
-        <title>Consuming activities from the PowerTrack Stream</title>
-        <para>
-            To consume an <ulink url="http://docs.gnip.com/w/page/23724581/Gnip-Full-Documentation#StreamingHTTP">activity stream</ulink>
-            you first need to know the subdomain name of the stream, and it's data collector id. 
-        </para>
-        <section>
-            <title>Getting Stream domain and data collector id</title>
-            <para>
-                If you log-in into your gnip account, you should reach to the following screen:
-            </para>
-            <para>
-            <inlinemediaobject>
-                <imageobject>
-                    <imagedata fileref="./images/powertrackdashboard.jpg" 
-                        align="center" valign="middle"/>
-                </imageobject>
-            </inlinemediaobject>
-            </para>
-            <para>
-            In this example, the username is <literal>acme</literal>, the hostname <literal>acme-powertrack</literal>,
-            and the data collector id is <literal>1</literal>.
-            </para>
-        </section>
+      <title>Getting Stream domain and data collector id</title>
+
+      <para>If you log-in into your gnip account, you should reach to the
+      following screen:</para>
+
+      <para>
+        <inlinemediaobject>
+          <imageobject>
+            <imagedata align="center"
+                       fileref="./images/images/consoledashboard.png"
+                       valign="middle" />
+          </imageobject>
+        </inlinemediaobject>
+      </para>
+
+      <para>In this example, the username is <literal>acme</literal>, the
+      hostname <literal>acme-powertrack</literal>, and the data collector id
+      is <literal>1</literal>.</para>
     </section>
-    <section>
-        <title>Consuming the stream</title>
-        <para>
-        First you must have an instance of <literal>GnipFacade</literal>. Usually you will have
-        an unique instance of the facade and multiples streams for different data collectors.
-        </para>
-        <programlisting language="Java"><![CDATA[final String domain = "acme-powertrack";
-final String username = "acme";
+  </section>
+
+  <section>
+    <title>Consuming the stream</title>
+
+    <para>First you must have an instance of <literal>GnipFacade</literal>.
+    Usually you will have an unique instance of the facade and multiples
+    streams for different data collectors.</para>
+
+    <programlisting language="Java">final String username = "user@domain.com";
 final String password = "******";
 
 final GnipFacade gnip = new DefaultGnipFacade(
     new JRERemoteResourceProvider(
-            new InmutableGnipAuthentication(username, password)));]]></programlisting>
-    <para></para>
-<para><literal>JRERemoteResourceProvider</literal> is an implementation of <literal>RemoteResourceProvider</literal>
-that connects to the remote HTTP Server. If you are using gnip4j as a part of a integration-test / big unit test,
-you will probably want to mock that implementation so it does not connect to network.</para>    
-<para>
-    After creating the facade, you must retrieve a <literal>GnipStream</literal>.
-</para>
-<programlisting language="Java"><![CDATA[final long dataCollectorId = 1;
+            new InmutableGnipAuthentication(username, password)));</programlisting>
+
+    <para />
+
+    <para><literal>JRERemoteResourceProvider</literal> is an implementation of
+    <literal>RemoteResourceProvider</literal> that connects to the remote HTTP
+    Server. If you are using gnip4j as a part of a integration-test / big unit
+    test, you will probably want to mock that implementation so it does not
+    connect to network.</para>
+
+    <para>After creating the facade, you must retrieve a
+    <literal>GnipStream</literal>.</para>
+
+    <programlisting language="Java">final String account = "YourAccount";
+final String streamName = "prod";
 final AtomicInteger counter = new AtomicInteger();
+
 final StreamNotification observer = new StreamNotificationAdapter() {
     @Override
     public void notify(final Activity activity, final GnipStream stream) {
         final int i = counter.getAndIncrement();
         System.out.println(i + "-" + activity.getBody() 
                              + " " + activity.getGnip().getMatchingRules());
-        if (i >= 10) {
+        if (i &gt;= 10) {
             stream.close();
         }
     }
 };
-final GnipStream stream = gnip.createStream(domain, dataCollectorId, observer);
-stream.await();]]></programlisting>
-    <para>
-        When you don't want to process any more activity you <emphasis role="bold">MUST</emphasis> call
-        the <literal>close</literal> method to release resources (the http socket, some threads, JMX registrations). 
-    </para>
-    <para>
-        The <literal>await</literal> method is provided for those programs that need to wait
-        until the stream is closed (for example a simple java main or a test). 
-    </para>
-    <para>
-     As you may see, all the activities in the stream are notified using the observer interface 
-     <literal>StreamNotification</literal>.  
-    </para>
-    <programlisting language="Java"><![CDATA[public interface StreamNotification {
+final GnipStream stream = gnip.createStream(account, streamName, n);
+stream.await();</programlisting>
+
+    <para>When you don't want to process any more activity you <emphasis
+    role="bold">MUST</emphasis> call the <literal>close</literal> method to
+    release resources (the http socket, some threads, JMX
+    registrations).</para>
+
+    <para>The <literal>await</literal> method is provided for those programs
+    that need to wait until the stream is closed (for example a simple java
+    main or a test).</para>
+
+    <para>As you may see, all the activities in the stream are notified using
+    the observer interface <literal>StreamNotification</literal>.</para>
+
+    <programlisting language="Java">public interface StreamNotification {
     void notify(Activity activity, GnipStream stream);
     
     void notifyConnectionError(TransportGnipException e);
@@ -90,25 +102,25 @@ stream.await();]]></programlisting>
     void notifyReConnectionError(GnipException e);
     
     void notifyReConnectionAttempt(int attempt, long waitTime);
-}]]></programlisting>
-    <para>
-        The implementation <literal>StreamNotificationAdapter</literal> is provided to ease usage. 
-    </para>
-    <para>
-        gnip4j handles errors in the stream (for example: unexpected data format, network problems) reconnecting
-        using an exponential back off algorithm. User is notified about these actions.
-    </para>
-    </section>
-    <section>
-        <title>Activity Processing</title>
-        <para>
-         For the processing of the stream, one thread which  read from the remote socket is launched,
-         and it also parses the json. After the parsing, it delegates the execution to an 
-         <ulink url="http://download.oracle.com/javase/6/docs/api/java/util/concurrent/ExecutorService.html">ExecutorService</ulink>
-          </para>
-          <para>
-          If none executor service was provided, an internal executor service is created for that stream 
-          
-          </para>
-    </section>
+}</programlisting>
+
+    <para>The implementation <literal>StreamNotificationAdapter</literal> is
+    provided to ease usage.</para>
+
+    <para>gnip4j handles errors in the stream (for example: unexpected data
+    format, network problems) reconnecting using an exponential back off
+    algorithm. User is notified about these actions.</para>
+  </section>
+
+  <section>
+    <title>Activity Processing</title>
+
+    <para>For the processing of the stream, one thread which read from the
+    remote socket is launched, and it also parses the json. After the parsing,
+    it delegates the execution to an <ulink
+    url="http://download.oracle.com/javase/6/docs/api/java/util/concurrent/ExecutorService.html">ExecutorService</ulink></para>
+
+    <para>If none executor service was provided, an internal executor service
+    is created for that stream</para>
+  </section>
 </chapter>

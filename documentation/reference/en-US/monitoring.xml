@@ -1,52 +1,74 @@
-<?xml version='1.0' encoding='utf-8' ?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-]>
-<chapter xml:id="monitoring" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Monitoring</title>
-    
-    <para>
-        Monitoring is an important part of any piece of software. 
-    </para>
-    <section>
-        <title>Recollecting Stats</title>
-        <para>
-            By default, <literal>DefaultGnipFacade</literal> stream's collects stats about the state of the stream.
-            
-            These are the collected metrics:
-            <itemizedlist>
-                <listitem><para>Transfered Bytes</para></listitem>
-                <listitem><para>Last Transfered Bytes Date</para></listitem>
-                <listitem><para>Transfered Activities</para></listitem>
-                <listitem><para>Last Transfered Activities Date</para></listitem>
-                <listitem><para>Number of reconnection attempt</para></listitem>
-                <listitem><para>Last  reconnection attempt Date</para></listitem>
-                <listitem><para>Number of successful reconnections</para></listitem>
-                <listitem><para>Last successful reconnection Date</para></listitem>
-           </itemizedlist>
-           Example: 
-        </para>
-<programlisting language="Java"><![CDATA[final GnipStream stream = ...;
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter xml:id="monitoring">
+  <title>Monitoring</title>
+
+  <para>Monitoring is an important part of any piece of software.</para>
+
+  <section>
+    <title>Recollecting Stats</title>
+
+    <para>By default, <literal>DefaultGnipFacade</literal> stream's collects
+    stats about the state of the stream. These are the collected metrics:
+    <itemizedlist>
+        <listitem>
+          <para>Transfered Bytes</para>
+        </listitem>
+
+        <listitem>
+          <para>Last Transfered Bytes Date</para>
+        </listitem>
+
+        <listitem>
+          <para>Transfered Activities</para>
+        </listitem>
+
+        <listitem>
+          <para>Last Transfered Activities Date</para>
+        </listitem>
+
+        <listitem>
+          <para>Number of reconnection attempt</para>
+        </listitem>
+
+        <listitem>
+          <para>Last reconnection attempt Date</para>
+        </listitem>
+
+        <listitem>
+          <para>Number of successful reconnections</para>
+        </listitem>
+
+        <listitem>
+          <para>Last successful reconnection Date</para>
+        </listitem>
+      </itemizedlist> Example:</para>
+
+    <programlisting language="Java">final GnipStream stream = ...;
 final StreamStats stats = stream.getStreamStats();
 System.out.println("Bytes: " + stats.getTransferedBytes());
 System.out.println("Activities: " + stats.getTransferedActivities());
-System.out.println("Last Activity Date: " + new Date(stats.getLastTransferedActivityDate()));]]></programlisting>
-    </section>
-    <section>
-        <title>JMX</title>
-        <para>
-            The stream's stats is exported using JMX by default (if platform supports it).
-            These stats are located in the MBean named <literal>com.zaubersoftware.gnip4j.streams.DDDDDDD-ID</literal>
-            where <literal>DDDDDDD</literal> is the stream domain, and <literal>ID</literal> is the collector's id.
-        </para>
-        <inlinemediaobject>
-                <imageobject>
-                    <imagedata fileref="./images/jmxconsole.png" 
-                        align="center" valign="middle"/>
-                </imageobject>
-        </inlinemediaobject>
-        <para>
-            JMX monitoring can be turned off using <literal>facade.setUseJMX(false)</literal>.
-        </para>
-    </section>
+System.out.println("Last Activity Date: " + new Date(stats.getLastTransferedActivityDate()));</programlisting>
+  </section>
+
+  <section>
+    <title>JMX</title>
+
+    <para>The stream's stats is exported using JMX by default (if platform
+    supports it). These stats are located in the MBean named
+    <literal>com.zaubersoftware.gnip4j.streams.DDDDDDD-ID</literal> where
+    <literal>DDDDDDD</literal> is the stream domain, and <literal>ID</literal>
+    is the collector's id.</para>
+
+    <inlinemediaobject>
+      <imageobject>
+        <imagedata align="center" fileref="./images/images/jmxconsole.png"
+                   valign="middle" />
+      </imageobject>
+    </inlinemediaobject>
+
+    <para>JMX monitoring can be turned off using
+    <literal>facade.setUseJMX(false)</literal>.</para>
+  </section>
 </chapter>
