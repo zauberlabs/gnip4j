@@ -20,7 +20,7 @@ from the data from the Java language.
 
 For more information refer to the Gnip4j Reference Guide. Available formats:
  
-   * [[Gnip4j Reference Documentation]]
+   * [https://github.com/zauberlabs/gnip4j/wiki/Reference]
  
 ## Maven Integration
 
