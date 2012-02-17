@@ -65,32 +65,24 @@ If you need logging adding `slf4j` as a dependency.
 ### Consuming ten Activities from the stream
    
 ```java
-    final String domain = "acme-powertrack";
-    final String username = "acme";
-    final String password = "password";    
-
-    final GnipFacade gnip = new DefaultGnipFacade(
-            new JRERemoteResourceProvider(
-                    new InmutableGnipAuthentication(username, password)));    
-
-    System.out.println("-- Creating stream");
+    final String account = "YourAccount";
+    final String streamName = "prod";
     final AtomicInteger counter = new AtomicInteger();
-    final StreamNotificationAdapter observer = new StreamNotificationAdapter() {
-        @Override
-        public void notify(final Activity activity, final GnipStream stream) {
-            final int i = counter.getAndIncrement();
-            if (i >= 10) {
-                System.out.println("-- Closing stream.");
-                stream.close();
-            }
-            System.out.println(i + "-" + activity.getBody() 
-                                 + " " + activity.getGnip().getMatchingRules());
+
+    final StreamNotification observer = new StreamNotificationAdapter() {
+      @Override
+      public void notify(final Activity activity, final GnipStream stream) {
+        final int i = counter.getAndIncrement();
+        System.out.println(i + "-" + activity.getBody() 
+                             + " " + activity.getGnip().getMatchingRules());
+        if (i >= 10) {
+            stream.close();
         }
+      }
     };
-    final GnipStream stream = gnip.createStream(domain, 1, observer);
-    System.out.println("-- Awaiting for stream to terminate");
+    
+    final GnipStream stream = gnip.createStream(account, streamName, n);
     stream.await();
-    System.out.println("-- Shutting down");
 ```
 
 ## How To Contribute
