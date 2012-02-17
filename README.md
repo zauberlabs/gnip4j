@@ -19,11 +19,9 @@ from the data from the Java language.
 ## How To use gnip4j
 
 For more information refer to the Gnip4j Reference Guide. Available formats:
-
- * [HTML Multiples pages](http://code.zaubersoftware.com/gnip4j/reference/current/html/index.html)
- * [HTML Single page](http://code.zaubersoftware.com/gnip4j/reference/current/html_single/index.html)
- * [PDF](http://code.zaubersoftware.com/gnip4j/reference/current/pdf/gnip4j-reference.pdf) 
-
+ 
+   * [[Gnip4j Reference Documentation]]
+ 
 ## Maven Integration
 
 Add to your dependency Managment:
