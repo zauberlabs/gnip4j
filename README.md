@@ -91,6 +91,11 @@ If you need logging adding `slf4j` as a dependency.
 
 Had an Issue? Fill it in https://github.com/zauberlabs/gnip4j/issues .
 
+## Get in Contact
+
+If you want to get in contact with us, or people interested in the project, please visit our group at
+http://groups.google.com/group/gnip4j
+
 ## Who is using gnip4j?
 
 Gnip4j was developed by [Zauber](http://www.zaubersoftware.com/), a software boutique & lab based
