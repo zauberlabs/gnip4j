@@ -53,7 +53,7 @@ public final class StreamTestDriver {
             throw new IllegalArgumentException("Missing gnip.password");
         }
         if(account == null) {
-            throw new IllegalArgumentException("Missing gnip.domain");
+            throw new IllegalArgumentException("Missing gnip.account");
         }
         if(streamName == null) {
             throw new IllegalArgumentException("Missing gnip.stream");
