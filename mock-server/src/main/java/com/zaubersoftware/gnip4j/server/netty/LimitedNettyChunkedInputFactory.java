@@ -15,7 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.server.netty;
 
-import com.zaubersoftware.gnip4j.server.GnipServer;
+import java.io.InputStream;
+
 import com.zaubersoftware.gnip4j.server.GnipServerFactory;
 
 /**
@@ -24,14 +25,25 @@ import com.zaubersoftware.gnip4j.server.GnipServerFactory;
  * @author Guido Marucci Blas
  * @since 11/11/2011
  */
-public final class NettyGnipServerFactory implements GnipServerFactory {
+public final class LimitedNettyChunkedInputFactory extends NettyChunkedInputFactory{
 
+    private final int numberOfChunks;
+    
+    /**
+     * 
+     * Creates the NettyHandlerAggregator.
+     * @param limitedActivities
+     * @param timesToStart the times that the mock server will start and shutdown client's connections.
+     */
+    public LimitedNettyChunkedInputFactory(final InputStream limitedActivities,
+            final int numberOfChunks) {
+        super(limitedActivities);
+        this.numberOfChunks = numberOfChunks;
+    }
+    
     @Override
-    public GnipServer createServer(final int port, final NettyChunkedInputFactory handlerFactory) {
-        if (handlerFactory == null) {
-            throw new IllegalArgumentException("The handlerFactory cannot be null");
-        }
-        return new NettyGnipServer(port, handlerFactory);
+    public GnipChunkedInput getChunkedInput() {
+       return new GnipChunkedInput(new NextChunkLimited(getActivities(), numberOfChunks));
     }
 
 }

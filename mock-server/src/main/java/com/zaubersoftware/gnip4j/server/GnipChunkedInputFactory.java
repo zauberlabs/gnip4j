@@ -13,25 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.zaubersoftware.gnip4j.server;
 
-import com.zaubersoftware.gnip4j.server.netty.NettyChunkedInputFactory;
+import com.zaubersoftware.gnip4j.server.netty.GnipChunkedInput;
+import com.zaubersoftware.gnip4j.server.netty.HttpGnipServerHandler;
 
 /**
- * A factory of {@link GnipServer}
- *
- * @author Guido Marucci Blas
- * @since 11/11/2011
+ * 
+ * Factory that knows how to creates a {@link HttpGnipServerHandler}  
+ * 
+ * 
+ * @author Ignacio De Maio
+ * @since Jan 10, 2012
  */
-public interface GnipServerFactory {
+public interface GnipChunkedInputFactory {
 
-    /**
-     * Creates a new {@link GnipServer}
-     *
-     * @param port The port to which the socket will be binded.
-     * @param handlerFactory 
-     * @return A new {@link GnipServer} that needs to be started.
-     */
-    GnipServer createServer(int port, NettyChunkedInputFactory handlerFactory);
+    public GnipChunkedInput getChunkedInput();
 }

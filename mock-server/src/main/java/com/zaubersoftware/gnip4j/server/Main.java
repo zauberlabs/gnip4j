@@ -17,7 +17,7 @@ package com.zaubersoftware.gnip4j.server;
 
 import java.io.InputStream;
 
-import com.zaubersoftware.gnip4j.server.netty.NettyGnipServerFactory;
+import com.zaubersoftware.gnip4j.server.netty.MockServer;
 
 /**
  * Main entry point to start the {@link GnipServer}
@@ -29,14 +29,12 @@ public final class Main {
 
     private static final int DEFAUL_SERVER_PORT = 8080;
     private static final InputStream ACTIVITIES = Main.class.getClassLoader().getResourceAsStream(
-            "com/zaubersoftware/gnip4j/server/activity/activities.json");
+            //"com/zaubersoftware/gnip4j/server/activity/activities.json");
+            "com/zaubersoftware/gnip4j/server/activity/unlimitedActivity.json");
 
-    public static void main(final String[] args) {
-        final GnipServerFactory gnipServerFactory = new NettyGnipServerFactory();
-        final GnipServer gnipServer = gnipServerFactory.createServer(DEFAUL_SERVER_PORT, ACTIVITIES);
-
-        gnipServer.start();
-        System.out.println("Gnip server started at port " + DEFAUL_SERVER_PORT);
+    public static void main(final String[] args) throws InterruptedException  {
+               final MockServer mockServer = new MockServer();
+               mockServer.startLimited(ACTIVITIES, 1000);
     }
 
 }

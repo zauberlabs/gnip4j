@@ -15,12 +15,17 @@
  */
 package com.zaubersoftware.gnip4j.server.netty;
 
-import static org.jboss.netty.handler.codec.http.HttpHeaders.Names.*;
-import static org.jboss.netty.handler.codec.http.HttpMethod.*;
-import static org.jboss.netty.handler.codec.http.HttpResponseStatus.*;
-import static org.jboss.netty.handler.codec.http.HttpVersion.*;
-
-import java.util.Collection;
+import static org.jboss.netty.handler.codec.http.HttpHeaders.Names.CONTENT_TYPE;
+import static org.jboss.netty.handler.codec.http.HttpHeaders.Names.LOCATION;
+import static org.jboss.netty.handler.codec.http.HttpHeaders.Names.TRANSFER_ENCODING;
+import static org.jboss.netty.handler.codec.http.HttpMethod.GET;
+import static org.jboss.netty.handler.codec.http.HttpResponseStatus.BAD_REQUEST;
+import static org.jboss.netty.handler.codec.http.HttpResponseStatus.INTERNAL_SERVER_ERROR;
+import static org.jboss.netty.handler.codec.http.HttpResponseStatus.METHOD_NOT_ALLOWED;
+import static org.jboss.netty.handler.codec.http.HttpResponseStatus.MOVED_PERMANENTLY;
+import static org.jboss.netty.handler.codec.http.HttpResponseStatus.NOT_FOUND;
+import static org.jboss.netty.handler.codec.http.HttpResponseStatus.OK;
+import static org.jboss.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.jboss.netty.channel.Channel;
@@ -36,6 +41,7 @@ import org.jboss.netty.handler.codec.http.DefaultHttpResponse;
 import org.jboss.netty.handler.codec.http.HttpRequest;
 import org.jboss.netty.handler.codec.http.HttpResponse;
 import org.jboss.netty.handler.codec.http.HttpResponseStatus;
+import org.jboss.netty.handler.stream.ChunkedInput;
 import org.jboss.netty.util.CharsetUtil;
 
 /**
@@ -47,18 +53,10 @@ import org.jboss.netty.util.CharsetUtil;
  */
 public class HttpGnipServerHandler extends SimpleChannelUpstreamHandler {
 
-    private final Collection<String> activities;
+    private final GnipChunkedInput chunkedInput;
 
-    /**
-     * Creates the HttpGnipServerHandler.
-     *
-     * @param activities
-     */
-    public HttpGnipServerHandler(final Collection<String> activities) {
-        if (activities == null || activities.isEmpty()) {
-            throw new IllegalArgumentException("The collection of activities cannot be null or empty");
-        }
-        this.activities = activities;
+    public HttpGnipServerHandler(final GnipChunkedInput gnipChunkedInput) {
+        this.chunkedInput = gnipChunkedInput;
     }
 
     @Override
@@ -77,7 +75,7 @@ public class HttpGnipServerHandler extends SimpleChannelUpstreamHandler {
             response.setChunked(true);
             final Channel ch = e.getChannel();
             ch.write(response);
-            ch.write(new GnipChunkedInput(activities));
+            ch.write(getChunkedInput());
         } else if (uri.equals("/")) {
             final HttpResponse response = new DefaultHttpResponse(HTTP_1_1, OK);
             response.setStatus(MOVED_PERMANENTLY);
@@ -95,10 +93,27 @@ public class HttpGnipServerHandler extends SimpleChannelUpstreamHandler {
         }
     }
 
+    public ChunkedInput getChunkedInput() {
+        return chunkedInput;
+    }
+
     @Override
     public void channelClosed(final ChannelHandlerContext ctx, final ChannelStateEvent e) throws Exception {
         super.channelClosed(ctx, e);
-        System.out.println("HOLAAAAAAAAA!");
+        System.out.println("Proxy Server Disconnect");
+            
+    }
+    @Override
+    public void channelConnected(final ChannelHandlerContext ctx, final ChannelStateEvent e) throws Exception {
+        super.channelConnected(ctx, e);
+    }
+    
+    @Override
+    public void channelOpen(final ChannelHandlerContext ctx, final ChannelStateEvent e) throws Exception {
+        final Channel channel = e.getChannel();
+        NettyGnipServer.allChannels.add(channel);
+        chunkedInput.setChannel(channel);
+        super.channelOpen(ctx, e);
     }
 
     @Override
@@ -110,7 +125,7 @@ public class HttpGnipServerHandler extends SimpleChannelUpstreamHandler {
             return;
         }
 
-        cause.printStackTrace();
+        //cause.printStackTrace();
         if (ch.isConnected()) {
             sendError(ctx, INTERNAL_SERVER_ERROR);
         }

@@ -25,4 +25,6 @@ public interface GnipServer {
 
     public void start();
 
+    public void shutdown();
+
 }
