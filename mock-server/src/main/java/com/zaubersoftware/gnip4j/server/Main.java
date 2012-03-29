@@ -34,7 +34,7 @@ public final class Main {
 
     public static void main(final String[] args) throws InterruptedException  {
                final MockServer mockServer = new MockServer();
-               mockServer.startLimited(ACTIVITIES, 1000);
+               mockServer.start(ACTIVITIES);
     }
 
 }

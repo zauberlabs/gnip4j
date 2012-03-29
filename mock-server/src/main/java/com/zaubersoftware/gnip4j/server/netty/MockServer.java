@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011 Zauber S.A. <http://www.zaubersoftware.com/>
+ * Copyright (c) 2011-2012 Zauber S.A. <http://www.zaubersoftware.com/>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,6 @@ public class MockServer {
 
     private static GnipServer gnipServer;
     private final int DEFAUL_SERVER_PORT = 8080;
-    private InputStream activities;
     private NettyChunkedInputFactory chunkedInputFactory;
    
     /**
@@ -68,7 +67,4 @@ public class MockServer {
         gnipServer.shutdown();
     }
     
-    public void setActivities(final InputStream activities) {
-        this.activities = activities;
-    }
 }
