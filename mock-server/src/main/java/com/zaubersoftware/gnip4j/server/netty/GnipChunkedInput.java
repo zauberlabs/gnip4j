@@ -15,12 +15,7 @@
  */
 package com.zaubersoftware.gnip4j.server.netty;
 
-import static org.jboss.netty.buffer.ChannelBuffers.*;
-
-import java.util.Collection;
-import java.util.Iterator;
-
-import org.jboss.netty.handler.codec.http.DefaultHttpChunk;
+import org.jboss.netty.channel.Channel;
 import org.jboss.netty.handler.stream.ChunkedInput;
 
 /**
@@ -32,18 +27,13 @@ import org.jboss.netty.handler.stream.ChunkedInput;
  */
 public final class GnipChunkedInput implements ChunkedInput {
 
-    private final Collection<String> activities;
-    private Iterator<String> iterator;
+    private final NextChunkStrategy nextChunkStrategy;
 
     /**
      * Creates the GnipChunkedInput.
      */
-    public GnipChunkedInput(final Collection<String> activities) {
-        if (activities == null || activities.isEmpty()) {
-            throw new IllegalArgumentException("The collection of activities cannot be null or empty");
-        }
-        this.activities = activities;
-        this.iterator = activities.iterator();
+    public GnipChunkedInput(final NextChunkStrategy nextChunkStrategy) {
+        this.nextChunkStrategy = nextChunkStrategy;
     }
 
     @Override
@@ -53,12 +43,7 @@ public final class GnipChunkedInput implements ChunkedInput {
 
     @Override
     public Object nextChunk() throws Exception {
-        if (iterator.hasNext() == false) {
-            iterator = activities.iterator();
-        }
-        final String activity = iterator.next();
-        final DefaultHttpChunk chunk = new DefaultHttpChunk(wrappedBuffer(activity.getBytes("UTF-8")));
-        return chunk;
+        return nextChunkStrategy.nextChunk();
     }
 
     @Override
@@ -71,4 +56,7 @@ public final class GnipChunkedInput implements ChunkedInput {
 
     }
 
+    public void setChannel(final Channel channel) {
+        nextChunkStrategy.setChannel(channel);
+    }
 }

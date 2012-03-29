@@ -27,6 +27,7 @@ import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.zaubersoftware.gnip4j.api.impl.DefaultGnipStream;
@@ -96,6 +97,14 @@ public final class JSONDeserializationTest {
     @Test
     public void testDeserializeWithPolygonAndPoint() throws JsonParseException, IOException{
         final InputStream is = getClass().getClassLoader().getResourceAsStream("com/zaubersoftware/gnip4j/payload/deserialize/geolocated-tweets.json");
+/*=======
+    @Ignore
+    public void testNPE() throws Exception {
+        final InputStream is = getClass().getClassLoader().getResourceAsStream(
+            "com/zaubersoftware/gnip4j/payload/payload-twitter-entities.js");
+        final InputStream expectedIs = getClass().getClassLoader().getResourceAsStream(
+            "com/zaubersoftware/gnip4j/payload/payload-twitter-entities.xml");
+>>>>>>> Fanout*/
         
         try  {
             final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);

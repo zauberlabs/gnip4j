@@ -15,15 +15,18 @@
  */
 package com.zaubersoftware.gnip4j.server.netty;
 
-import static org.jboss.netty.channel.Channels.*;
+import static org.jboss.netty.channel.Channels.pipeline;
 
 import java.net.InetSocketAddress;
-import java.util.Collection;
 import java.util.concurrent.Executors;
 
 import org.jboss.netty.bootstrap.ServerBootstrap;
+import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelPipeline;
 import org.jboss.netty.channel.ChannelPipelineFactory;
+import org.jboss.netty.channel.group.ChannelGroup;
+import org.jboss.netty.channel.group.ChannelGroupFuture;
+import org.jboss.netty.channel.group.DefaultChannelGroup;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 import org.jboss.netty.handler.codec.http.HttpRequestDecoder;
 import org.jboss.netty.handler.codec.http.HttpResponseEncoder;
@@ -42,15 +45,17 @@ public final class NettyGnipServer implements GnipServer {
 
     private static final class GnipPipelineFactory implements ChannelPipelineFactory {
 
-        private final Collection<String> activities;
-
+        private final NettyChunkedInputFactory chunkedInputFactory;
         /**
          * Creates the GnipPipelineFactory.
+         * @param nettyGnipServer 
+         * @param nettyGnipServer 
          *
          * @param activities
+         * @param timesToStart 
          */
-        public GnipPipelineFactory(final Collection<String> activities) {
-            this.activities = activities;
+        public GnipPipelineFactory(final NettyChunkedInputFactory chunkedInputFactory) {
+            this.chunkedInputFactory = chunkedInputFactory;
         }
 
         @Override
@@ -60,41 +65,52 @@ public final class NettyGnipServer implements GnipServer {
             pipeline.addLast("decoder", new HttpRequestDecoder());
             pipeline.addLast("encoder", new HttpResponseEncoder());
             pipeline.addLast("chunkedWriter", new ChunkedWriteHandler());
-
-            pipeline.addLast("handler", new HttpGnipServerHandler(activities));
-
+            pipeline.addLast("handler", new HttpGnipServerHandler(chunkedInputFactory.getChunkedInput()));
+            
             return pipeline;
         }
 
     }
 
+    static final ChannelGroup allChannels = new DefaultChannelGroup("time-server");
     private final int port;
     private final ServerBootstrap bootstrap;
+    public static Channel boundedChannel;
+    private final NioServerSocketChannelFactory channelFactory;
 
     /**
      * Creates the NettyGnipServer.
      *
      * @param port
      * @param activities The collection of activities to be served to the client in a loop.
+     * @param timesToStart 
      */
-    NettyGnipServer(final int port, final Collection<String> activities) {
-        if (activities == null || activities.isEmpty()) {
-            throw new IllegalArgumentException("The collection of activities cannot be null or empty");
-        }
+    NettyGnipServer(final int port, final NettyChunkedInputFactory handlerFactory) {
+        
         this.port = port;
 
         // Configure the server.
-        bootstrap = new ServerBootstrap(new NioServerSocketChannelFactory(
+        channelFactory = new NioServerSocketChannelFactory(
             Executors.newCachedThreadPool(),
-            Executors.newCachedThreadPool()));
+            Executors.newCachedThreadPool());
+        bootstrap = new ServerBootstrap(channelFactory);
 
         // Set up the event pipeline factory.
-        bootstrap.setPipelineFactory(new GnipPipelineFactory(activities));
+        final GnipPipelineFactory pipelineFactory = new GnipPipelineFactory(handlerFactory);
+        bootstrap.setPipelineFactory(pipelineFactory);
     }
 
     @Override
     public void start() {
-        bootstrap.bind(new InetSocketAddress(port));
+        boundedChannel = bootstrap.bind(new InetSocketAddress(port));
+        allChannels.add(boundedChannel);
     }
 
+    @Override
+    public void shutdown() {
+        final ChannelGroupFuture future = allChannels.close();
+        future.awaitUninterruptibly();
+        channelFactory.releaseExternalResources();
+        //bootstrap.releaseExternalResources();
+    }
 }

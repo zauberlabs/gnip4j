@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.zaubersoftware.gnip4j.server;
 
-import java.io.InputStream;
+import com.zaubersoftware.gnip4j.server.netty.NettyChunkedInputFactory;
 
 /**
  * A factory of {@link GnipServer}
@@ -29,12 +30,8 @@ public interface GnipServerFactory {
      * Creates a new {@link GnipServer}
      *
      * @param port The port to which the socket will be binded.
-     * @param activities An input stream of activities. The stream should contain a JSON activity per line.
-     * This stream will be read and kept in memory in order to serve the activities to the clients. Once
-     * all the activities have been served, the server will start serving the first activity again.
+     * @param handlerFactory 
      * @return A new {@link GnipServer} that needs to be started.
      */
-    GnipServer createServer(int port, InputStream activities);
-
-
+    GnipServer createServer(int port, NettyChunkedInputFactory handlerFactory);
 }

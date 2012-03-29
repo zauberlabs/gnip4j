@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2012 Zauber S.A. <http://www.zaubersoftware.com/>
+ * Copyright (c) 2011 Zauber S.A. <http://www.zaubersoftware.com/>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,16 +15,18 @@
  */
 package com.zaubersoftware.gnip4j.server;
 
+import com.zaubersoftware.gnip4j.server.netty.GnipChunkedInput;
+import com.zaubersoftware.gnip4j.server.netty.HttpGnipServerHandler;
+
 /**
- * A Gnip Server
- *
- * @author Guido Marucci Blas
- * @since 11/11/2011
+ * 
+ * Factory that knows how to creates a {@link HttpGnipServerHandler}  
+ * 
+ * 
+ * @author Ignacio De Maio
+ * @since Jan 10, 2012
  */
-public interface GnipServer {
+public interface GnipChunkedInputFactory {
 
-    public void start();
-
-    public void shutdown();
-
+    public GnipChunkedInput getChunkedInput();
 }
