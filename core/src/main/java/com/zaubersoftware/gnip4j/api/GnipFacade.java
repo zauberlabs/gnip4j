@@ -73,4 +73,6 @@ public interface GnipFacade {
      * @param rule The Rule object to add to the tracker.
      */
     void addRule(String account, String streamName, Rule rule);
+    
+    void deleteRule(String account, String streamName, Rule rule);
 }

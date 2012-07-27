@@ -145,6 +145,52 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
             }
         }
     }
+    
+    @Override
+    public final void deleteResource(final URI uri, final Object resource) throws AuthenticationGnipException,
+            TransportGnipException {
+        
+        OutputStream outStream = null;
+        try {
+            final URLConnection uc = uri.toURL().openConnection();
+            HttpURLConnection huc = null;
+            
+            if (uc instanceof HttpURLConnection) {
+                huc = (HttpURLConnection) uc;
+                huc.setRequestMethod("DELETE"); //to set HTTP method to DELETE
+            }
+            uc.setAllowUserInteraction(false);
+            uc.setDefaultUseCaches(false);
+            uc.setConnectTimeout(connectTimeout);
+            uc.setReadTimeout(readTimeout);
+            uc.setDoOutput(true); // Needed in order to make a POST request
+            uc.setRequestProperty("Accept-Encoding", "gzip, deflate"); 
+            uc.setRequestProperty("User-Agent", USER_AGENT);
+            uc.setRequestProperty("Authorization", "Basic " + encoder.encode(authentication));
+            uc.setRequestProperty("Content-type", "application/json");
+            doConfiguration(uc);
+            
+            outStream = uc.getOutputStream();
+            outStream.write(new ObjectMapper().writeValueAsString(resource).getBytes());
+            
+            if (huc != null) {
+                validateStatusLine(uri, huc.getResponseCode(), huc.getResponseMessage());
+            }
+            
+        } catch (final MalformedURLException e) {
+            throw new TransportGnipException(e);
+        } catch (final IOException e) {
+            throw new TransportGnipException(e);
+        } finally {
+            try {
+                if (outStream != null) {
+                    outStream.close();
+                }
+            } catch (final IOException e) {
+                // Nothing to be done here!
+            }
+        }
+    }  
 
     /** template method for configuring the URLConnection */
     protected void doConfiguration(final URLConnection uc) {
