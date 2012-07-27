@@ -175,6 +175,14 @@ public class DefaultGnipFacade implements GnipFacade {
         
         facade.postResource(baseUriStrategy.createRulesUri(account, streamName), rules);
     }
+    
+    @Override
+    public final void deleteRule(final String account, final String streamName, final Rule rule) {
+        Rules rules = new Rules();
+        rules.getRules().add(rule);
+        
+        facade.deleteResource(baseUriStrategy.createRulesUri(account, streamName), rules);
+    }
 
     public final boolean isUseJMX() {
         return useJMX;
