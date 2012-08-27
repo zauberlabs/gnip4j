@@ -61,6 +61,13 @@ public final class JMXTest {
             public void postResource(final URI uri, final Object resource) {
                 
             }
+
+			@Override
+			public void deleteResource(URI uri, Object resource)
+					throws AuthenticationGnipException, TransportGnipException {
+				// TODO Auto-generated method stub
+				
+			}
         };
         final GnipFacade f = new DefaultGnipFacade(resources);
         final GnipStream stream = f.createStream("acme", "stream", observer);
