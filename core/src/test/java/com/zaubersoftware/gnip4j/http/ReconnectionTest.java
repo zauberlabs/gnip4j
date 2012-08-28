@@ -147,6 +147,13 @@ class MockRemoteResourceProvider implements RemoteResourceProvider {
     public void postResource(final URI uri, final Object resource) {
 
     }
+
+	@Override
+	public void deleteResource(URI uri, Object resource)
+			throws AuthenticationGnipException, TransportGnipException {
+		// TODO Auto-generated method stub
+		
+	}
 }
 
 class MockExecutorService implements ExecutorService {
