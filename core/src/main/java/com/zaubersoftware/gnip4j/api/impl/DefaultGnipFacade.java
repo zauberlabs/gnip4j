@@ -174,7 +174,11 @@ public class DefaultGnipFacade implements GnipFacade {
     public final void addRule(final String account, final String streamName, final Rule rule) {
         Rules rules = new Rules();
         rules.getRules().add(rule);
-        
+        addRules(account, streamName, rules);
+    }
+    
+    @Override
+    public final void addRules(final String account, final String streamName, final Rules rules) {
         facade.postResource(baseUriStrategy.createRulesUri(account, streamName), rules);
     }
     
@@ -182,7 +186,11 @@ public class DefaultGnipFacade implements GnipFacade {
     public final void deleteRule(final String account, final String streamName, final Rule rule) {
         Rules rules = new Rules();
         rules.getRules().add(rule);
-        
+        deleteRules(account, streamName, rules);
+    }
+    
+    @Override
+    public final void deleteRules(final String account, final String streamName, final Rules rules) {
         facade.deleteResource(baseUriStrategy.createRulesUri(account, streamName), rules);
     }
 
