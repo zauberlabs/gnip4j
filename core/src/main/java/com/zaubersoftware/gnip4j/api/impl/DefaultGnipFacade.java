@@ -168,19 +168,39 @@ public class DefaultGnipFacade implements GnipFacade {
         }
     }
 
+    /* (non-Javadoc)
+     * @see com.zaubersoftware.gnip4j.api.GnipFacade#addRule(java.lang.String, java.lang.String, com.zaubersoftware.gnip4j.api.model.Rule)
+     */
     @Override
     public final void addRule(final String account, final String streamName, final Rule rule) {
         Rules rules = new Rules();
         rules.getRules().add(rule);
-        
+        addRules(account, streamName, rules);
+    }
+    
+    /* (non-Javadoc)
+     * @see com.zaubersoftware.gnip4j.api.GnipFacade#addRules(java.lang.String, java.lang.String, com.zaubersoftware.gnip4j.api.model.Rules)
+     */
+    @Override
+    public final void addRules(final String account, final String streamName, final Rules rules) {
         facade.postResource(baseUriStrategy.createRulesUri(account, streamName), rules);
     }
     
+    /* (non-Javadoc)
+     * @see com.zaubersoftware.gnip4j.api.GnipFacade#deleteRule(java.lang.String, java.lang.String, com.zaubersoftware.gnip4j.api.model.Rule)
+     */
     @Override
     public final void deleteRule(final String account, final String streamName, final Rule rule) {
         Rules rules = new Rules();
         rules.getRules().add(rule);
-        
+        deleteRules(account, streamName, rules);
+    }
+    
+    /* (non-Javadoc)
+     * @see com.zaubersoftware.gnip4j.api.GnipFacade#deleteRules(java.lang.String, java.lang.String, com.zaubersoftware.gnip4j.api.model.Rules)
+     */
+    @Override
+    public final void deleteRules(final String account, final String streamName, final Rules rules) {
         facade.deleteResource(baseUriStrategy.createRulesUri(account, streamName), rules);
     }
 
