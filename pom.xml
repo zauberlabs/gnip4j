@@ -101,7 +101,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
-					<encoding>ISO-8859-1</encoding>
+					<encoding>UTF-8</encoding>
 					<source>1.6</source>
 					<target>1.6</target>
 				</configuration>
@@ -134,7 +134,7 @@
 						<exclude>.gitignore</exclude>
 						<exclude>**/*.txt</exclude>
 					</excludes>
-					<encoding>iso-8859-1</encoding>
+					<encoding>UTF-8</encoding>
 					<strictCheck>true</strictCheck>
 				</configuration>
 				<executions>
