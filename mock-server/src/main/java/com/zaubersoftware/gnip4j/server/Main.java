@@ -21,19 +21,15 @@ import com.zaubersoftware.gnip4j.server.netty.MockServer;
 
 /**
  * Main entry point to start the {@link GnipServer}
- *
- * @author Guido Marucci Blas
- * @since 11/11/2011
  */
 public final class Main {
-
     private static final int DEFAUL_SERVER_PORT = 8080;
+
     private static final InputStream ACTIVITIES = Main.class.getClassLoader().getResourceAsStream(
-            //"com/zaubersoftware/gnip4j/server/activity/activities.json");
             "com/zaubersoftware/gnip4j/server/activity/unlimitedActivity.json");
 
     public static void main(final String[] args) throws InterruptedException  {
-               final MockServer mockServer = new MockServer();
+               final MockServer mockServer = new MockServer(DEFAUL_SERVER_PORT);
                mockServer.start(ACTIVITIES);
     }
 
