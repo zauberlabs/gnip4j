@@ -31,10 +31,10 @@ import org.codehaus.jackson.annotate.JsonProperty;
 @JsonAutoDetect
 public final class TwitterEntities{
     
-    private List<Urls> urls;
+    public List<Urls> urls;
     @JsonProperty(value = "user_mentions")
-    private List<UserMentions> userMentions;
-    private List<Hashtags> hashtags;
+    public List<UserMentions> userMentions;
+    public List<Hashtags> hashtags;
 
     /**
      * Gets the value of the urls property.
