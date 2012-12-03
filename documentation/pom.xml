@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>zauber-gnip4j-parent</artifactId>
-		<groupId>com.zaubersoftware.gnip4j</groupId>
+		<artifactId>gnip4j-parent</artifactId>
+		<groupId>com.rincaro</groupId>
 		<version>1.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.zaubersoftware.gnip4j.documentation</groupId>
+	<groupId>com.rincaro.gnip4j.documentation</groupId>
 	<artifactId>gnip4j-documentation-parent</artifactId>
 	<packaging>pom</packaging>
 	<name>Zauber::Gnip4j::Documentation Parent</name>

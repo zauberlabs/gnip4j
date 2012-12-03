@@ -6,16 +6,16 @@
 		<groupId>com.zaubersoftware.maven.poms</groupId>
 		<version>1.0.10</version>
 	</parent>
-	<name>Zauber::Gnip4j</name>
-	<groupId>com.zaubersoftware.gnip4j</groupId>
-	<artifactId>zauber-gnip4j-parent</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<name>com.rincaro.gnip4j</name>
+	<groupId>com.rincaro</groupId>
+	<artifactId>gnip4j-parent</artifactId>
+        <version>1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<scm>
-        <url>https://github.com/zaubersoftware/gnip4j</url>
-		<connection>scm:git:git@github.com:zaubersoftware/gnip4j.git</connection>
-		<developerConnection>scm:git:git@github.com:zaubersoftware/gnip4j.git</developerConnection>
+        <url>https://github.com/Rincaro/gnip4j</url>
+		<connection>scm:git:git@github.com:Rincaro/gnip4j.git</connection>
+		<developerConnection>scm:git:git@github.com:Rincaro/gnip4j.git</developerConnection>
 	</scm>
 
 	<licenses>
