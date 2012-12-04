@@ -18,30 +18,27 @@ package com.zaubersoftware.gnip4j.api.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * <p>Java class for anonymous complex type.
- *
- * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * <p>
+ * Java class for anonymous complex type.
+ * 
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
+ * 
  */
-public class Gnip{
+public class Gnip {
     private Language language;
-    @JsonProperty(value = "matching_rules")
-    private List<MatchingRules> matchingRules;
+    @JsonProperty(value = "matching_rules") private List<MatchingRules> matchingRules;
     private List<Url> urls;
-    @JsonProperty(value = "klout_score")
-    private Float kloutScore;
+    @JsonProperty(value = "klout_score") private Float kloutScore;
 
     /**
      * Gets the value of the language property.
-     *
-     * @return
-     *     possible object is
-     *     {@link Language }
-     *
+     * 
+     * @return possible object is {@link Language }
+     * 
      */
     public final Language getLanguage() {
         return language;
@@ -49,11 +46,10 @@ public class Gnip{
 
     /**
      * Sets the value of the language property.
-     *
+     * 
      * @param value
-     *     allowed object is
-     *     {@link Language }
-     *
+     *            allowed object is {@link Language }
+     * 
      */
     public final void setLanguage(final Language value) {
         language = value;
@@ -61,25 +57,24 @@ public class Gnip{
 
     /**
      * Gets the value of the matchingRules property.
-     *
+     * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the matchingRules property.
-     *
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for
+     * the matchingRules property.
+     * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getMatchingRules().add(newItem);
+     * getMatchingRules().add(newItem);
      * </pre>
-     *
-     *
+     * 
+     * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link MatchingRules }
-     *
-     *
+     * Objects of the following type(s) are allowed in the list {@link MatchingRules }
+     * 
+     * 
      */
     public final List<MatchingRules> getMatchingRules() {
         if (matchingRules == null) {
@@ -89,13 +84,13 @@ public class Gnip{
     }
 
     public final List<Url> getUrls() {
-        if (urls  == null) {
-            urls  = new ArrayList<Url>();
+        if (urls == null) {
+            urls = new ArrayList<Url>();
         }
         return urls;
     }
-    
+
     public final Float getKloutScore() {
-    	return kloutScore;
+        return kloutScore;
     }
 }

@@ -15,13 +15,13 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-
-
 /**
- * <p>Java class for anonymous complex type.
- *
- * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * <p>
+ * Java class for anonymous complex type.
+ * 
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
+ * 
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -32,20 +32,18 @@ package com.zaubersoftware.gnip4j.api.model;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
+ * 
+ * 
  */
-public final class MatchingRules{
+public final class MatchingRules {
     private String value;
     private String tag;
 
     /**
      * Gets the value of the value property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * 
+     * @return possible object is {@link String }
+     * 
      */
     public String getValue() {
         return value;
@@ -53,11 +51,10 @@ public final class MatchingRules{
 
     /**
      * Sets the value of the value property.
-     *
+     * 
      * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     *            allowed object is {@link String }
+     * 
      */
     public void setValue(final String value) {
         this.value = value;
@@ -65,11 +62,9 @@ public final class MatchingRules{
 
     /**
      * Gets the value of the tag property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * 
+     * @return possible object is {@link String }
+     * 
      */
     public String getTag() {
         return tag;
@@ -77,11 +72,10 @@ public final class MatchingRules{
 
     /**
      * Sets the value of the tag property.
-     *
+     * 
      * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     *            allowed object is {@link String }
+     * 
      */
     public void setTag(final String value) {
         tag = value;

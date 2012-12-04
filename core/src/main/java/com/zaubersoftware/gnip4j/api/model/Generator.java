@@ -15,25 +15,23 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-
-
 /**
- * <p>Java class for anonymous complex type.
- *
- * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * <p>
+ * Java class for anonymous complex type.
+ * 
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
+ * 
  */
-public final class Generator{
+public final class Generator {
     private String displayName;
     private String link;
 
     /**
      * Gets the value of the displayName property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * 
+     * @return possible object is {@link String }
+     * 
      */
     public String getDisplayName() {
         return displayName;
@@ -41,11 +39,10 @@ public final class Generator{
 
     /**
      * Sets the value of the displayName property.
-     *
+     * 
      * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     *            allowed object is {@link String }
+     * 
      */
     public void setDisplayName(final String value) {
         displayName = value;
@@ -53,11 +50,9 @@ public final class Generator{
 
     /**
      * Gets the value of the link property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * 
+     * @return possible object is {@link String }
+     * 
      */
     public String getLink() {
         return link;
@@ -65,11 +60,10 @@ public final class Generator{
 
     /**
      * Sets the value of the link property.
-     *
+     * 
      * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     *            allowed object is {@link String }
+     * 
      */
     public void setLink(final String value) {
         link = value;

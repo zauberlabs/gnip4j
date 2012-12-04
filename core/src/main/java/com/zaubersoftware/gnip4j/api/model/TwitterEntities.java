@@ -18,45 +18,43 @@ package com.zaubersoftware.gnip4j.api.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonAutoDetect;
-import org.codehaus.jackson.annotate.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * <p>Java class for anonymous complex type.
- *
- * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * <p>
+ * Java class for anonymous complex type.
+ * 
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
+ * 
  */
-@JsonAutoDetect
-public final class TwitterEntities{
-    
+@JsonAutoDetect public final class TwitterEntities {
+
     public List<Urls> urls;
-    @JsonProperty(value = "user_mentions")
-    public List<UserMentions> userMentions;
+    @JsonProperty(value = "user_mentions") public List<UserMentions> userMentions;
     public List<Hashtags> hashtags;
 
     /**
      * Gets the value of the urls property.
-     *
+     * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the urls property.
-     *
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for
+     * the urls property.
+     * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getUrls().add(newItem);
+     * getUrls().add(newItem);
      * </pre>
-     *
-     *
+     * 
+     * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Urls }
-     *
-     *
+     * Objects of the following type(s) are allowed in the list {@link Urls }
+     * 
+     * 
      */
     public List<Urls> getUrls() {
         if (urls == null) {
@@ -67,25 +65,24 @@ public final class TwitterEntities{
 
     /**
      * Gets the value of the userMentions property.
-     *
+     * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the userMentions property.
-     *
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for
+     * the userMentions property.
+     * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getUserMentions().add(newItem);
+     * getUserMentions().add(newItem);
      * </pre>
-     *
-     *
+     * 
+     * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link UserMentions }
-     *
-     *
+     * Objects of the following type(s) are allowed in the list {@link UserMentions }
+     * 
+     * 
      */
     public List<UserMentions> getUserMentions() {
         if (userMentions == null) {
@@ -96,25 +93,24 @@ public final class TwitterEntities{
 
     /**
      * Gets the value of the hashtags property.
-     *
+     * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the hashtags property.
-     *
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for
+     * the hashtags property.
+     * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getHashtags().add(newItem);
+     * getHashtags().add(newItem);
      * </pre>
-     *
-     *
+     * 
+     * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Hashtags }
-     *
-     *
+     * Objects of the following type(s) are allowed in the list {@link Hashtags }
+     * 
+     * 
      */
     public List<Hashtags> getHashtags() {
         if (hashtags == null) {

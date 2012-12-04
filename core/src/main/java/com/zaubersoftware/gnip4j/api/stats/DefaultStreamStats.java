@@ -15,7 +15,6 @@
  */
 package com.zaubersoftware.gnip4j.api.stats;
 
-
 /**
  * POJO implementation for {@link StreamStats}.
  * 
@@ -25,16 +24,16 @@ package com.zaubersoftware.gnip4j.api.stats;
 public class DefaultStreamStats implements ModifiableStreamStats {
     private long transferedBytes;
     private long transferedBytesDate;
-    
+
     private long transferedActivities;
     private long transferedActivitiesDate;
-    
+
     private int numberOfSucessfulReconnections;
     private long sucessfulReconnectionsDate;
-    
+
     private int numberOfReconnections;
     private long reconnectionDate;
-    
+
     @Override
     public final long getTransferedBytes() {
         return transferedBytes;
@@ -48,24 +47,24 @@ public class DefaultStreamStats implements ModifiableStreamStats {
     public final int getNumberOfSucessfulReconnections() {
         return numberOfSucessfulReconnections;
     }
-    
+
     @Override
     public final int getNumberOfReconnectionsAttempt() {
         return numberOfReconnections;
     }
-    
+
     @Override
     public final void incrementNumberOfSuccessfulReconnections() {
         numberOfSucessfulReconnections++;
         sucessfulReconnectionsDate = System.currentTimeMillis();
     }
-    
+
     @Override
     public final void incrementTransferedActivities() {
         transferedActivities++;
         transferedActivitiesDate = System.currentTimeMillis();
     }
-    
+
     @Override
     public final void incrementTransferedBytes() {
         transferedBytes++;
@@ -82,7 +81,7 @@ public class DefaultStreamStats implements ModifiableStreamStats {
         numberOfReconnections++;
         reconnectionDate = System.currentTimeMillis();
     }
-    
+
     @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();

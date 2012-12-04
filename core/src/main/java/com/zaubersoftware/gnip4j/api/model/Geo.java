@@ -15,16 +15,14 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-
 /**
  * <p>
  * Java class for anonymous complex type.
  * 
  * <p>
- * The following schema fragment specifies the expected content contained within
- * this class.
+ * The following schema fragment specifies the expected content contained within this class.
  */
-public class Geo{
+public class Geo {
     private Geometry coordinates;
     private String type;
 

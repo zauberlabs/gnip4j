@@ -25,14 +25,14 @@ public interface ModifiableStreamStats extends StreamStats {
 
     /** updates the number of succesful reconnections */
     void incrementNumberOfSuccessfulReconnections();
-    
+
     /** updates the number of connections attemps */
     void incrementNumberOfReconnectionsAttempt();
 
-    /** updates the number of  transfered activities */
+    /** updates the number of transfered activities */
     void incrementTransferedActivities();
 
-    /** updates the number of  transfered bytes */
+    /** updates the number of transfered bytes */
     void incrementTransferedBytes();
 
 }

@@ -19,7 +19,7 @@ import java.net.URI;
 
 /**
  * An strategy to generate {@link URI}s to connect against a Gnip endpoint.
- *
+ * 
  * @author Guido Marucci Blas
  * @since 11/11/2011
  */
@@ -27,7 +27,7 @@ public interface UriStrategy {
 
     /**
      * Generates a {@link URI} to connect against a Gnip endpoint to consume the activity stream.
-     *
+     * 
      * @param domain
      * @param dataCollectorId
      * @return
@@ -36,7 +36,7 @@ public interface UriStrategy {
 
     /**
      * Generates a {@link URI} to connect against a Gnip endpoint to get/modify rules.
-     *
+     * 
      * @param domain
      * @param dataCollectorId
      * @return

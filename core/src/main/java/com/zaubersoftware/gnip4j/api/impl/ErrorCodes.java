@@ -17,8 +17,8 @@ package com.zaubersoftware.gnip4j.api.impl;
 
 /**
  * Error codes
- *
- *
+ * 
+ * 
  * @author Juan F. Codagnone
  * @since May 20, 2011
  */

@@ -15,23 +15,21 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-
-
 /**
- * <p>Java class for anonymous complex type.
+ * <p>
+ * Java class for anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
  */
-public final class InReplyTo{
+public final class InReplyTo {
     private String link;
 
     /**
      * Gets the value of the link property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getLink() {
         return link;
@@ -41,9 +39,8 @@ public final class InReplyTo{
      * Sets the value of the link property.
      * 
      * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *            allowed object is {@link String }
+     * 
      */
     public void setLink(final String value) {
         this.link = value;

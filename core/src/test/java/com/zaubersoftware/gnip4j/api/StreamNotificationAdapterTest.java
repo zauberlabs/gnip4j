@@ -19,10 +19,9 @@ import org.junit.Test;
 
 import com.zaubersoftware.gnip4j.api.model.Activity;
 
-
 /**
  * Test for {@link StreamNotification}
- *
+ * 
  * @author Juan F. Codagnone
  * @since May 20, 2011
  */

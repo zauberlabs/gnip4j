@@ -15,7 +15,6 @@
  */
 package com.zaubersoftware.gnip4j.api.support.logging.spi;
 
-
 /**
  * {@link LoggerFactory} implementation
  * 

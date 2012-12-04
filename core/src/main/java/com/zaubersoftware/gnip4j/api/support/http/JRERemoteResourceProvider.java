@@ -28,8 +28,7 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
-import org.codehaus.jackson.map.ObjectMapper;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
@@ -49,44 +48,43 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
     private final Base64PasswordEncoder encoder = Base64PasswordEncoderFactory.getEncoder();
     private final int connectTimeout = 10000;
     private final int readTimeout = 35000;
-    
+
     /** Creates the JRERemoteResourceProvider. */
     public JRERemoteResourceProvider(final GnipAuthentication authentication) {
-        if(authentication == null) {
+        if (authentication == null) {
             throw new IllegalArgumentException(ErrorCodes.ERROR_NULL_AUTH);
         }
-        
+
         this.authentication = authentication;
-        if(CookieHandler.getDefault() == null) {
+        if (CookieHandler.getDefault() == null) {
             CookieHandler.setDefault(new CookieManager());
         }
     }
-    
+
     @Override
-    public final InputStream getResource(final URI uri) throws AuthenticationGnipException,
-            TransportGnipException {
-        
+    public final InputStream getResource(final URI uri) throws AuthenticationGnipException, TransportGnipException {
+
         try {
             final URLConnection uc = uri.toURL().openConnection();
             HttpURLConnection huc = null;
-            
-            if(uc instanceof HttpURLConnection) {
+
+            if (uc instanceof HttpURLConnection) {
                 huc = (HttpURLConnection) uc;
             }
             uc.setAllowUserInteraction(false);
             uc.setDefaultUseCaches(false);
             uc.setConnectTimeout(connectTimeout);
             uc.setReadTimeout(readTimeout);
-            uc.setRequestProperty("Accept-Encoding", "gzip, deflate"); 
+            uc.setRequestProperty("Accept-Encoding", "gzip, deflate");
             uc.setRequestProperty("User-Agent", USER_AGENT);
-            uc.setRequestProperty ("Authorization", "Basic " + encoder.encode(authentication));
+            uc.setRequestProperty("Authorization", "Basic " + encoder.encode(authentication));
             doConfiguration(uc);
             uc.connect();
-            
-            if(huc != null) {
+
+            if (huc != null) {
                 validateStatusLine(uri, huc.getResponseCode(), huc.getResponseMessage());
             }
-            InputStream is = uc.getInputStream(); 
+            InputStream is = uc.getInputStream();
             final String encoding = uc.getContentEncoding();
             if (encoding != null && encoding.equalsIgnoreCase("gzip")) {
                 is = new GZIPInputStream(is);
@@ -100,16 +98,16 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
             throw new TransportGnipException(e);
         }
     }
-    
+
     @Override
     public final void postResource(final URI uri, final Object resource) throws AuthenticationGnipException,
             TransportGnipException {
-        
+
         OutputStream outStream = null;
         try {
             final URLConnection uc = uri.toURL().openConnection();
             HttpURLConnection huc = null;
-            
+
             if (uc instanceof HttpURLConnection) {
                 huc = (HttpURLConnection) uc;
             }
@@ -118,19 +116,19 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
             uc.setConnectTimeout(connectTimeout);
             uc.setReadTimeout(readTimeout);
             uc.setDoOutput(true); // Needed in order to make a POST request
-            uc.setRequestProperty("Accept-Encoding", "gzip, deflate"); 
+            uc.setRequestProperty("Accept-Encoding", "gzip, deflate");
             uc.setRequestProperty("User-Agent", USER_AGENT);
             uc.setRequestProperty("Authorization", "Basic " + encoder.encode(authentication));
             uc.setRequestProperty("Content-type", "application/json");
             doConfiguration(uc);
-            
+
             outStream = uc.getOutputStream();
             outStream.write(new ObjectMapper().writeValueAsString(resource).getBytes());
-            
+
             if (huc != null) {
                 validateStatusLine(uri, huc.getResponseCode(), huc.getResponseMessage());
             }
-            
+
         } catch (final MalformedURLException e) {
             throw new TransportGnipException(e);
         } catch (final IOException e) {
@@ -145,38 +143,38 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
             }
         }
     }
-    
+
     @Override
     public final void deleteResource(final URI uri, final Object resource) throws AuthenticationGnipException,
             TransportGnipException {
-        
+
         OutputStream outStream = null;
         try {
             final URLConnection uc = uri.toURL().openConnection();
             HttpURLConnection huc = null;
-            
+
             if (uc instanceof HttpURLConnection) {
                 huc = (HttpURLConnection) uc;
-                huc.setRequestMethod("DELETE"); //to set HTTP method to DELETE
+                huc.setRequestMethod("DELETE"); // to set HTTP method to DELETE
             }
             uc.setAllowUserInteraction(false);
             uc.setDefaultUseCaches(false);
             uc.setConnectTimeout(connectTimeout);
             uc.setReadTimeout(readTimeout);
             uc.setDoOutput(true); // Needed in order to make a POST request
-            uc.setRequestProperty("Accept-Encoding", "gzip, deflate"); 
+            uc.setRequestProperty("Accept-Encoding", "gzip, deflate");
             uc.setRequestProperty("User-Agent", USER_AGENT);
             uc.setRequestProperty("Authorization", "Basic " + encoder.encode(authentication));
             uc.setRequestProperty("Content-type", "application/json");
             doConfiguration(uc);
-            
+
             outStream = uc.getOutputStream();
             outStream.write(new ObjectMapper().writeValueAsString(resource).getBytes());
-            
+
             if (huc != null) {
                 validateStatusLine(uri, huc.getResponseCode(), huc.getResponseMessage());
             }
-            
+
         } catch (final MalformedURLException e) {
             throw new TransportGnipException(e);
         } catch (final IOException e) {
@@ -190,10 +188,10 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
                 // Nothing to be done here!
             }
         }
-    }  
+    }
 
     /** template method for configuring the URLConnection */
     protected void doConfiguration(final URLConnection uc) {
-        
+
     }
 }

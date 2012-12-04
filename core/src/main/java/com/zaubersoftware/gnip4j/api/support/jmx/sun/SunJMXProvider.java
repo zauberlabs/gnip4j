@@ -32,22 +32,21 @@ import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;
 import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
 /**
- * Implementation for standar JDK. 
+ * Implementation for standar JDK.
  * 
  * @author Juan F. Codagnone
  * @since May 26, 2011
  */
 public class SunJMXProvider implements JMXProvider {
-   private Logger logger = LoggerFactory.getLogger(getClass());
-   
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
     @Override
     public final void registerBean(final GnipStream stream, final StreamStats streamStats) {
         final MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
         // Construct the ObjectName for the Hello MBean we will register
         try {
             ObjectName mbeanName = getStreamName(stream);
-            mbs.registerMBean(new com.zaubersoftware.gnip4j.api.support.jmx.sun.StreamStats(streamStats),
-                    mbeanName);
+            mbs.registerMBean(new com.zaubersoftware.gnip4j.api.support.jmx.sun.StreamStats(streamStats), mbeanName);
         } catch (InstanceAlreadyExistsException e) {
             throw new IllegalArgumentException(e);
         } catch (MBeanRegistrationException e) {
@@ -59,8 +58,7 @@ public class SunJMXProvider implements JMXProvider {
 
     /** @return the MBean name */
     private ObjectName getStreamName(final GnipStream stream) {
-        final String name =  "com.zaubersoftware.gnip4j.streams."
-            + stream.getStreamName() + ":type=StreamStats";
+        final String name = "com.zaubersoftware.gnip4j.streams." + stream.getStreamName() + ":type=StreamStats";
         try {
             return new ObjectName(name);
         } catch (MalformedObjectNameException e) {

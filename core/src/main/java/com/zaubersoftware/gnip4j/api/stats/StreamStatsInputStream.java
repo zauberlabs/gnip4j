@@ -28,15 +28,14 @@ import com.zaubersoftware.gnip4j.api.stats.commonsio.TeeInputStream;
  * @since May 26, 2011
  */
 public class StreamStatsInputStream extends TeeInputStream {
-    
+
     /** Creates the StreamStatsInputStream. */
-    public StreamStatsInputStream(final ModifiableStreamStats stats,
-            final InputStream target) {
+    public StreamStatsInputStream(final ModifiableStreamStats stats, final InputStream target) {
         super(target, new OutputStream() {
             @Override
             public void write(final int b) throws IOException {
                 stats.incrementTransferedBytes();
-                
+
                 if (b == '\n') {
                     stats.incrementTransferedActivities();
                 }

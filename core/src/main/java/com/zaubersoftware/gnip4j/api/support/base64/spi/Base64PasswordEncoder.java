@@ -25,6 +25,6 @@ import com.zaubersoftware.gnip4j.api.GnipAuthentication;
  * @since May 23, 2011
  */
 public interface Base64PasswordEncoder {
-    /** @return "basic" codification base64(auth.user ":" auth.pass)*/
+    /** @return "basic" codification base64(auth.user ":" auth.pass) */
     String encode(GnipAuthentication auth);
 }

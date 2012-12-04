@@ -15,7 +15,9 @@
  */
 package com.zaubersoftware.gnip4j.http;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,20 +25,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zaubersoftware.gnip4j.api.impl.DefaultGnipStream;
 import com.zaubersoftware.gnip4j.api.model.Activities;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.model.Geo;
 import com.zaubersoftware.gnip4j.api.model.MatchingRules;
 import com.zaubersoftware.gnip4j.api.model.Point;
-
 
 /**
  * Tests the {@link Activity} JSON Deserialization.
@@ -57,11 +57,11 @@ public final class JSONDeserializationTest {
     @Test
     public void testGetGnip() throws Exception {
         final InputStream is = getClass().getClassLoader().getResourceAsStream(
-        "com/zaubersoftware/gnip4j/payload/payload-example.js");
-        try  {
+                "com/zaubersoftware/gnip4j/payload/payload-example.js");
+        try {
             final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
             final Activity activity = parser.readValueAs(Activity.class);
-            
+
             assertNotNull(activity.getGnip());
             assertNotNull(activity.getGnip().getLanguage());
             assertEquals("en", activity.getGnip().getLanguage().getValue());
@@ -79,80 +79,83 @@ public final class JSONDeserializationTest {
     @Test
     public void testGeoCoordinates() throws Exception {
         final InputStream is = getClass().getClassLoader().getResourceAsStream(
-        "com/zaubersoftware/gnip4j/payload/payload-example-geo.json");
-        try  {
+                "com/zaubersoftware/gnip4j/payload/payload-example-geo.json");
+        try {
             final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
             final Activity activity = parser.readValueAs(Activity.class);
 
             assertNotNull(activity.getGeo());
             assertNotNull(activity.getGeo().getCoordinates());
-            assertEquals(-34.58501869, ((Point)activity.getGeo().getCoordinates()).getLatitude(), 0.001);
-            assertEquals(-58.43946468, ((Point)activity.getGeo().getCoordinates()).getLongitude(), 0.001);
+            assertEquals(-34.58501869, ((Point) activity.getGeo().getCoordinates()).getLatitude(), 0.001);
+            assertEquals(-58.43946468, ((Point) activity.getGeo().getCoordinates()).getLongitude(), 0.001);
         } finally {
             is.close();
         }
     }
 
-
     @Test
-    public void testDeserializeWithPolygonAndPoint() throws JsonParseException, IOException{
-        final InputStream is = getClass().getClassLoader().getResourceAsStream("com/zaubersoftware/gnip4j/payload/deserialize/geolocated-tweets.json");
-/*=======
-    @Ignore
-    public void testNPE() throws Exception {
+    public void testDeserializeWithPolygonAndPoint() throws JsonParseException, IOException {
         final InputStream is = getClass().getClassLoader().getResourceAsStream(
-            "com/zaubersoftware/gnip4j/payload/payload-twitter-entities.js");
-        final InputStream expectedIs = getClass().getClassLoader().getResourceAsStream(
-            "com/zaubersoftware/gnip4j/payload/payload-twitter-entities.xml");
->>>>>>> Fanout*/
-        
-        try  {
+                "com/zaubersoftware/gnip4j/payload/deserialize/geolocated-tweets.json");
+        /*
+         * =======
+         * 
+         * @Ignore public void testNPE() throws Exception { final InputStream is =
+         * getClass().getClassLoader().getResourceAsStream(
+         * "com/zaubersoftware/gnip4j/payload/payload-twitter-entities.js"); final InputStream expectedIs =
+         * getClass().getClassLoader().getResourceAsStream(
+         * "com/zaubersoftware/gnip4j/payload/payload-twitter-entities.xml"); >>>>>>> Fanout
+         */
+
+        try {
             final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
             final Activities activities = parser.readValueAs(Activities.class);
-            
-            
+
             Geo geo1 = activities.getActivities().get(0).getGeo();
             Geo geo2 = activities.getActivities().get(1).getGeo();
             Geo geo3 = activities.getActivities().get(0).getLocation().getGeo();
             Geo geo4 = activities.getActivities().get(1).getLocation().getGeo();
-            
+
             assertNull(geo1);
             assertEquals("lat: 35.11222481 lon: -78.99696934", geo2.getCoordinates().toString());
-            assertEquals("[[ lat: -0.5093057 lon: 51.286606 ][ lat: 0.334433 lon: 51.286606 ][ lat: 0.334433 lon: 51.691672 ][ lat: -0.5093057 lon: 51.691672 ]]", geo3.getCoordinates().toString());
-            
-            assertEquals("[[ lat: -79.058407 lon: 35.106225 ][ lat: -78.944666 lon: 35.106225 ][ lat: -78.944666 lon: 35.177993 ][ lat: -79.058407 lon: 35.177993 ]]", geo4.getCoordinates().toString());
-            
+            assertEquals(
+                    "[[ lat: -0.5093057 lon: 51.286606 ][ lat: 0.334433 lon: 51.286606 ][ lat: 0.334433 lon: 51.691672 ][ lat: -0.5093057 lon: 51.691672 ]]",
+                    geo3.getCoordinates().toString());
+
+            assertEquals(
+                    "[[ lat: -79.058407 lon: 35.106225 ][ lat: -78.944666 lon: 35.106225 ][ lat: -78.944666 lon: 35.177993 ][ lat: -79.058407 lon: 35.177993 ]]",
+                    geo4.getCoordinates().toString());
+
         } finally {
             is.close();
         }
     }
-    
-    /*USE THIS TEST TO TEST ENCODING OF JsonParser
-     * Run this test with -Dfile.encoding=UTF-8 and then with another encoding, and compare the file results
-     * */
-    public void utfDesearilzationTest() throws JsonParseException, IOException{
-        InputStream in = getClass().getClassLoader().getResourceAsStream("com/zaubersoftware/gnip4j/payload/deserialize/utf8_tweets.json");
-        
-        try  {
+
+    /*
+     * USE THIS TEST TO TEST ENCODING OF JsonParser Run this test with -Dfile.encoding=UTF-8 and then with another
+     * encoding, and compare the file results
+     */
+    public void utfDesearilzationTest() throws JsonParseException, IOException {
+        InputStream in = getClass().getClassLoader().getResourceAsStream(
+                "com/zaubersoftware/gnip4j/payload/deserialize/utf8_tweets.json");
+
+        try {
             final JsonParser parser = mapper.getJsonFactory().createJsonParser(in);
             final Activities activities = parser.readValueAs(Activities.class);
-            
-            
+
             String body0 = activities.getActivities().get(0).getBody();
             String body1 = activities.getActivities().get(1).getBody();
             String body2 = activities.getActivities().get(2).getBody();
 
             FileOutputStream fileOutputStream = new FileOutputStream(new File("tweets"));
-            
+
             fileOutputStream.write(body0.getBytes("UTF-8"));
             fileOutputStream.write(body1.getBytes("UTF-8"));
             fileOutputStream.write(body2.getBytes("UTF-8"));
-            
-            
+
         } finally {
-            //text.close();
+            // text.close();
         }
     }
-    
-    
+
 }

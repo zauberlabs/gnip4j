@@ -25,28 +25,28 @@ import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;
 import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
 /**
- * Abstract skeleton implementation of the {@link GnipStream} interface.
- * This is the base class of all the {@link GnipStream} implementations.
- *
+ * Abstract skeleton implementation of the {@link GnipStream} interface. This is the base class of all the
+ * {@link GnipStream} implementations.
+ * 
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
 public abstract class AbstractGnipStream implements GnipStream {
     private final Lock lock = new ReentrantLock();
-    private final Condition emptyCondition  = lock.newCondition(); 
+    private final Condition emptyCondition = lock.newCondition();
     private final AtomicBoolean streamClosed = new AtomicBoolean(false);
     private final Logger logger = LoggerFactory.getLogger(getClass());
-    
+
     @Override
     public final void close() {
-        if(!streamClosed.getAndSet(true)) {
+        if (!streamClosed.getAndSet(true)) {
             try {
                 doClose();
             } finally {
                 lock.lock();
-                try { 
+                try {
                     emptyCondition.signalAll();
-                } catch(final Throwable t) {
+                } catch (final Throwable t) {
                     logger.error("decrementing active jobs. should not happen ", t);
                 } finally {
                     lock.unlock();
@@ -55,16 +55,16 @@ public abstract class AbstractGnipStream implements GnipStream {
         }
     }
 
-    /**  template method for close */
+    /** template method for close */
     protected void doClose() {
-        
+
     }
 
     @Override
     public final void await() throws InterruptedException {
         lock.lock();
         try {
-            while(!streamClosed.get()) {
+            while (!streamClosed.get()) {
                 emptyCondition.await();
             }
         } finally {
@@ -73,5 +73,5 @@ public abstract class AbstractGnipStream implements GnipStream {
     }
 
     /** @return the stream name. Used for tracing propourses */
-    public abstract String getStreamName(); 
+    public abstract String getStreamName();
 }

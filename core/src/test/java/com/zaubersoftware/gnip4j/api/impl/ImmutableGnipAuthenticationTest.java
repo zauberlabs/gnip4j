@@ -22,7 +22,6 @@ import org.junit.Test;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 
-
 /**
  * TODO Descripcion de la clase. Los comenterios van en castellano.
  * 
@@ -37,19 +36,19 @@ public class ImmutableGnipAuthenticationTest {
     public final void getters() {
         final String user = "foo";
         final String pass = "bar";
-        
-        final GnipAuthentication a  = new ImmutableGnipAuthentication(user, pass);
+
+        final GnipAuthentication a = new ImmutableGnipAuthentication(user, pass);
         assertEquals(user, a.getUsername());
         assertEquals(pass, a.getPassword());
     }
-    
+
     /** test null argument */
     @Test(expected = IllegalArgumentException.class)
     public final void testNullUser() {
         new ImmutableGnipAuthentication(null, "xx");
         Assert.fail();
     }
-    
+
     /** test null argument */
     @Test(expected = IllegalArgumentException.class)
     public final void testNullPass() {

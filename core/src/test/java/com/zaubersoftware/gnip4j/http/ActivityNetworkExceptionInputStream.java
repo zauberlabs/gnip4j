@@ -19,34 +19,33 @@ import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-
 /**
- * InputStream that simulates errors 
+ * InputStream that simulates errors
  * 
  * @author Juan F. Codagnone
  * @since May 20, 2011
  */
 public final class ActivityNetworkExceptionInputStream extends FilterInputStream {
     private int bytesBefore;
-    
+
     /** Creates the ActivityExceptionInputStream. */
     public ActivityNetworkExceptionInputStream(final InputStream in, final int bytesBeforeError) {
         super(in);
-        if(in == null) {
+        if (in == null) {
             throw new IllegalArgumentException("Null resource!");
         }
         this.bytesBefore = bytesBeforeError;
     }
-    
+
     /** Creates the ActivityExceptionInputStream. */
     public ActivityNetworkExceptionInputStream(final String classpath, final int bytesBeforeError) {
-        this(ActivityNetworkExceptionInputStream.class.getClassLoader()
-                .getResourceAsStream(classpath), bytesBeforeError);
+        this(ActivityNetworkExceptionInputStream.class.getClassLoader().getResourceAsStream(classpath),
+                bytesBeforeError);
     }
 
     @Override
     public int read(final byte[] b, final int off, final int len) throws IOException {
-        if(bytesBefore <= 0) {
+        if (bytesBefore <= 0) {
             throw new IOException("mock connection closed");
         }
         int ret = super.read(b, off, len);

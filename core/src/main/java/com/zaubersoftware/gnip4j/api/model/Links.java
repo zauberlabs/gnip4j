@@ -15,25 +15,23 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-
-
 /**
- * <p>Java class for anonymous complex type.
- *
- * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * <p>
+ * Java class for anonymous complex type.
+ * 
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
+ * 
  */
-public final class Links{
+public final class Links {
     private String href;
     private String rel;
 
     /**
      * Gets the value of the href property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * 
+     * @return possible object is {@link String }
+     * 
      */
     public String getHref() {
         return href;
@@ -41,11 +39,10 @@ public final class Links{
 
     /**
      * Sets the value of the href property.
-     *
+     * 
      * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     *            allowed object is {@link String }
+     * 
      */
     public void setHref(final String value) {
         href = value;
@@ -53,11 +50,9 @@ public final class Links{
 
     /**
      * Gets the value of the rel property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * 
+     * @return possible object is {@link String }
+     * 
      */
     public String getRel() {
         return rel;
@@ -65,11 +60,10 @@ public final class Links{
 
     /**
      * Sets the value of the rel property.
-     *
+     * 
      * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     *            allowed object is {@link String }
+     * 
      */
     public void setRel(final String value) {
         rel = value;

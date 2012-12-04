@@ -15,27 +15,25 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-import org.codehaus.jackson.annotate.JsonAutoDetect;
-
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 /**
- * <p>Java class for anonymous complex type.
- *
- * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * <p>
+ * Java class for anonymous complex type.
+ * 
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
+ * 
  */
-@JsonAutoDetect
-public final class Rule{
+@JsonAutoDetect public final class Rule {
     private String value;
     private String tag;
 
     /**
      * Gets the value of the value property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * 
+     * @return possible object is {@link String }
+     * 
      */
     public String getValue() {
         return value;
@@ -43,11 +41,10 @@ public final class Rule{
 
     /**
      * Sets the value of the value property.
-     *
+     * 
      * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     *            allowed object is {@link String }
+     * 
      */
     public void setValue(final String value) {
         this.value = value;
@@ -55,11 +52,9 @@ public final class Rule{
 
     /**
      * Gets the value of the tag property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * 
+     * @return possible object is {@link String }
+     * 
      */
     public String getTag() {
         return tag;
@@ -67,11 +62,10 @@ public final class Rule{
 
     /**
      * Sets the value of the tag property.
-     *
+     * 
      * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     *            allowed object is {@link String }
+     * 
      */
     public void setTag(final String value) {
         tag = value;

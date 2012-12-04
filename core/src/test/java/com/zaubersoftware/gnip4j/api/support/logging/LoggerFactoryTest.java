@@ -17,7 +17,6 @@ package com.zaubersoftware.gnip4j.api.support.logging;
 
 import org.junit.Test;
 
-
 /**
  * TODO Descripcion de la clase. Los comenterios van en castellano.
  * 

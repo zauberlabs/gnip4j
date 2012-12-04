@@ -20,24 +20,22 @@ import java.net.URI;
 import com.zaubersoftware.gnip4j.api.UriStrategy;
 
 /**
- * The default implementation of {@link UriStrategy} that creates {@link URI}s to connect
- * to the real Gnip endpoint.
- *
+ * The default implementation of {@link UriStrategy} that creates {@link URI}s to connect to the real Gnip endpoint.
+ * 
  * <p>
  * The base URI format for stream is {@link DefaultUriStrategy#BASE_GNIP_URI_FMT}
  * <p>
- *
+ * 
  * <p>
  * The base URI format for rules is {@link DefaultUriStrategy#BASE_GNIP_RULES_URI_FMT}
  * <p>
- *
+ * 
  * @author Guido Marucci Blas
  * @since 11/11/2011
  */
 public final class DefaultUriStrategy implements UriStrategy {
     public static final String BASE_GNIP_STREAM_URI = "https://stream.gnip.com:443/accounts/%s/publishers/twitter/streams/track/%s.json";
     public static final String BASE_GNIP_RULES_URI = "https://api.gnip.com:443/accounts/%s/publishers/twitter/streams/track/%s/rules.json";
-    
 
     @Override
     public URI createStreamUri(final String account, String streamName) {
@@ -47,8 +45,7 @@ public final class DefaultUriStrategy implements UriStrategy {
         if (streamName == null || streamName.trim().isEmpty()) {
             throw new IllegalArgumentException("The streamName cannot be null or empty");
         }
-        
-        
+
         return URI.create(String.format(BASE_GNIP_STREAM_URI, account.trim(), streamName.trim()));
     }
 
@@ -60,7 +57,7 @@ public final class DefaultUriStrategy implements UriStrategy {
         if (streamName == null || streamName.trim().isEmpty()) {
             throw new IllegalArgumentException("The streamName cannot be null or empty");
         }
-        
+
         return URI.create(String.format(BASE_GNIP_RULES_URI, account.trim(), streamName.trim()));
     }
 }

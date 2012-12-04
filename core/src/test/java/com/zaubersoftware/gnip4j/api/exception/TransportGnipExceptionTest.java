@@ -21,9 +21,8 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-
 /**
- * Test {@link TransportGnipException} 
+ * Test {@link TransportGnipException}
  * 
  * @author Juan F. Codagnone
  * @since May 20, 2011
@@ -37,14 +36,13 @@ public class TransportGnipExceptionTest {
         assertFalse(new TransportGnipException(new IllegalArgumentException()).isNetworkError());
         assertTrue(new TransportGnipException("ioio", new IOException("no network")).isNetworkError());
     }
-    
+
     /** test */
     @Test
     public final void testException() {
         assertNull(new GnipException().getMessage());
     }
 
-    
     /** test */
     @Test
     public final void testAuthenticationGnipException() {

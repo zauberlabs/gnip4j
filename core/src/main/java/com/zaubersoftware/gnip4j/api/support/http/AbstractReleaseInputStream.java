@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * {@link InputStream} that knows how to release the resources of httpclient classes.  
+ * {@link InputStream} that knows how to release the resources of httpclient classes.
  * 
  * @author Juan F. Codagnone
  * @since May 23, 2011
@@ -28,8 +28,8 @@ public abstract class AbstractReleaseInputStream extends InputStream {
     protected InputStream target;
 
     /** constructor */
-    public  AbstractReleaseInputStream(final InputStream target) throws IOException {
-        if(target == null) {
+    public AbstractReleaseInputStream(final InputStream target) throws IOException {
+        if (target == null) {
             throw new IllegalArgumentException("null argument");
         }
         this.target = target;

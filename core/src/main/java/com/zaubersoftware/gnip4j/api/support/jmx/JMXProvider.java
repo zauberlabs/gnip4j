@@ -29,21 +29,20 @@ public final class JMXProvider {
     private JMXProvider() {
         // void
     }
-    
+
     private static com.zaubersoftware.gnip4j.api.support.jmx.spi.JMXProvider provider;
-    
+
     static {
         try {
             Class.forName("java.lang.management.ManagementFactory");
             provider = new SunJMXProvider();
-        } catch(Exception e) {
+        } catch (Exception e) {
             provider = new NullJMXProvider();
         }
     }
-    
-    
-    public static com.zaubersoftware.gnip4j.api.support.jmx.spi.JMXProvider  getProvider() {
+
+    public static com.zaubersoftware.gnip4j.api.support.jmx.spi.JMXProvider getProvider() {
         return provider;
     }
-    
+
 }

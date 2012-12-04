@@ -17,13 +17,11 @@ package com.zaubersoftware.gnip4j.api;
 
 import com.zaubersoftware.gnip4j.api.stats.StreamStats;
 
-
-
 /**
  * <p>
- * A Stream for the Gnip. Once created with {@link GnipFacade} you más register
- * some observer that will process the data. User MUST call {@link #close()} 
- * to release all the releated resources (or when you want to handle gracefull shutdowns)
+ * A Stream for the Gnip. Once created with {@link GnipFacade} you más register some observer that will process the
+ * data. User MUST call {@link #close()} to release all the releated resources (or when you want to handle gracefull
+ * shutdowns)
  * </p>
  * <p>
  * Implementations SHOULD handle reconnections and timeouts.
@@ -33,19 +31,18 @@ import com.zaubersoftware.gnip4j.api.stats.StreamStats;
  * @since Apr 29, 2011
  */
 public interface GnipStream {
-    
-    /** release the stream  */
+
+    /** release the stream */
     void close();
 
     /**
-     * await for the stream to be {@link #close()} or 
-     * to be shutdown because of some catastrofic issue.
+     * await for the stream to be {@link #close()} or to be shutdown because of some catastrofic issue.
      */
     void await() throws InterruptedException;
-    
+
     /** @return an identification for this stream */
     String getStreamName();
-    
+
     /** @return stream stats */
     StreamStats getStreamStats();
 }

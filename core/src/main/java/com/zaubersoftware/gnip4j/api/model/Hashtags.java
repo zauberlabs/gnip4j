@@ -18,13 +18,14 @@ package com.zaubersoftware.gnip4j.api.model;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
- * <p>Java class for anonymous complex type.
+ * <p>
+ * Java class for anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
  */
-public final class Hashtags{
+public final class Hashtags {
     private List<Integer> indices;
     private String text;
 
@@ -32,21 +33,20 @@ public final class Hashtags{
      * Gets the value of the indices property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the indices property.
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for
+     * the indices property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getIndices().add(newItem);
+     * getIndices().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
+     * Objects of the following type(s) are allowed in the list {@link Integer }
      * 
      * 
      */
@@ -60,10 +60,8 @@ public final class Hashtags{
     /**
      * Gets the value of the text property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getText() {
         return text;
@@ -73,9 +71,8 @@ public final class Hashtags{
      * Sets the value of the text property.
      * 
      * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *            allowed object is {@link String }
+     * 
      */
     public void setText(String value) {
         this.text = value;

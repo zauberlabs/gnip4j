@@ -15,20 +15,20 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 /**
  * TODO Descripcion de la clase. Los comenterios van en castellano.
- *
- *
+ * 
+ * 
  * @author Juan F. Codagnone
  * @since May 28, 2011
  */
 public class Url {
     private String url;
 
-    @JsonProperty(value = "expanded_url")
-    private String expandedUrl;
+    @JsonProperty(value = "expanded_url") private String expandedUrl;
 
     public final String getUrl() {
         return url;

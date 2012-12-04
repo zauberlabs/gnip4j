@@ -17,7 +17,7 @@ package com.zaubersoftware.gnip4j.api.support.jmx.sun;
 
 /**
  * MBean implementation
- *  
+ * 
  * @author Juan F. Codagnone
  * @since May 26, 2011
  */
@@ -28,7 +28,7 @@ public final class StreamStats implements StreamStatsMBean {
     public StreamStats(final com.zaubersoftware.gnip4j.api.stats.StreamStats target) {
         this.target = target;
     }
-    
+
     @Override
     public long getTransferedActivities() {
         return target.getTransferedActivities();

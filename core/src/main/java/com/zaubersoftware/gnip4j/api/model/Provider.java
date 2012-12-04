@@ -15,26 +15,24 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-
-
 /**
- * <p>Java class for anonymous complex type.
- *
- * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * <p>
+ * Java class for anonymous complex type.
+ * 
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
+ * 
  */
-public final class Provider{
+public final class Provider {
     private String displayName;
     private String objectType;
     private String link;
 
     /**
      * Gets the value of the displayName property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * 
+     * @return possible object is {@link String }
+     * 
      */
     public String getDisplayName() {
         return displayName;
@@ -42,11 +40,10 @@ public final class Provider{
 
     /**
      * Sets the value of the displayName property.
-     *
+     * 
      * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     *            allowed object is {@link String }
+     * 
      */
     public void setDisplayName(final String value) {
         displayName = value;
@@ -54,11 +51,9 @@ public final class Provider{
 
     /**
      * Gets the value of the objectType property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * 
+     * @return possible object is {@link String }
+     * 
      */
     public String getObjectType() {
         return objectType;
@@ -66,11 +61,10 @@ public final class Provider{
 
     /**
      * Sets the value of the objectType property.
-     *
+     * 
      * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     *            allowed object is {@link String }
+     * 
      */
     public void setObjectType(final String value) {
         objectType = value;
@@ -78,11 +72,9 @@ public final class Provider{
 
     /**
      * Gets the value of the link property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * 
+     * @return possible object is {@link String }
+     * 
      */
     public String getLink() {
         return link;
@@ -90,11 +82,10 @@ public final class Provider{
 
     /**
      * Sets the value of the link property.
-     *
+     * 
      * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     *            allowed object is {@link String }
+     * 
      */
     public void setLink(final String value) {
         link = value;

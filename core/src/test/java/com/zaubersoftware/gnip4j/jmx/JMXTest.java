@@ -15,7 +15,6 @@
  */
 package com.zaubersoftware.gnip4j.jmx;
 
-
 import java.io.InputStream;
 import java.net.URI;
 
@@ -41,39 +40,38 @@ public final class JMXTest {
     private final StreamNotificationAdapter observer = new StreamNotificationAdapter() {
         @Override
         public void notify(final Activity activity, final GnipStream stream) {
-            
+
         }
     };
-    
+
     /** test the register and unregister features of JMX */
     @Test
     public void testRegisterAndUnregister() throws Exception {
         final RemoteResourceProvider resources = new RemoteResourceProvider() {
-            
+
             @Override
-            public InputStream getResource(final URI uri) throws AuthenticationGnipException,
-                    TransportGnipException {
+            public InputStream getResource(final URI uri) throws AuthenticationGnipException, TransportGnipException {
                 return getClass().getClassLoader().getResourceAsStream(
                         "com/zaubersoftware/gnip4j/payload/payload-example.js");
             }
-            
+
             @Override
             public void postResource(final URI uri, final Object resource) {
-                
+
             }
 
-			@Override
-			public void deleteResource(URI uri, Object resource)
-					throws AuthenticationGnipException, TransportGnipException {
-				// TODO Auto-generated method stub
-				
-			}
+            @Override
+            public void deleteResource(URI uri, Object resource) throws AuthenticationGnipException,
+                    TransportGnipException {
+                // TODO Auto-generated method stub
+
+            }
         };
         final GnipFacade f = new DefaultGnipFacade(resources);
         final GnipStream stream = f.createStream("acme", "stream", observer);
         stream.close();
         f.createStream("acme", "stream", observer);
         stream.close();
-        
+
     }
 }

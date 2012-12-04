@@ -29,58 +29,58 @@ import com.zaubersoftware.gnip4j.api.support.http.JRERemoteResourceProvider;
 
 public class GnipRulesTestDriver {
 
-	private GnipFacade gnip;
-	private String account;
-	private String streamName;
-	
-	@Before
-	public void setUp() {
-	    final String username = System.getProperty("gnip.username");
+    private GnipFacade gnip;
+    private String account;
+    private String streamName;
+
+    @Before
+    public void setUp() {
+        final String username = System.getProperty("gnip.username");
         final String password = System.getProperty("gnip.password");
         account = System.getProperty("gnip.account");
         streamName = System.getProperty("gnip.stream");
-        
-        if(username == null) {
+
+        if (username == null) {
             throw new IllegalArgumentException("Missing gnip.username");
         }
-        if(password == null) {
+        if (password == null) {
             throw new IllegalArgumentException("Missing gnip.password");
         }
-        if(account == null) {
+        if (account == null) {
             throw new IllegalArgumentException("Missing gnip.account");
         }
-        if(streamName == null) {
+        if (streamName == null) {
             throw new IllegalArgumentException("Missing gnip.stream");
         }
-        
+
         gnip = new DefaultGnipFacade(new JRERemoteResourceProvider(new ImmutableGnipAuthentication(username, password)));
-	}
-	
-	@Test
-	public final void testGetRules() {
+    }
+
+    @Test
+    public final void testGetRules() {
         final Rules rules = gnip.getRules(account, streamName);
-        
+
         for (final Rule rule : rules.getRules()) {
-        	System.out.println("Found rule " + rule.getValue() + " with tag: " + rule.getTag());
+            System.out.println("Found rule " + rule.getValue() + " with tag: " + rule.getTag());
         }
-	}
-	
-	@Test
-	public final void testAddRule() {
-		final Rule rule = new Rule();
-		rule.setValue("#neverevergonnahappen88");
-		
-		gnip.addRule(account, streamName, rule);
-		
-		final Rules rules = gnip.getRules(account, streamName);
-		boolean ruleAdded = false;
-		for (final Rule existingRule : rules.getRules()) {
-			if (existingRule.getValue().equals("#neverevergonnahappen88")) {
-				System.out.println("Found rule #neverevergonnahappen88, which was just added");
-				ruleAdded = true;
-				break;
-			}
-		}
-		assertTrue(ruleAdded);
-	}
+    }
+
+    @Test
+    public final void testAddRule() {
+        final Rule rule = new Rule();
+        rule.setValue("#neverevergonnahappen88");
+
+        gnip.addRule(account, streamName, rule);
+
+        final Rules rules = gnip.getRules(account, streamName);
+        boolean ruleAdded = false;
+        for (final Rule existingRule : rules.getRules()) {
+            if (existingRule.getValue().equals("#neverevergonnahappen88")) {
+                System.out.println("Found rule #neverevergonnahappen88, which was just added");
+                ruleAdded = true;
+                break;
+            }
+        }
+        assertTrue(ruleAdded);
+    }
 }

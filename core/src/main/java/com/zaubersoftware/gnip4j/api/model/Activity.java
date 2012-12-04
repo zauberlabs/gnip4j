@@ -17,11 +17,11 @@ package com.zaubersoftware.gnip4j.api.model;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.codehaus.jackson.annotate.JsonAutoDetect;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonAutoDetect
-public class Activity {
+
+@JsonAutoDetect public class Activity {
     private InReplyTo inReplyTo;
     private Activity.Location location;
     private Actor actor;
@@ -29,8 +29,7 @@ public class Activity {
     private Generator generator;
     private Object object;
     private Provider provider;
-    @JsonProperty(value = "twitter_entities")
-    private TwitterEntities twitterEntities;
+    @JsonProperty(value = "twitter_entities") private TwitterEntities twitterEntities;
     private Gnip gnip;
     private String verb;
     private XMLGregorianCalendar postedTime;
@@ -94,7 +93,7 @@ public class Activity {
     public final void setProvider(final Provider value) {
         provider = value;
     }
-    
+
     public final TwitterEntities getTwitterEntities() {
         return twitterEntities;
     }
@@ -119,11 +118,9 @@ public class Activity {
         verb = value;
     }
 
-
     public final XMLGregorianCalendar getPostedTime() {
         return postedTime;
     }
-
 
     public final void setPostedTime(final XMLGregorianCalendar value) {
         postedTime = value;
@@ -132,7 +129,6 @@ public class Activity {
     public final String getBody() {
         return body;
     }
-
 
     public final void setBody(final String value) {
         body = value;
@@ -162,16 +158,14 @@ public class Activity {
         link = value;
     }
 
-    
     /**
      * <p>
      * Java class for anonymous complex type.
      * 
      * <p>
-     * The following schema fragment specifies the expected content contained
-     * within this class.
+     * The following schema fragment specifies the expected content contained within this class.
      */
-    public static class Location{
+    public static class Location {
         private Geo geo;
         private String countryCode;
         private String displayName;
@@ -179,12 +173,10 @@ public class Activity {
         private String streetAddress;
         private String link;
 
-        
         public final Geo getGeo() {
             return geo;
         }
 
-        
         public final void setGeo(final Geo value) {
             geo = value;
         }

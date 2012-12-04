@@ -18,42 +18,39 @@ package com.zaubersoftware.gnip4j.api.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>
+ * Java class for anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
  */
-public final class Urls{
+public final class Urls {
     private List<Integer> indices;
-    @JsonProperty(value = "expanded_url")
-    private String expandedUrl;
+    @JsonProperty(value = "expanded_url") private String expandedUrl;
     private String url;
-    @JsonProperty("display_url")
-    private String displayUrl;
-    
-    
+    @JsonProperty("display_url") private String displayUrl;
+
     /**
      * Gets the value of the indices property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the indices property.
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for
+     * the indices property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getIndices().add(newItem);
+     * getIndices().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
+     * Objects of the following type(s) are allowed in the list {@link Integer }
      * 
      * 
      */
@@ -67,10 +64,8 @@ public final class Urls{
     /**
      * Gets the value of the expandedUrl property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getExpandedUrl() {
         return expandedUrl;
@@ -80,9 +75,8 @@ public final class Urls{
      * Sets the value of the expandedUrl property.
      * 
      * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *            allowed object is {@link String }
+     * 
      */
     public void setExpandedUrl(String value) {
         this.expandedUrl = value;
@@ -91,10 +85,8 @@ public final class Urls{
     /**
      * Gets the value of the url property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getUrl() {
         return url;
@@ -104,9 +96,8 @@ public final class Urls{
      * Sets the value of the url property.
      * 
      * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *            allowed object is {@link String }
+     * 
      */
     public void setUrl(final String value) {
         this.url = value;
@@ -120,13 +111,15 @@ public final class Urls{
     public String getDisplayUrl() {
         return displayUrl;
     }
+
     /**
-     * Sets the displayUrl. 
-     *
-     * @param displayUrl <code>String</code> with the displayUrl.
+     * Sets the displayUrl.
+     * 
+     * @param displayUrl
+     *            <code>String</code> with the displayUrl.
      */
     public void setDisplayUrl(final String displayUrl) {
         this.displayUrl = displayUrl;
     }
-    
+
 }

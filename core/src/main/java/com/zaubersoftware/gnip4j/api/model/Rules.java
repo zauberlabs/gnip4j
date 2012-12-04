@@ -18,39 +18,38 @@ package com.zaubersoftware.gnip4j.api.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonAutoDetect;
-
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 /**
- * <p>Java class for anonymous complex type.
- *
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * Java class for anonymous complex type.
+ * 
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
  */
-@JsonAutoDetect
-public final class Rules {
+@JsonAutoDetect public final class Rules {
     private List<Rule> rules;
 
     /**
      * Gets the value of the rule property.
-     *
+     * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the rule property.
-     *
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for
+     * the rule property.
+     * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getRules().add(newItem);
+     * getRules().add(newItem);
      * </pre>
-     *
-     *
+     * 
+     * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Rule }
-     *
-     *
+     * Objects of the following type(s) are allowed in the list {@link Rule }
+     * 
+     * 
      */
     public List<Rule> getRules() {
         if (rules == null) {

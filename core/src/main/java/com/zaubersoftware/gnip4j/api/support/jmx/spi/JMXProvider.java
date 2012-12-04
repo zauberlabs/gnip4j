@@ -24,7 +24,7 @@ import com.zaubersoftware.gnip4j.api.stats.StreamStats;
  * @author Juan F. Codagnone
  * @since May 26, 2011
  */
-public interface JMXProvider  {
+public interface JMXProvider {
 
     /**
      * @param stream

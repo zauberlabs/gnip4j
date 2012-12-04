@@ -17,35 +17,35 @@ package com.zaubersoftware.gnip4j.api.model;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
-     @JsonAutoDetect
-    public  class Activities {
-        List<Activity> activities;
-        /**
-         * Creates the JSONDeserializationTest.Activities.
-         *
-         */
-        public Activities() {
-        }
-        
-        
-        /**
-         * Sets the activities. 
-         *
-         * @param activities <code>List<Activity></code> with the activities.
-         */
-        public void setActivities(List<Activity> activities) {
-            this.activities = activities;
-        }
-        
-        /**
-         * Returns the activities.
-         * 
-         * @return <code>List<Activity></code> with the activities.
-         */
-        public List<Activity> getActivities() {
-            return activities;
-        }
-        
+@JsonAutoDetect public class Activities {
+    List<Activity> activities;
+
+    /**
+     * Creates the JSONDeserializationTest.Activities.
+     * 
+     */
+    public Activities() {
     }
+
+    /**
+     * Sets the activities.
+     * 
+     * @param activities
+     *            <code>List<Activity></code> with the activities.
+     */
+    public void setActivities(List<Activity> activities) {
+        this.activities = activities;
+    }
+
+    /**
+     * Returns the activities.
+     * 
+     * @return <code>List<Activity></code> with the activities.
+     */
+    public List<Activity> getActivities() {
+        return activities;
+    }
+
+}

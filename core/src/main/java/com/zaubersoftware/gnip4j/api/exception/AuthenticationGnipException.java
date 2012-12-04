@@ -17,7 +17,7 @@ package com.zaubersoftware.gnip4j.api.exception;
 
 /**
  * There was a problem with remote authentication.
- *
+ * 
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
@@ -26,7 +26,7 @@ public class AuthenticationGnipException extends GnipException {
 
     /**
      * Creates the AuthenticationGnipException.
-     *
+     * 
      */
     public AuthenticationGnipException() {
         super();
@@ -47,5 +47,5 @@ public class AuthenticationGnipException extends GnipException {
         super(cause);
     }
 
-    //TODO Add the user credentials that were trying to be authenticated
+    // TODO Add the user credentials that were trying to be authenticated
 }

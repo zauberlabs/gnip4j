@@ -47,7 +47,7 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
 
 /**
  * Re connection algorithm test
- *
+ * 
  * @author Guido Marucci Blas
  * @since May 9, 2011
  */
@@ -56,34 +56,31 @@ public final class ReconnectionTest {
     private final UriStrategy uriStrategy = new DefaultUriStrategy();
 
     /** test */
-    @Test//(timeout = 10000)
+    @Test
+    // (timeout = 10000)
     public void testReConnection() throws Exception {
         // ignore framework warnings
         final Logger root = Logger.getRootLogger();
         root.setLevel(Level.OFF);
 
         final AtomicInteger count = new AtomicInteger(0);
-        final DefaultGnipStream stream = new DefaultGnipStream(new MockRemoteResourceProvider(), "account", "stream", new MockExecutorService(), uriStrategy);
+        final DefaultGnipStream stream = new DefaultGnipStream(new MockRemoteResourceProvider(), "account", "stream",
+                new MockExecutorService(), uriStrategy);
         final StringBuilder out = new StringBuilder();
         final StreamNotification n = new StreamNotification() {
             @Override
             public void notifyReConnectionError(final GnipException e) {
-                out.append(String.format("ReConnectionError: %s\n",
-                        e.getMessage()));
+                out.append(String.format("ReConnectionError: %s\n", e.getMessage()));
             }
 
             @Override
-            public void notifyReConnectionAttempt(final int attempt,
-                    final long waitTime) {
-                out.append(String.format(
-                        "Connection attempt %d wait time %d\n", attempt,
-                        waitTime));
+            public void notifyReConnectionAttempt(final int attempt, final long waitTime) {
+                out.append(String.format("Connection attempt %d wait time %d\n", attempt, waitTime));
             }
 
             @Override
             public void notifyConnectionError(final TransportGnipException e) {
-                out.append(String.format("ConnectionError: %s\n",
-                        e.getMessage()));
+                out.append(String.format("ConnectionError: %s\n", e.getMessage()));
             }
 
             @Override
@@ -97,19 +94,17 @@ public final class ReconnectionTest {
         stream.open(n);
         stream.await();
         final String s = out.toString();
-        final String expected = IOUtils.toString(getClass().getClassLoader()
-                .getResourceAsStream("reconnectlog.txt"));
+        final String expected = IOUtils.toString(getClass().getClassLoader().getResourceAsStream("reconnectlog.txt"));
         Assert.assertEquals(expected, s);
         Assert.assertEquals("transferedBytes = 8000\ntransferedActivities = 4\n"
-                + "numberOfSucessfulReconnections = 1\nnumberOfReconnections = 4",
-                stream.getStreamStats().toString());
+                + "numberOfSucessfulReconnections = 1\nnumberOfReconnections = 4", stream.getStreamStats().toString());
     }
 }
 
 /** mock implementation */
 class MockRemoteResourceProvider implements RemoteResourceProvider {
     private final AtomicInteger i = new AtomicInteger();
-    private final List<Object []> responses = new ArrayList<Object []>();
+    private final List<Object[]> responses = new ArrayList<Object[]>();
 
     /** Creates the MockRemoteResourceProvider. */
     public MockRemoteResourceProvider() {
@@ -118,17 +113,16 @@ class MockRemoteResourceProvider implements RemoteResourceProvider {
         final ActivityNetworkExceptionInputStream instream2 = new ActivityNetworkExceptionInputStream(
                 "payload-example-2.js", 3525);
 
-        responses.add(new Object[]{200, "Ok", instream});
-        responses.add(new Object[]{505, "TEST!", null});
-        responses.add(new Object[]{505, "TEST!", null});
-        responses.add(new Object[]{505, "TEST!", null});
-        responses.add(new Object[]{200, "Ok", instream2});
+        responses.add(new Object[] { 200, "Ok", instream });
+        responses.add(new Object[] { 505, "TEST!", null });
+        responses.add(new Object[] { 505, "TEST!", null });
+        responses.add(new Object[] { 505, "TEST!", null });
+        responses.add(new Object[] { 200, "Ok", instream2 });
     }
 
     @Override
-    public InputStream getResource(final URI uri)
-            throws AuthenticationGnipException, TransportGnipException {
-        final Object []response = responses.get(i.getAndIncrement());
+    public InputStream getResource(final URI uri) throws AuthenticationGnipException, TransportGnipException {
+        final Object[] response = responses.get(i.getAndIncrement());
 
         final int statusCode = (Integer) response[0];
         if (statusCode == 401) {
@@ -136,9 +130,8 @@ class MockRemoteResourceProvider implements RemoteResourceProvider {
         } else if (statusCode == 200) {
             return (InputStream) response[2];
         } else {
-            throw new TransportGnipException(
-                String.format("Connection to %s: Unexpected status code: %s %s",
-                        uri, statusCode, response[1].toString()));
+            throw new TransportGnipException(String.format("Connection to %s: Unexpected status code: %s %s", uri,
+                    statusCode, response[1].toString()));
         }
 
     }
@@ -148,12 +141,11 @@ class MockRemoteResourceProvider implements RemoteResourceProvider {
 
     }
 
-	@Override
-	public void deleteResource(URI uri, Object resource)
-			throws AuthenticationGnipException, TransportGnipException {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void deleteResource(URI uri, Object resource) throws AuthenticationGnipException, TransportGnipException {
+        // TODO Auto-generated method stub
+
+    }
 }
 
 class MockExecutorService implements ExecutorService {
@@ -209,39 +201,34 @@ class MockExecutorService implements ExecutorService {
     }
 
     @Override
-    public <T> T invokeAny(final Collection<? extends Callable<T>> tasks,
-            final long timeout, final TimeUnit unit)
+    public <T> T invokeAny(final Collection<? extends Callable<T>> tasks, final long timeout, final TimeUnit unit)
             throws InterruptedException, ExecutionException, TimeoutException {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public <T> T invokeAny(final Collection<? extends Callable<T>> tasks)
-            throws InterruptedException, ExecutionException {
+    public <T> T invokeAny(final Collection<? extends Callable<T>> tasks) throws InterruptedException,
+            ExecutionException {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public <T> List<Future<T>> invokeAll(
-            final Collection<? extends Callable<T>> tasks, final long timeout,
+    public <T> List<Future<T>> invokeAll(final Collection<? extends Callable<T>> tasks, final long timeout,
             final TimeUnit unit) throws InterruptedException {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public <T> List<Future<T>> invokeAll(
-            final Collection<? extends Callable<T>> tasks)
-            throws InterruptedException {
+    public <T> List<Future<T>> invokeAll(final Collection<? extends Callable<T>> tasks) throws InterruptedException {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public boolean awaitTermination(final long timeout, final TimeUnit unit)
-            throws InterruptedException {
+    public boolean awaitTermination(final long timeout, final TimeUnit unit) throws InterruptedException {
         // TODO Auto-generated method stub
         return false;
     }

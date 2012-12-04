@@ -29,7 +29,7 @@ import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
  */
 public abstract class AbstractRemoteResourceProvider implements RemoteResourceProvider {
     protected static final String USER_AGENT = "Gnip4j (https://github.com/zaubersoftware/gnip4j/)";
-    
+
     /** validate responses */
     public final void validateStatusLine(final URI uri, final int statusCode, final String reason) {
         System.out.println(uri);
@@ -37,10 +37,9 @@ public abstract class AbstractRemoteResourceProvider implements RemoteResourcePr
             // nothing to do
         } else if (statusCode == 401) {
             throw new AuthenticationGnipException(reason);
-        } else { 
-            throw new TransportGnipException(
-                String.format("Connection to %s: Unexpected status code: %s %s",
-                        uri, statusCode, reason));
+        } else {
+            throw new TransportGnipException(String.format("Connection to %s: Unexpected status code: %s %s", uri,
+                    statusCode, reason));
         }
     }
 }

@@ -23,7 +23,6 @@ import com.zaubersoftware.gnip4j.api.impl.ImmutableGnipAuthentication;
 import com.zaubersoftware.gnip4j.api.support.base64.spi.Base64PasswordEncoder;
 import com.zaubersoftware.gnip4j.api.support.base64.spi.Base64PasswordEncoderImpl;
 
-
 /**
  * Test {@link Base64PasswordEncoder}
  * 
@@ -36,6 +35,6 @@ public class Base64PasswordEncoderTest {
     @Test
     public final void foo() {
         assertEquals("anVhbjpqdWFu",
-          new Base64PasswordEncoderImpl().encode(new ImmutableGnipAuthentication("juan", "juan")));
+                new Base64PasswordEncoderImpl().encode(new ImmutableGnipAuthentication("juan", "juan")));
     }
 }

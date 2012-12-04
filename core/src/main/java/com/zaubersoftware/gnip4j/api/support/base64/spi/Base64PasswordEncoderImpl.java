@@ -24,8 +24,7 @@ public class Base64PasswordEncoderImpl implements Base64PasswordEncoder {
 
     @Override
     public final String encode(final GnipAuthentication auth) {
-        return Base64.encodeBytes(
-                (auth.getUsername() + ":" + auth.getPassword()).getBytes());
+        return Base64.encodeBytes((auth.getUsername() + ":" + auth.getPassword()).getBytes());
     }
 
 }

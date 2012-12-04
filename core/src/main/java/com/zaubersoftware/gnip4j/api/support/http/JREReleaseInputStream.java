@@ -33,14 +33,14 @@ public class JREReleaseInputStream extends AbstractReleaseInputStream {
     /** Creates the JREReleaseInputStream. */
     public JREReleaseInputStream(final URLConnection huc, final InputStream target) throws IOException {
         super(target);
-        
+
         this.huc = huc;
     }
 
     @Override
     public final void close() throws IOException {
         try {
-            if(target != null) {
+            if (target != null) {
                 try {
                     target.close();
                     target = null;
@@ -49,10 +49,10 @@ public class JREReleaseInputStream extends AbstractReleaseInputStream {
                 }
             }
         } finally {
-            if(huc instanceof HttpURLConnection) {
-                ((HttpURLConnection)huc).disconnect();
+            if (huc instanceof HttpURLConnection) {
+                ((HttpURLConnection) huc).disconnect();
             }
         }
     }
-    
+
 }

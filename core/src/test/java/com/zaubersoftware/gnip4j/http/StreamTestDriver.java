@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 package com.zaubersoftware.gnip4j.http;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Test;
@@ -27,7 +28,7 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.support.http.JRERemoteResourceProvider;
 
 /**
- * Test Driver that tests the flows using a real connections 
+ * Test Driver that tests the flows using a real connections
  * 
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
@@ -45,23 +46,24 @@ public final class StreamTestDriver {
         final String password = System.getProperty("gnip.password");
         final String account = System.getProperty("gnip.account");
         final String streamName = System.getProperty("gnip.stream");
-        
-        if(username == null) {
+
+        if (username == null) {
             throw new IllegalArgumentException("Missing gnip.username");
         }
-        if(password == null) {
+        if (password == null) {
             throw new IllegalArgumentException("Missing gnip.password");
         }
-        if(account == null) {
+        if (account == null) {
             throw new IllegalArgumentException("Missing gnip.account");
         }
-        if(streamName == null) {
+        if (streamName == null) {
             throw new IllegalArgumentException("Missing gnip.stream");
         }
-        
+
         try {
-            final GnipFacade gnip = new DefaultGnipFacade(new JRERemoteResourceProvider(new ImmutableGnipAuthentication(username, password)));
-            
+            final GnipFacade gnip = new DefaultGnipFacade(new JRERemoteResourceProvider(
+                    new ImmutableGnipAuthentication(username, password)));
+
             System.out.println("-- Creating stream");
             final AtomicInteger counter = new AtomicInteger();
             final StreamNotificationAdapter n = new StreamNotificationAdapter() {
@@ -80,7 +82,7 @@ public final class StreamTestDriver {
             stream.await();
             System.out.println("-- Shutting down");
 
-        }   catch(Throwable t) {
+        } catch (Throwable t) {
             System.out.println(t.getMessage());
             t.printStackTrace();
         }

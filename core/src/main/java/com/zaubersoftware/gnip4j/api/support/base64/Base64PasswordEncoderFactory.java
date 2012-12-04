@@ -26,16 +26,16 @@ import com.zaubersoftware.gnip4j.api.support.base64.spi.Base64PasswordEncoderImp
  */
 public final class Base64PasswordEncoderFactory {
     private static Base64PasswordEncoder target;
-    
+
     static {
         target = new Base64PasswordEncoderImpl();
     }
-    
+
     /** Creates the Base64PasswordEncoderFactory. */
     private Base64PasswordEncoderFactory() {
         // void
     }
-    
+
     public static Base64PasswordEncoder getEncoder() {
         return target;
     }

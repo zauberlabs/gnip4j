@@ -15,8 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-import org.codehaus.jackson.annotate.JsonAutoDetect;
-import org.codehaus.jackson.annotate.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 
 /**
  * TODO Descripcion de la clase. Los comentarios van en castellano.
@@ -26,20 +26,19 @@ import org.codehaus.jackson.annotate.JsonAutoDetect.Visibility;
  * @since Feb 15, 2012
  */
 
-@JsonAutoDetect(getterVisibility=Visibility.PUBLIC_ONLY)
-public class Point implements Geometry{
-    
+@JsonAutoDetect(getterVisibility = Visibility.PUBLIC_ONLY) public class Point implements Geometry {
+
     /**
      * Creates the Point.
-     *
+     * 
      */
     @SuppressWarnings("unused")
     private Point() {
     }
-    
+
     /**
      * Creates the Point.
-     *
+     * 
      * @param latitude
      * @param longitude
      */
@@ -49,14 +48,9 @@ public class Point implements Geometry{
         this.longitude = longitude;
     }
 
-
-
-
     private double latitude;
     private double longitude;
-    
-    
-    
+
     /**
      * Returns the latitude.
      * 
@@ -65,8 +59,7 @@ public class Point implements Geometry{
     public double getLatitude() {
         return latitude;
     }
-    
-    
+
     /**
      * Returns the longitude.
      * 
@@ -81,8 +74,7 @@ public class Point implements Geometry{
     public Geometries getType() {
         return Geometries.Point;
     }
-    
-    
+
     /** @see java.lang.Object#toString() */
     @Override
     public String toString() {

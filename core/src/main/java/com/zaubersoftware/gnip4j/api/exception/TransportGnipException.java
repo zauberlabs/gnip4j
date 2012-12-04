@@ -19,13 +19,12 @@ import java.io.IOException;
 
 /**
  * Represents an exception that was caused by a transport error.
- *
+ * 
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
 public class TransportGnipException extends GnipException {
 
-    
     /** <code>serialVersionUID</code> */
     private static final long serialVersionUID = 3682753762097222234L;
 
@@ -52,7 +51,7 @@ public class TransportGnipException extends GnipException {
     public final boolean isNetworkError() {
         return (getCause() != null) ? getCause() instanceof IOException : false;
     }
-    
-    //TODO Add support for transport information error, for example, status code Maybe by subclassing this
-    //exception in HttpRequestGnipException
+
+    // TODO Add support for transport information error, for example, status code Maybe by subclassing this
+    // exception in HttpRequestGnipException
 }

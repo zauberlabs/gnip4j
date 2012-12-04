@@ -31,8 +31,8 @@ import com.zaubersoftware.gnip4j.api.support.http.JRERemoteResourceProvider;
 
 /**
  * TODO: Description of the class, Comments in english by default
- *
- *
+ * 
+ * 
  * @author Guido Marucci Blas
  * @since 11/11/2011
  */
@@ -75,7 +75,7 @@ public final class LocalhostTestDriver {
             stream.await();
             System.out.println("-- Shutting down");
 
-        }   catch(final Throwable t) {
+        } catch (final Throwable t) {
             System.out.println(t.getMessage());
             t.printStackTrace();
         }

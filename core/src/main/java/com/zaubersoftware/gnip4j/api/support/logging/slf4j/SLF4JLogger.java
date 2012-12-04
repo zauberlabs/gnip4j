@@ -19,7 +19,7 @@ import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
 /**
  * SLF4J implementation
- *
+ * 
  * @author Juan F. Codagnone
  * @since May 23, 2011
  */
@@ -28,7 +28,7 @@ public final class SLF4JLogger implements Logger {
 
     /** constructor */
     public SLF4JLogger(final org.slf4j.Logger target) {
-        if(target == null) {
+        if (target == null) {
             throw new IllegalArgumentException("target is null");
         }
         this.target = target;

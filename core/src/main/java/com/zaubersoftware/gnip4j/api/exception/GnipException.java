@@ -17,7 +17,7 @@ package com.zaubersoftware.gnip4j.api.exception;
 
 /**
  * Base exception
- *
+ * 
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
  */
@@ -27,7 +27,7 @@ public class GnipException extends RuntimeException {
 
     /**
      * Creates the GnipException.
-     *
+     * 
      */
     public GnipException() {
         super();
@@ -35,7 +35,7 @@ public class GnipException extends RuntimeException {
 
     /**
      * Creates the GnipException.
-     *
+     * 
      * @param message
      * @param cause
      */
@@ -45,7 +45,7 @@ public class GnipException extends RuntimeException {
 
     /**
      * Creates the GnipException.
-     *
+     * 
      * @param message
      */
     public GnipException(final String message) {
@@ -54,7 +54,7 @@ public class GnipException extends RuntimeException {
 
     /**
      * Creates the GnipException.
-     *
+     * 
      * @param cause
      */
     public GnipException(final Throwable cause) {

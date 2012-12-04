@@ -22,7 +22,7 @@ import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;
 import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
 /**
- * Stub implementation of {@link GnipStream} 
+ * Stub implementation of {@link GnipStream}
  * 
  * @author Guido Marucci Blas
  * @since May 23, 2011
@@ -33,16 +33,16 @@ public final class GnipStreamStub implements GnipStream {
 
     /**
      * Creates the GnipStreamStub.
-     *
+     * 
      */
     public GnipStreamStub(final String name) {
-        if(name == null) {
+        if (name == null) {
             throw new IllegalArgumentException("null name");
         }
-        
+
         this.name = name;
     }
-    
+
     @Override
     public void close() {
         logger.debug("The stream has been closed");
@@ -59,7 +59,7 @@ public final class GnipStreamStub implements GnipStream {
     }
 
     private final StreamStats stats = new DefaultStreamStats();
-    
+
     @Override
     public StreamStats getStreamStats() {
         return stats;

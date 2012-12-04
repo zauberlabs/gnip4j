@@ -23,8 +23,7 @@ package com.zaubersoftware.gnip4j.api.model;
  * @since Feb 15, 2012
  */
 public interface Geometry {
-    
-    
+
     Geometries getType();
-    
+
 }

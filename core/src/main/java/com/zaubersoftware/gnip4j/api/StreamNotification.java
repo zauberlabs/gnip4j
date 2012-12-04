@@ -30,31 +30,37 @@ public interface StreamNotification {
     /**
      * Notifies the arrival of a new {@link Activity}
      * 
-     * @param activity The new arrived activity.
-     * @param stream The stream used to suck the activities.
+     * @param activity
+     *            The new arrived activity.
+     * @param stream
+     *            The stream used to suck the activities.
      */
     void notify(Activity activity, GnipStream stream);
-    
+
     /**
      * Notifies a connection error.
      * 
-     * @param e The exception that cause the error.
+     * @param e
+     *            The exception that cause the error.
      */
     void notifyConnectionError(TransportGnipException e);
-    
+
     /**
      * Notifies an error that occurs while trying to re-establish a connection with Gnip
      * 
-     * @param e The exception that cause ther error.
+     * @param e
+     *            The exception that cause ther error.
      */
     void notifyReConnectionError(GnipException e);
-    
+
     /**
      * Notifies a re-connection attempt with Gnip. This is called before the waiting time.
      * 
-     * @param attempt The amount of re-connection attempts including this notification. Once a reconnection
-     * has been established the counter will be reset.
-     * @param waitTime The amount of time to be waited before trying to reconnect.
+     * @param attempt
+     *            The amount of re-connection attempts including this notification. Once a reconnection has been
+     *            established the counter will be reset.
+     * @param waitTime
+     *            The amount of time to be waited before trying to reconnect.
      */
     void notifyReConnectionAttempt(int attempt, long waitTime);
 }

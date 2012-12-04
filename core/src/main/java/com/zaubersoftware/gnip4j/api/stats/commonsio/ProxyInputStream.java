@@ -22,14 +22,12 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * A Proxy stream which acts as expected, that is it passes the method
- * calls on to the proxied stream and doesn't change which methods are
- * being called.
+ * A Proxy stream which acts as expected, that is it passes the method calls on to the proxied stream and doesn't change
+ * which methods are being called.
  * <p>
- * It is an alternative base class to FilterInputStream
- * to increase reusability, because FilterInputStream changes the
+ * It is an alternative base class to FilterInputStream to increase reusability, because FilterInputStream changes the
  * methods being called, such as read(byte[]) to read(byte[], int, int).
- *
+ * 
  * @author Stephen Colebourne
  * @version $Id: ProxyInputStream.java 610010 2008-01-08 14:50:59Z niallp $
  */
@@ -37,8 +35,9 @@ public abstract class ProxyInputStream extends FilterInputStream {
 
     /**
      * Constructs a new ProxyInputStream.
-     *
-     * @param proxy  the InputStream to delegate to
+     * 
+     * @param proxy
+     *            the InputStream to delegate to
      */
     public ProxyInputStream(final InputStream proxy) {
         super(proxy);
@@ -47,8 +46,10 @@ public abstract class ProxyInputStream extends FilterInputStream {
 
     /**
      * Invokes the delegate's <code>read()</code> method.
+     * 
      * @return the byte read or -1 if the end of stream
-     * @throws IOException if an I/O error occurs
+     * @throws IOException
+     *             if an I/O error occurs
      */
     @Override
     public int read() throws IOException {
@@ -57,9 +58,12 @@ public abstract class ProxyInputStream extends FilterInputStream {
 
     /**
      * Invokes the delegate's <code>read(byte[])</code> method.
-     * @param bts the buffer to read the bytes into
+     * 
+     * @param bts
+     *            the buffer to read the bytes into
      * @return the number of bytes read or -1 if the end of stream
-     * @throws IOException if an I/O error occurs
+     * @throws IOException
+     *             if an I/O error occurs
      */
     @Override
     public int read(final byte[] bts) throws IOException {
@@ -68,11 +72,16 @@ public abstract class ProxyInputStream extends FilterInputStream {
 
     /**
      * Invokes the delegate's <code>read(byte[], int, int)</code> method.
-     * @param bts the buffer to read the bytes into
-     * @param st The start offset
-     * @param end The number of bytes to read
+     * 
+     * @param bts
+     *            the buffer to read the bytes into
+     * @param st
+     *            The start offset
+     * @param end
+     *            The number of bytes to read
      * @return the number of bytes read or -1 if the end of stream
-     * @throws IOException if an I/O error occurs
+     * @throws IOException
+     *             if an I/O error occurs
      */
     @Override
     public int read(final byte[] bts, final int st, final int end) throws IOException {
@@ -81,9 +90,12 @@ public abstract class ProxyInputStream extends FilterInputStream {
 
     /**
      * Invokes the delegate's <code>skip(long)</code> method.
-     * @param ln the number of bytes to skip
+     * 
+     * @param ln
+     *            the number of bytes to skip
      * @return the number of bytes to skipped or -1 if the end of stream
-     * @throws IOException if an I/O error occurs
+     * @throws IOException
+     *             if an I/O error occurs
      */
     @Override
     public long skip(final long ln) throws IOException {
@@ -92,8 +104,10 @@ public abstract class ProxyInputStream extends FilterInputStream {
 
     /**
      * Invokes the delegate's <code>available()</code> method.
+     * 
      * @return the number of available bytes
-     * @throws IOException if an I/O error occurs
+     * @throws IOException
+     *             if an I/O error occurs
      */
     @Override
     public int available() throws IOException {
@@ -102,7 +116,9 @@ public abstract class ProxyInputStream extends FilterInputStream {
 
     /**
      * Invokes the delegate's <code>close()</code> method.
-     * @throws IOException if an I/O error occurs
+     * 
+     * @throws IOException
+     *             if an I/O error occurs
      */
     @Override
     public void close() throws IOException {
@@ -111,7 +127,9 @@ public abstract class ProxyInputStream extends FilterInputStream {
 
     /**
      * Invokes the delegate's <code>mark(int)</code> method.
-     * @param idx read ahead limit
+     * 
+     * @param idx
+     *            read ahead limit
      */
     @Override
     public synchronized void mark(final int idx) {
@@ -120,7 +138,9 @@ public abstract class ProxyInputStream extends FilterInputStream {
 
     /**
      * Invokes the delegate's <code>reset()</code> method.
-     * @throws IOException if an I/O error occurs
+     * 
+     * @throws IOException
+     *             if an I/O error occurs
      */
     @Override
     public synchronized void reset() throws IOException {
@@ -129,6 +149,7 @@ public abstract class ProxyInputStream extends FilterInputStream {
 
     /**
      * Invokes the delegate's <code>markSupported()</code> method.
+     * 
      * @return true if mark is supported, otherwise false
      */
     @Override

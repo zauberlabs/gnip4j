@@ -19,49 +19,44 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonAutoDetect;
-import org.codehaus.jackson.annotate.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 
 /**
  * @author Martin Silva
  * @since Feb 15, 2012
  */
 
-@JsonAutoDetect(getterVisibility=Visibility.PUBLIC_ONLY)
-public class Polygon implements Geometry, Iterable<Point> {
-    
+@JsonAutoDetect(getterVisibility = Visibility.PUBLIC_ONLY) public class Polygon implements Geometry, Iterable<Point> {
+
     private List<Point> points;
-    
-    
+
     /**
      * Creates the Polygon.
-     *
+     * 
      */
-    
+
     Polygon() {
     }
-    
+
     /**
      * Creates the Polygon.
-     *
+     * 
      */
     public Polygon(List<Point> points) {
         this.points = points;
     }
-    
-    
+
     public Polygon(Point points[]) {
         this.points = Arrays.asList(points);
     }
-    
 
     /** @see java.lang.Iterable#iterator() */
     @Override
     public Iterator<Point> iterator() {
         return this.points.iterator();
     }
-    
-    
+
     /**
      * Returns the points.
      * 
@@ -76,20 +71,19 @@ public class Polygon implements Geometry, Iterable<Point> {
     public Geometries getType() {
         return Geometries.Polygon;
     }
-    
-    
+
     /** @see java.lang.Object#toString() */
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("[");
-        
+
         for (Point p : this.points) {
             builder.append("[ " + p.toString() + " ]");
         }
-        
+
         builder.append("]");
-        
+
         return builder.toString();
     }
 }

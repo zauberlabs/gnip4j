@@ -22,7 +22,7 @@ import com.zaubersoftware.gnip4j.api.model.Rule;
 import com.zaubersoftware.gnip4j.api.model.Rules;
 
 /**
- * Facade to the Gnip Streaming API  
+ * Facade to the Gnip Streaming API
  * 
  * @author Guido Marucci Blas
  * @since Apr 29, 2011
@@ -30,49 +30,52 @@ import com.zaubersoftware.gnip4j.api.model.Rules;
 public interface GnipFacade {
 
     /** @see #createStream(String, long, StreamNotification, ExecutorService) */
-    GnipStream createStream(String account, String streamName,
-            StreamNotification observer);
-    
+    GnipStream createStream(String account, String streamName, StreamNotification observer);
+
     /**
-     * Gnip provides access to the data with a streaming HTTP implementation
-     * that allows you to consume data in near real-time over a single
-     * persistent HTTP connection/request.
+     * Gnip provides access to the data with a streaming HTTP implementation that allows you to consume data in near
+     * real-time over a single persistent HTTP connection/request.
      * 
-     * @param account The account name for the power track API. (For example: acme)
-     * @param streamName the streamName
-     * @param observer {@link StreamNotification} used to notify the {@link Activity}s.
-     * @param executorService {@link ExecutorService} used to process {@link Activity}
-     * @return a reference to the stream so it can be closed 
+     * @param account
+     *            The account name for the power track API. (For example: acme)
+     * @param streamName
+     *            the streamName
+     * @param observer
+     *            {@link StreamNotification} used to notify the {@link Activity}s.
+     * @param executorService
+     *            {@link ExecutorService} used to process {@link Activity}
+     * @return a reference to the stream so it can be closed
      */
-    GnipStream createStream(String account, String streamName,
-                            StreamNotification observer, 
-                            ExecutorService executorService);
-    
+    GnipStream createStream(String account, String streamName, StreamNotification observer,
+            ExecutorService executorService);
+
     /**
-     * Gnip provides a REST interface to the rules configured for each data collector.
-     * They can be modified either through this interface, or through the UI. These
-     * views are synchronized.
-     *
-     * @param account The account name for the power track API. (For example: acme)
-     * @param streamName the streamName
+     * Gnip provides a REST interface to the rules configured for each data collector. They can be modified either
+     * through this interface, or through the UI. These views are synchronized.
+     * 
+     * @param account
+     *            The account name for the power track API. (For example: acme)
+     * @param streamName
+     *            the streamName
      * @return The Rules object for all the rules configured on this tracker.
      */
     Rules getRules(String account, String streamName);
-    
+
     /**
-     * Gnip provides a REST interface to the rules configured for each data collector.
-     * They can be modified either through this interface, or through the UI. These
-     * views are synchronized.
+     * Gnip provides a REST interface to the rules configured for each data collector. They can be modified either
+     * through this interface, or through the UI. These views are synchronized.
      * 
-     * Rules should be added one at a time, according to Gnip's documentation on best
-     * practices, so this method only lets you change one Rule. It can, of course, be
-     * called many times.
+     * Rules should be added one at a time, according to Gnip's documentation on best practices, so this method only
+     * lets you change one Rule. It can, of course, be called many times.
      * 
-     @param account The account name for the power track API. (For example: acme)
-     * @param streamName the streamName
-     * @param rule The Rule object to add to the tracker.
+     * @param account
+     *            The account name for the power track API. (For example: acme)
+     * @param streamName
+     *            the streamName
+     * @param rule
+     *            The Rule object to add to the tracker.
      */
     void addRule(String account, String streamName, Rule rule);
-    
+
     void deleteRule(String account, String streamName, Rule rule);
 }

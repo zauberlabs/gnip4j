@@ -20,9 +20,8 @@ import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 
 /**
- * An adapter for {@link StreamNotification} that implements all the method
- * except for {@link StreamNotification#notify(Activity, GnipStream)} by doing 
- * nothing.
+ * An adapter for {@link StreamNotification} that implements all the method except for
+ * {@link StreamNotification#notify(Activity, GnipStream)} by doing nothing.
  * 
  * @author Guido Marucci Blas
  * @since May 9, 2011
