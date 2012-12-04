@@ -122,4 +122,8 @@ public final class Urls {
         this.displayUrl = displayUrl;
     }
 
+    public void setIndices(List<Integer> indices) {
+        this.indices = indices;
+    }
+
 }

@@ -78,4 +78,8 @@ public final class Hashtags {
         this.text = value;
     }
 
+    public void setIndices(List<Integer> indices) {
+        this.indices = indices;
+    }
+
 }

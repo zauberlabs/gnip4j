@@ -119,4 +119,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
         return hashtags;
     }
 
+    public void setUrls(List<Urls> urls) {
+        this.urls = urls;
+    }
+
+    public void setUserMentions(List<UserMentions> userMentions) {
+        this.userMentions = userMentions;
+    }
+
+    public void setHashtags(List<Hashtags> hashtags) {
+        this.hashtags = hashtags;
+    }
+
 }
