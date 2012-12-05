@@ -15,7 +15,6 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -77,16 +76,10 @@ public class Gnip {
      * 
      */
     public final List<MatchingRules> getMatchingRules() {
-        if (matchingRules == null) {
-            matchingRules = new ArrayList<MatchingRules>();
-        }
         return matchingRules;
     }
 
     public final List<Url> getUrls() {
-        if (urls == null) {
-            urls = new ArrayList<Url>();
-        }
         return urls;
     }
 

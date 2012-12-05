@@ -34,15 +34,17 @@ public class Url {
         return url;
     }
 
-    public final void setUrl(final String url) {
+    public final Url setUrl(final String url) {
         this.url = url;
+        return this;
     }
 
     public final String getExpandedUrl() {
         return expandedUrl;
     }
 
-    public final void setExpandedUrl(final String expandedUrl) {
+    public final Url setExpandedUrl(final String expandedUrl) {
         this.expandedUrl = expandedUrl;
+        return this;
     }
 }

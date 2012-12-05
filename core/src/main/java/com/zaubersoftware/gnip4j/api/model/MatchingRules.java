@@ -56,8 +56,9 @@ public final class MatchingRules {
      *            allowed object is {@link String }
      * 
      */
-    public void setValue(final String value) {
+    public MatchingRules setValue(final String value) {
         this.value = value;
+        return this;
     }
 
     /**
@@ -77,8 +78,9 @@ public final class MatchingRules {
      *            allowed object is {@link String }
      * 
      */
-    public void setTag(final String value) {
+    public MatchingRules setTag(final String value) {
         tag = value;
+        return this;
     }
 
 }
