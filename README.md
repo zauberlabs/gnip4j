@@ -14,7 +14,6 @@ from the data from the Java language.
    * Push model via Streaming (asynchronous processing)
    * Error handling support (and exponential-backoff reconnections)
    * Monitoring Support (JMX)
-   * [Mule ESB](http://www.mulesoft.org/) integration
 
 ## How To use gnip4j
 
@@ -30,12 +29,12 @@ Add to your dependency Managment:
      <dependencyManagement>
        <dependencies>
         <dependency>
-           <groupId>com.zaubersoftware.gnip4j</groupId>
+           <groupId>com.rincaro</groupId>
            <artifactId>gnip4j-core</artifactId>
            <version>${gnip4j.version}</version>
         </dependency>
         <dependency>
-           <groupId>com.zaubersoftware.gnip4j</groupId>
+           <groupId>com.rincaro</groupId>
            <artifactId>gnip4j-http</artifactId>
            <version>${gnip4j.version}</version>
         </dependency>
@@ -43,7 +42,7 @@ Add to your dependency Managment:
      </dependencyManagement>
      ...
      <properties>
-         <gnip4j.version>0.1</gnip4j.version>
+         <gnip4j.version>1.2-SNAPSHOT</gnip4j.version>
      </properties>
 ```
 
@@ -52,7 +51,7 @@ and add to your project:
 ```xml
     <dependencies>
        <dependency>
-        <groupId>com.zaubersoftware.gnip4j</groupId>
+        <groupId>com.rincaro</groupId>
         <artifactId>gnip4j-core</artifactId>
        </dependency>
     </dependencies>
