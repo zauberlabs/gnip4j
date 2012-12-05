@@ -93,4 +93,16 @@ public class Gnip {
     public final Float getKloutScore() {
         return kloutScore;
     }
+
+    public void setMatchingRules(List<MatchingRules> matchingRules) {
+        this.matchingRules = matchingRules;
+    }
+
+    public void setUrls(List<Url> urls) {
+        this.urls = urls;
+    }
+
+    public void setKloutScore(Float kloutScore) {
+        this.kloutScore = kloutScore;
+    }
 }

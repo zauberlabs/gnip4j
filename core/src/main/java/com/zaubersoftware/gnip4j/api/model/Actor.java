@@ -465,4 +465,12 @@ public final class Actor {
 
     }
 
+    public void setLanguages(List<String> languages) {
+        this.languages = languages;
+    }
+
+    public void setLinks(List<Links> links) {
+        this.links = links;
+    }
+
 }
