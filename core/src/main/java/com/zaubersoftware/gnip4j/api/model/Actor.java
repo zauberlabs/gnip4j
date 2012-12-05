@@ -37,7 +37,7 @@ public final class Actor {
     private XMLGregorianCalendar postedTime;
     private String displayName;
     private String preferredUsername;
-    private int utcOffset;
+    private String utcOffset;
     private String objectType;
     private int statusesCount;
     private BigInteger listedCount;
@@ -201,7 +201,7 @@ public final class Actor {
      * Gets the value of the utcOffset property.
      * 
      */
-    public int getUtcOffset() {
+    public String getUtcOffset() {
         return utcOffset;
     }
 
@@ -209,7 +209,7 @@ public final class Actor {
      * Sets the value of the utcOffset property.
      * 
      */
-    public void setUtcOffset(final int value) {
+    public void setUtcOffset(final String value) {
         utcOffset = value;
     }
 

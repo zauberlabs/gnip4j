@@ -150,4 +150,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
         id = value;
     }
 
+    public void setIndices(List<Integer> indices) {
+        this.indices = indices;
+    }
+
 }
