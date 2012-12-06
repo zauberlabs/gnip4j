@@ -52,20 +52,8 @@
 	</developers>
 	<issueManagement>
 		<system>github</system>
-		<url>https://github.com/zaubersoftware/gnip4j/issues</url>
+		<url>https://github.com/Rincaro/gnip4j/issues</url>
 	</issueManagement>
-	<distributionManagement>
-		<repository>
-			<id>sonatype-nexus-staging</id>
-			<name>Nexus Release Repository</name>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-		<snapshotRepository>
-			<id>zauber-code-snapshots</id>
-			<name>Zauber Code Snapshots</name>
-			<url>https://repo1.zaubersoftware.com/zauber/code/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
 
 	<modules>
 		<module>core</module>
@@ -75,15 +63,7 @@
 	</modules>
 
 	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-project-info-reports-plugin</artifactId>
-					<version>2.6</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+
 
 		<plugins>
 			<plugin>
