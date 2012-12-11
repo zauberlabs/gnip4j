@@ -31,6 +31,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import com.zaubersoftware.gnip4j.api.impl.DefaultGnipStream;
+import com.zaubersoftware.gnip4j.api.impl.formats.JsonActivityFeedProcessor;
 import com.zaubersoftware.gnip4j.api.model.Activities;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.model.Geo;
@@ -50,7 +51,7 @@ public final class JSONDeserializationTest {
     /** setup test */
     @Before
     public void setUp() throws Exception {
-        mapper = DefaultGnipStream.getObjectMapper();
+        mapper = JsonActivityFeedProcessor.getObjectMapper();
     }
 
     /** test a complete unmarshal from the json */

@@ -15,6 +15,10 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
@@ -34,11 +38,21 @@ public class Activity {
     private Gnip gnip;
     private String verb;
     private XMLGregorianCalendar postedTime;
+    private Date created;
+    private Date updated;
     private String body;
     private String objectType;
     private String id;
     private String link;
-
+    private Source source;
+    private List<Category> categories;
+    private List<Links> links;
+    private String summary;
+    private Author author;
+    private String content;
+    private String subtitle;
+    private String title;
+    
     public final InReplyTo getInReplyTo() {
         return inReplyTo;
     }
@@ -104,6 +118,9 @@ public class Activity {
     }
 
     public final Gnip getGnip() {
+        if(gnip == null) {
+            gnip = new Gnip();
+        }
         return gnip;
     }
 
@@ -171,7 +188,7 @@ public class Activity {
      * The following schema fragment specifies the expected content contained
      * within this class.
      */
-    public static class Location{
+    public static class Location {
         private Geo geo;
         private String countryCode;
         private String displayName;
@@ -236,4 +253,83 @@ public class Activity {
         }
     }
 
+    public final void setSource(final Source value) {
+        source = value;
+    }
+    
+    public final Source getSource() {
+        return source;
+    }
+    
+    public final Date getCreated() {
+        return created;
+    }
+    
+    public final void setCreated(final Date created) {
+        this.created = created;
+    }
+    
+
+    public final Date getUpdated() {
+        return updated;
+    }
+    
+    public final void setUpdated(final Date updated) {
+        this.updated = updated;
+    }
+    
+    /** get the categories */
+    public final List<Category> getCategoriesRules() {
+        if (categories == null) {
+            categories = new ArrayList<Category>();
+        }
+        return categories;
+    }
+    
+    public final List<Links> getLinks() {
+        if (links == null) {
+            links = new ArrayList<Links>();
+        }
+        return links;
+    }
+    
+    public final String getSummary() {
+        return summary;
+    }
+
+    public final void setSummary(final String value) {
+        summary = value;
+    }
+
+    public final Author getAuthor() {
+        return author;
+    }
+    
+    public final void setAuthor(final Author author) {
+        this.author = author;
+    }
+
+    public final String getContent() {
+        return content;
+    }
+    
+    public final void setContent(final String content) {
+        this.content = content;
+    }
+    
+    public final String getSubtitle() {
+        return subtitle;
+    }
+    
+    public final void setSubtitle(final String subtitle) {
+        this.subtitle = subtitle;
+    }
+
+    public final void setTitle(final String text) {
+        title = text;
+    }
+    
+    public final String getTitle() {
+        return title;
+    }
 }

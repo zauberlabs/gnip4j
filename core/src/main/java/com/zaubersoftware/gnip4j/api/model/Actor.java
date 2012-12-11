@@ -28,7 +28,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * <p>The following schema fragment specifies the expected content contained within this class.
  *
  */
-public final class Actor{
+public final class Actor {
     
     private Actor.Location location;
     private List<String> languages;

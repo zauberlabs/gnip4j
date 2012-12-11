@@ -1,0 +1,980 @@
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_349239648508272</id>
+  <created>2012-12-11T19:11:06+00:00</created>
+  <published>2012-12-11T19:11:06+00:00</published>
+  <updated>2012-12-11T19:11:06+00:00</updated>
+  <title>Hamza Malik posted a bookmark to the Justin Bieber page on Facebook</title>
+  <category term="BookmarkPosted" label="Bookmark Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/349239648508272"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-11-18Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/bookmark</activity:object-type>
+    <id>67253243887_349239648508272</id>
+    <title>JusTin BieBer All Around the world</title>
+    <content>HamZa MaLik #BoYBeLieBer 
+&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; &#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; &#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588; &#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588; &#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588; &#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588; &#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588; &#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588; &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;</content>
+    <summary>OMGGGGGGGGG i FounD JusTin BieBer ReaL AccounT !!!!!!!! LiKe &#x2665; https://www.facebook.com/LiVeMyLiFeJDB</summary>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/349239648508272"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+    <link rel="related" href="http://www.facebook.com/LiVeMyLiFeJDB"/>
+    <link rel="preview" href="https://fbexternal-a.akamaihd.net/safe_image.php?d=AQA5K8Omzdyrtih9&amp;url=https%3A%2F%2Ffbcdn-profile-a.akamaihd.net%2Fhprofile-ak-snc6%2F276719_452406868134900_216076773_n.jpg"/>
+  </activity:object>
+  <author>
+    <name>Hamza Malik</name>
+    <uri>http://www.facebook.com/profile.php?id=100003222007141</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=100003222007141"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_505526919487136</id>
+  <created>2012-12-11T19:11:13+00:00</created>
+  <published>2012-12-11T19:11:13+00:00</published>
+  <updated>2012-12-11T19:11:13+00:00</updated>
+  <title>Hamza Malik posted a bookmark to the Justin Bieber page on Facebook</title>
+  <category term="BookmarkPosted" label="Bookmark Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/505526919487136"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-11-27Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/bookmark</activity:object-type>
+    <id>67253243887_505526919487136</id>
+    <title>JusTin BieBer All Around the world</title>
+    <content>HamZa MaLik #BoYBeLieBer 
+&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; &#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; &#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588; &#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588; &#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588; &#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588; &#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588; &#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588; &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;</content>
+    <summary>OMGGGGGGGGG i FounD JusTin BieBer ReaL AccounT !!!!!!!! LiKe &#x2665; https://www.facebook.com/LiVeMyLiFeJDB</summary>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/505526919487136"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+    <link rel="related" href="http://www.facebook.com/LiVeMyLiFeJDB"/>
+    <link rel="preview" href="https://fbexternal-a.akamaihd.net/safe_image.php?d=AQA5K8Omzdyrtih9&amp;url=https%3A%2F%2Ffbcdn-profile-a.akamaihd.net%2Fhprofile-ak-snc6%2F276719_452406868134900_216076773_n.jpg"/>
+  </activity:object>
+  <author>
+    <name>Hamza Malik</name>
+    <uri>http://www.facebook.com/profile.php?id=100003222007141</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=100003222007141"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_10151449361633888</id>
+  <created>2012-12-11T19:11:27+00:00</created>
+  <published>2012-12-11T19:11:27+00:00</published>
+  <updated>2012-12-11T19:11:27+00:00</updated>
+  <title>Hamza Malik posted a note to the Justin Bieber page on Facebook</title>
+  <category term="NotePosted" label="Note Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449361633888"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-11-34Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>
+    <id>67253243887_10151449361633888</id>
+    <title>OMGGGGGGGGG i FounD JusTin BieBer ReaL AccounT !!!!!!!! LiKe &#x2665; https://www.facebook.com/LiVeMyLiFeJDB</title>
+    <content>OMGGGGGGGGG i FounD JusTin BieBer ReaL AccounT !!!!!!!! LiKe &#x2665; https://www.facebook.com/LiVeMyLiFeJDB</content>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449361633888"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+  </activity:object>
+  <author>
+    <name>Hamza Malik</name>
+    <uri>http://www.facebook.com/profile.php?id=100003222007141</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=100003222007141"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_571368796223071</id>
+  <created>2012-12-11T19:10:18+00:00</created>
+  <published>2012-12-11T19:10:18+00:00</published>
+  <updated>2012-12-11T19:10:18+00:00</updated>
+  <title>Beliebers Com Sangue Roxo posted a bookmark to the Justin Bieber page on Facebook</title>
+  <category term="BookmarkPosted" label="Bookmark Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/571368796223071"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-11-34Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/bookmark</activity:object-type>
+    <id>67253243887_571368796223071</id>
+    <title>Beliebers Com Sangue Roxo</title>
+    <content>Pra Aquelas Beliebers  Que Sabem Tudo Sobre Justin e Que Nunca o Abandonaram !! </content>
+    <summary>http://www.facebook.com/BeliebersComSangueRoxo?ref=hl</summary>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/571368796223071"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+    <link rel="related" href="http://www.facebook.com/BeliebersComSangueRoxo"/>
+    <link rel="preview" href="https://fbexternal-a.akamaihd.net/safe_image.php?d=AQDC0PLlU0d-Knn4&amp;url=http%3A%2F%2Fprofile.ak.fbcdn.net%2Fhprofile-ak-ash4%2F373045_352912381463205_714104785_n.jpg"/>
+  </activity:object>
+  <author>
+    <name>Beliebers Com Sangue Roxo</name>
+    <uri>http://www.facebook.com/profile.php?id=352912381463205</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=352912381463205"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_290853617702734</id>
+  <created>2012-12-11T19:11:45+00:00</created>
+  <published>2012-12-11T19:11:45+00:00</published>
+  <updated>2012-12-11T19:11:45+00:00</updated>
+  <title>Hamza Malik posted a bookmark to the Justin Bieber page on Facebook</title>
+  <category term="BookmarkPosted" label="Bookmark Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/290853617702734"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-12-02Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/bookmark</activity:object-type>
+    <id>67253243887_290853617702734</id>
+    <title>JusTin BieBer All Around the world</title>
+    <content>HamZa MaLik #BoYBeLieBer 
+&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; &#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; &#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588; &#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588; &#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588; &#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588; &#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588; &#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588; &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;</content>
+    <summary>OMGGGGGGGGG i FounD JusTin BieBer ReaL AccounT !!!!!!!! LiKe &#x2665; https://www.facebook.com/LiVeMyLiFeJDB</summary>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/290853617702734"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+    <link rel="related" href="http://www.facebook.com/LiVeMyLiFeJDB"/>
+    <link rel="preview" href="https://fbexternal-a.akamaihd.net/safe_image.php?d=AQA5K8Omzdyrtih9&amp;url=https%3A%2F%2Ffbcdn-profile-a.akamaihd.net%2Fhprofile-ak-snc6%2F276719_452406868134900_216076773_n.jpg"/>
+  </activity:object>
+  <author>
+    <name>Hamza Malik</name>
+    <uri>http://www.facebook.com/profile.php?id=100003222007141</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=100003222007141"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_439647212771225_76801298</id>
+  <created>2012-12-11T19:11:47+00:00</created>
+  <published>2012-12-11T19:11:47+00:00</published>
+  <updated>2012-12-11T19:11:47+00:00</updated>
+  <title>Beliebers Com Sangue Roxo posted a comment to the Justin Bieber page on Facebook</title>
+  <category term="CommentPosted" label="Comment Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/439647212771225"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-12-02Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/comment</activity:object-type>
+    <id>67253243887_439647212771225_76801298</id>
+    <title>curtiu la pag ???</title>
+    <content>curtiu la pag ???</content>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/439647212771225"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+    <thr:in-reply-to type="html" href="http://www.facebook.com/67253243887/posts/439647212771225"/>
+  </activity:object>
+  <author>
+    <name>Beliebers Com Sangue Roxo</name>
+    <uri>http://www.facebook.com/profile.php?id=352912381463205</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=352912381463205"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_10151449357663888_39790645</id>
+  <created>2012-12-11T19:11:48+00:00</created>
+  <published>2012-12-11T19:11:48+00:00</published>
+  <updated>2012-12-11T19:11:48+00:00</updated>
+  <title>Jastin Bebers posted a comment to the Justin Bieber page on Facebook</title>
+  <category term="CommentPosted" label="Comment Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449357663888"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-12-02Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/comment</activity:object-type>
+    <id>67253243887_10151449357663888_39790645</id>
+    <title>_</title>
+    <content>_</content>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449357663888"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+    <thr:in-reply-to type="html" href="http://www.facebook.com/67253243887/posts/10151449357663888"/>
+  </activity:object>
+  <author>
+    <name>Jastin Bebers</name>
+    <uri>http://www.facebook.com/profile.php?id=100004771600136</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=100004771600136"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_10151449362413888</id>
+  <created>2012-12-11T19:12:01+00:00</created>
+  <published>2012-12-11T19:12:01+00:00</published>
+  <updated>2012-12-11T19:12:01+00:00</updated>
+  <title>Believe 3D posted a note to the Justin Bieber page on Facebook</title>
+  <category term="NotePosted" label="Note Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449362413888"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-12-11Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>
+    <id>67253243887_10151449362413888</id>
+    <title>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </title>
+    <content>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </content>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449362413888"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+  </activity:object>
+  <author>
+    <name>Believe 3D</name>
+    <uri>http://www.facebook.com/profile.php?id=489440457756048</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=489440457756048"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_10151449362518888</id>
+  <created>2012-12-11T19:12:06+00:00</created>
+  <published>2012-12-11T19:12:06+00:00</published>
+  <updated>2012-12-11T19:12:06+00:00</updated>
+  <title>Believe 3D posted a note to the Justin Bieber page on Facebook</title>
+  <category term="NotePosted" label="Note Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449362518888"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-12-17Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>
+    <id>67253243887_10151449362518888</id>
+    <title>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </title>
+    <content>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </content>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449362518888"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+  </activity:object>
+  <author>
+    <name>Believe 3D</name>
+    <uri>http://www.facebook.com/profile.php?id=489440457756048</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=489440457756048"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_303020563148099</id>
+  <created>2012-12-11T19:12:12+00:00</created>
+  <published>2012-12-11T19:12:12+00:00</published>
+  <updated>2012-12-11T19:12:12+00:00</updated>
+  <title>Hamza Malik posted a bookmark to the Justin Bieber page on Facebook</title>
+  <category term="BookmarkPosted" label="Bookmark Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/303020563148099"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-12-24Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/bookmark</activity:object-type>
+    <id>67253243887_303020563148099</id>
+    <title>JusTin BieBer All Around the world</title>
+    <content>HamZa MaLik #BoYBeLieBer 
+&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; &#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; &#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588; &#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588; &#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588; &#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588; &#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588; &#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588; &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2500;&#x2500;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;</content>
+    <summary>OMGGGGGGGGG i FounD JusTin BieBer ReaL AccounT !!!!!!!! LiKe &#x2665; https://www.facebook.com/LiVeMyLiFeJDB</summary>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/303020563148099"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+    <link rel="related" href="http://www.facebook.com/LiVeMyLiFeJDB"/>
+    <link rel="preview" href="https://fbexternal-a.akamaihd.net/safe_image.php?d=AQA5K8Omzdyrtih9&amp;url=https%3A%2F%2Ffbcdn-profile-a.akamaihd.net%2Fhprofile-ak-snc6%2F276719_452406868134900_216076773_n.jpg"/>
+  </activity:object>
+  <author>
+    <name>Hamza Malik</name>
+    <uri>http://www.facebook.com/profile.php?id=100003222007141</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=100003222007141"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_10151449362668888</id>
+  <created>2012-12-11T19:12:12+00:00</created>
+  <published>2012-12-11T19:12:12+00:00</published>
+  <updated>2012-12-11T19:12:12+00:00</updated>
+  <title>Believe 3D posted a note to the Justin Bieber page on Facebook</title>
+  <category term="NotePosted" label="Note Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449362668888"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-12-24Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>
+    <id>67253243887_10151449362668888</id>
+    <title>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </title>
+    <content>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </content>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449362668888"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+  </activity:object>
+  <author>
+    <name>Believe 3D</name>
+    <uri>http://www.facebook.com/profile.php?id=489440457756048</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=489440457756048"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_10151449363143888</id>
+  <created>2012-12-11T19:12:24+00:00</created>
+  <published>2012-12-11T19:12:24+00:00</published>
+  <updated>2012-12-11T19:12:24+00:00</updated>
+  <title>Believe 3D posted a note to the Justin Bieber page on Facebook</title>
+  <category term="NotePosted" label="Note Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449363143888"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-12-32Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>
+    <id>67253243887_10151449363143888</id>
+    <title>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </title>
+    <content>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </content>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449363143888"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+  </activity:object>
+  <author>
+    <name>Believe 3D</name>
+    <uri>http://www.facebook.com/profile.php?id=489440457756048</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=489440457756048"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_10151449362948888</id>
+  <created>2012-12-11T19:12:18+00:00</created>
+  <published>2012-12-11T19:12:18+00:00</published>
+  <updated>2012-12-11T19:12:18+00:00</updated>
+  <title>Believe 3D posted a note to the Justin Bieber page on Facebook</title>
+  <category term="NotePosted" label="Note Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449362948888"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-12-32Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>
+    <id>67253243887_10151449362948888</id>
+    <title>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </title>
+    <content>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </content>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449362948888"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+  </activity:object>
+  <author>
+    <name>Believe 3D</name>
+    <uri>http://www.facebook.com/profile.php?id=489440457756048</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=489440457756048"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_10151449363293888</id>
+  <created>2012-12-11T19:12:29+00:00</created>
+  <published>2012-12-11T19:12:29+00:00</published>
+  <updated>2012-12-11T19:12:29+00:00</updated>
+  <title>Believe 3D posted a note to the Justin Bieber page on Facebook</title>
+  <category term="NotePosted" label="Note Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449363293888"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-12-42Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>
+    <id>67253243887_10151449363293888</id>
+    <title>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </title>
+    <content>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </content>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449363293888"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+  </activity:object>
+  <author>
+    <name>Believe 3D</name>
+    <uri>http://www.facebook.com/profile.php?id=489440457756048</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=489440457756048"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_143682955780305</id>
+  <created>2012-12-11T19:12:38+00:00</created>
+  <published>2012-12-11T19:12:38+00:00</published>
+  <updated>2012-12-11T19:12:38+00:00</updated>
+  <title>Gabii Emii posted a bookmark to the Justin Bieber page on Facebook</title>
+  <category term="BookmarkPosted" label="Bookmark Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/143682955780305"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-13-04Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/bookmark</activity:object-type>
+    <id>67253243887_143682955780305</id>
+    <title>Justin Bieber :3</title>
+    <content>Moda,Juegos,Artista . &#x2665; Justin Bieber :3</content>
+    <summary>Like Llike Like.
+http://www.facebook.com/pages/Justin-Bieber-3/346184758807083</summary>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/143682955780305"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+    <link rel="related" href="http://www.facebook.com/pages/Justin-Bieber-3/346184758807083"/>
+    <link rel="preview" href="https://fbexternal-a.akamaihd.net/safe_image.php?d=AQBfwEHGkVM9rEJH&amp;url=http%3A%2F%2Fprofile.ak.fbcdn.net%2Fhprofile-ak-snc6%2F195757_346184758807083_1315607416_n.jpg"/>
+  </activity:object>
+  <author>
+    <name>Gabii Emii</name>
+    <uri>http://www.facebook.com/profile.php?id=100002531611257</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=100002531611257"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_10151449363368888</id>
+  <created>2012-12-11T19:12:35+00:00</created>
+  <published>2012-12-11T19:12:35+00:00</published>
+  <updated>2012-12-11T19:12:35+00:00</updated>
+  <title>Believe 3D posted a note to the Justin Bieber page on Facebook</title>
+  <category term="NotePosted" label="Note Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449363368888"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-13-04Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>
+    <id>67253243887_10151449363368888</id>
+    <title>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </title>
+    <content>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </content>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449363368888"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+  </activity:object>
+  <author>
+    <name>Believe 3D</name>
+    <uri>http://www.facebook.com/profile.php?id=489440457756048</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=489440457756048"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_10151449363363888</id>
+  <created>2012-12-11T19:12:34+00:00</created>
+  <published>2012-12-11T19:12:34+00:00</published>
+  <updated>2012-12-11T19:12:34+00:00</updated>
+  <title>&#x5D0;&#x5D5;&#x5E8; &#x5DE;&#x5E2;&#x5D5;&#x5D3;&#x5D4; posted a note to the Justin Bieber page on Facebook</title>
+  <category term="NotePosted" label="Note Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449363363888"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-13-04Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>
+    <id>67253243887_10151449363363888</id>
+    <title>&#x5D0;&#x5D9;&#x5D6;&#x5D4; &#x5E0;&#x5D3;&#x5D9;&#x5E8;!
+&#x5E2;&#x5DB;&#x5E9;&#x5D9;&#x5D5; &#x5D4;&#x5D5;&#x5E8;&#x5D3;&#x5EA;&#x5D9; &#x5D0;&#x5EA; &#x5D4;&#x5D0;&#x5E4;&#x5DC;&#x5D9;&#x5E7;&#x5E6;&#x5D9;&#x5D9;&#x5D4; &#x5D5;&#x5D5;&#x5D0;&#x5D8;&#x5E1; &#x5D0;&#x5E4; &#x5DC;&#x5DE;&#x5D7;&#x5E9;&#x5D1;!
+&#x5E8;&#x5D5;&#x5E6;&#x5D9;&#x5DD; &#x5D2;&#x5DD;?!
+:&#x5DB;&#x5E0;&#x5E1;&#x5D5; &#x5E2;&#x5DB;&#x5E9;&#x5D9;&#x5D5; &#x5DC;&#x5D0;&#x5EA;&#x5E8;
+http://www.whatsapp.axe.co.il 
+!&#x5E0;&#x5D5;&#x5D3;&#x5E8; &#x5E9;&#x5E2;&#x5D5;&#x5D1;&#x5D3; 100% &#x5D1;&#x5DC;&#x5D9; &#x5DB;&#x5DC; &#x5D4;&#x5D7;&#x5D0;&#x5E8;&#x5D8;&#x5D5;&#x5EA; &#x5E9;&#x5DC; &#x5D4;&#x5E4;&#x5D9;&#x5D9;&#x5E1;&#x5D1;&#x5D5;&#x5E7;
+</title>
+    <content>&#x5D0;&#x5D9;&#x5D6;&#x5D4; &#x5E0;&#x5D3;&#x5D9;&#x5E8;!
+&#x5E2;&#x5DB;&#x5E9;&#x5D9;&#x5D5; &#x5D4;&#x5D5;&#x5E8;&#x5D3;&#x5EA;&#x5D9; &#x5D0;&#x5EA; &#x5D4;&#x5D0;&#x5E4;&#x5DC;&#x5D9;&#x5E7;&#x5E6;&#x5D9;&#x5D9;&#x5D4; &#x5D5;&#x5D5;&#x5D0;&#x5D8;&#x5E1; &#x5D0;&#x5E4; &#x5DC;&#x5DE;&#x5D7;&#x5E9;&#x5D1;!
+&#x5E8;&#x5D5;&#x5E6;&#x5D9;&#x5DD; &#x5D2;&#x5DD;?!
+:&#x5DB;&#x5E0;&#x5E1;&#x5D5; &#x5E2;&#x5DB;&#x5E9;&#x5D9;&#x5D5; &#x5DC;&#x5D0;&#x5EA;&#x5E8;
+http://www.whatsapp.axe.co.il 
+!&#x5E0;&#x5D5;&#x5D3;&#x5E8; &#x5E9;&#x5E2;&#x5D5;&#x5D1;&#x5D3; 100% &#x5D1;&#x5DC;&#x5D9; &#x5DB;&#x5DC; &#x5D4;&#x5D7;&#x5D0;&#x5E8;&#x5D8;&#x5D5;&#x5EA; &#x5E9;&#x5DC; &#x5D4;&#x5E4;&#x5D9;&#x5D9;&#x5E1;&#x5D1;&#x5D5;&#x5E7;
+</content>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449363363888"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+  </activity:object>
+  <author>
+    <name>&#x5D0;&#x5D5;&#x5E8; &#x5DE;&#x5E2;&#x5D5;&#x5D3;&#x5D4;</name>
+    <uri>http://www.facebook.com/profile.php?id=1258596630</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=1258596630"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_10151449364263888</id>
+  <created>2012-12-11T19:13:24+00:00</created>
+  <published>2012-12-11T19:13:24+00:00</published>
+  <updated>2012-12-11T19:13:24+00:00</updated>
+  <title>Believe 3D posted a note to the Justin Bieber page on Facebook</title>
+  <category term="NotePosted" label="Note Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449364263888"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-13-38Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>
+    <id>67253243887_10151449364263888</id>
+    <title>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </title>
+    <content>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </content>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449364263888"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+  </activity:object>
+  <author>
+    <name>Believe 3D</name>
+    <uri>http://www.facebook.com/profile.php?id=489440457756048</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=489440457756048"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_10151449364523888</id>
+  <created>2012-12-11T19:13:35+00:00</created>
+  <published>2012-12-11T19:13:35+00:00</published>
+  <updated>2012-12-11T19:13:35+00:00</updated>
+  <title>Believe 3D posted a note to the Justin Bieber page on Facebook</title>
+  <category term="NotePosted" label="Note Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449364523888"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-13-46Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>
+    <id>67253243887_10151449364523888</id>
+    <title>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </title>
+    <content>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </content>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449364523888"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+  </activity:object>
+  <author>
+    <name>Believe 3D</name>
+    <uri>http://www.facebook.com/profile.php?id=489440457756048</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=489440457756048"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_10151449364443888</id>
+  <created>2012-12-11T19:13:29+00:00</created>
+  <published>2012-12-11T19:13:29+00:00</published>
+  <updated>2012-12-11T19:13:29+00:00</updated>
+  <title>Believe 3D posted a note to the Justin Bieber page on Facebook</title>
+  <category term="NotePosted" label="Note Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449364443888"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-13-46Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>
+    <id>67253243887_10151449364443888</id>
+    <title>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </title>
+    <content>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </content>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449364443888"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+  </activity:object>
+  <author>
+    <name>Believe 3D</name>
+    <uri>http://www.facebook.com/profile.php?id=489440457756048</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=489440457756048"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_10151449364778888</id>
+  <created>2012-12-11T19:13:46+00:00</created>
+  <published>2012-12-11T19:13:46+00:00</published>
+  <updated>2012-12-11T19:13:46+00:00</updated>
+  <title>Believe 3D posted a note to the Justin Bieber page on Facebook</title>
+  <category term="NotePosted" label="Note Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449364778888"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-13-55Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>
+    <id>67253243887_10151449364778888</id>
+    <title>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </title>
+    <content>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </content>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449364778888"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+  </activity:object>
+  <author>
+    <name>Believe 3D</name>
+    <uri>http://www.facebook.com/profile.php?id=489440457756048</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=489440457756048"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_10151449364658888</id>
+  <created>2012-12-11T19:13:40+00:00</created>
+  <published>2012-12-11T19:13:40+00:00</published>
+  <updated>2012-12-11T19:13:40+00:00</updated>
+  <title>Believe 3D posted a note to the Justin Bieber page on Facebook</title>
+  <category term="NotePosted" label="Note Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449364658888"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-13-55Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>
+    <id>67253243887_10151449364658888</id>
+    <title>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </title>
+    <content>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </content>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449364658888"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+  </activity:object>
+  <author>
+    <name>Believe 3D</name>
+    <uri>http://www.facebook.com/profile.php?id=489440457756048</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=489440457756048"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:service="http://activitystrea.ms/service-provider" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:gnip="http://www.gnip.com/schemas/2010">
+  <id>67253243887_10151449364903888</id>
+  <created>2012-12-11T19:13:53+00:00</created>
+  <published>2012-12-11T19:13:53+00:00</published>
+  <updated>2012-12-11T19:13:53+00:00</updated>
+  <title>Believe 3D posted a note to the Justin Bieber page on Facebook</title>
+  <category term="NotePosted" label="Note Posted"/>
+  <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449364903888"/>
+  <source>
+    <link rel="self" type="application/json" href="https://graph.facebook.com/justinbieber/feed?limit=150&amp;access_token=AAACZAzlgR4IwBADnxZBlmV29tXvzkQEQgLRuTh6XpC5q8sd6EysVueXk6c94VdVoSIvxhYqMWB0ZBxsk0sIObrMHBSEDHNEwpZBaXGgEKgZDZD"/>
+    <title>Facebook - Fan Page - Feed (with comments) - justinbieber</title>
+    <updated>2012-12-11T19-14-06Z</updated>
+    <gnip:rule xmlns:gnip="http://www.gnip.com/schemas/2010">justinbieber</gnip:rule>
+  </source>
+  <service:provider>
+    <name>Facebook</name>
+    <uri>www.facebook.com</uri>
+    <icon/>
+  </service:provider>
+  <activity:verb>http://activitystrea.ms/schema/1.0/post</activity:verb>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>
+    <id>67253243887_10151449364903888</id>
+    <title>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </title>
+    <content>UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! UNETE! </content>
+    <link rel="alternate" type="html" href="http://www.facebook.com/67253243887/posts/10151449364903888"/>
+    <link rel="via" type="text/html" href="http://www.facebook.com/JustinBieber"/>
+  </activity:object>
+  <author>
+    <name>Believe 3D</name>
+    <uri>http://www.facebook.com/profile.php?id=489440457756048</uri>
+  </author>
+  <activity:actor>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
+    <link rel="alternate" type="html" length="0" href="http://www.facebook.com/profile.php?id=489440457756048"/>
+  </activity:actor>
+  <gnip:matching_rules>
+    <gnip:matching_rule rel="source">justinbieber</gnip:matching_rule>
+  </gnip:matching_rules>
+</entry>
+

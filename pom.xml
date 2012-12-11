@@ -129,6 +129,7 @@
 						<include>**/*.java</include>
 					</includes>
 					<excludes>
+                                                <exclude>**/com/zaubersoftware/gnip4j/api/impl/ISO8601DateParser.java</exclude>
 						<exclude>**/commonsio/*.java</exclude>
 						<exclude>target/**</exclude>
 						<exclude>.gitignore</exclude>

@@ -27,77 +27,37 @@ public final class Provider{
     private String displayName;
     private String objectType;
     private String link;
+    private String icon;
 
-    /**
-     * Gets the value of the displayName property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
     public String getDisplayName() {
         return displayName;
     }
 
-    /**
-     * Sets the value of the displayName property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
-     */
     public void setDisplayName(final String value) {
         displayName = value;
     }
 
-    /**
-     * Gets the value of the objectType property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
     public String getObjectType() {
         return objectType;
     }
 
-    /**
-     * Sets the value of the objectType property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
-     */
     public void setObjectType(final String value) {
         objectType = value;
     }
 
-    /**
-     * Gets the value of the link property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
     public String getLink() {
         return link;
     }
 
-    /**
-     * Sets the value of the link property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
-     */
     public void setLink(final String value) {
         link = value;
     }
 
+    public String getIcon() {
+        return icon;
+    }
+    
+    public void setIcon(final String icon) {
+        this.icon = icon;
+    }
 }

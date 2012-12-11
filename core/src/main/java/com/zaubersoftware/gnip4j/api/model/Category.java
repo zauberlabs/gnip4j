@@ -13,21 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zaubersoftware.gnip4j.api;
-
-import java.net.URI;
+package com.zaubersoftware.gnip4j.api.model;
 
 /**
- * An strategy to generate {@link URI}s to connect against a Gnip endpoint.
+ * TODO: Description of the class, Comments in english by default
  *
- * @author Guido Marucci Blas
- * @since 11/11/2011
+ *
+ * @author Juan F. Codagnone
+ * @since Dec 13, 2012
  */
-public interface UriStrategy {
+public class Category {
+    private String term;
+    private String label;
 
-    /** Generates a {@link URI} to connect against a Gnip endpoint to consume the activity stream. */
-    URI createStreamUri(String account, String streamName);
+    public final String getTerm() {
+        return term;
+    }
 
-    /** Generates a {@link URI} to connect against a Gnip endpoint to get/modify rules. */
-    URI createRulesUri(String account, String streamName);
+    public final String getLabel() {
+        return label;
+    }
+
+    public final void setLabel(final String label) {
+        this.label = label;
+    }
+
+
+    public final void setTerm(final String term) {
+        this.term = term;
+    }
 }

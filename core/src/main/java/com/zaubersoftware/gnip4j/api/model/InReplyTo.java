@@ -22,31 +22,23 @@ package com.zaubersoftware.gnip4j.api.model;
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  */
-public final class InReplyTo{
+public final class InReplyTo {
     private String link;
+    private String type;
 
-    /**
-     * Gets the value of the link property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
     public String getLink() {
         return link;
     }
 
-    /**
-     * Sets the value of the link property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
     public void setLink(final String value) {
         this.link = value;
     }
-
+    
+    public String getType() {
+        return type;
+    }
+    
+    public void setType(final String type) {
+        this.type = type;
+    }
 }

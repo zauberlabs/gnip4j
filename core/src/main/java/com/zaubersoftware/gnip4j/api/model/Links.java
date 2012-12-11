@@ -26,6 +26,7 @@ package com.zaubersoftware.gnip4j.api.model;
 public final class Links {
     private String href;
     private String rel;
+    private String type;
 
     public String getHref() {
         return href;
@@ -43,4 +44,11 @@ public final class Links {
         rel = value;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(final String type) {
+        this.type = type;
+    }
 }
