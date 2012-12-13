@@ -23,54 +23,22 @@ package com.zaubersoftware.gnip4j.api.model;
  * <p>The following schema fragment specifies the expected content contained within this class.
  *
  */
-public final class Links{
+public final class Links {
     private String href;
     private String rel;
 
-    /**
-     * Gets the value of the href property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
     public String getHref() {
         return href;
     }
 
-    /**
-     * Sets the value of the href property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
-     */
     public void setHref(final String value) {
         href = value;
     }
 
-    /**
-     * Gets the value of the rel property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
     public String getRel() {
         return rel;
     }
 
-    /**
-     * Sets the value of the rel property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
-     */
     public void setRel(final String value) {
         rel = value;
     }
