@@ -21,9 +21,9 @@ import com.zaubersoftware.gnip4j.api.stats.StreamStats;
 
 /**
  * <p>
- * A Stream for the Gnip. Once created with {@link GnipFacade} you más register
+ * A Stream for the Gnip. Once created with {@link GnipFacade} you must register
  * some observer that will process the data. User MUST call {@link #close()} 
- * to release all the releated resources (or when you want to handle gracefull shutdowns)
+ * to release all the related resources (or when you want to handle graceful shutdowns)
  * </p>
  * <p>
  * Implementations SHOULD handle reconnections and timeouts.
@@ -39,7 +39,7 @@ public interface GnipStream {
 
     /**
      * await for the stream to be {@link #close()} or 
-     * to be shutdown because of some catastrofic issue.
+     * to be shutdown because of some catastrophic issue.
      */
     void await() throws InterruptedException;
     

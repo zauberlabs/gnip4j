@@ -35,7 +35,6 @@ public final class SlowNettyChunkedInputFactory extends NettyChunkedInputFactory
      * 
      * Creates the NettyHandlerAggregator.
      * @param limitedActivities
-     * @param timesToStart the times that the mock server will start and shutdown client's connections.
      */
     public SlowNettyChunkedInputFactory(final InputStream limitedActivities,
             final int timeBetweenChunks) {
