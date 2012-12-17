@@ -17,8 +17,10 @@ package com.zaubersoftware.gnip4j.api.impl;
 
 import static org.junit.Assert.*;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.text.ParseException;
 import java.util.Collection;
 import java.util.Collections;
@@ -68,6 +70,11 @@ public class XMLActivityStreamFeedProcessorTest {
                                 final Activity e = mapper.reader(Activity.class).readValue(data0);
                                 final byte[] data1 = mapper.writeValueAsBytes(e);
                                 assertArrayEquals(data0, data1);
+                                
+                                // test serialization
+                                final ObjectOutputStream os = new ObjectOutputStream(new ByteArrayOutputStream());
+                                os.writeObject(activity);
+                                os.close();
                             } catch (final Exception e) {
                                 throw new RuntimeException(e);
                             }

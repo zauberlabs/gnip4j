@@ -26,5 +26,6 @@ package com.zaubersoftware.gnip4j.api.model;
  * 
  */
 public class Object extends Activity {
+    private static final long serialVersionUID = 1L;
         
 }

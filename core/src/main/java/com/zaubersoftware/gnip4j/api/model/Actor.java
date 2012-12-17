@@ -15,6 +15,7 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +29,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * <p>The following schema fragment specifies the expected content contained within this class.
  *
  */
-public final class Actor {
-    
+public final class Actor implements Serializable {
+    private static final long serialVersionUID = 1;
     private Actor.Location location;
     private List<String> languages;
     private List<Links> links;
@@ -48,14 +49,6 @@ public final class Actor {
     private String image;
     private String id;
 
-    /**
-     * Gets the value of the location property.
-     *
-     * @return
-     *     possible object is
-     *     {@link Actor.Location }
-     *
-     */
     public Actor.Location getLocation() {
         return location;
     }
@@ -68,14 +61,6 @@ public final class Actor {
         this.twitterTimeZone = twitterTimeZone;
     }
 
-    /**
-     * Sets the value of the location property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link Actor.Location }
-     *
-     */
     public void setLocation(final Actor.Location value) {
         location = value;
     }
@@ -150,361 +135,128 @@ public final class Actor {
         return postedTime;
     }
 
-    /**
-     * Sets the value of the postedTime property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *
-     */
     public void setPostedTime(final XMLGregorianCalendar value) {
         postedTime = value;
     }
 
-    /**
-     * Gets the value of the displayName property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
     public String getDisplayName() {
         return displayName;
     }
 
-    /**
-     * Sets the value of the displayName property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
-     */
     public void setDisplayName(final String value) {
         displayName = value;
     }
 
-    /**
-     * Gets the value of the preferredUsername property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
     public String getPreferredUsername() {
         return preferredUsername;
     }
 
-    /**
-     * Sets the value of the preferredUsername property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
-     */
     public void setPreferredUsername(final String value) {
         preferredUsername = value;
     }
 
-    /**
-     * Gets the value of the utcOffset property.
-     *
-     */
     public int getUtcOffset() {
         return utcOffset;
     }
 
-    /**
-     * Sets the value of the utcOffset property.
-     *
-     */
     public void setUtcOffset(final int value) {
         utcOffset = value;
     }
 
-    /**
-     * Gets the value of the objectType property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
     public String getObjectType() {
         return objectType;
     }
 
-    /**
-     * Sets the value of the objectType property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
-     */
     public void setObjectType(final String value) {
         objectType = value;
     }
 
-    /**
-     * Gets the value of the statusesCount property.
-     *
-     */
     public int getStatusesCount() {
         return statusesCount;
     }
 
-    /**
-     * Sets the value of the statusesCount property.
-     *
-     */
     public void setStatusesCount(final int value) {
         statusesCount = value;
     }
 
-    /**
-     * Gets the value of the listedCount property.
-     *
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *
-     */
     public BigInteger getListedCount() {
         return listedCount;
     }
 
-    /**
-     * Sets the value of the listedCount property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *
-     */
     public void setListedCount(final BigInteger value) {
         listedCount = value;
     }
 
-    /**
-     * Gets the value of the friendsCount property.
-     *
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *
-     */
     public BigInteger getFriendsCount() {
         return friendsCount;
     }
 
-    /**
-     * Sets the value of the friendsCount property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *
-     */
     public void setFriendsCount(final BigInteger value) {
         friendsCount = value;
     }
 
-    /**
-     * Gets the value of the followersCount property.
-     *
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *
-     */
     public BigInteger getFollowersCount() {
         return followersCount;
     }
 
-    /**
-     * Sets the value of the followersCount property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *
-     */
     public void setFollowersCount(final BigInteger value) {
         followersCount = value;
     }
 
-    /**
-     * Gets the value of the summary property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
     public String getSummary() {
         return summary;
     }
 
-    /**
-     * Sets the value of the summary property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
-     */
     public void setSummary(final String value) {
         summary = value;
     }
 
-    /**
-     * Gets the value of the link property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
     public String getLink() {
         return link;
     }
 
-    /**
-     * Sets the value of the link property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
-     */
     public void setLink(final String value) {
         link = value;
     }
 
-    /**
-     * Gets the value of the image property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
     public String getImage() {
         return image;
     }
 
-    /**
-     * Sets the value of the image property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
-     */
     public void setImage(final String value) {
         image = value;
     }
 
-    /**
-     * Gets the value of the id property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
+    
     public String getId() {
         return id;
     }
 
-    /**
-     * Sets the value of the id property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
-     */
+    
     public void setId(final String value) {
         id = value;
     }
 
 
-    /**
-     * <p>Java class for anonymous complex type.
-     *
-     * <p>The following schema fragment specifies the expected content contained within this class.
-     *
-     * <pre>
-     * &lt;complexType>
-     *   &lt;complexContent>
-     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *       &lt;attribute name="displayName" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *       &lt;attribute name="objectType" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *     &lt;/restriction>
-     *   &lt;/complexContent>
-     * &lt;/complexType>
-     * </pre>
-     *
-     *
-     */
-    public static final class Location{
+    public static final class Location implements Serializable {
+        
         private String displayName;
         private String objectType;
 
-        /**
-         * Gets the value of the displayName property.
-         *
-         * @return
-         *     possible object is
-         *     {@link String }
-         *
-         */
         public String getDisplayName() {
             return displayName;
         }
 
-        /**
-         * Sets the value of the displayName property.
-         *
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *
-         */
         public void setDisplayName(final String value) {
             displayName = value;
         }
 
-        /**
-         * Gets the value of the objectType property.
-         *
-         * @return
-         *     possible object is
-         *     {@link String }
-         *
-         */
         public String getObjectType() {
             return objectType;
         }
 
-        /**
-         * Sets the value of the objectType property.
-         *
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *
-         */
         public void setObjectType(final String value) {
             objectType = value;
         }
-
     }
-
 }

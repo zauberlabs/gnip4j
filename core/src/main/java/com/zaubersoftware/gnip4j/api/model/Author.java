@@ -15,13 +15,16 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.io.Serializable;
+
 /**
  * Author
  *
  * @author Juan F. Codagnone
  * @since Dec 13, 2012
  */
-public class Author {
+public class Author implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String uri;
     private String name;
     

@@ -15,6 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.io.Serializable;
+
 
 
 /**
@@ -23,7 +25,8 @@ package com.zaubersoftware.gnip4j.api.model;
  * <p>The following schema fragment specifies the expected content contained within this class.
  *
  */
-public final class Links {
+public final class Links implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String href;
     private String rel;
     private String type;

@@ -15,6 +15,7 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +26,9 @@ import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 @JsonAutoDetect
-public class Activity {
+public class Activity implements Serializable {
+    private static final long serialVersionUID = -6613328643160393766L;
+    
     private InReplyTo inReplyTo;
     private Activity.Location location;
     private Actor actor;
@@ -188,7 +191,8 @@ public class Activity {
      * The following schema fragment specifies the expected content contained
      * within this class.
      */
-    public static class Location {
+    public static class Location implements Serializable {
+        private static final long serialVersionUID = 1L;
         private Geo geo;
         private String countryCode;
         private String displayName;

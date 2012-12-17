@@ -15,6 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.io.Serializable;
+
 
 
 /**
@@ -23,31 +25,15 @@ package com.zaubersoftware.gnip4j.api.model;
  * <p>The following schema fragment specifies the expected content contained within this class.
  *
  */
-public final class Language{
+public final class Language implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String value;
 
-    /**
-     * Gets the value of the value property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
     public String getValue() {
         return value;
     }
 
-    /**
-     * Sets the value of the value property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
-     */
     public void setValue(final String value) {
         this.value = value;
     }
-
 }

@@ -67,12 +67,12 @@ public abstract class AbstractReleaseInputStream extends InputStream {
 
     @Override
     public final int available() throws IOException {
-        return target.available();
+        return target == null ? 0 : target.available();
     }
 
     @Override
     public final String toString() {
-        return target.toString();
+        return target == null ? null : target.toString();
     }
 
     @Override

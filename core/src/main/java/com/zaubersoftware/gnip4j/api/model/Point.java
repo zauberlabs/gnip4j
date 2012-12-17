@@ -20,30 +20,22 @@ import org.codehaus.jackson.annotate.JsonAutoDetect.Visibility;
 
 /**
  * TODO Descripcion de la clase. Los comentarios van en castellano.
- * 
- * 
+ *
+ *
  * @author Martin Silva
  * @since Feb 15, 2012
  */
 
-@JsonAutoDetect(getterVisibility=Visibility.PUBLIC_ONLY)
-public class Point implements Geometry{
-    
-    /**
-     * Creates the Point.
-     *
-     */
+@JsonAutoDetect(getterVisibility = Visibility.PUBLIC_ONLY)
+public class Point implements Geometry {
+
+    /** Creates the Point.*/
     @SuppressWarnings("unused")
     private Point() {
     }
-    
-    /**
-     * Creates the Point.
-     *
-     * @param latitude
-     * @param longitude
-     */
-    public Point(double latitude, double longitude) {
+
+
+    public Point(final double latitude, final double longitude) {
         super();
         this.latitude = latitude;
         this.longitude = longitude;
@@ -54,36 +46,20 @@ public class Point implements Geometry{
 
     private double latitude;
     private double longitude;
-    
-    
-    
-    /**
-     * Returns the latitude.
-     * 
-     * @return <code>double</code> with the latitude.
-     */
+
     public double getLatitude() {
         return latitude;
     }
-    
-    
-    /**
-     * Returns the longitude.
-     * 
-     * @return <code>double</code> with the longitude.
-     */
+
     public double getLongitude() {
         return longitude;
     }
 
-    /** @see com.zaubersoftware.gnip4j.api.model.Geometry#getType() */
     @Override
     public Geometries getType() {
         return Geometries.Point;
     }
-    
-    
-    /** @see java.lang.Object#toString() */
+
     @Override
     public String toString() {
         return "lat: " + latitude + " lon: " + longitude;

@@ -15,6 +15,7 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +26,8 @@ import java.util.List;
  * @author Juan F. Codagnone
  * @since Dec 12, 2012
  */
-public class Source {
+public class Source implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String title;
     private Date updated;
     private List<Links> links;

@@ -15,6 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.io.Serializable;
+
 /**
  * TODO: Description of the class, Comments in english by default
  *
@@ -22,7 +24,8 @@ package com.zaubersoftware.gnip4j.api.model;
  * @author Juan F. Codagnone
  * @since Dec 13, 2012
  */
-public class Category {
+public class Category implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String term;
     private String label;
 
