@@ -63,7 +63,7 @@
 		<snapshotRepository>
 			<id>zauber-code-snapshots</id>
 			<name>Zauber Code Snapshots</name>
-			<url>https://repo1.zaubersoftware.com/zauber/code/snapshots</url>
+			<url>https://repo1.zauberlabs.com/content/repositories/zauber-code-snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 
@@ -129,6 +129,7 @@
 						<include>**/*.java</include>
 					</includes>
 					<excludes>
+                                                <exclude>**/com/zaubersoftware/gnip4j/api/impl/ISO8601DateParser.java</exclude>
 						<exclude>**/commonsio/*.java</exclude>
 						<exclude>target/**</exclude>
 						<exclude>.gitignore</exclude>

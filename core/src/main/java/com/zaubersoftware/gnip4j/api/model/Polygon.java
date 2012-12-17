@@ -27,60 +27,44 @@ import org.codehaus.jackson.annotate.JsonAutoDetect.Visibility;
  * @since Feb 15, 2012
  */
 
-@JsonAutoDetect(getterVisibility=Visibility.PUBLIC_ONLY)
+@JsonAutoDetect(getterVisibility = Visibility.PUBLIC_ONLY)
 public class Polygon implements Geometry, Iterable<Point> {
     
     private List<Point> points;
     
     
-    /**
-     * Creates the Polygon.
-     *
-     */
-    
     Polygon() {
     }
     
-    /**
-     * Creates the Polygon.
-     *
-     */
-    public Polygon(List<Point> points) {
+    /** Creates the Polygon. */
+    public Polygon(final List<Point> points) {
         this.points = points;
     }
     
     
-    public Polygon(Point points[]) {
+    public Polygon(final Point points[]) {
         this.points = Arrays.asList(points);
     }
     
 
-    /** @see java.lang.Iterable#iterator() */
     @Override
-    public Iterator<Point> iterator() {
+    public final Iterator<Point> iterator() {
         return this.points.iterator();
     }
     
     
-    /**
-     * Returns the points.
-     * 
-     * @return <code>List<Point></code> with the points.
-     */
-    public List<Point> getPoints() {
+    public final List<Point> getPoints() {
         return points;
     }
 
-    /** @see com.zaubersoftware.gnip4j.api.model.Geometry#getType() */
     @Override
-    public Geometries getType() {
+    public final Geometries getType() {
         return Geometries.Polygon;
     }
     
     
-    /** @see java.lang.Object#toString() */
     @Override
-    public String toString() {
+    public final String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("[");
         

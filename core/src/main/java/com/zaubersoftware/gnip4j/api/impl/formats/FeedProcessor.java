@@ -13,21 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zaubersoftware.gnip4j.api;
+package com.zaubersoftware.gnip4j.api.impl.formats;
 
-import java.net.URI;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.ParseException;
 
-/**
- * An strategy to generate {@link URI}s to connect against a Gnip endpoint.
- *
- * @author Guido Marucci Blas
- * @since 11/11/2011
- */
-public interface UriStrategy {
 
-    /** Generates a {@link URI} to connect against a Gnip endpoint to consume the activity stream. */
-    URI createStreamUri(String account, String streamName);
-
-    /** Generates a {@link URI} to connect against a Gnip endpoint to get/modify rules. */
-    URI createRulesUri(String account, String streamName);
+/** process the content of a feed */
+public interface FeedProcessor {
+    /** process the content of a gnip feed. must be interrumplible */
+    void process(final InputStream is) throws IOException, ParseException;
 }

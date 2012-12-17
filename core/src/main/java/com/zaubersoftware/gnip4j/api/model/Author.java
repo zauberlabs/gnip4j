@@ -13,21 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zaubersoftware.gnip4j.api;
+package com.zaubersoftware.gnip4j.api.model;
 
-import java.net.URI;
+import java.io.Serializable;
 
 /**
- * An strategy to generate {@link URI}s to connect against a Gnip endpoint.
+ * Author
  *
- * @author Guido Marucci Blas
- * @since 11/11/2011
+ * @author Juan F. Codagnone
+ * @since Dec 13, 2012
  */
-public interface UriStrategy {
-
-    /** Generates a {@link URI} to connect against a Gnip endpoint to consume the activity stream. */
-    URI createStreamUri(String account, String streamName);
-
-    /** Generates a {@link URI} to connect against a Gnip endpoint to get/modify rules. */
-    URI createRulesUri(String account, String streamName);
+public class Author implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private String uri;
+    private String name;
+    
+    public final String getUri() {
+        return uri;
+    }
+    
+    public final void setUri(final String uri) {
+        this.uri = uri;
+    }
+    
+    public final String getName() {
+        return name;
+    }
+    
+    public final void setName(final String name) {
+        this.name = name;
+    }
 }

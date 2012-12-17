@@ -30,8 +30,7 @@ import com.zaubersoftware.gnip4j.api.model.Rules;
 public interface GnipFacade {
 
     /** @see #createStream(String, long, StreamNotification, ExecutorService) */
-    GnipStream createStream(String account, String streamName,
-            StreamNotification observer);
+    GnipStream createStream(String account, String streamName, StreamNotification observer);
     
     /**
      * Gnip provides access to the data with a streaming HTTP implementation
@@ -48,6 +47,7 @@ public interface GnipFacade {
                             StreamNotification observer, 
                             ExecutorService executorService);
     
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * Gnip provides a REST interface to the rules configured for each data collector.
      * They can be modified either through this interface, or through the UI. These

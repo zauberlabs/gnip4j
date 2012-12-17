@@ -15,6 +15,7 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,60 +28,28 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * <p>The following schema fragment specifies the expected content contained within this class.
  *
  */
-public class Gnip{
+public class Gnip implements Serializable {
+    private static final long serialVersionUID = -928243859838308139L;
+    
     private Language language;
     @JsonProperty(value = "matching_rules")
     private List<MatchingRules> matchingRules;
     private List<Url> urls;
     @JsonProperty(value = "klout_score")
     private Float kloutScore;
+    @JsonProperty(value = "favorite_count")
+    private Long favoriteCount;
 
-    /**
-     * Gets the value of the language property.
-     *
-     * @return
-     *     possible object is
-     *     {@link Language }
-     *
-     */
     public final Language getLanguage() {
         return language;
     }
 
-    /**
-     * Sets the value of the language property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link Language }
-     *
-     */
     public final void setLanguage(final Language value) {
         language = value;
     }
 
-    /**
-     * Gets the value of the matchingRules property.
-     *
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the matchingRules property.
-     *
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getMatchingRules().add(newItem);
-     * </pre>
-     *
-     *
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link MatchingRules }
-     *
-     *
-     */
+    /** Gets the value of the matchingRules property.*/
+    @JsonProperty(value = "matching_rules")
     public final List<MatchingRules> getMatchingRules() {
         if (matchingRules == null) {
             matchingRules = new ArrayList<MatchingRules>();
@@ -97,5 +66,13 @@ public class Gnip{
     
     public final Float getKloutScore() {
     	return kloutScore;
+    }
+    
+    public final Long getFavoriteCount() {
+        return favoriteCount;
+    }
+    
+    public final void setFavoriteCount(final Long favoriteCount) {
+        this.favoriteCount = favoriteCount;
     }
 }
