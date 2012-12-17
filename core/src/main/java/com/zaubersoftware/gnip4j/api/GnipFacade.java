@@ -60,19 +60,38 @@ public interface GnipFacade {
     Rules getRules(String account, String streamName);
     
     /**
-     * Gnip provides a REST interface to the rules configured for each data collector.
-     * They can be modified either through this interface, or through the UI. These
-     * views are synchronized.
+     * Add a single rule from the Gnip stream
      * 
-     * Rules should be added one at a time, according to Gnip's documentation on best
-     * practices, so this method only lets you change one Rule. It can, of course, be
-     * called many times.
-     * 
-     @param account The account name for the power track API. (For example: acme)
+     * @param account The account name for the power track API. (For example: acme)
      * @param streamName the streamName
      * @param rule The Rule object to add to the tracker.
      */
     void addRule(String account, String streamName, Rule rule);
     
+    /**
+     * Add a collection of rules to the Gnip stream
+     * 
+     * @param account The account name for the power track API. (For example: acme)
+     * @param streamName the streamName
+     * @param rule The Rules object to add to the tracker
+     */
+    void addRules(String account, String streamName, Rules rules);
+    
+    /**
+     * Delete a single rule from the Gnip stream
+     * 
+     * @param account The account name for the power track API. (For example: acme)
+     * @param streamName the streamName
+     * @param rule The Rule object to add to the tracker.
+     */
     void deleteRule(String account, String streamName, Rule rule);
+    
+    /**
+     * Delete a collection of rules from the Gnip stream
+     * 
+     * @param account The account name for the power track API. (For example: acme)
+     * @param streamName the streamName
+     * @param rules The Rules object to add to the tracker.
+     */
+    void deleteRules(String account, String streamName, Rules rules);
 }
