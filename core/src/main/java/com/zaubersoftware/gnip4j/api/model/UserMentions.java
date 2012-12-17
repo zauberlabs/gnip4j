@@ -15,6 +15,7 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,8 @@ import org.codehaus.jackson.annotate.JsonProperty;
  *
  */
 @JsonAutoDetect
-public final class UserMentions{
+public final class UserMentions implements Serializable {
+    private static final long serialVersionUID = 1L;
     private List<Integer> indices;
     @JsonProperty(value = "screen_name")
     private String screenName;

@@ -15,6 +15,7 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +30,8 @@ import org.codehaus.jackson.annotate.JsonProperty;
  *
  */
 @JsonAutoDetect
-public final class TwitterEntities{
-    
+public final class TwitterEntities implements Serializable {
+    private static final long serialVersionUID = 1L;
     private List<Urls> urls;
     @JsonProperty(value = "user_mentions")
     private List<UserMentions> userMentions;

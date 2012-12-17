@@ -17,20 +17,21 @@ package com.zaubersoftware.gnip4j.http;
 
 import static org.junit.Assert.*;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.util.List;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import com.zaubersoftware.gnip4j.api.impl.DefaultGnipStream;
+import com.zaubersoftware.gnip4j.api.impl.formats.JsonActivityFeedProcessor;
 import com.zaubersoftware.gnip4j.api.model.Activities;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.model.Geo;
@@ -50,7 +51,7 @@ public final class JSONDeserializationTest {
     /** setup test */
     @Before
     public void setUp() throws Exception {
-        mapper = DefaultGnipStream.getObjectMapper();
+        mapper = JsonActivityFeedProcessor.getObjectMapper();
     }
 
     /** test a complete unmarshal from the json */
@@ -97,15 +98,7 @@ public final class JSONDeserializationTest {
     @Test
     public void testDeserializeWithPolygonAndPoint() throws JsonParseException, IOException{
         final InputStream is = getClass().getClassLoader().getResourceAsStream("com/zaubersoftware/gnip4j/payload/deserialize/geolocated-tweets.json");
-/*=======
-    @Ignore
-    public void testNPE() throws Exception {
-        final InputStream is = getClass().getClassLoader().getResourceAsStream(
-            "com/zaubersoftware/gnip4j/payload/payload-twitter-entities.js");
-        final InputStream expectedIs = getClass().getClassLoader().getResourceAsStream(
-            "com/zaubersoftware/gnip4j/payload/payload-twitter-entities.xml");
->>>>>>> Fanout*/
-        
+
         try  {
             final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
             final Activities activities = parser.readValueAs(Activities.class);
@@ -154,5 +147,17 @@ public final class JSONDeserializationTest {
         }
     }
     
-    
+    /**
+     * tests if the data "model" is serializable
+     */
+    @Test
+    public void testSerializable() throws IOException {
+        final InputStream is = getClass().getClassLoader().getResourceAsStream(
+                "com/zaubersoftware/gnip4j/payload/payload-example.js");
+        final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
+        final Activity activity = parser.readValueAs(Activity.class);
+        final ObjectOutputStream os = new ObjectOutputStream(new ByteArrayOutputStream());
+        os.writeObject(activity);
+    }
+      
 }

@@ -37,7 +37,7 @@ public abstract class AbstractReleaseInputStream extends InputStream {
 
     @Override
     public final int read() throws IOException {
-        return target.read();
+        return target == null ? -1 : target.read();
     }
 
     @Override
@@ -47,7 +47,7 @@ public abstract class AbstractReleaseInputStream extends InputStream {
 
     @Override
     public final int read(final byte[] b) throws IOException {
-        return target.read(b);
+        return target == null ? -1 : target.read(b);
     }
 
     @Override
@@ -57,7 +57,7 @@ public abstract class AbstractReleaseInputStream extends InputStream {
 
     @Override
     public final int read(final byte[] b, final int off, final int len) throws IOException {
-        return target.read(b, off, len);
+        return target == null ? -1 : target.read(b, off, len);
     }
 
     @Override
@@ -67,12 +67,12 @@ public abstract class AbstractReleaseInputStream extends InputStream {
 
     @Override
     public final int available() throws IOException {
-        return target.available();
+        return target == null ? 0 : target.available();
     }
 
     @Override
     public final String toString() {
-        return target.toString();
+        return target == null ? null : target.toString();
     }
 
     @Override

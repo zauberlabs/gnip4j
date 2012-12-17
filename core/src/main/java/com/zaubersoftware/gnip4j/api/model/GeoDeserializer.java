@@ -26,55 +26,49 @@ import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.deser.StdDeserializer;
-import org.codehaus.jackson.node.ArrayNode;
 
 /**
  * TODO Descripcion de la clase. Los comentarios van en castellano.
- * 
- * 
+ *
+ *
  * @author Martin Silva
  * @since Feb 15, 2012
  */
 public class GeoDeserializer extends StdDeserializer<Geo> {
 
-    /**
-     * Creates the GeoDeserializer.
-     *
-     * @param vc
-     */
-    public GeoDeserializer(Class<Geo> clazz) {
+    /** Creates the GeoDeserializer. */
+    public GeoDeserializer(final Class<Geo> clazz) {
         super(clazz);
     }
 
-    /** @see org.codehaus.jackson.map.JsonDeserializer#deserialize(org.codehaus.jackson.JsonParser, org.codehaus.jackson.map.DeserializationContext) */
     @Override
-    public Geo deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-        JsonNode tree = jp.readValueAsTree();
-        
-        JsonNode coordinates = tree.findValue("coordinates");
-        JsonNode type = tree.findValue("type");
-        
-        
-        Geo geo = new Geo();
+    public Geo deserialize(final JsonParser jp, final DeserializationContext ctxt) throws IOException,
+            JsonProcessingException {
+        final JsonNode tree = jp.readValueAsTree();
+
+        final JsonNode coordinates = tree.findValue("coordinates");
+        final JsonNode type = tree.findValue("type");
+
+
+        final Geo geo = new Geo();
         geo.setType(type.getTextValue());
-        
-        if(Geometries.valueOf(type.getTextValue()) == Geometries.Polygon){
+
+        if(Geometries.valueOf(type.getTextValue()) == Geometries.Polygon) {
             geo.setCoordinates(this.createPolygon(coordinates));
-        }
-        else{
+        } else{
             geo.setCoordinates(this.createPoint(coordinates));
         }
-        
+
         return geo;
     }
 
     /**
      * @param coordinates
      * @return
-     * @throws IOException 
-     * @throws JsonParseException 
+     * @throws IOException
+     * @throws JsonParseException
      */
-    private Geometry createPoint(JsonNode coordinates) throws JsonParseException, IOException {
+    private Geometry createPoint(final JsonNode coordinates) throws IOException {
         return new Point(coordinates.get(0).getDoubleValue(), coordinates.get(1).getDoubleValue());
     }
 
@@ -82,17 +76,17 @@ public class GeoDeserializer extends StdDeserializer<Geo> {
      * @param coordinates
      * @return
      */
-    private Geometry createPolygon(JsonNode coordinates) {
-        JsonNode values = (ArrayNode)coordinates.get(0);
-        Iterator<JsonNode> elements = values.getElements();
-        
-        List<Point> points = new ArrayList<Point>();
-        while(elements.hasNext()){
-            JsonNode next = elements.next();
+    private Geometry createPolygon(final JsonNode coordinates) {
+        final JsonNode values = coordinates.get(0);
+        final Iterator<JsonNode> elements = values.getElements();
+
+        final List<Point> points = new ArrayList<Point>();
+        while(elements.hasNext()) {
+            final JsonNode next = elements.next();
             points.add(new Point(next.get(0).getDoubleValue(), next.get(1).getDoubleValue()));
         }
-        
+
         return new Polygon(points);
     }
-    
+
 }

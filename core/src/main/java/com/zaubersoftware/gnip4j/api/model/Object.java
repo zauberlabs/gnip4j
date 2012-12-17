@@ -25,15 +25,7 @@ package com.zaubersoftware.gnip4j.api.model;
  * this class.
  * 
  */
-public final class Object extends Activity {
-    private String summary;
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(final String value) {
-        summary = value;
-    }
-
+public class Object extends Activity {
+    private static final long serialVersionUID = 1L;
         
 }
