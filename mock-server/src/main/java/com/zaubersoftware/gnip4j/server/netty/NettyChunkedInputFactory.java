@@ -62,7 +62,7 @@ public class NettyChunkedInputFactory implements GnipChunkedInputFactory{
 
     protected static final Collection<String> parseActivities(final InputStream activities) {
         try {
-            final BufferedReader reader = new BufferedReader(new InputStreamReader(activities));
+            final BufferedReader reader = new BufferedReader(new InputStreamReader(activities, "UTF-8"));
             final Collection<String> result = new ArrayList<String>();
             String line;
             while ((line = reader.readLine()) != null) {

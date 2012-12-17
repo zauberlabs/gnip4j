@@ -24,28 +24,28 @@ import com.zaubersoftware.gnip4j.server.GnipServerFactory;
  * 
  * Implementation of Mock Server  
  * 
- * 
  * @author Ignacio De Maio
  * @since Jan 4, 2012
  */
 public class MockServer {
 
     private static GnipServer gnipServer;
-    private final int DEFAUL_SERVER_PORT = 8080;
+
+
     private NettyChunkedInputFactory chunkedInputFactory;
+
+    private int portNumber;
    
-    /**
-     * 
-     */
-    public MockServer(){
+    public MockServer(int portNumber){
+        this.portNumber = portNumber;
     }    
     
     void start() {
             final GnipServerFactory gnipServerFactory = new NettyGnipServerFactory();
-            gnipServer = gnipServerFactory.createServer(DEFAUL_SERVER_PORT, chunkedInputFactory);
+            gnipServer = gnipServerFactory.createServer(portNumber, chunkedInputFactory);
 
             gnipServer.start();
-            System.out.println("Gnip server started at port " + DEFAUL_SERVER_PORT);
+            System.out.println("Gnip mock server started at port " + portNumber);
     }
     
     public void start(final InputStream activities) {
