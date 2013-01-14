@@ -15,6 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.api;
 
+import java.util.concurrent.TimeUnit;
+
 import com.zaubersoftware.gnip4j.api.stats.StreamStats;
 
 
@@ -43,9 +45,21 @@ public interface GnipStream {
      */
     void await() throws InterruptedException;
     
+    /**
+     * await for the stream to be {@link #close()} or 
+     * to be shutdown because of some catastrophic issue.
+     * 
+     * @param time the maximum time to wait
+     * @param unit the time unit of the {@code time} argument
+     * @return true si fue cerrado, false si salio por timeout 
+     */
+    boolean await(long time, TimeUnit unit) throws InterruptedException;
+    
+    
     /** @return an identification for this stream */
     String getStreamName();
     
     /** @return stream stats */
     StreamStats getStreamStats();
+
 }

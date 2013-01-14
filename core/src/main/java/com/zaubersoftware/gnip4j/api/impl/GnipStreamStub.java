@@ -15,6 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.api.impl;
 
+import java.util.concurrent.TimeUnit;
+
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.stats.DefaultStreamStats;
 import com.zaubersoftware.gnip4j.api.stats.StreamStats;
@@ -63,6 +65,12 @@ public final class GnipStreamStub implements GnipStream {
     @Override
     public StreamStats getStreamStats() {
         return stats;
+    }
+
+    @Override
+    public boolean await(final long time, final TimeUnit unit) throws InterruptedException {
+        logger.debug("Awaiting for stream termination");
+        return true;
     }
 
 }

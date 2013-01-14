@@ -15,6 +15,7 @@
  */
 package com.zaubersoftware.gnip4j.api.impl;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -72,6 +73,19 @@ public abstract class AbstractGnipStream implements GnipStream {
         }
     }
 
+    @Override
+    public final boolean await(final long time, final TimeUnit unit) throws InterruptedException {
+        boolean ret = false;
+        lock.lock();
+        try {
+            emptyCondition.await(time, unit);
+            ret = streamClosed.get();
+        } finally {
+            lock.unlock();
+        }
+        return ret;
+    }
+    
     /** @return the stream name. Used for tracing propourses */
     public abstract String getStreamName(); 
 }

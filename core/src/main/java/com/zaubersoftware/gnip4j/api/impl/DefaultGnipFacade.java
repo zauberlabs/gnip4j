@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonProcessingException;
@@ -90,6 +91,11 @@ public class DefaultGnipFacade implements GnipFacade {
             public void await() throws InterruptedException {
                 target.await();
             }
+            
+            @Override
+            public boolean await(final long time, final TimeUnit unit) throws InterruptedException {
+                return target.await(time, unit);
+            }
 
             @Override
             public final String getStreamName() {
@@ -130,6 +136,11 @@ public class DefaultGnipFacade implements GnipFacade {
                     stream.await();
                 }
 
+                @Override
+                public boolean await(final long time, final TimeUnit unit) throws InterruptedException {
+                    return stream.await(time, unit);
+                }
+                
                 @Override
                 public StreamStats getStreamStats() {
                     return stream.getStreamStats();
