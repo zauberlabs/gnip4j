@@ -15,7 +15,7 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-import javax.xml.datatype.XMLGregorianCalendar;
+import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
     @JsonProperty(value = "twitter_entities") private TwitterEntities twitterEntities;
     private Gnip gnip;
     private String verb;
-    private XMLGregorianCalendar postedTime;
+    private DateTime postedTime;
     private String body;
     private String objectType;
     private String id;
@@ -118,11 +118,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
         verb = value;
     }
 
-    public final XMLGregorianCalendar getPostedTime() {
+    public final DateTime getPostedTime() {
         return postedTime;
     }
 
-    public final void setPostedTime(final XMLGregorianCalendar value) {
+    public final void setPostedTime(final DateTime value) {
         postedTime = value;
     }
 
