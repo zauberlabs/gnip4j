@@ -18,6 +18,7 @@ package com.zaubersoftware.gnip4j.api.model;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
@@ -180,6 +181,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
      * The following schema fragment specifies the expected content contained within this class.
      */
     public static class Location {
+        @JsonInclude(JsonInclude.Include.ALWAYS)
         private Geo geo;
         private String countryCode;
         private String name;

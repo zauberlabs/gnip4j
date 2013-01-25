@@ -18,6 +18,7 @@ package com.zaubersoftware.gnip4j.api.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -29,9 +30,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public final class Urls {
     private List<Integer> indices;
-    @JsonProperty(value = "expanded_url") private String expandedUrl;
+    @JsonProperty(value = "expanded_url") 
+    @JsonInclude(JsonInclude.Include.ALWAYS)
+    private String expandedUrl;
+    
     private String url;
-    @JsonProperty("display_url") private String displayUrl;
+    
+    @JsonProperty("display_url") 
+    private String displayUrl;
 
     /**
      * Gets the value of the indices property.

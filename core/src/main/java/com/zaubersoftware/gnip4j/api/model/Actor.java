@@ -21,6 +21,8 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * <p>
  * Java class for anonymous complex type.
@@ -32,18 +34,22 @@ import org.joda.time.DateTime;
 public final class Actor {
 
     private Actor.Location location;
-    private List<String> languages;
+    @JsonInclude(JsonInclude.Include.ALWAYS)
+    private List<String> languages = new ArrayList<String>();
     private List<Links> links;
     private DateTime postedTime;
     private String displayName;
     private String preferredUsername;
+    @JsonInclude(JsonInclude.Include.ALWAYS)
     private String utcOffset;
     private String objectType;
     private int statusesCount;
     private BigInteger listedCount;
+    @JsonInclude(JsonInclude.Include.ALWAYS)
     private String twitterTimeZone;
     private BigInteger friendsCount;
     private BigInteger followersCount;
+    @JsonInclude(JsonInclude.Include.ALWAYS)
     private String summary;
     private String link;
     private String image;
@@ -52,12 +58,11 @@ public final class Actor {
 
 	public void clear() {
 		location = null;
-		languages = null;
+		languages.clear();
 		links = null;
 		postedTime = null;
-		displayName = preferredUsername = utcOffset = objectType = summary = link = image = id = null;
+		displayName = preferredUsername = utcOffset = objectType = summary = link = image = id = twitterTimeZone = null;
 		listedCount = friendsCount = followersCount = null;	
-		twitterTimeZone = null;
 	}
 
     /**
@@ -482,7 +487,7 @@ public final class Actor {
     }
 
     public void setLanguages(List<String> languages) {
-        this.languages = languages;
+        this.languages = languages != null ? languages : new ArrayList<String>();
     }
 
     public void setLinks(List<Links> links) {

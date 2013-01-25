@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -30,14 +31,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 
  */
 @JsonAutoDetect public final class TwitterEntities {
+    
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
+    public List<Media> media = new ArrayList<Media>();
 
     public List<Urls> urls;
-    @JsonProperty(value = "user_mentions") public List<UserMentions> userMentions;
+    @JsonProperty(value = "user_mentions") 
+    public List<UserMentions> userMentions;
     public List<Hashtags> hashtags;
 
 	public void clear() {
 		urls.clear();
 		hashtags.clear();	
+		media.clear();
 	}
 
     /**
@@ -134,6 +140,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
     public void setHashtags(List<Hashtags> hashtags) {
         this.hashtags = hashtags;
+    }
+
+    public List<Media> getMedia() {
+        return media;
+    }
+
+    public void setMedia(List<Media> media) {
+        this.media = media;
     }
 
 

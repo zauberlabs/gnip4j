@@ -31,6 +31,11 @@ public class GeoSerializer extends StdSerializer<Geo> {
 
 	@Override
 	public void serialize(Geo value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonGenerationException {
+	    
+	    if( value == null ) {
+	        jgen.writeNull();
+	        return;
+	    }
 		if( value.getType().equals("Point") ) {
 			jgen.writeStartObject();
 			jgen.writeFieldName("type");
