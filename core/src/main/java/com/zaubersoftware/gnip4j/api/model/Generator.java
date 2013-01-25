@@ -26,6 +26,11 @@ package com.zaubersoftware.gnip4j.api.model;
 public final class Generator {
     private String displayName;
     private String link;
+    
+
+	public void clear() {
+		displayName = link = null;
+	}
 
     /**
      * Gets the value of the displayName property.
@@ -68,5 +73,6 @@ public final class Generator {
     public void setLink(final String value) {
         link = value;
     }
+
 
 }

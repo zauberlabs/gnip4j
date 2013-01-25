@@ -31,8 +31,18 @@ public class Gnip {
     private Language language;
     @JsonProperty(value = "matching_rules") private List<MatchingRules> matchingRules;
     private List<Url> urls;
-    @JsonProperty(value = "klout_score") private Float kloutScore;
+    @JsonProperty(value = "klout_score") private Long kloutScore;
 
+
+	public void clear() {
+		if( language != null ) {
+			language.clear();
+		}
+		if( urls != null ) {
+			urls.clear();
+		}
+	}
+	
     /**
      * Gets the value of the language property.
      * 
@@ -83,7 +93,7 @@ public class Gnip {
         return urls;
     }
 
-    public final Float getKloutScore() {
+    public final Long getKloutScore() {
         return kloutScore;
     }
 
@@ -95,7 +105,8 @@ public class Gnip {
         this.urls = urls;
     }
 
-    public void setKloutScore(Float kloutScore) {
+    public void setKloutScore(Long kloutScore) {
         this.kloutScore = kloutScore;
     }
+
 }

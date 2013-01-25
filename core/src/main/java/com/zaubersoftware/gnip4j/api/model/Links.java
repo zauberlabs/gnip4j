@@ -15,6 +15,9 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 /**
  * <p>
  * Java class for anonymous complex type.
@@ -24,6 +27,7 @@ package com.zaubersoftware.gnip4j.api.model;
  * 
  */
 public final class Links {
+	@JsonInclude(JsonInclude.Include.ALWAYS)
     private String href;
     private String rel;
 

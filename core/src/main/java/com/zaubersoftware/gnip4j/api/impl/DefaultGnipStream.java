@@ -74,15 +74,16 @@ public class DefaultGnipStream extends AbstractGnipStream {
 
         SimpleModule gnipActivityModule = new SimpleModule("gnip.activity", new Version(1, 0, 0, null));
         gnipActivityModule.addDeserializer(Geo.class, new GeoDeserializer(Geo.class));
-        mapper.registerModule(gnipActivityModule);
+  
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'.000Z'"));
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        mapper.registerModule(new JodaModule());       
+        //mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         final DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'.000Z'");
         final TimeZone tz = TimeZone.getTimeZone("GMT");
+        df.setTimeZone(tz);
         mapper.setDateFormat(df); 
+        mapper.registerModule(gnipActivityModule);
+        mapper.registerModule(new JodaModule()); 
         return mapper;
     }
 

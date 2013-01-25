@@ -27,6 +27,11 @@ public final class Provider {
     private String displayName;
     private String objectType;
     private String link;
+    
+
+	public void clear() {
+		displayName = objectType = link = null;
+	}
 
     /**
      * Gets the value of the displayName property.
@@ -90,5 +95,6 @@ public final class Provider {
     public void setLink(final String value) {
         link = value;
     }
+
 
 }

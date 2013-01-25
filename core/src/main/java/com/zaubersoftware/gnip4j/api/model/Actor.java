@@ -19,7 +19,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.datatype.XMLGregorianCalendar;
+import org.joda.time.DateTime;
 
 /**
  * <p>
@@ -34,7 +34,7 @@ public final class Actor {
     private Actor.Location location;
     private List<String> languages;
     private List<Links> links;
-    private XMLGregorianCalendar postedTime;
+    private DateTime postedTime;
     private String displayName;
     private String preferredUsername;
     private String utcOffset;
@@ -48,6 +48,24 @@ public final class Actor {
     private String link;
     private String image;
     private String id;
+    
+
+	public void clear() {
+		if( location != null ) {
+			location.clear();
+		}
+		if( languages != null ) {
+			languages.clear();
+		}
+		if( links != null ) {
+			links.clear();
+		}
+		if( postedTime != null ) {
+			postedTime = null;
+		}
+		displayName = preferredUsername = utcOffset = objectType = summary = link = image = id = null;
+		listedCount = friendsCount = followersCount = null;	
+	}
 
     /**
      * Gets the value of the location property.
@@ -137,10 +155,10 @@ public final class Actor {
     /**
      * Gets the value of the postedTime property.
      * 
-     * @return possible object is {@link XMLGregorianCalendar }
+     * @return possible object is {@link DateTime }
      * 
      */
-    public XMLGregorianCalendar getPostedTime() {
+    public DateTime getPostedTime() {
         return postedTime;
     }
 
@@ -148,10 +166,10 @@ public final class Actor {
      * Sets the value of the postedTime property.
      * 
      * @param value
-     *            allowed object is {@link XMLGregorianCalendar }
+     *            allowed object is {@link DateTime }
      * 
      */
-    public void setPostedTime(final XMLGregorianCalendar value) {
+    public void setPostedTime(final DateTime value) {
         postedTime = value;
     }
 
@@ -431,7 +449,12 @@ public final class Actor {
             return displayName;
         }
 
-        /**
+        public void clear() {
+			displayName = objectType = null;
+			
+		}
+
+		/**
          * Sets the value of the displayName property.
          * 
          * @param value
@@ -472,5 +495,6 @@ public final class Actor {
     public void setLinks(List<Links> links) {
         this.links = links;
     }
+
 
 }

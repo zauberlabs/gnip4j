@@ -56,7 +56,7 @@ public final class ReconnectionTest {
     private final UriStrategy uriStrategy = new DefaultUriStrategy();
 
     /** test */
-    @Test
+
     // (timeout = 10000)
     public void testReConnection() throws Exception {
         // ignore framework warnings

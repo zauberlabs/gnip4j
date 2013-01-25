@@ -36,7 +36,15 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
     private Point() {
     }
 
-    /**
+    public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
+	/**
      * Creates the Point.
      * 
      * @param latitude

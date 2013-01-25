@@ -45,5 +45,9 @@ public final class InReplyTo {
     public void setLink(final String value) {
         this.link = value;
     }
+    
+    public void clear() {
+    	link = null;
+    }
 
 }

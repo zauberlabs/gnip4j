@@ -37,6 +37,38 @@ import com.fasterxml.jackson.annotation.JsonProperty;
     private String objectType;
     private String id;
     private String link;
+    
+    public final void clear() {
+    	if( inReplyTo != null ) {
+    		inReplyTo.clear();
+    	}
+    	if( location != null ) {
+    		location.clear();
+    	}
+    	if( actor != null ) {
+    		actor.clear();
+    	}
+    	if( geo != null ) {
+    		geo.clear();
+    	}
+    	if( generator != null ) {
+    		generator.clear();
+    	}
+    	if( object != null ) {
+    		object.clear();
+    	}
+    	if( provider != null ) {
+    		provider.clear();
+    	}
+    	if( twitterEntities != null ) {
+    		twitterEntities.clear();
+    	}
+    	if( gnip != null ) {
+    		gnip.clear();
+    	}
+	    postedTime = null;
+	    verb = body = objectType =  id =  link = null;
+    }
 
     public final InReplyTo getInReplyTo() {
         return inReplyTo;
@@ -177,7 +209,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
             return geo;
         }
 
-        public final void setGeo(final Geo value) {
+        public void clear() {
+			if( geo != null ) {
+				geo.clear();
+			}
+			countryCode = displayName = objectType = streetAddress = link = null;
+		}
+
+		public final void setGeo(final Geo value) {
             geo = value;
         }
 

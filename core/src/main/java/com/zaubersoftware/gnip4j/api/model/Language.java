@@ -47,4 +47,7 @@ public final class Language {
         this.value = value;
     }
 
+	public void clear() {
+		value = null;
+	}
 }

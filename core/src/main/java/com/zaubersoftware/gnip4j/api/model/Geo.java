@@ -42,4 +42,9 @@ public class Geo {
         type = value;
     }
 
+	public void clear() {
+        coordinates = null;
+		type = null;
+	}
+
 }

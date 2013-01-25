@@ -35,6 +35,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
     @JsonProperty(value = "user_mentions") public List<UserMentions> userMentions;
     public List<Hashtags> hashtags;
 
+	public void clear() {
+		urls.clear();
+		hashtags.clear();	
+	}
+
     /**
      * Gets the value of the urls property.
      * 
@@ -130,5 +135,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
     public void setHashtags(List<Hashtags> hashtags) {
         this.hashtags = hashtags;
     }
+
 
 }
