@@ -38,7 +38,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
     private String id;
     private String link;
     
-    public final void clear() {
+    public void clear() {
     	inReplyTo = null;
     	location = null;
     	actor = null;

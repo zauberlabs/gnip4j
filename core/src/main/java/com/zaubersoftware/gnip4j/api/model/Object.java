@@ -33,5 +33,10 @@ public final class Object extends Activity {
     public void setSummary(final String value) {
         summary = value;
     }
+    
+    public void clear() {
+        super.clear();
+        summary = null;
+    }
 
 }
