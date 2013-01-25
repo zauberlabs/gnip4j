@@ -103,7 +103,7 @@
 				<configuration>
 					<header>src/HEADER.txt</header>
 					<includes>
-						<!--   <include>**/*.java</include> -->
+						<include>**/*.java</include>
 					</includes>
 					<excludes>
 						<exclude>**/commonsio/*.java</exclude>
@@ -111,6 +111,9 @@
 						<exclude>.gitignore</exclude>
 						<exclude>**/*.txt</exclude>
 						<exclude>**/*.md</exclude>
+						<exclude>**/*.js</exclude>
+					    <exclude>**/*.properties</exclude>
+						<exclude>**/*.xml</exclude>
 					</excludes>
 					<encoding>iso-8859-1</encoding>
 					<strictCheck>true</strictCheck>
