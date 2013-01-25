@@ -114,6 +114,7 @@
 						<exclude>**/*.js</exclude>
 					    <exclude>**/*.properties</exclude>
 						<exclude>**/*.xml</exclude>
+						<exclude>**/GeoSerializer.java</exclude>
 					</excludes>
 					<encoding>iso-8859-1</encoding>
 					<strictCheck>true</strictCheck>
