@@ -23,14 +23,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @JsonAutoDetect public class Activity {
-    private InReplyTo inReplyTo;
+
+	private InReplyTo inReplyTo;
     private Activity.Location location;
     private Actor actor;
     private Geo geo;
     private Generator generator;
     private Object object;
     private Provider provider;
-    @JsonProperty(value = "twitter_entities") private TwitterEntities twitterEntities;
+    @JsonProperty(value = "twitter_entities") 
+    private TwitterEntities twitterEntities;
     private Gnip gnip;
     private String verb;
     private DateTime postedTime;
@@ -38,6 +40,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
     private String objectType;
     private String id;
     private String link;
+    private Target target;
     
     public void clear() {
     	inReplyTo = null;
@@ -50,6 +53,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
     	twitterEntities = null;
     	gnip = null;
 	    postedTime = null;
+	    target = null;
 	    verb = body = objectType =  id =  link = null;
     }
 
@@ -172,6 +176,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
     public final void setLink(final String value) {
         link = value;
     }
+    
+    public final Target getTarget() {
+		return target;
+	}
+
+	public final void setTarget(Target value) {
+		target = value;
+	}
 
     /**
      * <p>
@@ -257,6 +269,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
         public final void setLink(final String value) {
             link = value;
         }
+
+
     }
 
 }

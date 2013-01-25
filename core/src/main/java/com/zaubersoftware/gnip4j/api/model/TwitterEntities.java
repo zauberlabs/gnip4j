@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
     @JsonInclude(JsonInclude.Include.NON_DEFAULT)
     public List<Media> media = new ArrayList<Media>();
 
-    public List<Urls> urls;
+    public List<TwitterEntitityUrl> urls;
     @JsonProperty(value = "user_mentions") 
     public List<UserMentions> userMentions;
     public List<Hashtags> hashtags;
@@ -63,13 +63,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list {@link Urls }
+     * Objects of the following type(s) are allowed in the list {@link TwitterEntitityUrl }
      * 
      * 
      */
-    public List<Urls> getUrls() {
+    public List<TwitterEntitityUrl> getUrls() {
         if (urls == null) {
-            urls = new ArrayList<Urls>();
+            urls = new ArrayList<TwitterEntitityUrl>();
         }
         return urls;
     }
@@ -130,7 +130,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
         return hashtags;
     }
 
-    public void setUrls(List<Urls> urls) {
+    public void setUrls(List<TwitterEntitityUrl> urls) {
         this.urls = urls;
     }
 

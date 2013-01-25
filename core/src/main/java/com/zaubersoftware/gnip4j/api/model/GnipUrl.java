@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Juan F. Codagnone
  * @since May 28, 2011
  */
-public class Url {
+public class GnipUrl {
     private String url;
 
     @JsonProperty(value = "expanded_url") private String expandedUrl;
@@ -34,7 +34,7 @@ public class Url {
         return url;
     }
 
-    public final Url setUrl(final String url) {
+    public final GnipUrl setUrl(final String url) {
         this.url = url;
         return this;
     }
@@ -43,7 +43,7 @@ public class Url {
         return expandedUrl;
     }
 
-    public final Url setExpandedUrl(final String expandedUrl) {
+    public final GnipUrl setExpandedUrl(final String expandedUrl) {
         this.expandedUrl = expandedUrl;
         return this;
     }

@@ -30,13 +30,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 
  */
 public class Gnip {
-    private Language language;
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+    private Language language = null;
     
 	@JsonInclude(JsonInclude.Include.NON_DEFAULT)
     @JsonProperty(value = "matching_rules") private List<MatchingRules> matchingRules = new ArrayList<MatchingRules>();
 	
 	@JsonInclude(JsonInclude.Include.NON_DEFAULT)
-    private List<Url> urls = new ArrayList<Url>();
+    private List<GnipUrl> urls = new ArrayList<GnipUrl>();
     
 	@JsonInclude(JsonInclude.Include.NON_DEFAULT)
     @JsonProperty(value = "klout_score")
@@ -96,7 +97,7 @@ public class Gnip {
         return matchingRules;
     }
 
-    public final List<Url> getUrls() {
+    public final List<GnipUrl> getUrls() {
         return urls;
     }
 
@@ -108,7 +109,7 @@ public class Gnip {
         this.matchingRules = matchingRules;
     }
 
-    public void setUrls(List<Url> urls) {
+    public void setUrls(List<GnipUrl> urls) {
         this.urls = urls;
     }
 

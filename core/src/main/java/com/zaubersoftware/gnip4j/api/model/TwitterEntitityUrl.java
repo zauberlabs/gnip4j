@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * <p>
  * The following schema fragment specifies the expected content contained within this class.
  */
-public final class Urls {
+public final class TwitterEntitityUrl {
     private List<Integer> indices;
     @JsonProperty(value = "expanded_url") 
     @JsonInclude(JsonInclude.Include.ALWAYS)
@@ -37,6 +37,7 @@ public final class Urls {
     private String url;
     
     @JsonProperty("display_url") 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String displayUrl;
 
     /**

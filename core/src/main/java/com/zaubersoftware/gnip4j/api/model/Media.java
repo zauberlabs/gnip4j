@@ -8,62 +8,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-class Size {
-    String resize;
-    int h;
-    int w;
-    public String getResize() {
-        return resize;
-    }
-    public void setResize(String resize) {
-        this.resize = resize;
-    }
-    public int getH() {
-        return h;
-    }
-    public void setH(int h) {
-        this.h = h;
-    }
-    public int getW() {
-        return w;
-    }
-    public void setW(int w) {
-        this.w = w;
-    }
-}
-
-class Sizes {
-    Size thumb;
-    Size small;
-    Size medium;
-    Size large;
-    
-    public Size getThumb() {
-        return thumb;
-    }
-    public void setThumb(Size thumb) {
-        this.thumb = thumb;
-    }
-    public Size getSmall() {
-        return small;
-    }
-    public void setSmall(Size small) {
-        this.small = small;
-    }
-    public Size getMedium() {
-        return medium;
-    }
-    public void setMedium(Size medium) {
-        this.medium = medium;
-    }
-    public Size getLarge() {
-        return large;
-    }
-    public void setLarge(Size large) {
-        this.large = large;
-    }
-}
-
 /**
  * @author Derrick Burns <derrick.burns@rincaro.com>
  *
@@ -87,61 +31,71 @@ public class Media {
     public String getType() {
         return type;
     }
-    public void setType(String type) {
+    public Media setType(String type) {
         this.type = type;
+        return this;
     }
     public List<Integer> getIndices() {
         return indices;
     }
-    public void setIndices(List<Integer> indices) {
+    public Media setIndices(List<Integer> indices) {
         this.indices = indices;
+        return this;
     }
     public Sizes getSizes() {
         return sizes;
     }
-    public void setSizes(Sizes sizes) {
+    public Media setSizes(Sizes sizes) {
         this.sizes = sizes;
+        return this;
     }
     public String getUrl() {
         return url;
     }
-    public void setUrl(String url) {
+    public Media setUrl(String url) {
         this.url = url;
+        return this;
     }
     public String getMediaUrl() {
         return mediaUrl;
     }
-    public void setMediaUrl(String mediaUrl) {
+    public Media setMediaUrl(String mediaUrl) {
         this.mediaUrl = mediaUrl;
+        return this;
     }
     public String getDisplayUrl() {
         return displayUrl;
     }
-    public void setDisplayUrl(String displayUrl) {
+    public Media setDisplayUrl(String displayUrl) {
         this.displayUrl = displayUrl;
+        return this;
     }
     public String getMediaUrlHttps() {
         return mediaUrlHttps;
     }
-    public void setMediaUrlHttps(String mediaUrlHttps) {
+    public Media setMediaUrlHttps(String mediaUrlHttps) {
         this.mediaUrlHttps = mediaUrlHttps;
+        return this;
     }
     public BigInteger getId() {
         return id;
     }
-    public void setId(BigInteger id) {
+    public Media setId(BigInteger id) {
         this.id = id;
+        return this;
     }
     public String getIdStr() {
         return idStr;
     }
-    public void setIdStr(String idStr) {
+    public Media setIdStr(String idStr) {
         this.idStr = idStr;
+        return this;
     }
     public String getExpandedUrl() {
         return expandedUrl;
     }
-    public void setExpandedUrl(String expandedUrl) {
+    public Media setExpandedUrl(String expandedUrl) {
         this.expandedUrl = expandedUrl;
+        return this;
     }
 }
