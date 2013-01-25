@@ -39,33 +39,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
     private String link;
     
     public final void clear() {
-    	if( inReplyTo != null ) {
-    		inReplyTo.clear();
-    	}
-    	if( location != null ) {
-    		location.clear();
-    	}
-    	if( actor != null ) {
-    		actor.clear();
-    	}
-    	if( geo != null ) {
-    		geo.clear();
-    	}
-    	if( generator != null ) {
-    		generator.clear();
-    	}
-    	if( object != null ) {
-    		object.clear();
-    	}
-    	if( provider != null ) {
-    		provider.clear();
-    	}
-    	if( twitterEntities != null ) {
-    		twitterEntities.clear();
-    	}
-    	if( gnip != null ) {
-    		gnip.clear();
-    	}
+    	inReplyTo = null;
+    	location = null;
+    	actor = null;
+    	geo = null;
+    	generator = null;
+    	object = null;
+    	provider = null;
+    	twitterEntities = null;
+    	gnip = null;
 	    postedTime = null;
 	    verb = body = objectType =  id =  link = null;
     }
@@ -200,6 +182,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
     public static class Location {
         private Geo geo;
         private String countryCode;
+        private String name;
         private String displayName;
         private String objectType;
         private String streetAddress;
@@ -210,10 +193,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
         }
 
         public void clear() {
-			if( geo != null ) {
-				geo.clear();
-			}
-			countryCode = displayName = objectType = streetAddress = link = null;
+			geo = null;
+			countryCode = displayName = name = objectType = streetAddress = link = null;
 		}
 
 		public final void setGeo(final Geo value) {
@@ -226,12 +207,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
          * @return possible object is {@link String }
          * 
          */
+		@JsonProperty("country_code")
         public final String getCountryCode() {
             return countryCode;
         }
 
         public final void setCountryCode(final String value) {
             countryCode = value;
+        }
+        
+        public final String getName() {
+            return name;
+        }
+
+        public final void setName(final String value) {
+            name = value;
         }
 
         public final String getDisplayName() {

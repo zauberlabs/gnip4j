@@ -15,6 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * <p>
  * Java class for anonymous complex type.
@@ -37,6 +39,7 @@ package com.zaubersoftware.gnip4j.api.model;
  */
 public final class MatchingRules {
     private String value;
+	@JsonInclude(JsonInclude.Include.ALWAYS)
     private String tag;
 
     /**

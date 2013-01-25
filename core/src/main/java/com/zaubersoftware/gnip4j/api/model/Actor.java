@@ -51,20 +51,13 @@ public final class Actor {
     
 
 	public void clear() {
-		if( location != null ) {
-			location.clear();
-		}
-		if( languages != null ) {
-			languages.clear();
-		}
-		if( links != null ) {
-			links.clear();
-		}
-		if( postedTime != null ) {
-			postedTime = null;
-		}
+		location = null;
+		languages = null;
+		links = null;
+		postedTime = null;
 		displayName = preferredUsername = utcOffset = objectType = summary = link = image = id = null;
 		listedCount = friendsCount = followersCount = null;	
+		twitterTimeZone = null;
 	}
 
     /**

@@ -35,12 +35,10 @@ public class Gnip {
 
 
 	public void clear() {
-		if( language != null ) {
-			language.clear();
-		}
-		if( urls != null ) {
-			urls.clear();
-		}
+		language = null;
+		urls = null;
+		matchingRules = null;
+		kloutScore = null;
 	}
 	
     /**

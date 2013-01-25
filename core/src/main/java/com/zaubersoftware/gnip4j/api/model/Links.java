@@ -16,7 +16,6 @@
 package com.zaubersoftware.gnip4j.api.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * <p>

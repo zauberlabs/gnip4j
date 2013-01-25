@@ -49,6 +49,7 @@ import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.model.Geo;
 import com.zaubersoftware.gnip4j.api.model.GeoDeserializer;
+import com.zaubersoftware.gnip4j.api.model.GeoSerializer;
 import com.zaubersoftware.gnip4j.api.stats.DefaultStreamStats;
 import com.zaubersoftware.gnip4j.api.stats.ModifiableStreamStats;
 import com.zaubersoftware.gnip4j.api.stats.StreamStats;
@@ -74,6 +75,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
 
         SimpleModule gnipActivityModule = new SimpleModule("gnip.activity", new Version(1, 0, 0, null));
         gnipActivityModule.addDeserializer(Geo.class, new GeoDeserializer(Geo.class));
+        gnipActivityModule.addSerializer(Geo.class, new GeoSerializer(Geo.class, true));
   
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
