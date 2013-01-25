@@ -15,8 +15,10 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -29,15 +31,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Gnip {
     private Language language;
-    @JsonProperty(value = "matching_rules") private List<MatchingRules> matchingRules;
-    private List<Url> urls;
-    @JsonProperty(value = "klout_score") private Long kloutScore;
+    
+	@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+    @JsonProperty(value = "matching_rules") private List<MatchingRules> matchingRules = new ArrayList<MatchingRules>();
+	
+	@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+    private List<Url> urls = new ArrayList<Url>();
+    
+	@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+    @JsonProperty(value = "klout_score")
+	private Long kloutScore;
 
 
 	public void clear() {
 		language = null;
-		urls = null;
-		matchingRules = null;
+		urls.clear();
+		matchingRules.clear();
 		kloutScore = null;
 	}
 	
