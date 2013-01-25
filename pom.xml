@@ -103,7 +103,7 @@
 				<configuration>
 					<header>src/HEADER.txt</header>
 					<includes>
-						<include>**/*.java</include>
+						<!--   <include>**/*.java</include> -->
 					</includes>
 					<excludes>
 						<exclude>**/commonsio/*.java</exclude>
