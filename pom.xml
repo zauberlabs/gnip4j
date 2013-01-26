@@ -95,6 +95,7 @@
 
 				<version>2.1</version>
 			</plugin>
+			<!-- 
 			<plugin>
 				<groupId>com.mycila.maven-license-plugin</groupId>
 				<artifactId>maven-license-plugin</artifactId>
@@ -127,6 +128,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			 -->
 		</plugins>
 	</build>
 	<dependencies>
