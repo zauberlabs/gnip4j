@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public final class Actor {
 
     private Actor.Location location;
-    @JsonInclude(JsonInclude.Include.ALWAYS)
+   // @JsonInclude(JsonInclude.Include.ALWAYS)
     private List<String> languages = new ArrayList<String>();
     private List<Links> links;
     private DateTime postedTime;
@@ -43,7 +43,7 @@ public final class Actor {
     @JsonInclude(JsonInclude.Include.ALWAYS)
     private String utcOffset;
     private String objectType;
-    private int statusesCount;
+    private Integer statusesCount;
     private BigInteger listedCount;
     @JsonInclude(JsonInclude.Include.ALWAYS)
     private String twitterTimeZone;
@@ -61,6 +61,7 @@ public final class Actor {
 		languages.clear();
 		links = null;
 		postedTime = null;
+		statusesCount = null;
 		displayName = preferredUsername = utcOffset = objectType = summary = link = image = id = twitterTimeZone = null;
 		listedCount = friendsCount = followersCount = null;	
 	}
@@ -254,7 +255,7 @@ public final class Actor {
      * Gets the value of the statusesCount property.
      * 
      */
-    public int getStatusesCount() {
+    public Integer getStatusesCount() {
         return statusesCount;
     }
 
@@ -262,7 +263,7 @@ public final class Actor {
      * Sets the value of the statusesCount property.
      * 
      */
-    public void setStatusesCount(final int value) {
+    public void setStatusesCount(final Integer value) {
         statusesCount = value;
     }
 
