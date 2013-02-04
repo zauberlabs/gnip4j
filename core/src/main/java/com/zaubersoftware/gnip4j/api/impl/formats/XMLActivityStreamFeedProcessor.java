@@ -476,7 +476,7 @@ class AtomFeedParser {
         
         for(int i = 0; i < reader.getAttributeCount(); i++) {
             final String name = reader.getAttributeName(i).getLocalPart();
-            if("href".equals(name)) {
+            if("uri".equals(name)) {
                 to.setLink(reader.getAttributeValue(i));
             }
         }
