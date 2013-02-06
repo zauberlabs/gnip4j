@@ -97,7 +97,7 @@ public class ISO8601DateParser {
 
         // this is zero time so we need to add that TZ indicator for
         if (input.endsWith("Z")) {
-            input = input.replaceAll("(\\.000)?Z$", "GMT-00:00");
+            input = input.replaceAll("(\\.\\d{3})?Z$", "GMT-00:00");
         } else {
             final int inset = 6;
 
