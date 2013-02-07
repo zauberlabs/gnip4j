@@ -514,6 +514,14 @@ class AtomFeedParser {
             final AtomicBoolean ret = new AtomicBoolean(false);
             if(reader.isStartElement() && GNIP_MATCHING_RULE.equals(reader.getName())) {
                 final MatchingRules rule = new MatchingRules();
+
+                for (int i = 0; i < reader.getAttributeCount(); i++) {
+                    final String name = reader.getAttributeName(i).getLocalPart();
+                    
+                    if ("tag".equals(name))
+                        rule.setTag(reader.getAttributeValue(i));
+                }
+
                 rule.setValue(getText(ret, reader));
                 
                 rules.add(rule);
