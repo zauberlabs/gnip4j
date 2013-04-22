@@ -38,6 +38,7 @@ public class Activity implements Serializable {
     private Provider provider;
     @JsonProperty(value = "twitter_entities")
     private TwitterEntities twitterEntities;
+    private long retweetCount;
     private Gnip gnip;
     private String verb;
     private XMLGregorianCalendar postedTime;
@@ -335,5 +336,13 @@ public class Activity implements Serializable {
     
     public final String getTitle() {
         return title;
+    }
+    
+    public final long getRetweetCount() {
+        return retweetCount;
+    }
+
+    public final void setRetweetCount(final long retweetCount) {
+        this.retweetCount = retweetCount;
     }
 }
