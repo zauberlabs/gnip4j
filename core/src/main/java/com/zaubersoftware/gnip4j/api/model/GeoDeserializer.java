@@ -55,37 +55,39 @@ public class GeoDeserializer extends StdDeserializer<Geo> {
 
         if(Geometries.valueOf(type.getTextValue()) == Geometries.Polygon) {
             geo.setCoordinates(this.createPolygon(coordinates));
-        } else{
+        } else {
             geo.setCoordinates(this.createPoint(coordinates));
         }
 
         return geo;
     }
 
-    /**
-     * @param coordinates
-     * @return
-     * @throws IOException
-     * @throws JsonParseException
-     */
-    private Geometry createPoint(final JsonNode coordinates) throws IOException {
-        return new Point(coordinates.get(0).getDoubleValue(), coordinates.get(1).getDoubleValue());
+    /** @return a point */
+    private Point createPoint(final JsonNode coordinates) throws IOException {
+        final Point ret;
+        if(coordinates.isArray()) {
+            ret = new Point(coordinates.get(0).getDoubleValue(), coordinates.get(1).getDoubleValue());
+        } else {
+            ret = new Point(coordinates.get("latitude").getDoubleValue(), 
+                            coordinates.get("longitude").getDoubleValue());
+        }
+        return ret;
     }
 
-    /**
-     * @param coordinates
-     * @return
-     */
-    private Geometry createPolygon(final JsonNode coordinates) {
-        final JsonNode values = coordinates.get(0);
-        final Iterator<JsonNode> elements = values.getElements();
-
+    /** @return a polygon */
+    private Polygon createPolygon(final JsonNode coordinates) throws IOException {
         final List<Point> points = new ArrayList<Point>();
+        final Iterator<JsonNode> elements;
+        if(coordinates.has("points")) {
+            elements = coordinates.get("points").iterator();
+        } else {
+            final JsonNode values = coordinates.get(0);
+            elements = values.getElements();
+        }
         while(elements.hasNext()) {
             final JsonNode next = elements.next();
-            points.add(new Point(next.get(0).getDoubleValue(), next.get(1).getDoubleValue()));
+            points.add(createPoint(next));
         }
-
         return new Polygon(points);
     }
 
