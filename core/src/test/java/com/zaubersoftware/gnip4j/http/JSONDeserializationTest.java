@@ -62,6 +62,7 @@ public final class JSONDeserializationTest {
         try  {
             final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
             final Activity activity = parser.readValueAs(Activity.class);
+            final Activity activity2= parser.readValueAs(Activity.class);
             
             assertNotNull(activity.getGnip());
             assertNotNull(activity.getGnip().getLanguage());
@@ -71,6 +72,11 @@ public final class JSONDeserializationTest {
             assertEquals(1, matchingRules.size());
             assertEquals("coke", matchingRules.get(0).getValue());
             assertEquals(null, matchingRules.get(0).getTag());
+            
+            final Activity activity3= parser.readValueAs(Activity.class);
+            
+            assertNotNull(activity3.getTwitterEntities().getMediaUrls());
+            assertNotNull(activity3.getTwitterEntities().getMediaUrls().get(0).getSizes());
         } finally {
             is.close();
         }

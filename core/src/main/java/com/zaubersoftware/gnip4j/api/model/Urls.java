@@ -27,7 +27,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  */
-public final class Urls implements Serializable {
+public class Urls implements Serializable {
     private static final long serialVersionUID = 1L;
     private List<Integer> indices;
     @JsonProperty(value = "expanded_url")
