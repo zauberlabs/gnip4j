@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>zauber-gnip4j-parent</artifactId>
 		<groupId>com.zaubersoftware.gnip4j</groupId>
-		<version>1.1</version>
+		<version>1.2-SNAPSHOT</version>
 	</parent>
 	<groupId>com.zaubersoftware.gnip4j</groupId>
 	<artifactId>gnip4j-mock-server</artifactId>
