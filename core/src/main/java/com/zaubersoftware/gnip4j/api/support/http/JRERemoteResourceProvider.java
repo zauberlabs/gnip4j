@@ -49,7 +49,7 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
     private final Base64PasswordEncoder encoder = Base64PasswordEncoderFactory.getEncoder();
     private final int connectTimeout = 10000;
     private final int readTimeout = 35000;
-    
+
     /** Creates the JRERemoteResourceProvider. */
     public JRERemoteResourceProvider(final GnipAuthentication authentication) {
         if(authentication == null) {
@@ -118,14 +118,14 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
             uc.setConnectTimeout(connectTimeout);
             uc.setReadTimeout(readTimeout);
             uc.setDoOutput(true); // Needed in order to make a POST request
-            uc.setRequestProperty("Accept-Encoding", "gzip, deflate"); 
+            uc.setRequestProperty("Accept-Encoding", "gzip, deflate");
             uc.setRequestProperty("User-Agent", USER_AGENT);
             uc.setRequestProperty("Authorization", "Basic " + encoder.encode(authentication));
             uc.setRequestProperty("Content-type", "application/json");
             doConfiguration(uc);
             
             outStream = uc.getOutputStream();
-            outStream.write(new ObjectMapper().writeValueAsString(resource).getBytes());
+            outStream.write(new ObjectMapper().writeValueAsString(resource).getBytes("UTF-8"));
             
             if (huc != null) {
                 validateStatusLine(uri, huc.getResponseCode(), huc.getResponseMessage());
@@ -171,7 +171,7 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
             doConfiguration(uc);
             
             outStream = uc.getOutputStream();
-            outStream.write(new ObjectMapper().writeValueAsString(resource).getBytes());
+            outStream.write(new ObjectMapper().writeValueAsString(resource).getBytes("UTF-8"));
             
             if (huc != null) {
                 validateStatusLine(uri, huc.getResponseCode(), huc.getResponseMessage());
