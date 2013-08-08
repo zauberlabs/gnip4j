@@ -31,15 +31,27 @@ public abstract class AbstractRemoteResourceProvider implements RemoteResourcePr
     protected static final String USER_AGENT = "Gnip4j (https://github.com/zaubersoftware/gnip4j/)";
     
     /** validate responses */
-    public final void validateStatusLine(final URI uri, final int statusCode, final String reason) {
+    public final void validateStatusLine(final URI uri, final int statusCode, final String reason,
+            final ErrorProvider errorProvider) {
         if (statusCode >= 200 && statusCode <= 299) {
             // nothing to do
         } else if (statusCode == 401) {
             throw new AuthenticationGnipException(reason);
         } else { 
+            String msg = null;
+            if(errorProvider != null) {
+                msg = errorProvider.getError();
+            }
+            if(msg == null) {
+                msg = "";
+            }
             throw new TransportGnipException(
-                String.format("Connection to %s: Unexpected status code: %s %s",
-                        uri, statusCode, reason));
+                String.format("Connection to %s: Unexpected status code: %s %s %s",
+                        uri, statusCode, reason, msg));
         }
     }
+}
+
+interface ErrorProvider {
+    String getError();
 }

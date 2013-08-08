@@ -15,6 +15,7 @@
  */
 package com.zaubersoftware.gnip4j.api.support.http;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -28,6 +29,10 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
+import org.codehaus.jackson.JsonFactory;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.JsonParser;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
@@ -84,21 +89,28 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
             uc.connect();
             
             if(huc != null) {
-                validateStatusLine(uri, huc.getResponseCode(), huc.getResponseMessage());
+                validateStatusLine(uri, huc.getResponseCode(), huc.getResponseMessage(), 
+                                   new DefaultErrorProvider(huc));
             }
-            InputStream is = uc.getInputStream(); 
-            final String encoding = uc.getContentEncoding();
-            if (encoding != null && encoding.equalsIgnoreCase("gzip")) {
-                is = new GZIPInputStream(is);
-            } else if (encoding != null && encoding.equalsIgnoreCase("deflate")) {
-                is = new InflaterInputStream(is, new Inflater(true));
-            }
+            final InputStream is = getRealInputStream(uc, uc.getInputStream()); 
+            
             return new JREReleaseInputStream(uc, is);
         } catch (final MalformedURLException e) {
             throw new TransportGnipException(e);
         } catch (final IOException e) {
             throw new TransportGnipException(e);
         }
+    }
+
+    /** applies content enconding transformation */
+    static InputStream getRealInputStream(final URLConnection uc, InputStream is) throws IOException {
+        final String encoding = uc.getContentEncoding();
+        if (encoding != null && encoding.equalsIgnoreCase("gzip")) {
+            is = new GZIPInputStream(is);
+        } else if (encoding != null && encoding.equalsIgnoreCase("deflate")) {
+            is = new InflaterInputStream(is, new Inflater(true));
+        }
+        return is;
     }
     
     @Override
@@ -128,7 +140,8 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
             outStream.write(new ObjectMapper().writeValueAsString(resource).getBytes());
             
             if (huc != null) {
-                validateStatusLine(uri, huc.getResponseCode(), huc.getResponseMessage());
+                validateStatusLine(uri, huc.getResponseCode(), huc.getResponseMessage(),
+                        new DefaultErrorProvider(huc));
             }
             
         } catch (final MalformedURLException e) {
@@ -174,7 +187,7 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
             outStream.write(new ObjectMapper().writeValueAsString(resource).getBytes());
             
             if (huc != null) {
-                validateStatusLine(uri, huc.getResponseCode(), huc.getResponseMessage());
+                validateStatusLine(uri, huc.getResponseCode(), huc.getResponseMessage(), new DefaultErrorProvider(huc));
             }
             
         } catch (final MalformedURLException e) {
@@ -195,5 +208,68 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
     /** template method for configuring the URLConnection */
     protected void doConfiguration(final URLConnection uc) {
         
+    }
+    
+    static final String toInputStream(final InputStream is) {
+        try {
+            final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte []buff = new byte[4096];
+            int i;
+            while((i = is.read(buff)) >= 0) {
+                bos.write(buff, 0, i);
+            }
+            
+            return new String(bos.toByteArray(), "utf-8");
+        } catch(IOException e) {
+            return "";
+        }
+    }
+    static final ObjectMapper m = new ObjectMapper();
+    
+    static class DefaultErrorProvider implements ErrorProvider {
+        private final HttpURLConnection huc;
+        
+        /** Creates the DefaultErrorProvider. */
+        public DefaultErrorProvider(final HttpURLConnection huc) {
+            this.huc = huc;
+        }
+        
+        @Override
+        public String getError() {
+            try {
+                final InputStream is = JRERemoteResourceProvider.getRealInputStream(huc, huc.getErrorStream());
+                if(huc.getContentType().startsWith("application/json")) {
+                    return m.readValue(is, Errors.class).getError().getMessage();
+                } else {
+                    return toInputStream(is); 
+                }
+            } catch (IOException e) {
+                return null;
+            }
+        }
+    }
+}
+class Errors {
+    private Error error;
+
+    public final Error getError() {
+        return error;
+    }
+
+    public final void setError(final Error error) {
+        this.error = error;
+    }
+    
+}
+@JsonIgnoreProperties(ignoreUnknown = true)
+class Error {
+    private String message;
+
+    public final String getMessage() {
+        return message;
+    }
+
+    public final void setMessage(final String message) {
+        this.message = message;
     }
 }
