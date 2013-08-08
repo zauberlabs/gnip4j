@@ -29,9 +29,6 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
-import org.codehaus.jackson.JsonFactory;
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -112,6 +109,7 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
         }
         return is;
     }
+    private final ObjectMapper mapper = new ObjectMapper();
     
     @Override
     public final void postResource(final URI uri, final Object resource) throws AuthenticationGnipException,
@@ -137,7 +135,7 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
             doConfiguration(uc);
             
             outStream = uc.getOutputStream();
-            outStream.write(new ObjectMapper().writeValueAsString(resource).getBytes());
+            outStream.write(mapper.writeValueAsString(resource).getBytes("utf-8"));
             
             if (huc != null) {
                 validateStatusLine(uri, huc.getResponseCode(), huc.getResponseMessage(),
