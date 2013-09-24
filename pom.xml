@@ -5,11 +5,11 @@
 	<parent>
 		<groupId>com.rincaro</groupId>
 		<artifactId>rincaro-parent</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0.1</version>
 	</parent>
 	<name>com.rincaro.gnip4j</name>
 	<artifactId>gnip4j-parent</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1.0</version>
 	<packaging>pom</packaging>
 
 	<scm>
