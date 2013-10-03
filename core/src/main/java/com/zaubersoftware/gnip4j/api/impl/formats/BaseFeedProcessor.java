@@ -17,11 +17,9 @@ package com.zaubersoftware.gnip4j.api.impl.formats;
 
 import java.util.concurrent.ExecutorService;
 
+import com.sun.org.apache.xerces.internal.impl.dv.ValidatedInfo;
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
-import com.zaubersoftware.gnip4j.api.model.Activity;
-import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;
-import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
 
 /**
@@ -31,17 +29,16 @@ import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
  * @author Juan F. Codagnone
  * @since Dec 13, 2012
  */
-public abstract class BaseFeedProcessor implements FeedProcessor {
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+public abstract class BaseFeedProcessor<T> implements FeedProcessor {
     protected final String streamName;
     private final ExecutorService activityService;
-    private final StreamNotification notification;
-    private final GnipStream stream;
+    private final StreamNotification<T> notification;
+    private GnipStream stream;
     
     
     /** Creates the BaseFeedProcessor. */
     public BaseFeedProcessor(final String streamName, final ExecutorService activityService,
-            final StreamNotification notification, final GnipStream stream) {
+            final StreamNotification<T> notification) {
         if(streamName == null) {
             throw new IllegalArgumentException("streamName is null");
         }
@@ -51,34 +48,28 @@ public abstract class BaseFeedProcessor implements FeedProcessor {
         if(notification == null) {
             throw new IllegalArgumentException("notification is null");
         }
-        if(stream == null) {
-            throw new IllegalArgumentException("stream is null");
-        }
         
 
         this.streamName = streamName;
         this.activityService = activityService;
         this.notification = notification;
-        this.stream = stream;
     }
     
     /** handle an activity */
-    protected final void handle(final Activity activity) {
-        if (activity == null) {
-            logger.warn("Activity parsed from stream {} is null. Should not happen!",
-                    streamName);
-            return;
-        }
-        if (activity.getBody() == null && activity.getObject() == null) {
-            logger.warn("{}: Activity with id {} and link {} has a null body",
-                    new Object[]{streamName, activity.getId(), activity.getLink()});
-        }
-        logger.trace("{}: Notifying activity {}", streamName, activity.getBody());
+    protected final void handle(final Object activity) {
         activityService.execute(new Runnable() {
             @Override
             public void run() {
-                notification.notify(activity, stream);
+                notification.notify((T)activity, stream);
             }
         });
+    }
+    
+    public final void setStream(final GnipStream stream) {
+        this.stream = stream;
+    }
+    
+    public final GnipStream getStream() {
+        return stream;
     }
 }

@@ -25,7 +25,7 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
  * @author Juan F. Codagnone
  * @since May 4, 2011
  */
-public interface StreamNotification {
+public interface StreamNotification<T> {
 
     /**
      * Notifies the arrival of a new {@link Activity}
@@ -33,7 +33,7 @@ public interface StreamNotification {
      * @param activity The new arrived activity.
      * @param stream The stream used to suck the activities.
      */
-    void notify(Activity activity, GnipStream stream);
+    void notify(T  activity, GnipStream stream);
     
     /**
      * Notifies a connection error.

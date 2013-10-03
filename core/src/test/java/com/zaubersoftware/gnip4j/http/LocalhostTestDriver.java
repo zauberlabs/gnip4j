@@ -59,7 +59,7 @@ public final class LocalhostTestDriver {
 
             System.out.println("-- Creating stream");
             final AtomicInteger counter = new AtomicInteger();
-            final StreamNotificationAdapter n = new StreamNotificationAdapter() {
+            final StreamNotificationAdapter<Activity> n = new StreamNotificationAdapter<Activity>() {
                 @Override
                 public void notify(final Activity activity, final GnipStream stream) {
                     final int i = counter.getAndIncrement();
@@ -70,7 +70,10 @@ public final class LocalhostTestDriver {
                     System.out.println(i + "-" + activity.getBody() + " " + activity.getGnip().getMatchingRules());
                 }
             };
-            final GnipStream stream = gnip.createStream("test-account", "test-stream", n);
+            final GnipStream stream = gnip.createPowertrackStream().withAccount("test-account")
+                                                                    .withType("test-stream")
+                                                                    .withObserver(n)
+                                                                    .build();
             System.out.println("-- Awaiting for stream to terminate");
             stream.await();
             System.out.println("-- Shutting down");

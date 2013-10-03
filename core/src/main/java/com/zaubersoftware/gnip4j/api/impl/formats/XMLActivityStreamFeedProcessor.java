@@ -19,7 +19,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringReader;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -34,11 +33,9 @@ import java.util.regex.Pattern;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.namespace.QName;
-import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
-import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
 import com.zaubersoftware.gnip4j.api.impl.ISO8601DateParser;
 import com.zaubersoftware.gnip4j.api.model.Activity;
@@ -101,15 +98,17 @@ import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
  * @author Juan F. Codagnone
  * @since Dec 11, 2012
  */
-public class XMLActivityStreamFeedProcessor extends BaseFeedProcessor {
+public class XMLActivityStreamFeedProcessor<T> extends BaseFeedProcessor<T> {
     private final Pattern startPattern = Pattern.compile("^[<]entry .*$");
     private final Pattern endPattern = Pattern.compile("^[<][/]entry.*$");
-    private final XMLInputFactory factory = XMLInputFactory.newInstance();
+    private final Unmarshaller<T> unmarshaller;
 
     /** constructor */
     public XMLActivityStreamFeedProcessor(final String streamName, final ExecutorService activityService,
-            final StreamNotification notification, final GnipStream stream) {
-        super(streamName, activityService, notification, stream);
+            final StreamNotification<T> notification,
+            final Unmarshaller<T> unmarshaller) {
+        super(streamName, activityService, notification);
+        this.unmarshaller = unmarshaller;
     }
 
     @Override
@@ -127,26 +126,10 @@ public class XMLActivityStreamFeedProcessor extends BaseFeedProcessor {
                 sb.append(s);
             } else if (endPattern.matcher(s).matches()) {
                 sb.append(s);
-
-                try {
-                    handle(parse(sb.toString()));
-                } catch (final XMLStreamException e) {
-                    throw new IllegalArgumentException("parsing activity", e);
-                }
+                handle(unmarshaller.unmarshall(sb.toString()));
             } else {
                 sb.append(s);
             }
-        }
-    }
-
-    /** parse  */
-    private Activity parse(final String s) throws XMLStreamException, ParseException {
-        final XMLStreamReader reader = factory.createXMLStreamReader(new StringReader(s));
-        final AtomFeedParser parser = new AtomFeedParser();
-        try {
-            return parser.process(reader);
-        } finally {
-            reader.close();
         }
     }
 }

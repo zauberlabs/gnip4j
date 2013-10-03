@@ -27,7 +27,7 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
  * @author Guido Marucci Blas
  * @since May 9, 2011
  */
-public abstract class StreamNotificationAdapter implements StreamNotification {
+public abstract class StreamNotificationAdapter<T> implements StreamNotification<T> {
 
     @Override
     public void notifyConnectionError(final TransportGnipException e) {

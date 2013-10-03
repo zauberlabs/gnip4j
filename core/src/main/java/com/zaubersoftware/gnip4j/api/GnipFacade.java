@@ -15,9 +15,6 @@
  */
 package com.zaubersoftware.gnip4j.api;
 
-import java.util.concurrent.ExecutorService;
-
-import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.model.Rule;
 import com.zaubersoftware.gnip4j.api.model.Rules;
 
@@ -29,23 +26,11 @@ import com.zaubersoftware.gnip4j.api.model.Rules;
  */
 public interface GnipFacade {
 
-    /** @see #createStream(String, long, StreamNotification, ExecutorService) */
-    GnipStream createStream(String account, String streamName, StreamNotification observer);
+    /** Let you create an Enterprices Data Collector Stream */
+    EDCStreamBuilder createEnterpriceDataCollectorStream();
     
-    /**
-     * Gnip provides access to the data with a streaming HTTP implementation
-     * that allows you to consume data in near real-time over a single
-     * persistent HTTP connection/request.
-     * 
-     * @param account The account name for the power track API. (For example: acme)
-     * @param streamName the streamName
-     * @param observer {@link StreamNotification} used to notify the {@link Activity}s.
-     * @param executorService {@link ExecutorService} used to process {@link Activity}
-     * @return a reference to the stream so it can be closed 
-     */
-    GnipStream createStream(String account, String streamName,
-                            StreamNotification observer, 
-                            ExecutorService executorService);
+    /** Let you create a Powertrack Stream */
+    PowertrackStreamBuilder createPowertrackStream();
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**

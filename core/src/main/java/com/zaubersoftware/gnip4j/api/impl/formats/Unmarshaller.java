@@ -13,31 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zaubersoftware.gnip4j.api;
-
-import org.junit.Test;
-
-import com.zaubersoftware.gnip4j.api.model.Activity;
-
+package com.zaubersoftware.gnip4j.api.impl.formats;
 
 /**
- * Test for {@link StreamNotification}
- *
+ * Unmarshal something that came from Gnip 
+ * 
  * @author Juan F. Codagnone
- * @since May 20, 2011
+ * @since Oct 3, 2013
+ * @param <T> type
  */
-public class StreamNotificationAdapterTest {
+public interface Unmarshaller<T> {
 
-    /** nothing to do! */
-    @Test
-    public final void testNull() {
-        final StreamNotification<Activity> n = new StreamNotificationAdapter<Activity>() {
-            @Override
-            public void notify(final Activity activity, final GnipStream stream) {
-            }
-        };
-        n.notifyConnectionError(null);
-        n.notifyReConnectionError(null);
-        n.notifyReConnectionAttempt(-1, -1000);
-    }
+    /** unmarshall an entity */
+    T unmarshall(String s);
 }

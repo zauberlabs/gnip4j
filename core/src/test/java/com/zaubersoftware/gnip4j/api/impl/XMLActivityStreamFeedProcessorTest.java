@@ -40,6 +40,7 @@ import org.mockito.Mockito;
 
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.StreamNotificationAdapter;
+import com.zaubersoftware.gnip4j.api.impl.formats.ActivityUnmarshaller;
 import com.zaubersoftware.gnip4j.api.impl.formats.FeedProcessor;
 import com.zaubersoftware.gnip4j.api.impl.formats.JsonActivityFeedProcessor;
 import com.zaubersoftware.gnip4j.api.impl.formats.XMLActivityStreamFeedProcessor;
@@ -60,8 +61,8 @@ public class XMLActivityStreamFeedProcessorTest {
         try {
             final AtomicInteger i = new AtomicInteger();
             final ObjectMapper mapper = JsonActivityFeedProcessor.getObjectMapper();
-            final FeedProcessor p = new XMLActivityStreamFeedProcessor("foo", new DirectExecuteService(),
-                    new StreamNotificationAdapter() {
+            final FeedProcessor p = new XMLActivityStreamFeedProcessor<Activity>("foo", new DirectExecuteService(),
+                    new StreamNotificationAdapter<Activity>() {
                         @Override
                         public void notify(final Activity activity, final GnipStream stream) {
                             i.incrementAndGet();
@@ -79,7 +80,7 @@ public class XMLActivityStreamFeedProcessorTest {
                                 throw new RuntimeException(e);
                             }
                         }
-                    }, Mockito.mock(GnipStream.class));
+                    }, new ActivityUnmarshaller("hola"));
             p.process(is);
             assertEquals(23, i.get());
         } finally {

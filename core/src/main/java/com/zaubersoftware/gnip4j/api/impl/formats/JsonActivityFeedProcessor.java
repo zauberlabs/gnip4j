@@ -26,7 +26,6 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.map.module.SimpleModule;
 
-import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.model.Geo;
@@ -54,8 +53,8 @@ public class JsonActivityFeedProcessor extends BaseFeedProcessor {
     
     /** constructor */
     public JsonActivityFeedProcessor(final String streamName, final ExecutorService activityService,
-            final StreamNotification notification, final GnipStream stream) {
-        super(streamName, activityService, notification, stream);
+            final StreamNotification notification) {
+        super(streamName, activityService, notification);
     }
     
     @Override

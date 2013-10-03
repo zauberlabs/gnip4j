@@ -23,7 +23,6 @@ import org.mule.api.lifecycle.CreateException;
 import org.mule.api.transport.Connector;
 import org.mule.transport.AbstractMessageReceiver;
 import org.mule.transport.ConnectException;
-import org.mule.util.UriParamFilter;
 
 import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.GnipStream;
@@ -50,16 +49,20 @@ public class GnipMessageReceiver extends AbstractMessageReceiver {
         String account = uri.substring(uri.indexOf("accounts/") + "accounts/".length(), uri.indexOf("/publishers"));
         String streamName = uri.substring(uri.indexOf("streams/track/") + "streams/track/".length(), uri.indexOf(".json"));
         
-        stream = getGnipFacade().createStream(account, streamName, new StreamNotificationAdapter() {
-            @Override
-            public void notify(final Activity activity, final GnipStream stream) {
-                try {
-                    routeMessage(createMuleMessage(activity));
-                } catch (final MuleException e) {
-                    throw new UnhandledException(e);
-                }
-            }
-        });
+        stream = getGnipFacade().createPowertrackStream()
+                .withAccount(account)
+                .withType(streamName)
+                .withObserver(new StreamNotificationAdapter<Activity>() {
+                    @Override
+                    public void notify(final Activity activity, final GnipStream stream) {
+                        try {
+                            routeMessage(createMuleMessage(activity));
+                        } catch (final MuleException e) {
+                            throw new UnhandledException(e);
+                        }
+                    }
+                })
+                .build();
     }
 
     public final GnipFacade getGnipFacade() {

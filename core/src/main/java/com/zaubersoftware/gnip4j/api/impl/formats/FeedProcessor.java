@@ -19,9 +19,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 
+import com.zaubersoftware.gnip4j.api.GnipStream;
+
 
 /** process the content of a feed */
 public interface FeedProcessor {
     /** process the content of a gnip feed. must be interrumplible */
     void process(final InputStream is) throws IOException, ParseException;
+    
+    void setStream(final GnipStream stream);
 }

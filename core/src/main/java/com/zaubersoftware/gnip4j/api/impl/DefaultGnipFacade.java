@@ -20,19 +20,25 @@ import static com.zaubersoftware.gnip4j.api.impl.ErrorCodes.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonProcessingException;
 
+import com.zaubersoftware.gnip4j.api.EDCStreamBuilder;
 import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.GnipStream;
+import com.zaubersoftware.gnip4j.api.PowertrackStreamBuilder;
 import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
 import com.zaubersoftware.gnip4j.api.UriStrategy;
 import com.zaubersoftware.gnip4j.api.exception.GnipException;
+import com.zaubersoftware.gnip4j.api.impl.formats.ActivityUnmarshaller;
+import com.zaubersoftware.gnip4j.api.impl.formats.ByLineFeedProcessor;
+import com.zaubersoftware.gnip4j.api.impl.formats.FeedProcessor;
 import com.zaubersoftware.gnip4j.api.impl.formats.JsonActivityFeedProcessor;
+import com.zaubersoftware.gnip4j.api.impl.formats.Unmarshaller;
+import com.zaubersoftware.gnip4j.api.impl.formats.XMLActivityStreamFeedProcessor;
 import com.zaubersoftware.gnip4j.api.model.Rule;
 import com.zaubersoftware.gnip4j.api.model.Rules;
 import com.zaubersoftware.gnip4j.api.stats.StreamStats;
@@ -49,7 +55,6 @@ public class DefaultGnipFacade implements GnipFacade {
     private static final UriStrategy DEFAULT_BASE_URI_STRATEGY = new DefaultUriStrategy();
 
     private final RemoteResourceProvider facade;
-    private int streamDefaultWorkers = Runtime.getRuntime().availableProcessors();
     private boolean useJMX = true;
     private final UriStrategy baseUriStrategy;
 
@@ -71,49 +76,62 @@ public class DefaultGnipFacade implements GnipFacade {
     }
 
     @Override
-    public final GnipStream createStream(
-            final String account,
-            final String streamName,
-            final StreamNotification observer) {
-        final ExecutorService executor = Executors.newFixedThreadPool(streamDefaultWorkers);
-        final GnipStream target = createStream(account, streamName, observer, executor);
-        return new GnipStream() {
+    public final PowertrackStreamBuilder createPowertrackStream() {
+        return new PowertrackStreamBuilder() {
             @Override
-            public void close() {
-                try {
-                    target.close();
-                } finally {
-                    executor.shutdown();
-                }
-            }
-
-            @Override
-            public void await() throws InterruptedException {
-                target.await();
-            }
-            
-            @Override
-            public boolean await(final long time, final TimeUnit unit) throws InterruptedException {
-                return target.await(time, unit);
-            }
-
-            @Override
-            public final String getStreamName() {
-                return target.getStreamName();
-            }
-
-            @Override
-            public StreamStats getStreamStats() {
-                return target.getStreamStats();
+            protected GnipStream buildStream() {
+                final String streamName = String.format("powertrack-%s-%s", this.account, this.type);
+                
+                final FeedProcessor processor = new JsonActivityFeedProcessor(
+                        streamName, 
+                        executorService, 
+                        this.observer);
+                final GnipStream stream = createStream(this.account, streamName, 
+                        this.observer, this.executorService, new ActivityUnmarshaller(streamName), 
+                        processor);
+                processor.setStream(stream);
+                return stream;
             }
         };
     }
 
     @Override
+    public final EDCStreamBuilder createEnterpriceDataCollectorStream() {
+        return new EDCStreamBuilder() {
+            @Override
+            protected GnipStream buildStream() {
+                FeedProcessor p;
+                final String streamName = String.format("edc-%s-%s", this.account, this.dataCollector);
+                
+                if(activity) {
+                    p = new XMLActivityStreamFeedProcessor(this.account, this.executorService, this.observer, 
+                                                           new ActivityUnmarshaller(streamName));
+                } else {
+                    if(Format.JSON.equals(this.format)) {
+                        p = new ByLineFeedProcessor(streamName, this.executorService, this.observer, 
+                                unmarshaller);
+                    } else if(Format.JSON.equals(this.format)) {
+                        p = new XMLActivityStreamFeedProcessor(streamName, this.executorService, 
+                                this.observer, unmarshaller);
+                    } else {
+                        throw new IllegalArgumentException("Unknown format " + format);
+                    }
+                }
+                final GnipStream stream = createStream(this.account, streamName, 
+                        this.observer, this.executorService, this.unmarshaller, 
+                        p);
+                p.setStream(stream);
+                return stream;
+            }
+        };
+    }
+    
+    
     public final GnipStream createStream(final String account, final String streamName,
-            final StreamNotification observer, final ExecutorService executor) {
+            final StreamNotification observer, final ExecutorService executor, final Unmarshaller unmarshaller,
+            final FeedProcessor feedProcessor) {
         final DefaultGnipStream stream = createStream(account, streamName, executor);
-        stream.open(observer);
+        stream.open(observer, unmarshaller, feedProcessor);
         GnipStream ret = stream;
         if(useJMX) {
             ret = new GnipStream() {
@@ -149,19 +167,6 @@ public class DefaultGnipFacade implements GnipFacade {
             JMXProvider.getProvider().registerBean(stream, stream.getStreamStats());
         }
         return ret;
-    }
-
-
-    public final int getStreamDefaultWorkers() {
-        return streamDefaultWorkers;
-    }
-
-    /** @see #getStreamDefaultWorkers() */
-    public final void setStreamDefaultWorkers(final int streamDefaultWorkers) {
-        if(streamDefaultWorkers < 1) {
-            throw new IllegalArgumentException("Must be >= 1");
-        }
-        this.streamDefaultWorkers = streamDefaultWorkers;
     }
 
     @Override

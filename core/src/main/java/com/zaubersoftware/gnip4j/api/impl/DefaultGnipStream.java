@@ -19,18 +19,9 @@ import static com.zaubersoftware.gnip4j.api.impl.ErrorCodes.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.text.ParseException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.Version;
-import org.codehaus.jackson.map.DeserializationConfig;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.module.SimpleModule;
 
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
@@ -41,10 +32,9 @@ import com.zaubersoftware.gnip4j.api.exception.GnipException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.impl.formats.FeedProcessor;
 import com.zaubersoftware.gnip4j.api.impl.formats.JsonActivityFeedProcessor;
+import com.zaubersoftware.gnip4j.api.impl.formats.Unmarshaller;
 import com.zaubersoftware.gnip4j.api.impl.formats.XMLActivityStreamFeedProcessor;
 import com.zaubersoftware.gnip4j.api.model.Activity;
-import com.zaubersoftware.gnip4j.api.model.Geo;
-import com.zaubersoftware.gnip4j.api.model.GeoDeserializer;
 import com.zaubersoftware.gnip4j.api.stats.DefaultStreamStats;
 import com.zaubersoftware.gnip4j.api.stats.ModifiableStreamStats;
 import com.zaubersoftware.gnip4j.api.stats.StreamStats;
@@ -82,7 +72,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
     private Thread httpThread;
     private final ModifiableStreamStats stats = new DefaultStreamStats();
 
-    private StreamNotification notification = new StreamNotificationAdapter() {
+    private StreamNotification notification = new StreamNotificationAdapter<Activity>() {
         @Override
         public void notify(final Activity activity, final GnipStream stream) {
             logger.warn("No notification is registed for stream {}", getStreamName());
@@ -126,7 +116,8 @@ public class DefaultGnipStream extends AbstractGnipStream {
     }
 
     /** open the stream */
-    public final void open(final StreamNotification notification) {
+      public final <X> void open(final StreamNotification<X> notification, final Unmarshaller<X> unmarshaller,
+              final FeedProcessor processor) {
         if(notification == null) {
             throw new IllegalArgumentException(getStreamName() + " does not support null observers");
         }  else {
@@ -137,13 +128,6 @@ public class DefaultGnipStream extends AbstractGnipStream {
             throw new IllegalStateException("The stream is open");
         }
 
-        final FeedProcessor processor;
-        if(streamURI.getPath().endsWith("xml")) {
-            processor = new XMLActivityStreamFeedProcessor(streamName, activityService, notification, this);
-        } else {
-            processor = new JsonActivityFeedProcessor(streamName, activityService, notification, this);
-        }
-        
         this.httpConsumer = new GnipHttpConsumer(getStreamInputStream(), processor);
         this.httpThread = new Thread(httpConsumer, streamName + "-consumer-http");
         httpThread.start();

@@ -38,7 +38,7 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
  * @since May 26, 2011
  */
 public final class JMXTest {
-    private final StreamNotificationAdapter observer = new StreamNotificationAdapter() {
+    private final StreamNotificationAdapter<Activity> observer = new StreamNotificationAdapter<Activity>() {
         @Override
         public void notify(final Activity activity, final GnipStream stream) {
             
@@ -70,9 +70,17 @@ public final class JMXTest {
 			}
         };
         final GnipFacade f = new DefaultGnipFacade(resources);
-        final GnipStream stream = f.createStream("acme", "stream", observer);
+        final GnipStream stream = f.createPowertrackStream()
+            .withAccount("acme")
+            .withType("twitter")
+            .withObserver(observer)
+            .build();
         stream.close();
-        f.createStream("acme", "stream", observer);
+        f.createPowertrackStream()
+            .withAccount("acme")
+            .withType("twitter")
+            .withObserver(observer)
+            .build();
         stream.close();
         
     }

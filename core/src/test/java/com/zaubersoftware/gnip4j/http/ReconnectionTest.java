@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -37,12 +38,15 @@ import org.junit.Test;
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
+import com.zaubersoftware.gnip4j.api.StreamNotificationAdapter;
 import com.zaubersoftware.gnip4j.api.UriStrategy;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
 import com.zaubersoftware.gnip4j.api.exception.GnipException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.impl.DefaultGnipStream;
 import com.zaubersoftware.gnip4j.api.impl.DefaultUriStrategy;
+import com.zaubersoftware.gnip4j.api.impl.formats.ActivityUnmarshaller;
+import com.zaubersoftware.gnip4j.api.impl.formats.JsonActivityFeedProcessor;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 
 /**
@@ -65,7 +69,7 @@ public final class ReconnectionTest {
         final AtomicInteger count = new AtomicInteger(0);
         final DefaultGnipStream stream = new DefaultGnipStream(new MockRemoteResourceProvider(), "account", "stream", new MockExecutorService(), uriStrategy);
         final StringBuilder out = new StringBuilder();
-        final StreamNotification n = new StreamNotification() {
+        final StreamNotification<Activity> n = new StreamNotification<Activity>() {
             @Override
             public void notifyReConnectionError(final GnipException e) {
                 out.append(String.format("ReConnectionError: %s\n",
@@ -94,7 +98,9 @@ public final class ReconnectionTest {
                 }
             }
         };
-        stream.open(n);
+        final JsonActivityFeedProcessor processor = new JsonActivityFeedProcessor("stream", Executors.newSingleThreadExecutor(), n);
+        processor.setStream(stream);
+        stream.open(n, new ActivityUnmarshaller("stream"), processor);
         stream.await();
         final String s = out.toString();
         final String expected = IOUtils.toString(getClass().getClassLoader()
