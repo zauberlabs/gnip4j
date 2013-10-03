@@ -48,4 +48,52 @@ public final class Rule implements Serializable {
     public void setTag(final String value) {
         tag = value;
     }
+    
+    @Override
+    public boolean equals(final java.lang.Object obj) {
+        boolean ret = false;
+        
+        if(this == obj) {
+            ret = true;
+        } else if(obj instanceof Rule) {
+            final Rule r = ((Rule)obj);
+            
+            ret = equals(value, r.value) && equals(tag, r.tag); 
+        }
+        return ret;
+    }
+
+    @Override
+    public int hashCode() {
+        int ret = 17;
+        
+        ret = 19 * ret + value == null ? 0 : value.hashCode();
+        ret = 19 * ret + tag == null ? 0 : tag.hashCode();
+        return ret;
+    }
+    
+    private static boolean equals(final String s1, final String s2) {
+        boolean ret = false;
+        if(s1 == null && s2 == null) {
+            ret = true;
+        } else if(s1 == null || s2 == null) {
+            ret = false;
+        } else {
+            ret = s1.equals(s2);
+        }
+        return ret;
+    }
+    
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        if(tag != null) {
+            sb.append(tag);
+        }
+        if(sb.length() != 0) {
+            sb.append(' ');
+        }
+        sb.append(value);
+        return sb.toString();
+    }
 }

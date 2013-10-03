@@ -63,7 +63,12 @@ public final class Actor implements Serializable {
     private String image;
     private String id;
     private boolean verified;
-
+    
+    // wordpress activity
+    // An md5 hash of the person's email.  
+    // This value can be used to get the person's gravatar. (http://www.gravatar.com/avatar/<md5>)
+    private String wpEmailMd5;
+    
     public Actor.Location getLocation() {
         return location;
     }
@@ -243,6 +248,14 @@ public final class Actor implements Serializable {
     }
 
     
+    public String getWpEmailMd5() {
+        return wpEmailMd5;
+    }
+
+    public void setWpEmailMd5(final String wpEmailMd5) {
+        this.wpEmailMd5 = wpEmailMd5;
+    }
+
     public String getId() {
         return id;
     }

@@ -56,6 +56,7 @@ public class Activity implements Serializable {
     private String content;
     private String subtitle;
     private String title;
+    private Object target;
     
     public final InReplyTo getInReplyTo() {
         return inReplyTo;
@@ -344,5 +345,13 @@ public class Activity implements Serializable {
 
     public final void setRetweetCount(final long retweetCount) {
         this.retweetCount = retweetCount;
+    }
+    
+    public final Object getTarget() {
+        return target;
+    }
+
+    public final void setTarget(final Object target) {
+        this.target = target;
     }
 }
