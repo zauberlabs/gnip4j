@@ -49,7 +49,9 @@ public class ByLineFeedProcessor<T> extends BaseFeedProcessor<T> {
         String s = null;
 
         while ((s = reader.readLine()) != null) {
-            handle(unmarshaller.unmarshall(s));
+            if(!s.isEmpty()) {
+                handle(unmarshaller.unmarshall(s));
+            }
             if(Thread.interrupted()) {
                 break;
             }
