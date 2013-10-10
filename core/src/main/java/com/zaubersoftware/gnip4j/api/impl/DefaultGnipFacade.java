@@ -117,7 +117,7 @@ public class DefaultGnipFacade implements GnipFacade {
                         throw new IllegalArgumentException("Unknown format " + format);
                     }
                 }
-                final GnipStream stream = createStream(this.account, streamName, 
+                final GnipStream stream = createStream(this.account, dataCollector.toString(), 
                         this.observer, this.executorService, this.unmarshaller, 
                         p);
                 p.setStream(stream);
