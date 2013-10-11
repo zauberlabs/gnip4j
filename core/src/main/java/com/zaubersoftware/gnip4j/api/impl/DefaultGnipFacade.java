@@ -86,7 +86,7 @@ public class DefaultGnipFacade implements GnipFacade {
                         streamName, 
                         executorService, 
                         this.observer);
-                final GnipStream stream = createStream(this.account, streamName, 
+                final GnipStream stream = createStream(this.account, type, 
                         this.observer, this.executorService, new ActivityUnmarshaller(streamName), 
                         processor);
                 processor.setStream(stream);
