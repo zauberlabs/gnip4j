@@ -110,7 +110,7 @@ public class DefaultGnipFacade implements GnipFacade {
                     if(Format.JSON.equals(this.format)) {
                         p = new ByLineFeedProcessor(streamName, this.executorService, this.observer, 
                                 unmarshaller);
-                    } else if(Format.JSON.equals(this.format)) {
+                    } else if(Format.ATOM.equals(this.format)) {
                         p = new XMLActivityStreamFeedProcessor(streamName, this.executorService, 
                                 this.observer, unmarshaller);
                     } else {
