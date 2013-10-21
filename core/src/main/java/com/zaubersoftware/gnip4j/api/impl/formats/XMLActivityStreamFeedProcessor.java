@@ -374,7 +374,7 @@ class AtomFeedParser {
             } else if(reader.isStartElement() && GNIP_FAVORITE_COUNT.equals(reader.getName())) {
                 for(int i = 0; i < reader.getAttributeCount(); i++) {
                     final String name = reader.getAttributeName(i).getLocalPart();
-                    if("favoriteCount".equals(name)) {
+                    if("favoriteCount".equals(name) && !reader.getAttributeValue(i).isEmpty()) {
                         getActivity().getGnip().setFavoriteCount(Long.parseLong(reader.getAttributeValue(i)));
                     }
                 }
