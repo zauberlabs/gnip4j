@@ -30,7 +30,7 @@ import com.zaubersoftware.gnip4j.api.impl.formats.Unmarshaller;
 public abstract class EDCStreamBuilder {
     protected Long dataCollector;
     protected Unmarshaller unmarshaller; 
-    protected boolean activity;
+    protected boolean activity = true;
     protected Format format;
     
     private int streamDefaultWorkers = Runtime.getRuntime().availableProcessors();
@@ -74,8 +74,9 @@ public abstract class EDCStreamBuilder {
         return this;
     }
     
-    public void andFormatNormalizeToActivity() {
+    public EDCStreamBuilder andFormatNormalizeToActivity() {
         activity = true;
+        return this;
     }
     
     /** build the stream*/
