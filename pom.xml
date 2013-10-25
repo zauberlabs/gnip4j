@@ -70,8 +70,8 @@
 	<modules>
     	<module>core</module>
 		<module>http</module>
-		<module>mule</module>
-		<module>documentation</module>
+		<!--<module>mule</module>-->
+		<!--<module>documentation</module>-->
   		<module>mock-server</module>
     </modules>
 

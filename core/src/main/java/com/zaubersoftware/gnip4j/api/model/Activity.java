@@ -57,6 +57,7 @@ public class Activity implements Serializable {
     private String subtitle;
     private String title;
     private Object target;
+    private Info info;
     
     public final InReplyTo getInReplyTo() {
         return inReplyTo;
@@ -353,5 +354,13 @@ public class Activity implements Serializable {
 
     public final void setTarget(final Object target) {
         this.target = target;
+    }
+
+    public Info getInfo() {
+        return info;
+    }
+
+    public void setInfo(Info info) {
+        this.info = info;
     }
 }

@@ -23,8 +23,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import com.zaubersoftware.gnip4j.api.model.Info;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -41,7 +44,7 @@ import com.zaubersoftware.gnip4j.api.model.Point;
 
 /**
  * Tests the {@link Activity} JSON Deserialization.
- * 
+ *
  * @author Guido Marucci Blas
  * @since May 5, 2011
  */
@@ -54,16 +57,64 @@ public final class JSONDeserializationTest {
         mapper = JsonActivityFeedProcessor.getObjectMapper();
     }
 
+
+    @Test
+    public void testReplayCompletedMessage() throws Exception {
+        final InputStream is = getClass().getClassLoader().getResourceAsStream(
+                "com/zaubersoftware/gnip4j/payload/replay-request-completed.json");
+        try {
+            JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
+            Activity activity = parser.readValueAs(Activity.class);
+            Info info = activity.getInfo();
+            assertNotNull(info);
+            assertEquals("message content", "Replay Request Completed", info.getMessage());
+            assertEquals("activity count", 8874, info.getActivityCount());
+            assertTrue("info date",
+                    info.getSent()
+                            .equals(new SimpleDateFormat("yyyy-MM-dd'T'kk:mm:ssXXX")
+                                    .parse("2013-02-27T22:15:50+00:00")));
+        } finally {
+            if (is != null) {
+                is.close();
+            }
+        }
+    }
+
+    @Test
+    public void testReplayCompletedWithErrorsMessage() throws Exception {
+        final InputStream is = getClass().getClassLoader().getResourceAsStream(
+                "com/zaubersoftware/gnip4j/payload/replay-request-completed-with-errors.json");
+        try {
+            JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
+            Activity activity = parser.readValueAs(Activity.class);
+            Info info = activity.getInfo();
+            assertNotNull(info);
+            assertEquals("message content", "Replay Request Completed with Errors", info.getMessage());
+            assertEquals("activity count", 56333, info.getActivityCount());
+            assertTrue("info date",
+                    info.getSent()
+                            .equals(new SimpleDateFormat("yyyy-MM-dd'T'kk:mm:ssXXX")
+                                    .parse("2013-02-27T16:00:02+00:00")));
+            List<Date> minutesFailed = info.getMinutesFailed();
+            assertNotNull(minutesFailed);
+            assertEquals("size of minutesFailed", 2, minutesFailed.size());
+        } finally {
+            if (is != null) {
+                is.close();
+            }
+        }
+    }
+
     /** test a complete unmarshal from the json */
     @Test
     public void testGetGnip() throws Exception {
         final InputStream is = getClass().getClassLoader().getResourceAsStream(
-        "com/zaubersoftware/gnip4j/payload/payload-example.js");
+                "com/zaubersoftware/gnip4j/payload/payload-example.js");
         try  {
             final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
             final Activity activity = parser.readValueAs(Activity.class);
             final Activity activity2= parser.readValueAs(Activity.class);
-            
+
             assertNotNull(activity.getGnip());
             assertNotNull(activity.getGnip().getLanguage());
             assertEquals("en", activity.getGnip().getLanguage().getValue());
@@ -72,9 +123,9 @@ public final class JSONDeserializationTest {
             assertEquals(1, matchingRules.size());
             assertEquals("coke", matchingRules.get(0).getValue());
             assertEquals(null, matchingRules.get(0).getTag());
-            
+
             final Activity activity3= parser.readValueAs(Activity.class);
-            
+
             assertNotNull(activity3.getTwitterEntities().getMediaUrls());
             assertNotNull(activity3.getTwitterEntities().getMediaUrls().get(0).getSizes());
         } finally {
@@ -86,7 +137,7 @@ public final class JSONDeserializationTest {
     @Test
     public void testGeoCoordinates() throws Exception {
         final InputStream is = getClass().getClassLoader().getResourceAsStream(
-        "com/zaubersoftware/gnip4j/payload/payload-example-geo.json");
+                "com/zaubersoftware/gnip4j/payload/payload-example-geo.json");
         try  {
             final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
             final Activity activity = parser.readValueAs(Activity.class);
@@ -108,51 +159,51 @@ public final class JSONDeserializationTest {
         try  {
             final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
             final Activities activities = parser.readValueAs(Activities.class);
-            
-            
+
+
             Geo geo1 = activities.getActivities().get(0).getGeo();
             Geo geo2 = activities.getActivities().get(1).getGeo();
             Geo geo3 = activities.getActivities().get(0).getLocation().getGeo();
             Geo geo4 = activities.getActivities().get(1).getLocation().getGeo();
-            
+
             assertNull(geo1);
             assertEquals("lat: 35.11222481 lon: -78.99696934", geo2.getCoordinates().toString());
             assertEquals("[[ lat: -0.5093057 lon: 51.286606 ][ lat: 0.334433 lon: 51.286606 ][ lat: 0.334433 lon: 51.691672 ][ lat: -0.5093057 lon: 51.691672 ]]", geo3.getCoordinates().toString());
-            
+
             assertEquals("[[ lat: -79.058407 lon: 35.106225 ][ lat: -78.944666 lon: 35.106225 ][ lat: -78.944666 lon: 35.177993 ][ lat: -79.058407 lon: 35.177993 ]]", geo4.getCoordinates().toString());
-            
+
         } finally {
             is.close();
         }
     }
-    
+
     /*USE THIS TEST TO TEST ENCODING OF JsonParser
      * Run this test with -Dfile.encoding=UTF-8 and then with another encoding, and compare the file results
      * */
     public void utfDesearilzationTest() throws JsonParseException, IOException{
         InputStream in = getClass().getClassLoader().getResourceAsStream("com/zaubersoftware/gnip4j/payload/deserialize/utf8_tweets.json");
-        
+
         try  {
             final JsonParser parser = mapper.getJsonFactory().createJsonParser(in);
             final Activities activities = parser.readValueAs(Activities.class);
-            
-            
+
+
             String body0 = activities.getActivities().get(0).getBody();
             String body1 = activities.getActivities().get(1).getBody();
             String body2 = activities.getActivities().get(2).getBody();
 
             FileOutputStream fileOutputStream = new FileOutputStream(new File("tweets"));
-            
+
             fileOutputStream.write(body0.getBytes("UTF-8"));
             fileOutputStream.write(body1.getBytes("UTF-8"));
             fileOutputStream.write(body2.getBytes("UTF-8"));
-            
-            
+
+
         } finally {
             //text.close();
         }
     }
-    
+
     /**
      * tests if the data "model" is serializable
      */
@@ -165,5 +216,4 @@ public final class JSONDeserializationTest {
         final ObjectOutputStream os = new ObjectOutputStream(new ByteArrayOutputStream());
         os.writeObject(activity);
     }
-      
 }
