@@ -24,8 +24,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.util.Arrays;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import com.zaubersoftware.gnip4j.api.model.Info;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -56,6 +59,54 @@ public final class JSONDeserializationTest {
     @Before
     public void setUp() throws Exception {
         mapper = JsonActivityFeedProcessor.getObjectMapper();
+    }
+
+
+    @Test
+    public void testReplayCompletedMessage() throws Exception {
+        final InputStream is = getClass().getClassLoader().getResourceAsStream(
+                "com/zaubersoftware/gnip4j/payload/replay-request-completed.json");
+        try {
+            JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
+            Activity activity = parser.readValueAs(Activity.class);
+            Info info = activity.getInfo();
+            assertNotNull(info);
+            assertEquals("message content", "Replay Request Completed", info.getMessage());
+            assertEquals("activity count", 8874, info.getActivityCount());
+            assertTrue("info date",
+                    info.getSent()
+                            .equals(new SimpleDateFormat("yyyy-MM-dd'T'kk:mm:ssXXX")
+                                    .parse("2013-02-27T22:15:50+00:00")));
+        } finally {
+            if (is != null) {
+                is.close();
+            }
+        }
+    }
+
+    @Test
+    public void testReplayCompletedWithErrorsMessage() throws Exception {
+        final InputStream is = getClass().getClassLoader().getResourceAsStream(
+                "com/zaubersoftware/gnip4j/payload/replay-request-completed-with-errors.json");
+        try {
+            JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
+            Activity activity = parser.readValueAs(Activity.class);
+            Info info = activity.getInfo();
+            assertNotNull(info);
+            assertEquals("message content", "Replay Request Completed with Errors", info.getMessage());
+            assertEquals("activity count", 56333, info.getActivityCount());
+            assertTrue("info date",
+                    info.getSent()
+                            .equals(new SimpleDateFormat("yyyy-MM-dd'T'kk:mm:ssXXX")
+                                    .parse("2013-02-27T16:00:02+00:00")));
+            List<Date> minutesFailed = info.getMinutesFailed();
+            assertNotNull(minutesFailed);
+            assertEquals("size of minutesFailed", 2, minutesFailed.size());
+        } finally {
+            if (is != null) {
+                is.close();
+            }
+        }
     }
 
     /** test a complete unmarshal from the json */
