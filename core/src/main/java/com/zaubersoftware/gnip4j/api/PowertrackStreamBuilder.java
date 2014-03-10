@@ -18,6 +18,8 @@ package com.zaubersoftware.gnip4j.api;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import com.zaubersoftware.gnip4j.api.model.Activity;
+
 /**
  * TODO: Description of the class, Comments in english by default  
  * 
@@ -30,7 +32,7 @@ public abstract class PowertrackStreamBuilder {
     private int streamDefaultWorkers = Runtime.getRuntime().availableProcessors();
     protected ExecutorService executorService = Executors.newFixedThreadPool(streamDefaultWorkers);
     protected String account;
-    protected StreamNotification observer;
+    protected StreamNotification<Activity> observer;
     
     /**  if your EDC URL starts with http://acme.gnip.com  then this value is acme*/
     public final PowertrackStreamBuilder withAccount(final String account) {

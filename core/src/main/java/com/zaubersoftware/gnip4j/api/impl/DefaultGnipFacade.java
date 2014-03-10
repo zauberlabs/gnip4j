@@ -36,9 +36,11 @@ import com.zaubersoftware.gnip4j.api.exception.GnipException;
 import com.zaubersoftware.gnip4j.api.impl.formats.ActivityUnmarshaller;
 import com.zaubersoftware.gnip4j.api.impl.formats.ByLineFeedProcessor;
 import com.zaubersoftware.gnip4j.api.impl.formats.FeedProcessor;
+import com.zaubersoftware.gnip4j.api.impl.formats.JSONActivityUnmarshaller;
 import com.zaubersoftware.gnip4j.api.impl.formats.JsonActivityFeedProcessor;
 import com.zaubersoftware.gnip4j.api.impl.formats.Unmarshaller;
 import com.zaubersoftware.gnip4j.api.impl.formats.XMLActivityStreamFeedProcessor;
+import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.model.Rule;
 import com.zaubersoftware.gnip4j.api.model.Rules;
 import com.zaubersoftware.gnip4j.api.stats.StreamStats;
@@ -82,10 +84,11 @@ public class DefaultGnipFacade implements GnipFacade {
             protected GnipStream buildStream() {
                 final String streamName = String.format("powertrack-%s-%s", this.account, this.type);
                 
-                final FeedProcessor processor = new JsonActivityFeedProcessor(
+                final FeedProcessor processor =  new ByLineFeedProcessor<Activity>(
                         streamName, 
                         executorService, 
-                        this.observer);
+                        this.observer, 
+                        new JSONActivityUnmarshaller());
                 final GnipStream stream = createStream(this.account, type, 
                         this.observer, this.executorService, new ActivityUnmarshaller(streamName), 
                         processor);
