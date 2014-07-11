@@ -15,6 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.io.Serializable;
+
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
@@ -22,7 +24,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  */
-public class Size {
+public class Size implements Serializable {
     
     @JsonProperty(value = "w")
     private int width;
