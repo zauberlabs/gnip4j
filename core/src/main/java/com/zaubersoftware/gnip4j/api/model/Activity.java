@@ -348,6 +348,14 @@ public class Activity implements Serializable {
         this.retweetCount = retweetCount;
     }
     
+    public final long getFavoritesCount() {
+        return favoritesCount;
+    }
+
+    public final void setFavoritesCount(final long favoritesCount) {
+        this.favoritesCount = favoritesCount;
+    }
+  
     public final Object getTarget() {
         return target;
     }
