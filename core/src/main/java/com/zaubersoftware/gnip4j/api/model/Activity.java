@@ -39,6 +39,7 @@ public class Activity implements Serializable {
     @JsonProperty(value = "twitter_entities")
     private TwitterEntities twitterEntities;
     private long retweetCount;
+    private long favoritesCount;
     private Gnip gnip;
     private String verb;
     private XMLGregorianCalendar postedTime;
