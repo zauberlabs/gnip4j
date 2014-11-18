@@ -51,7 +51,7 @@ public final class Actor implements Serializable {
     private XMLGregorianCalendar postedTime;
     private String displayName;
     private String preferredUsername;
-    private int utcOffset;
+    private Integer utcOffset;
     private String objectType;
     private int statusesCount;
     private BigInteger listedCount;
@@ -175,11 +175,11 @@ public final class Actor implements Serializable {
         preferredUsername = value;
     }
 
-    public int getUtcOffset() {
+    public Integer getUtcOffset() {
         return utcOffset;
     }
 
-    public void setUtcOffset(final int value) {
+    public void setUtcOffset(final Integer value) {
         utcOffset = value;
     }
 
