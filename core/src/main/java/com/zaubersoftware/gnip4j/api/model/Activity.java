@@ -39,6 +39,11 @@ public class Activity implements Serializable {
     @JsonProperty(value = "twitter_entities")
     private TwitterEntities twitterEntities;
     private long retweetCount;
+    @JsonProperty(value = "twitter_filter_level")
+    private String twitterFilterLevel;
+    @JsonProperty(value = "twitter_lang")
+    private String twitterLang;
+    
     private Gnip gnip;
     private String verb;
     private XMLGregorianCalendar postedTime;
@@ -345,6 +350,22 @@ public class Activity implements Serializable {
 
     public final void setRetweetCount(final long retweetCount) {
         this.retweetCount = retweetCount;
+    }
+    
+    public String getTwitterFilterLevel() {
+        return twitterFilterLevel;
+    }
+
+    public void setTwitterFilterLevel(String twitterFilterLevel) {
+        this.twitterFilterLevel = twitterFilterLevel;
+    }
+
+    public String getTwitterLang() {
+        return twitterLang;
+    }
+
+    public void setTwitterLang(String twitterLang) {
+        this.twitterLang = twitterLang;
     }
     
     public final Object getTarget() {
