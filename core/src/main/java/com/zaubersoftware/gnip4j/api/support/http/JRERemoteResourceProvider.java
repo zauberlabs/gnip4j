@@ -135,7 +135,7 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
             doConfiguration(uc);
             
             outStream = uc.getOutputStream();
-            outStream.write(mapper.writeValueAsString(resource).getBytes("utf-8"));
+            outStream.write(mapper.writeValueAsString(resource).getBytes("UTF-8"));
             
             if (huc != null) {
                 validateStatusLine(uri, huc.getResponseCode(), huc.getResponseMessage(),
@@ -182,7 +182,7 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
             doConfiguration(uc);
             
             outStream = uc.getOutputStream();
-            outStream.write(new ObjectMapper().writeValueAsString(resource).getBytes());
+            outStream.write(new ObjectMapper().writeValueAsString(resource).getBytes("UTF-8"));
             
             if (huc != null) {
                 validateStatusLine(uri, huc.getResponseCode(), huc.getResponseMessage(), new DefaultErrorProvider(huc));
