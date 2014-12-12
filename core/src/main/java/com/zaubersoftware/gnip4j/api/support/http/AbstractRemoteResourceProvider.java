@@ -19,6 +19,7 @@ import java.net.URI;
 
 import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
+import com.zaubersoftware.gnip4j.api.exception.GnipUnprocessableEntityException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 
 /**
@@ -35,19 +36,32 @@ public abstract class AbstractRemoteResourceProvider implements RemoteResourcePr
             final ErrorProvider errorProvider) {
         if (statusCode >= 200 && statusCode <= 299) {
             // nothing to do
-        } else if (statusCode == 401) {
-            throw new AuthenticationGnipException(reason);
         } else { 
             String msg = null;
             if(errorProvider != null) {
-                msg = errorProvider.getError();
+              msg = errorProvider.getError();
             }
             if(msg == null) {
-                msg = "";
+              msg = "";
             }
-            throw new TransportGnipException(
-                String.format("Connection to %s: Unexpected status code: %s %s %s",
-                        uri, statusCode, reason, msg));
+
+            if (statusCode == 401) {
+              throw new AuthenticationGnipException(reason);
+            } else if (statusCode == 422) {
+              GnipUnprocessableEntityException exception = null;
+              try {
+                exception = new GnipUnprocessableEntityException(String.format("Connection to %s", uri), msg);
+              } catch (Exception e) {
+                throw new TransportGnipException(String.format("Connection to %s: status code: %s %s %s", uri,
+                    statusCode, reason, msg), e);
+              }
+              throw exception;
+            }
+          else {
+              throw new TransportGnipException(
+                  String.format("Connection to %s: Unexpected status code: %s %s %s",
+                          uri, statusCode, reason, msg));
+          }
         }
     }
 }
