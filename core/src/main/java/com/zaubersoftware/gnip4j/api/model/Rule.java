@@ -67,8 +67,8 @@ public final class Rule implements Serializable {
     public int hashCode() {
         int ret = 17;
         
-        ret = 19 * ret + value == null ? 0 : value.hashCode();
-        ret = 19 * ret + tag == null ? 0 : tag.hashCode();
+        ret = 19 * ret + ((value == null) ? 0 : value.hashCode());
+        ret = 19 * ret + ((tag == null) ? 0 : tag.hashCode());
         return ret;
     }
     
