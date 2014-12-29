@@ -326,9 +326,7 @@ class AtomFeedParser {
             if(reader.isStartElement() && ATOM_ID.equals(reader.getName())) {
                 getActivity().setId(getText(ret, reader));
             } else if(reader.isStartElement() && ATOM_PUBLISHED.equals(reader.getName())) {
-                final GregorianCalendar c = new GregorianCalendar();
-                c.setTime(ISO8601DateParser.parse(getText(ret, reader)));
-                getActivity().setPostedTime(datatypeFactory.newXMLGregorianCalendar(c));
+                getActivity().setPostedTime(ISO8601DateParser.parse(getText(ret, reader)));
             } else if(reader.isStartElement() && ATOM_CREATED.equals(reader.getName())) {
                 getActivity().setCreated(ISO8601DateParser.parse(getText(ret, reader)));
             } else if(reader.isStartElement() && ATOM_UPDATED.equals(reader.getName())) {

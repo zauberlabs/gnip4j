@@ -18,6 +18,7 @@ package com.zaubersoftware.gnip4j.api.model;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -48,7 +49,7 @@ public final class Actor implements Serializable {
     private Actor.Location location;
     private List<String> languages;
     private List<Links> links;
-    private XMLGregorianCalendar postedTime;
+    private Date postedTime;
     private String displayName;
     private String preferredUsername;
     private Integer utcOffset;
@@ -151,11 +152,11 @@ public final class Actor implements Serializable {
      *     {@link XMLGregorianCalendar }
      *
      */
-    public XMLGregorianCalendar getPostedTime() {
+    public Date getPostedTime() {
         return postedTime;
     }
 
-    public void setPostedTime(final XMLGregorianCalendar value) {
+    public void setPostedTime(final Date value) {
         postedTime = value;
     }
 

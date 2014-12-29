@@ -46,7 +46,7 @@ public class Activity implements Serializable {
     
     private Gnip gnip;
     private String verb;
-    private XMLGregorianCalendar postedTime;
+    private Date postedTime;
     private Date created;
     private Date updated;
     private String body;
@@ -147,12 +147,12 @@ public class Activity implements Serializable {
     }
 
 
-    public final XMLGregorianCalendar getPostedTime() {
+    public final Date getPostedTime() {
         return postedTime;
     }
 
 
-    public final void setPostedTime(final XMLGregorianCalendar value) {
+    public final void setPostedTime(final Date value) {
         postedTime = value;
     }
 
