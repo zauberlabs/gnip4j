@@ -66,7 +66,7 @@ public class NettyChunkedInputFactory implements GnipChunkedInputFactory{
             final Collection<String> result = new ArrayList<String>();
             String line;
             while ((line = reader.readLine()) != null) {
-                result.add(line);
+                result.add(line.trim() + "\r\n");
             }
             return result;
         } catch (final IOException e) {
