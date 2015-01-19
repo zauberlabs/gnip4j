@@ -77,6 +77,7 @@ public final class JSONDeserializationTest {
             
             assertNotNull(activity3.getTwitterEntities().getMediaUrls());
             assertNotNull(activity3.getTwitterEntities().getMediaUrls().get(0).getSizes());
+            assertEquals(646, activity3.getActor().getFavoritesCount().intValue());
         } finally {
             is.close();
         }
@@ -165,5 +166,20 @@ public final class JSONDeserializationTest {
         final ObjectOutputStream os = new ObjectOutputStream(new ByteArrayOutputStream());
         os.writeObject(activity);
     }
-      
+
+    /** test a complete unmarshal from the json */
+    @Test
+    public void testFavoriteCountMissing() throws Exception {
+        final InputStream is = getClass().getClassLoader().getResourceAsStream(
+        "com/zaubersoftware/gnip4j/payload/payload-twitter-missing-favoriteCount.js");
+        try  {
+            final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
+            final Activity activity = parser.readValueAs(Activity.class);
+            
+            assertEquals(11, activity.getActor().getFavoritesCount().intValue());
+            assertEquals(0, activity.getFavoritesCount());
+        } finally {
+            is.close();
+        }
+    }
 }

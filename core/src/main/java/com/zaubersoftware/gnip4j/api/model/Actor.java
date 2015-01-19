@@ -59,6 +59,7 @@ public final class Actor implements Serializable {
     private String twitterTimeZone;
     private BigInteger friendsCount;
     private BigInteger followersCount;
+    private Integer favoritesCount;
     private String summary;
     private String link;
     private String image;
@@ -222,6 +223,14 @@ public final class Actor implements Serializable {
 
     public void setFollowersCount(final BigInteger value) {
         followersCount = value;
+    }
+    
+    public Integer getFavoritesCount() {
+        return favoritesCount;
+    }
+
+    public void setFavoritesCount(Integer favoritesCount) {
+        this.favoritesCount = favoritesCount;
     }
 
     public String getSummary() {

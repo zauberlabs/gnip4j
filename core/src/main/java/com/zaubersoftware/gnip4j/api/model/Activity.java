@@ -39,6 +39,7 @@ public class Activity implements Serializable {
     @JsonProperty(value = "twitter_entities")
     private TwitterEntities twitterEntities;
     private long retweetCount;
+    private int favoritesCount;
     @JsonProperty(value = "twitter_filter_level")
     private String twitterFilterLevel;
     @JsonProperty(value = "twitter_lang")
@@ -352,6 +353,14 @@ public class Activity implements Serializable {
         this.retweetCount = retweetCount;
     }
     
+    public long getFavoritesCount() {
+        return favoritesCount;
+    }
+
+    public void setFavoritesCount(final int favoritesCount) {
+        this.favoritesCount = favoritesCount;
+    }
+
     public String getTwitterFilterLevel() {
         return twitterFilterLevel;
     }
