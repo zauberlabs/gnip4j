@@ -122,13 +122,14 @@ public class Urls implements Serializable {
     public String getDisplayUrl() {
         return displayUrl;
     }
-    /**
-     * Sets the displayUrl. 
-     *
-     * @param displayUrl <code>String</code> with the displayUrl.
-     */
+
     public void setDisplayUrl(final String displayUrl) {
         this.displayUrl = displayUrl;
     }
+
+    public void setIndices(List<Integer> indices) {
+        this.indices = indices;
+    }
+    
     
 }

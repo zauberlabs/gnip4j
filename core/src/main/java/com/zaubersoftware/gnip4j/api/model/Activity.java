@@ -38,6 +38,8 @@ public class Activity implements Serializable {
     private Provider provider;
     @JsonProperty(value = "twitter_entities")
     private TwitterEntities twitterEntities;
+    @JsonProperty(value = "twitter_extended_entities")
+    private TwitterEntities twitterExtendedEntities;
     private long retweetCount;
     private int favoritesCount;
     @JsonProperty(value = "twitter_filter_level")
@@ -126,6 +128,14 @@ public class Activity implements Serializable {
 
     public final void setTwitterEntities(final TwitterEntities value) {
         twitterEntities = value;
+    }
+
+    public TwitterEntities getTwitterExtendedEntities() {
+        return twitterExtendedEntities;
+    }
+
+    public void setTwitterExtendedEntities(final TwitterEntities twitterExtendedEntities) {
+        this.twitterExtendedEntities = twitterExtendedEntities;
     }
 
     public final Gnip getGnip() {

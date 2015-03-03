@@ -27,12 +27,17 @@ public class MediaUrls extends Urls {
     
     @JsonProperty(value = "id_str")
     private String id;
+    @JsonProperty(value = "source_status_id_str")
+    private String sourceStatusIdStr;
+    
     @JsonProperty(value = "media_url")
     private String mediaUrl;
     @JsonProperty("media_url_https")
     private String mediaUrlHttps;
     private String type;    
     private Sizes sizes;
+    @JsonProperty(value = "video_info")
+    private VideoInfo videoInfo;
 
     public String getId() {
         return id;
@@ -70,6 +75,35 @@ public class MediaUrls extends Urls {
         this.sizes = sizes;
     }
 
-    
+    public String getSourceStatusIdStr() {
+        return sourceStatusIdStr;
+    }
 
+    public void setSourceStatusIdStr(final String sourceStatusIdStr) {
+        this.sourceStatusIdStr = sourceStatusIdStr;
+    }
+
+    public VideoInfo getVideoInfo() {
+        return videoInfo;
+    }
+
+    public void setVideoInfo(final VideoInfo videoInfo) {
+        this.videoInfo = videoInfo;
+    }
+
+    public String getMediaUrl() {
+        return mediaUrl;
+    }
+
+    public void setMediaUrl(final String mediaUrl) {
+        this.mediaUrl = mediaUrl;
+    }
+
+    public String getMediaUrlHttps() {
+        return mediaUrlHttps;
+    }
+
+    public void setMediaUrlHttps(final String mediaUrlHttps) {
+        this.mediaUrlHttps = mediaUrlHttps;
+    }
 }

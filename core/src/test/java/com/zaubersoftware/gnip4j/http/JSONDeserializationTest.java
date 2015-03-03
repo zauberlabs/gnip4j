@@ -23,6 +23,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectOutputStream;
+import java.util.Arrays;
 import java.util.List;
 
 import org.codehaus.jackson.JsonParseException;
@@ -36,7 +37,10 @@ import com.zaubersoftware.gnip4j.api.model.Activities;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.model.Geo;
 import com.zaubersoftware.gnip4j.api.model.MatchingRules;
+import com.zaubersoftware.gnip4j.api.model.MediaUrls;
 import com.zaubersoftware.gnip4j.api.model.Point;
+import com.zaubersoftware.gnip4j.api.model.TwitterVideoVariant;
+import com.zaubersoftware.gnip4j.api.model.VideoInfo;
 
 
 /**
@@ -182,4 +186,59 @@ public final class JSONDeserializationTest {
             is.close();
         }
     }
+    
+    /** test a complete unmarshal from the json */
+    @Test
+    public void testAnimatedGif() throws Exception {
+        final InputStream is = getClass().getClassLoader().getResourceAsStream(
+        "com/zaubersoftware/gnip4j/payload/animated_gif.js");
+        try  {
+            final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
+            final Activity activity = parser.readValueAs(Activity.class);
+            
+            assertNotNull(activity.getTwitterExtendedEntities());
+            assertNotNull(activity.getTwitterExtendedEntities());
+            assertEquals(1, activity.getTwitterExtendedEntities().getMediaUrls().size());
+            MediaUrls mediaUrls = activity.getTwitterExtendedEntities().getMediaUrls().get(0);
+            
+            final VideoInfo videoInfo = mediaUrls.getVideoInfo();
+            assertNull(videoInfo.getDurationMillis());
+            assertEquals(Arrays.asList(25, 14), videoInfo.getAspectRatio());
+            assertEquals(1, videoInfo.getVariants().size());
+            final TwitterVideoVariant v = videoInfo.getVariants().get(0);
+            assertEquals(0, v.getBitrate().intValue());
+            assertEquals("video/mp4" , v.getContentType());
+            assertEquals("https://pbs.twimg.com/tweet_video/B-vFBELWoAE224Z.mp4" , v.getUrl());
+        } finally {
+            is.close();
+        }
+    }
+
+    /** test a complete unmarshal from the json */
+    @Test
+    public void testVideo() throws Exception {
+        final InputStream is = getClass().getClassLoader().getResourceAsStream(
+        "com/zaubersoftware/gnip4j/payload/video.js");
+        try  {
+            final JsonParser parser = mapper.getJsonFactory().createJsonParser(is);
+            final Activity activity = parser.readValueAs(Activity.class);
+            
+            assertNotNull(activity.getTwitterExtendedEntities());
+            assertNotNull(activity.getTwitterExtendedEntities());
+            assertEquals(1, activity.getTwitterExtendedEntities().getMediaUrls().size());
+            MediaUrls mediaUrls = activity.getTwitterExtendedEntities().getMediaUrls().get(0);
+            
+            final VideoInfo videoInfo = mediaUrls.getVideoInfo();
+            assertEquals(29520L, videoInfo.getDurationMillis().longValue());
+            assertEquals(Arrays.asList(3, 4), videoInfo.getAspectRatio());
+            assertEquals(4, videoInfo.getVariants().size());
+            final TwitterVideoVariant v = videoInfo.getVariants().get(0);
+            assertEquals(320000, v.getBitrate().intValue());
+            assertEquals("video/mp4" , v.getContentType());
+            assertEquals("https://video.twimg.com/ext_tw_video/570781977240080385/pu/vid/240x320/ukdop381TJHydDNj.mp4" , v.getUrl());
+        } finally {
+            is.close();
+        }
+    }
+    
 }
