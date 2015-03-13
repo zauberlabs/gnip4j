@@ -63,7 +63,7 @@
 		<snapshotRepository>
 			<id>zauber-code-snapshots</id>
 			<name>Zauber Code Snapshots</name>
-			<url>https://repo1.zauberlabs.com/content/repositories/zauber-code-snapshots</url>
+			<url>https://repo1.flowics.com/content/repositories/zauber-code-snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 
