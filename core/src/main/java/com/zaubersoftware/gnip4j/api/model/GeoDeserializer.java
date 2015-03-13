@@ -46,8 +46,8 @@ public class GeoDeserializer extends StdDeserializer<Geo> {
             JsonProcessingException {
         final JsonNode tree = jp.readValueAsTree();
 
-        final JsonNode coordinates = tree.findValue("coordinates");
-        final JsonNode type = tree.findValue("type");
+        final JsonNode coordinates = tree.get("coordinates");
+        final JsonNode type = tree.get("type");
 
 
         final Geo geo = new Geo();
