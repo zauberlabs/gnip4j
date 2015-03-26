@@ -61,4 +61,8 @@ public final class Rules implements Serializable {
         return rules;
     }
 
+    @Override
+    public String toString() {
+        return getRules().toString();
+    }
 }
