@@ -39,7 +39,9 @@ public class Gnip implements Serializable {
     private Float kloutScore;
     @JsonProperty(value = "favorite_count")
     private Long favoriteCount;
-
+    @JsonProperty(value = "profileLocations")
+    private List<Location> profileLocations;
+    
     public final Language getLanguage() {
         return language;
     }
@@ -75,4 +77,12 @@ public class Gnip implements Serializable {
     public final void setFavoriteCount(final Long favoriteCount) {
         this.favoriteCount = favoriteCount;
     }
+
+    public List<Location> getProfileLocations() {
+        if (profileLocations == null) {
+            profileLocations = new ArrayList<Location>();
+        }
+        return profileLocations;
+    }
+
 }

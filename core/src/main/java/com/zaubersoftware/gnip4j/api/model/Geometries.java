@@ -24,7 +24,7 @@ package com.zaubersoftware.gnip4j.api.model;
  */
 public enum Geometries {
     
-    Point("Point"), Polygon("Polygon");
+    point("point"), Point("Point"), Polygon("Polygon");
     
     private String type;
 
@@ -33,11 +33,6 @@ public enum Geometries {
     }
     
     
-    /**
-     * Returns the type.
-     * 
-     * @return <code>String</code> with the type.
-     */
     public String getType() {
         return type;
     }
