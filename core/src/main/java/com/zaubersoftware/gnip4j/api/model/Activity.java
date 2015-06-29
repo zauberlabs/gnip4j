@@ -197,7 +197,12 @@ public class Activity implements Serializable {
     public static class Location implements Serializable {
         private static final long serialVersionUID = 1L;
         private Geo geo;
+        @JsonProperty(value = "country_code")
         private String countryCode;
+
+        @JsonProperty(value = "twitter_country_code")
+        private String twitterCountryCode;
+
         private String displayName;
         private String objectType;
         private String streetAddress;
@@ -225,6 +230,14 @@ public class Activity implements Serializable {
 
         public final void setCountryCode(final String value) {
             countryCode = value;
+        }
+
+        public String getTwitterCountryCode() {
+            return twitterCountryCode;
+        }
+
+        public void setTwitterCountryCode(String twitterCountryCode) {
+            this.twitterCountryCode = twitterCountryCode;
         }
 
         public final String getDisplayName() {
