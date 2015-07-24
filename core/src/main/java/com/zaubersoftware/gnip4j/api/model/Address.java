@@ -15,6 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.io.Serializable;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
@@ -24,7 +26,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
  * @author Juan F. Codagnone
  * @since Mar 20, 2015
  */
-public class Address {
+public class Address implements Serializable {
     // Los Angeles County
     private String subRegion;
     // California

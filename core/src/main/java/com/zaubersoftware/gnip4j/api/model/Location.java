@@ -15,13 +15,15 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.io.Serializable;
+
 /**
  *
  *
  * @author Juan F. Codagnone
  * @since Mar 20, 2015
  */
-public class Location {
+public class Location implements Serializable {
     // San Fernando, California, United States
     private String displayName;
     private Address address;
