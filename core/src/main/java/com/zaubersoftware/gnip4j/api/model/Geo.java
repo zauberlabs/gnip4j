@@ -30,6 +30,15 @@ public class Geo implements Serializable {
     private Geometry coordinates;
     private String type;
 
+    /** Creates the Geo. */
+    public Geo() {
+    }
+
+    public Geo(final String type, final Geometry geometry) {
+        setType(type);
+        setCoordinates(geometry);
+    }
+    
     public final Geometry getCoordinates() {
         return coordinates;
     }
@@ -46,4 +55,29 @@ public class Geo implements Serializable {
         type = value;
     }
 
+    @Override
+    public String toString() {
+        return new StringBuilder()
+                .append("{\"type\": \"")
+                .append(type)
+                .append("\", \"coordinates\": ")
+                .append(coordinates)
+                .append("}")
+                .toString();
+    }
+    
+    @Override
+    public boolean equals(final java.lang.Object obj) {
+        boolean ret = false;
+        
+        if(this == obj) {
+            ret = true;
+        } else if(obj instanceof Geo) {
+            final Geo g = (Geo) obj;
+            ret = type.equals(g.type) && 
+                  coordinates.equals(g.coordinates);
+        }
+        
+        return ret;
+    }
 }

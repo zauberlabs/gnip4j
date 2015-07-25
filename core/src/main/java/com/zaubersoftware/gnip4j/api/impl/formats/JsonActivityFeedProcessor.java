@@ -30,6 +30,7 @@ import com.zaubersoftware.gnip4j.api.StreamNotification;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.model.Geo;
 import com.zaubersoftware.gnip4j.api.model.GeoDeserializer;
+import com.zaubersoftware.gnip4j.api.model.GeoSerializer;
 import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;
 import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
@@ -43,6 +44,7 @@ public class JsonActivityFeedProcessor extends BaseFeedProcessor {
         
         SimpleModule gnipActivityModule = new SimpleModule("gnip.activity", new Version(1, 0, 0, null));
         gnipActivityModule.addDeserializer(Geo.class, new GeoDeserializer(Geo.class));
+        gnipActivityModule.addSerializer(Geo.class, new GeoSerializer());
         mapper.registerModule(gnipActivityModule);
         
         mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);

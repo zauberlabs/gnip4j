@@ -28,33 +28,31 @@ import org.codehaus.jackson.annotate.JsonAutoDetect.Visibility;
  */
 
 @JsonAutoDetect(getterVisibility = Visibility.PUBLIC_ONLY)
-public class Polygon implements Geometry, Iterable<Point> {
-    
-    private List<Point> points;
-    
+public class Polygon implements Geometry, Iterable<LinearRing> {
+    private List<LinearRing> holes;
     
     Polygon() {
     }
     
     /** Creates the Polygon. */
-    public Polygon(final List<Point> points) {
-        this.points = points;
+    public Polygon(final List<LinearRing> holes) {
+        this.holes = holes;
     }
     
     
-    public Polygon(final Point points[]) {
-        this.points = Arrays.asList(points);
+    public Polygon(final LinearRing ...holes) {
+        this(Arrays.asList(holes));
     }
     
 
     @Override
-    public final Iterator<Point> iterator() {
-        return this.points.iterator();
+    public final Iterator<LinearRing> iterator() {
+        return this.holes.iterator();
     }
     
     
-    public final List<Point> getPoints() {
-        return points;
+    public final List<LinearRing> getHoles() {
+        return holes;
     }
 
     @Override
@@ -65,15 +63,34 @@ public class Polygon implements Geometry, Iterable<Point> {
     
     @Override
     public final String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("[");
+        final StringBuilder builder = new StringBuilder();
+        builder.append('[');
         
-        for (Point p : this.points) {
-            builder.append("[ " + p.toString() + " ]");
+        for (final LinearRing p : this.holes) {
+            builder.append(p.toString());
         }
         
-        builder.append("]");
+        builder.append(']');
         
         return builder.toString();
+    }
+    
+    @Override
+    public boolean equals(final java.lang.Object obj) {
+        boolean ret = false;
+        
+        if(obj == this) {
+            ret = true;
+        } else if(obj instanceof Polygon) {
+            final Polygon p = (Polygon) obj;
+            ret = holes.equals(p.holes);
+        }
+        
+        return ret;
+    }
+    
+    @Override
+    public int hashCode() {
+        return holes.hashCode();
     }
 }

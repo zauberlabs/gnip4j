@@ -19,13 +19,11 @@ import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonAutoDetect.Visibility;
 
 /**
- * TODO Descripcion de la clase. Los comentarios van en castellano.
- *
+ * Point
  *
  * @author Martin Silva
  * @since Feb 15, 2012
  */
-
 @JsonAutoDetect(getterVisibility = Visibility.PUBLIC_ONLY)
 public class Point implements Geometry {
 
@@ -34,15 +32,11 @@ public class Point implements Geometry {
     private Point() {
     }
 
-
     public Point(final double latitude, final double longitude) {
         super();
         this.latitude = latitude;
         this.longitude = longitude;
     }
-
-
-
 
     private double latitude;
     private double longitude;
@@ -63,5 +57,32 @@ public class Point implements Geometry {
     @Override
     public String toString() {
         return "lat: " + latitude + " lon: " + longitude;
+    }
+    
+    @Override
+    public boolean equals(final java.lang.Object obj) {
+        boolean ret = false;
+        
+        if(this == obj) {
+            ret = true;
+        } else if(obj instanceof Point) {
+            final Point p = (Point) obj;
+            ret = Double.doubleToLongBits(latitude) == Double.doubleToLongBits(p.latitude) &&
+                  Double.doubleToLongBits(longitude) == Double.doubleToLongBits(p.longitude);
+        }
+        
+        return ret;
+    }
+    
+    @Override
+    public int hashCode() {
+        long value = Double.doubleToLongBits(latitude);
+        final int iConstant = 37;
+        int iTotal = ((int) (value ^ (value >> 32)));
+        
+        value = Double.doubleToLongBits(longitude);
+        iTotal = iTotal * iConstant + ((int) (value ^ (value >> 32)));
+        
+        return iTotal;
     }
 }

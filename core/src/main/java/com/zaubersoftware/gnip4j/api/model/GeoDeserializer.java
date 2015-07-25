@@ -21,14 +21,13 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.deser.StdDeserializer;
 
 /**
- * TODO Descripcion de la clase. Los comentarios van en castellano.
+ * Geo Deserializer
  *
  *
  * @author Martin Silva
@@ -53,10 +52,10 @@ public class GeoDeserializer extends StdDeserializer<Geo> {
         final Geo geo = new Geo();
         geo.setType(type.getTextValue());
 
-        if(Geometries.valueOf(type.getTextValue()) == Geometries.Polygon) {
-            geo.setCoordinates(this.createPolygon(coordinates));
+        if(Geometries.Polygon.equals(Geometries.valueOf(type.getTextValue()))) {
+            geo.setCoordinates(createPolygon(coordinates));
         } else {
-            geo.setCoordinates(this.createPoint(coordinates));
+            geo.setCoordinates(createPoint(coordinates));
         }
 
         return geo;
@@ -68,27 +67,32 @@ public class GeoDeserializer extends StdDeserializer<Geo> {
         if(coordinates.isArray()) {
             ret = new Point(coordinates.get(0).getDoubleValue(), coordinates.get(1).getDoubleValue());
         } else {
-            ret = new Point(coordinates.get("latitude").getDoubleValue(), 
-                            coordinates.get("longitude").getDoubleValue());
+            ret = null;
         }
         return ret;
     }
 
     /** @return a polygon */
-    private Polygon createPolygon(final JsonNode coordinates) throws IOException {
-        final List<Point> points = new ArrayList<Point>();
-        final Iterator<JsonNode> elements;
-        if(coordinates.has("points")) {
-            elements = coordinates.get("points").iterator();
-        } else {
-            final JsonNode values = coordinates.get(0);
-            elements = values.getElements();
+    private Polygon createPolygon(final JsonNode linearrings) throws IOException {
+        final List<LinearRing> linearRings = new ArrayList<LinearRing>(linearrings.size());
+        
+        for(final Iterator<JsonNode> it = linearrings.getElements(); it.hasNext() ; ) {
+            final JsonNode linearRingNode = it.next();
+            linearRings.add(parseLinearRing(linearRingNode));
+                
         }
-        while(elements.hasNext()) {
-            final JsonNode next = elements.next();
+
+        return new Polygon(linearRings);
+    }
+
+    private LinearRing parseLinearRing(final JsonNode linearRingNode) throws IOException {
+        final List<Point> points = new ArrayList<Point>(linearRingNode.size());
+        for(final Iterator<JsonNode> it = linearRingNode.getElements(); it.hasNext() ; ) {
+            final JsonNode next = it.next();
             points.add(createPoint(next));
         }
-        return new Polygon(points);
+        return new LinearRing(points);
+        
     }
 
 }

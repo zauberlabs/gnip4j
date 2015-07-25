@@ -202,23 +202,64 @@ public class Activity implements Serializable {
 
     
     /**
-     * <p>
-     * Java class for anonymous complex type.
-     * 
-     * <p>
-     * The following schema fragment specifies the expected content contained
-     * within this class.
+     * https://dev.twitter.com/overview/api/places representation for gnip.
      */
     public static class Location implements Serializable {
         private static final long serialVersionUID = 1L;
+        /**
+         * A series of longitude and latitude points, defining a box which will
+         * contain the Place entity this bounding box is related to. Each point
+         * is an array in the form of [longitude, latitude]. Points are grouped
+         * into an array per bounding box. Bounding box arrays are wrapped in
+         * one additional array to be compatible with the polygon notation.
+         */
         private Geo geo;
+        
+        /**
+         * Name of the country containing this place. Example:
+         * In Twitter Raw: "country":"France"
+         */
+        @JsonProperty("country_code")
         private String countryCode;
+        
+        /**
+         * Full human-readable representation of the place’s name.
+         * In Twitter Raw: "full_name":"San Francisco, CA"
+         */
         private String displayName;
+        
+        /**
+         * "objectType": "place"
+         */
         private String objectType;
-        private String streetAddress;
+        
+        /**
+         * URL representing the location of additional place metadata for this place.
+         * 
+         * In Twitter Raw: "url":"https://api.twitter.com/1.1/geo/id/7238f93a3e899af6.json"
+         */
         private String link;
 
+        /**
+         * Short human-readable representation of the place’s name.
+         * In Twitter Raw: "name":"Paris"
+         */
+        private String name;
+        @JsonProperty("twitter_country_code")
+
+        /**
+         * Shortened country code representing the country containing this place.
+         * In Twitter Raw: "country_code":"FR"
+         */
+        private String twitterCountryCode;
         
+        /**
+         * The type of location represented by this place.
+         * In Twitter Raw: "place_type":"city"
+         */
+        @JsonProperty("twitter_place_type")
+        private String twitterPlaceType;
+
         public final Geo getGeo() {
             return geo;
         }
@@ -228,12 +269,6 @@ public class Activity implements Serializable {
             geo = value;
         }
 
-        /**
-         * Gets the value of the countryCode property.
-         * 
-         * @return possible object is {@link String }
-         * 
-         */
         public final String getCountryCode() {
             return countryCode;
         }
@@ -258,14 +293,6 @@ public class Activity implements Serializable {
             objectType = value;
         }
 
-        public final String getStreetAddress() {
-            return streetAddress;
-        }
-
-        public final void setStreetAddress(final String value) {
-            streetAddress = value;
-        }
-
         public final String getLink() {
             return link;
         }
@@ -273,6 +300,38 @@ public class Activity implements Serializable {
         public final void setLink(final String value) {
             link = value;
         }
+
+
+        public final String getName() {
+            return name;
+        }
+
+
+        public final void setName(String name) {
+            this.name = name;
+        }
+
+
+        public final String getTwitterCountryCode() {
+            return twitterCountryCode;
+        }
+
+
+        public final void setTwitterCountryCode(final String twitterCountryCode) {
+            this.twitterCountryCode = twitterCountryCode;
+        }
+
+
+        public final String getTwitterPlaceType() {
+            return twitterPlaceType;
+        }
+
+
+        public final void setTwitterPlaceType(final String twitterPlaceType) {
+            this.twitterPlaceType = twitterPlaceType;
+        }
+        
+        
     }
 
     public final void setSource(final Source value) {

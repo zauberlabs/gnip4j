@@ -122,9 +122,9 @@ public final class JSONDeserializationTest {
             
             assertNull(geo1);
             assertEquals("lat: 35.11222481 lon: -78.99696934", geo2.getCoordinates().toString());
-            assertEquals("[[ lat: -0.5093057 lon: 51.286606 ][ lat: 0.334433 lon: 51.286606 ][ lat: 0.334433 lon: 51.691672 ][ lat: -0.5093057 lon: 51.691672 ]]", geo3.getCoordinates().toString());
+            assertEquals("[[[ lat: -0.5093057 lon: 51.286606 ][ lat: 0.334433 lon: 51.286606 ][ lat: 0.334433 lon: 51.691672 ][ lat: -0.5093057 lon: 51.691672 ]]]", geo3.getCoordinates().toString());
             
-            assertEquals("[[ lat: -79.058407 lon: 35.106225 ][ lat: -78.944666 lon: 35.106225 ][ lat: -78.944666 lon: 35.177993 ][ lat: -79.058407 lon: 35.177993 ]]", geo4.getCoordinates().toString());
+            assertEquals("[[[ lat: -79.058407 lon: 35.106225 ][ lat: -78.944666 lon: 35.106225 ][ lat: -78.944666 lon: 35.177993 ][ lat: -79.058407 lon: 35.177993 ]]]", geo4.getCoordinates().toString());
             
         } finally {
             is.close();
