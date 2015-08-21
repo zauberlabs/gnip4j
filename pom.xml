@@ -157,8 +157,7 @@
 	</dependencies>
 	<properties>
 		<jackson.version>1.8.0</jackson.version>
-		<slf4j.version>1.6.1</slf4j.version>
-
+		<slf4j.version>1.7.12</slf4j.version>
 		<sonar.mantis.id>44</sonar.mantis.id>
 		<crono.organization.name>zauber</crono.organization.name>
 		<crono.project.name>zauber-gnip4j</crono.project.name>
