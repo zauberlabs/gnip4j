@@ -205,6 +205,12 @@ public class Activity implements Serializable {
      * https://dev.twitter.com/overview/api/places representation for gnip.
      */
     public static class Location implements Serializable {
+        public static final String TW_TYPE_COUNTRY="country";
+        public static final String TW_TYPE_ADMIN="admin";
+        public static final String TW_TYPE_CITY="city";
+        public static final String TW_TYPE_NEIGHBORHOOD="neighborhood";
+        public static final String TW_TYPE_POI="poi";
+
         private static final long serialVersionUID = 1L;
         /**
          * A series of longitude and latitude points, defining a box which will
