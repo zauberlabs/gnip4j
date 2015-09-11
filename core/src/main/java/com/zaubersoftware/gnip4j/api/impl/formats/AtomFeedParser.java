@@ -105,7 +105,7 @@ public class AtomFeedParser {
     
     
     /** process an atom feed  */
-    Activity process(final XMLStreamReader reader) throws XMLStreamException, ParseException {
+    public Activity process(final XMLStreamReader reader) throws XMLStreamException, ParseException {
         final Activity activity = new Activity();
         state.push(new StartState(activity));
         while(reader.hasNext()) {
