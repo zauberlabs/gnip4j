@@ -206,6 +206,16 @@ public class AtomFeedParser {
         return s;
     }
     
+    /** NPE free trim */
+    public static String trim(final String s) {
+        String ret = s;
+        
+        if(ret != null) {
+            ret = s.trim();
+        }
+        return ret;
+    }
+    
     /** parse atom:entry */
     private class ActivityState extends State {
         private final Activity activity;
@@ -291,9 +301,9 @@ public class AtomFeedParser {
                     }
                 });
             } else if(reader.isStartElement() && ACTIVITY_VERB.equals(reader.getName())) {
-                getActivity().setVerb(getText(ret, reader));
+                getActivity().setVerb(trim(getText(ret, reader)));
             } else if(reader.isStartElement() && ACTIVITY_OBJECT_TYPE.equals(reader.getName())) {
-                getActivity().setObjectType(getText(ret, reader));
+                getActivity().setObjectType(trim(getText(ret, reader)));
             } else if(reader.isStartElement() && ATOM_SUMMARY.equals(reader.getName())) {
                 getActivity().setSummary(getText(ret, reader));
             } else if(reader.isStartElement() && ATOM_AUTHOR.equals(reader.getName())) {
