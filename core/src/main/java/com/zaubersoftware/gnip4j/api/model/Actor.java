@@ -25,21 +25,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for anonymous complex type.
- *
- * <p>The following schema fragment specifies the expected content contained within this class.
- *
- */
-/**
- * TODO: Description of the class, Comments in english by default  
- * 
- * 
- * @author Juan F. Codagnone
- * @since Apr 19, 2013
- */
-/**
- * TODO: Description of the class, Comments in english by default  
- * 
+ * An actor  
  * 
  * @author Juan F. Codagnone
  * @since Apr 19, 2013
