@@ -24,8 +24,6 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
@@ -92,18 +90,7 @@ public class AtomFeedParser {
     private static final QName ATOM_SUBTITLE = new QName(ATOM_NS, "subtitle");
 
     private Stack<State> state = new Stack<State>();
-    private final DatatypeFactory datatypeFactory;
 
-    
-    public AtomFeedParser() {
-        try {
-            datatypeFactory = DatatypeFactory.newInstance();
-        } catch (DatatypeConfigurationException e) {
-            throw new RuntimeException(e);
-        }
-    }    
-    
-    
     /** process an atom feed  */
     public Activity process(final XMLStreamReader reader) throws XMLStreamException, ParseException {
         final Activity activity = new Activity();
