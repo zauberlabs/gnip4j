@@ -86,14 +86,39 @@ public final class Rule implements Serializable {
     
     @Override
     public String toString() {
+        /*
+         * Outputs a json like the one gnip expects.
+         * 
+         * You might say WTF, we are crafting the json string by hand.
+         * Thats because its just a toString method, and because i don't 
+         * want extra dependencies.
+         */
         final StringBuilder sb = new StringBuilder();
+        sb.append('{');
+        
         if(tag != null) {
-            sb.append(tag);
+            sb.append("\"tag\": \"");
+            sb.append(escape(tag));
+            sb.append('"');
         }
-        if(sb.length() != 0) {
-            sb.append(' ');
+        
+        if(value != null) {
+            if(sb.length() != 0) {
+                if(sb.length() > 1) {
+                    sb.append(", ");
+                }
+            }
+            sb.append("\"value\": \"");
+            sb.append(escape(value));
+            sb.append('"');
         }
-        sb.append(value);
+        
+        sb.append('}');
+        
         return sb.toString();
+    }
+    
+    private static String escape(final String s) {
+        return s.replace("\"", "\\\"");
     }
 }
