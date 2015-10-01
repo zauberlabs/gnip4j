@@ -17,7 +17,6 @@ package com.zaubersoftware.gnip4j.api.impl.formats;
 
 import java.util.concurrent.ExecutorService;
 
-import com.sun.org.apache.xerces.internal.impl.dv.ValidatedInfo;
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
 

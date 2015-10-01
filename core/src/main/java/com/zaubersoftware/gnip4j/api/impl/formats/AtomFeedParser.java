@@ -82,6 +82,7 @@ public class AtomFeedParser {
     private static final QName ATOM_TITLE = new QName(ATOM_NS, "title");
     private static final QName ATOM_CATEGORY = new QName(ATOM_NS, "category");
     private static final QName ATOM_LINK = new QName(ATOM_NS, "link");
+    private static final QName ATOM_CAPTION = new QName(ATOM_NS, "caption");
     private static final QName ATOM_SOURCE = new QName(ATOM_NS, "source");
     private static final QName ATOM_CONTENT = new QName(ATOM_NS, "content");
     private static final QName ATOM_SUMMARY = new QName(ATOM_NS, "summary");
@@ -262,8 +263,8 @@ public class AtomFeedParser {
                         getActivity().setSource(source);
                     }
                 });
-            } else if(reader.isStartElement() && ATOM_LINK.equals(reader.getName())) {
-                getActivity().getLinks().add(parseLink(reader));
+            } else if(reader.isStartElement() && ATOM_CAPTION.equals(reader.getName())) {
+                getActivity().setCaption(getText(ret, reader));
             } else if(reader.isStartElement() && ACTIVITY_ACTOR.equals(reader.getName())) {
                 state.push(new ActorState() {
                     @Override

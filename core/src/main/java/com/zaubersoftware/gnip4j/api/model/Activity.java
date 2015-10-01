@@ -20,8 +20,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.xml.datatype.XMLGregorianCalendar;
-
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonProperty;
 
@@ -65,6 +63,7 @@ public class Activity implements Serializable {
     private String subtitle;
     private String title;
     private Object target;
+    private String caption;
     
     public final InReplyTo getInReplyTo() {
         return inReplyTo;
@@ -458,5 +457,13 @@ public class Activity implements Serializable {
 
     public final void setTarget(final Object target) {
         this.target = target;
+    }
+    
+    public final String getCaption() {
+        return this.caption;
+    }
+    
+    public void setCaption(final String caption) {
+        this.caption = caption;
     }
 }
