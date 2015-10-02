@@ -103,7 +103,7 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
     static InputStream getRealInputStream(final URLConnection uc, InputStream is) throws IOException {
         final String encoding = uc.getContentEncoding();
         if (encoding != null && encoding.equalsIgnoreCase("gzip")) {
-            is = new GZIPInputStream(is);
+            is = new StreamingGZIPInputStream(is);
         } else if (encoding != null && encoding.equalsIgnoreCase("deflate")) {
             is = new InflaterInputStream(is, new Inflater(true));
         }
