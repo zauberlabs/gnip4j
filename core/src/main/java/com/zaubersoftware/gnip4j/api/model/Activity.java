@@ -64,6 +64,7 @@ public class Activity implements Serializable {
     private String title;
     private Object target;
     private String caption;
+    private String comment;
     
     public final InReplyTo getInReplyTo() {
         return inReplyTo;
@@ -465,5 +466,13 @@ public class Activity implements Serializable {
     
     public void setCaption(final String caption) {
         this.caption = caption;
+    }
+    
+    public String getComment() {
+        return comment;
+    }
+    
+    public void setComment(final String comment) {
+        this.comment = comment;
     }
 }

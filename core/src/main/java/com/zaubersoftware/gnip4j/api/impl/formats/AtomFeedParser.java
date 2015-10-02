@@ -16,6 +16,7 @@
 package com.zaubersoftware.gnip4j.api.impl.formats;
 
 
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -66,6 +67,9 @@ public class AtomFeedParser {
     private static final QName GNIP_RULE = new QName(GNIP_NS, "rule");
     private static final QName GNIP_FAVORITE_COUNT = new QName(GNIP_NS, "statistics");
     
+    private static final String FB_NS = "http://www.facebook.com";
+    private static final QName FB_ID = new QName(FB_NS, "id");
+    private static final QName FB_FRIEND_COUNT = new QName(FB_NS, "friend_count");
     
     private static final String THR_NS = "http://purl.org/syndication/thread/1.0";
     private static final QName THR_IN_REPLY_TO = new QName(THR_NS, "in-reply-to");
@@ -83,12 +87,15 @@ public class AtomFeedParser {
     private static final QName ATOM_CATEGORY = new QName(ATOM_NS, "category");
     private static final QName ATOM_LINK = new QName(ATOM_NS, "link");
     private static final QName ATOM_CAPTION = new QName(ATOM_NS, "caption");
+    private static final QName ATOM_COMMENT = new QName(ATOM_NS, "comment");
     private static final QName ATOM_SOURCE = new QName(ATOM_NS, "source");
     private static final QName ATOM_CONTENT = new QName(ATOM_NS, "content");
     private static final QName ATOM_SUMMARY = new QName(ATOM_NS, "summary");
     private static final QName ATOM_AUTHOR = new QName(ATOM_NS, "author");
     private static final QName ATOM_GENERATOR = new QName(ATOM_NS, "generator");
     private static final QName ATOM_SUBTITLE = new QName(ATOM_NS, "subtitle");
+    private static final QName ATOM_IS_VERIFIED = new QName(ATOM_NS, "is_verified");
+    private static final QName ATOM_FAN_COUNT = new QName(ATOM_NS, "fan_count");
 
     private Stack<State> state = new Stack<State>();
 
@@ -220,8 +227,10 @@ public class AtomFeedParser {
     /** parse atom:entry */
     private class ActivityState extends State {
         private final Activity activity;
+        private String fbId;
+        private Actor fbActor;
         
-        public ActivityState(Activity activity) {
+        public ActivityState(final Activity activity) {
             this.activity = activity;
         }
 
@@ -230,11 +239,29 @@ public class AtomFeedParser {
         }
         
         @Override
+        public void onDone() {
+            super.onDone();
+            
+            if(fbId != null) {
+                activity.setId(fbId);
+            }
+            
+            if(fbActor != null) {
+                Actor actor = activity.getActor();
+                if(actor == null) {
+                    activity.setActor(fbActor);
+                }
+            }
+        }
+        
+        @Override
         public boolean doProcess(final XMLStreamReader reader) throws XMLStreamException, ParseException {
             final AtomicBoolean ret = new AtomicBoolean();
             
             if(reader.isStartElement() && ATOM_ID.equals(reader.getName())) {
                 getActivity().setId(getText(ret, reader));
+            } else if(reader.isStartElement() && FB_ID.equals(reader.getName())) {
+                fbId = getText(ret, reader);
             } else if(reader.isStartElement() && ATOM_PUBLISHED.equals(reader.getName())) {
                 getActivity().setPostedTime(ISO8601DateParser.parse(getText(ret, reader)));
             } else if(reader.isStartElement() && ATOM_CREATED.equals(reader.getName())) {
@@ -260,15 +287,21 @@ public class AtomFeedParser {
                 state.push(new SourceState() {
                     @Override
                     public void onDone() {
+                        super.onDone();
+                        
                         getActivity().setSource(source);
                     }
                 });
             } else if(reader.isStartElement() && ATOM_CAPTION.equals(reader.getName())) {
                 getActivity().setCaption(getText(ret, reader));
+            } else if(reader.isStartElement() && ATOM_COMMENT.equals(reader.getName())) {
+                getActivity().setComment(getText(ret, reader));
             } else if(reader.isStartElement() && ACTIVITY_ACTOR.equals(reader.getName())) {
                 state.push(new ActorState() {
                     @Override
                     public void onDone() {
+                        super.onDone();
+                        
                         getActivity().setActor(actor);
                     }
                 });
@@ -276,6 +309,8 @@ public class AtomFeedParser {
                 state.push(new MatchingRulesState() {
                     @Override
                     public void onDone() {
+                        super.onDone();
+                        
                         getActivity().getGnip().getMatchingRules().addAll(rules);
                     }
                 });
@@ -291,6 +326,8 @@ public class AtomFeedParser {
                 state.push(new ActivityState(o) {
                     @Override
                     public void onDone() {
+                        super.onDone();
+                        
                         getActivity().setObject(o);
                     }
                 });
@@ -298,6 +335,8 @@ public class AtomFeedParser {
                 state.push(new ServiceProvider() {
                     @Override
                     public void onDone() {
+                        super.onDone();
+                        
                         getActivity().setProvider(provider);
                     }
                 });
@@ -311,7 +350,10 @@ public class AtomFeedParser {
                 state.push(new AuthorState() {
                     @Override
                     public void onDone() {
+                        super.onDone();
+                        
                         getActivity().setAuthor(getAuthor());
+                        ActivityState.this.fbActor = super.fbActor;
                     }
                 });
             } else if(reader.isStartElement() && ATOM_CONTENT.equals(reader.getName())) {
@@ -474,6 +516,7 @@ public class AtomFeedParser {
     /** parse author */
     class AuthorState extends State {
         private final Author author = new Author();
+        protected Actor fbActor;
         
         public Author getAuthor() {
             return author;
@@ -487,11 +530,40 @@ public class AtomFeedParser {
                 author.setName(getText(ret, reader));
             } else if(reader.isStartElement() && ATOM_URI.equals(reader.getName())) {
                 author.setUri(getText(ret, reader));
+            } else if(reader.isStartElement() && FB_ID.equals(reader.getName())) {
+                fbActor().setId(getText(ret, reader));
+            } else if(reader.isStartElement() && FB_FRIEND_COUNT.equals(reader.getName())) {
+                fbActor().setFriendsCount(new BigInteger(getText(ret, reader)));
+            } else if(reader.isStartElement() && ATOM_FAN_COUNT.equals(reader.getName())) {
+                fbActor().setFollowersCount(new BigInteger(getText(ret, reader)));
+            } else if(reader.isStartElement() && ATOM_IS_VERIFIED.equals(reader.getName())) {
+                fbActor().setVerified(Integer.valueOf(getText(ret, reader)) != 0);
+            } else if(reader.isStartElement() && ATOM_ICON.equals(reader.getName())) {    
+                fbActor().setImage(getText(ret, reader));
             } else {
                 onUnhandledEvent(reader);
             }
             
             return ret.get();
+        }
+
+        private Actor fbActor() {
+            if(fbActor == null) {
+                fbActor = new Actor();
+            }
+            return fbActor;
+        }
+        
+        @Override
+        public void onDone() {
+            super.onDone();
+            
+            if(fbActor != null) {
+                fbActor.setDisplayName(author.getName());
+                fbActor.setLink(author.getUri());
+            }
+            
+            super.onDone();
         }
     }
 }
