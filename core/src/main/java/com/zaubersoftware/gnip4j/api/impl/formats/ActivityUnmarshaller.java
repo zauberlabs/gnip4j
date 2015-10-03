@@ -27,7 +27,7 @@ import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;
 import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
 /**
- *  Unmarshalls Gnip's Activity
+ *  Unmarshalls Gnip's Activity from an Activity XML Stream
  * 
  * @author Juan F. Codagnone
  * @since Oct 3, 2013
