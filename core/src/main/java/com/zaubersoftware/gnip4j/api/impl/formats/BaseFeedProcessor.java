@@ -55,11 +55,11 @@ public abstract class BaseFeedProcessor<T> implements FeedProcessor {
     }
     
     /** handle an activity */
-    protected final void handle(final Object activity) {
+    protected final void handle(final T activity) {
         activityService.execute(new Runnable() {
             @Override
             public void run() {
-                notification.notify((T)activity, stream);
+                notification.notify(activity, stream);
             }
         });
     }
