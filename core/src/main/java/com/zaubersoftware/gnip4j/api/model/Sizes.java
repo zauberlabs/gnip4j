@@ -15,12 +15,14 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
+import java.io.Serializable;
+
 /**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  */
-public final class Sizes {
+public final class Sizes implements Serializable {
     
     private Size large;
     private Size medium;
