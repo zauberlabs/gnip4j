@@ -14,7 +14,6 @@ from the data from the Java language.
    * Push model via Streaming (asynchronous processing)
    * Error handling support (and exponential-backoff reconnections)
    * Monitoring Support (JMX)
-   * [Mule ESB](http://www.mulesoft.org/) integration
 
 ## How To use gnip4j
 
