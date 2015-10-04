@@ -13,20 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zaubersoftware.gnip4j.api.model;
-
-import java.io.Serializable;
+package com.zaubersoftware.gnip4j.api.impl.formats;
 
 /**
- * TODO Descripcion de la clase. Los comentarios van en castellano.
- * 
- * 
- * @author Martin Silva
- * @since Feb 15, 2012
+ * An unmarshaller that simply passes through the source value. Useful in 
+ * cases where no parsing is desired coming off the stream. For example, 
+ * pushing activities into a queue for asynchronous processing.  
  */
-public interface Geometry extends Serializable {
-    
-    
-    Geometries getType();
-    
+public class StringUnmarshaller implements Unmarshaller<String> {
+
+	@Override
+	public String unmarshall(String s) {
+		return s;
+	}
 }
