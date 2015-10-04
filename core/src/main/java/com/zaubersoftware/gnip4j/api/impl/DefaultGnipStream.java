@@ -289,7 +289,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
                 logger.debug("{}: Re-connecting stream with Gnip: {}", streamName, streamURI);
                 is = getStreamInputStream();
                 logger.debug("{}: The re-connection has been successfully established", streamName);
-
+                notification.notifyReConnected(reConnectionAttempt.get());
                 reConnectionAttempt.set(0);
                 reConnectionWaitTime = INITIAL_RE_CONNECTION_WAIT_TIME;
                 stats.incrementNumberOfSuccessfulReconnections();

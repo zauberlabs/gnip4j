@@ -43,5 +43,10 @@ public abstract class StreamNotificationAdapter<T> implements StreamNotification
     public void notifyReConnectionAttempt(final int attempt, final long waitTime) {
         // Do nothing
     }
+    
+    @Override
+    public void notifyReConnected(final int attmepts){
+    	// Do nothing
+    }
 
 }
