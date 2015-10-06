@@ -25,14 +25,15 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
  * 
  * 
  * @author Juan F. Codagnone
+ * @param <T>
  * @since Oct 3, 2013
  */
-public abstract class PowertrackStreamBuilder {
+public abstract class PowertrackStreamBuilder<T> {
     protected String type;
     private int streamDefaultWorkers = Runtime.getRuntime().availableProcessors();
     protected ExecutorService executorService = Executors.newFixedThreadPool(streamDefaultWorkers);
     protected String account;
-    protected StreamNotification<Activity> observer;
+    protected StreamNotification<T> observer;
     
     /**  if your EDC URL starts with http://acme.gnip.com  then this value is acme*/
     public final PowertrackStreamBuilder withAccount(final String account) {
@@ -40,7 +41,7 @@ public abstract class PowertrackStreamBuilder {
         return this;
     }
     
-    public final PowertrackStreamBuilder withObserver(final StreamNotification observer) {
+    public final PowertrackStreamBuilder withObserver(final StreamNotification<T> observer) {
         this.observer = observer;
         return this;
     }
