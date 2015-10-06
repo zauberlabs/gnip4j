@@ -23,6 +23,7 @@ import java.text.ParseException;
 import java.util.concurrent.ExecutorService;
 
 import com.zaubersoftware.gnip4j.api.StreamNotification;
+import com.zaubersoftware.gnip4j.api.stats.ModifiableStreamStats;
 import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;
 import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
@@ -39,13 +40,19 @@ public class StringFeedProcessor extends BaseFeedProcessor<String> {
 	}
 
 	@Override
-	public void process(InputStream is) throws IOException, ParseException {
+	public void process(InputStream is, final ModifiableStreamStats stats) throws IOException, ParseException {
 		BufferedReader rdr = new BufferedReader(new InputStreamReader(is));
 		
         logger.debug("Starting to consume activity stream {} ...", streamName);
         while (!Thread.interrupted()) {
         	final String activity = rdr.readLine();
-        	handle(activity);
+        	// lines with zero length are keep-alive msgs from stream
+        	if (activity.length() > 0){
+        		handle(activity);
+        		if (stats != null){
+        			stats.incrementTransferedActivities();
+        		}
+        	}
         }
 	}
 }

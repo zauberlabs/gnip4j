@@ -223,7 +223,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
                             reconnect();
                         }
                         if(is != null) {
-                            processor.process(is);
+                            processor.process(is,stats);
                             logger.debug("{}: The activity stream is no longer being consumed.", streamName);
                         }
                     } catch(final IOException e) {
