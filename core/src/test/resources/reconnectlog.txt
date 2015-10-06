@@ -8,5 +8,6 @@ ReConnectionError: Connection to https://stream.gnip.com:443/accounts/account/pu
 Connection attempt 3 wait time 2000
 ReConnectionError: Connection to https://stream.gnip.com:443/accounts/account/publishers/twitter/streams/track/stream.json: Unexpected status code: 505 TEST!
 Connection attempt 4 wait time 4000
+Connection attempt 4 succeeded
 So true LOL RT @FreddyAmazin: Dear McDonald's, May I have some Coke with my ice?! Sincerely, I asked for a DRINK, not a half a cup of ice.
 Testing! Coca coke coca-cola
