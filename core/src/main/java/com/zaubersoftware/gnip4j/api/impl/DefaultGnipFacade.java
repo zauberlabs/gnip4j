@@ -78,7 +78,7 @@ public class DefaultGnipFacade implements GnipFacade {
     }
 
     @Override
-    public final PowertrackStreamBuilder createPowertrackStream() {
+    public PowertrackStreamBuilder createPowertrackStream() {
         return new PowertrackStreamBuilder() {
             @Override
             protected GnipStream buildStream() {

@@ -29,8 +29,9 @@ public interface GnipFacade {
     /** Let you create an Enterprices Data Collector Stream */
     EDCStreamBuilder createEnterpriceDataCollectorStream();
     
-    /** Let you create a Powertrack Stream */
-    PowertrackStreamBuilder createPowertrackStream();
+    /** Let you create a Powertrack Stream 
+     * @param <T>*/
+    <T> PowertrackStreamBuilder<T> createPowertrackStream();
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
