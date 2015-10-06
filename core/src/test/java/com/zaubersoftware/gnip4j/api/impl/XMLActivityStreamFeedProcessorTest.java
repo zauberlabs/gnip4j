@@ -81,7 +81,7 @@ public class XMLActivityStreamFeedProcessorTest {
                             }
                         }
                     }, new ActivityUnmarshaller("hola"));
-            p.process(is);
+            p.process(is, null);
             assertEquals(23, i.get());
         } finally {
             IOUtils.closeQuietly(is);

@@ -20,12 +20,13 @@ import java.io.InputStream;
 import java.text.ParseException;
 
 import com.zaubersoftware.gnip4j.api.GnipStream;
+import com.zaubersoftware.gnip4j.api.stats.ModifiableStreamStats;
 
 
 /** process the content of a feed */
 public interface FeedProcessor {
     /** process the content of a gnip feed. must be interrumplible */
-    void process(final InputStream is) throws IOException, ParseException;
+    void process(final InputStream is, final ModifiableStreamStats stats) throws IOException, ParseException;
     
     void setStream(final GnipStream stream);
 }

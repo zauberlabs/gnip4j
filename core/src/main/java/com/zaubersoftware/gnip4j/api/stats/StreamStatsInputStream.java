@@ -37,9 +37,11 @@ public class StreamStatsInputStream extends TeeInputStream {
             public void write(final int b) throws IOException {
                 stats.incrementTransferedBytes();
                 
-                if (b == '\n') {
+                // new line not sufficient to count as activity rcvd since stream
+                // sends CRLF every 30 secs or so to keep-alive
+                /*if (b == '\n') {
                     stats.incrementTransferedActivities();
-                }
+                }*/
             }
         });
     }
