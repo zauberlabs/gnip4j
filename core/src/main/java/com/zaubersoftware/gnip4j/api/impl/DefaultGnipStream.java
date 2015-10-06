@@ -22,6 +22,7 @@ import java.net.URI;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
@@ -197,6 +198,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
 
         private final AtomicInteger reConnectionAttempt = new AtomicInteger();
         private long reConnectionWaitTime = INITIAL_RE_CONNECTION_WAIT_TIME;
+        private AtomicLong disconnectedSinceTime = null;
 
         private InputStream is;
         private FeedProcessor processor;
@@ -220,6 +222,9 @@ public class DefaultGnipStream extends AbstractGnipStream {
                 while (!shuttingDown.get() && !Thread.interrupted()) {
                     try {
                         if(is == null) {
+                        	if (disconnectedSinceTime == null){
+                        		disconnectedSinceTime = new AtomicLong(System.currentTimeMillis());
+                        	}
                             reconnect();
                         }
                         if(is != null) {
@@ -289,7 +294,8 @@ public class DefaultGnipStream extends AbstractGnipStream {
                 logger.debug("{}: Re-connecting stream with Gnip: {}", streamName, streamURI);
                 is = getStreamInputStream();
                 logger.debug("{}: The re-connection has been successfully established", streamName);
-
+                notification.notifyReConnected(reConnectionAttempt.get(), System.currentTimeMillis() - disconnectedSinceTime.get());
+                disconnectedSinceTime = null;
                 reConnectionAttempt.set(0);
                 reConnectionWaitTime = INITIAL_RE_CONNECTION_WAIT_TIME;
                 stats.incrementNumberOfSuccessfulReconnections();

@@ -97,6 +97,13 @@ public final class ReconnectionTest {
                     stream.close();
                 }
             }
+
+			@Override
+			public void notifyReConnected(int attempt, long elaspedDisconnectedTime) {
+				out.append(String.format(
+                        "Connection attempt %d succeeded\n", attempt));
+				
+			}
         };
         final JsonActivityFeedProcessor processor = new JsonActivityFeedProcessor("stream", Executors.newSingleThreadExecutor(), n);
         processor.setStream(stream);

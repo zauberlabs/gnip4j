@@ -57,4 +57,12 @@ public interface StreamNotification<T> {
      * @param waitTime The amount of time to be waited before trying to reconnect.
      */
     void notifyReConnectionAttempt(int attempt, long waitTime);
+
+    /**
+     * Notifies that we have successfully reconnected to gnip stream.
+     * 
+     * @param attempts The number of re-connection attempts made before success.
+     * @param elapsedDisconnectedTime The elapsed ms between disconnect and successful reconnect.
+     */
+	void notifyReConnected(int attempts, long elapsedDisconnectedTime);
 }
