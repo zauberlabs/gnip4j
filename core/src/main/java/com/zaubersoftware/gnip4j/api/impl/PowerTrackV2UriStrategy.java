@@ -77,14 +77,28 @@ public final class PowerTrackV2UriStrategy implements UriStrategy {
 
     @Override
     public URI createRulesUri(final String account, final String streamName) {
-        if (account == null || account.trim().isEmpty()) {
-            throw new IllegalArgumentException("The account cannot be null or empty");
-        }
-        if (streamName == null || streamName.trim().isEmpty()) {
-            throw new IllegalArgumentException("The streamName cannot be null or empty");
-        }
-        
-        return URI.create(String.format(ruleUrlBase + PATH_GNIP_RULES_URI, account.trim(), publisher.trim(), streamName.trim()));
+        return URI.create(createRulesBaseUrl(account, streamName));
+    }
+    
+    @Override
+    public URI createRulesDeleteUri(final String account, final String streamName) {
+    	 return URI.create(createRulesBaseUrl(account, streamName) + "?_method=delete");
+    }
+    
+    @Override
+	public String getHttpMethodForRulesDelete() {
+		return UriStrategy.HTTP_POST;
+	}
+    
+    private String createRulesBaseUrl(final String account, final String streamName) {
+    	 if (account == null || account.trim().isEmpty()) {
+             throw new IllegalArgumentException("The account cannot be null or empty");
+         }
+         if (streamName == null || streamName.trim().isEmpty()) {
+             throw new IllegalArgumentException("The streamName cannot be null or empty");
+         }
+         
+         return String.format(ruleUrlBase + PATH_GNIP_RULES_URI, account.trim(), publisher.trim(), streamName.trim());
     }
     
     public final String getStreamUrlBase() {

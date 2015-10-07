@@ -25,9 +25,18 @@ import java.net.URI;
  */
 public interface UriStrategy {
 
-    /** Generates a {@link URI} to connect against a Gnip endpoint to consume the activity stream. */
+    String HTTP_DELETE = "DELETE";
+    String HTTP_POST = "POST";
+
+	/** Generates a {@link URI} to connect against a Gnip endpoint to consume the activity stream. */
     URI createStreamUri(String account, String streamName);
 
     /** Generates a {@link URI} to connect against a Gnip endpoint to get/modify rules. */
     URI createRulesUri(String account, String streamName);
+
+    /** Generates a {@link URI} to connect against a Gnip endpoint to delete rules. */
+	URI createRulesDeleteUri(String account, String streamName);
+
+	/** Informs the {@link GnipFacade} which http verb/method to use for rule deletion. Powertrack V2 API uses POST. V1 uses DELETE. */
+	String getHttpMethodForRulesDelete();
 }

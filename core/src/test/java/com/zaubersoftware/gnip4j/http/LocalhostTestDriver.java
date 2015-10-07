@@ -52,6 +52,16 @@ public final class LocalhostTestDriver {
                 public URI createRulesUri(final String domain, final String streamName) {
                     return null;
                 }
+                
+                @Override
+                public URI createRulesDeleteUri(final String domain, final String streamName) {
+                    return null;
+                }
+                
+                @Override
+            	public String getHttpMethodForRulesDelete() {
+            		return UriStrategy.HTTP_DELETE;
+            	}
             };
             final JRERemoteResourceProvider resourceProvider = new JRERemoteResourceProvider(
                     new ImmutableGnipAuthentication("foo", "bar"));
