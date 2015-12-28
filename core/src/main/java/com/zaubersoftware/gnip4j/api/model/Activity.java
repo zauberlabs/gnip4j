@@ -65,6 +65,8 @@ public class Activity implements Serializable {
     private Object target;
     private String caption;
     private String comment;
+    @JsonProperty(value = "twitter_quoted_status")
+    private Activity twitterQuotedStatus;
     
     public final InReplyTo getInReplyTo() {
         return inReplyTo;
@@ -200,6 +202,13 @@ public class Activity implements Serializable {
         link = value;
     }
 
+    public Activity getTwitterQuotedStatus() {
+        return twitterQuotedStatus;
+    }
+    
+    public void setTwitterQuotedStatus(final Activity twitterQuotedStatus) {
+        this.twitterQuotedStatus = twitterQuotedStatus;
+    }
     
     /**
      * https://dev.twitter.com/overview/api/places representation for gnip.
