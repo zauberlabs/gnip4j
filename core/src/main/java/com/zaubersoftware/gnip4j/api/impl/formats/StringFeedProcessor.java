@@ -45,7 +45,10 @@ public class StringFeedProcessor extends BaseFeedProcessor<String> {
         logger.debug("Starting to consume activity stream {} ...", streamName);
         while (!Thread.interrupted()) {
         	final String activity = rdr.readLine();
-        	handle(activity);
+        	// lines with zero length are keep-alive msgs from stream
+        	if (activity.length() > 0){
+        		handle(activity);
+        	}
         }
 	}
 }
