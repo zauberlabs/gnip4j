@@ -24,6 +24,7 @@ import java.util.concurrent.ExecutorService;
 
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
+import com.zaubersoftware.gnip4j.api.stats.ModifiableStreamStats;
 
 /**
  * Custom feed processor   
@@ -43,7 +44,7 @@ public class ByLineFeedProcessor<T> extends BaseFeedProcessor<T> {
     }
     
     @Override
-    public final void process(final InputStream is) throws IOException, ParseException {
+    public final void process(final InputStream is, final ModifiableStreamStats stats) throws IOException, ParseException {
         // hack
         final BufferedReader reader = new BufferedReader(new InputStreamReader(is, "utf-8"));
         String s = null;
@@ -51,6 +52,9 @@ public class ByLineFeedProcessor<T> extends BaseFeedProcessor<T> {
         while ((s = reader.readLine()) != null) {
             if(!s.isEmpty()) {
                 handle(unmarshaller.unmarshall(s));
+                if (stats != null){
+                	stats.incrementTransferedActivities();
+                }
             }
             if(Thread.interrupted()) {
                 break;

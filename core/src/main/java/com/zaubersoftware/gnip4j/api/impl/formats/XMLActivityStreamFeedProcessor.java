@@ -24,6 +24,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.regex.Pattern;
 
 import com.zaubersoftware.gnip4j.api.StreamNotification;
+import com.zaubersoftware.gnip4j.api.stats.ModifiableStreamStats;
 
 /**
  * <p>
@@ -85,7 +86,7 @@ public class XMLActivityStreamFeedProcessor<T> extends BaseFeedProcessor<T> {
     }
 
     @Override
-    public final void process(final InputStream is) throws IOException, ParseException {
+    public final void process(final InputStream is, final ModifiableStreamStats stats) throws IOException, ParseException {
         // hack
         final BufferedReader reader = new BufferedReader(new InputStreamReader(is, "utf-8"));
         String s = null;
@@ -102,6 +103,9 @@ public class XMLActivityStreamFeedProcessor<T> extends BaseFeedProcessor<T> {
                 handle(unmarshaller.unmarshall(sb.toString()));
             } else {
                 sb.append(s);
+            }
+            if (! s.isEmpty() && stats != null){
+            	stats.incrementTransferedActivities();
             }
         }
     }

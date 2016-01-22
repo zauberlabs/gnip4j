@@ -31,6 +31,7 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.model.Geo;
 import com.zaubersoftware.gnip4j.api.model.GeoDeserializer;
 import com.zaubersoftware.gnip4j.api.model.GeoSerializer;
+import com.zaubersoftware.gnip4j.api.stats.ModifiableStreamStats;
 import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;
 import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
@@ -60,14 +61,17 @@ public class JsonActivityFeedProcessor extends BaseFeedProcessor {
     }
     
     @Override
-    public final void process(final InputStream is) throws IOException {
+    public final void process(final InputStream is, final ModifiableStreamStats stats) throws IOException {
         final JsonParser parser =  JsonActivityFeedProcessor
                 .getObjectMapper().getJsonFactory().createJsonParser(is);
 
-        logger.debug("Starting to consume activity stream {} ...", streamName);
+        logger.info("Starting to consume activity stream {} ...", streamName);
         while(!Thread.interrupted()) {
             final Activity activity = parser.readValueAs(Activity.class);
             handle(activity);
+            if (activity != null && stats != null){
+            	stats.incrementTransferedActivities();
+            }
         }
     }
 }
