@@ -56,5 +56,15 @@ public final class EnterpriseDataCollectorUriStrategy implements UriStrategy {
         
         return URI.create(String.format(RULES_URI, account.trim(), streamName.trim()));
     }
+    
+    @Override
+    public URI createRulesDeleteUri(final String account, final String streamName) {
+    	return createRulesUri(account, streamName);
+    }
+    
+    @Override
+	public String getHttpMethodForRulesDelete() {
+		return UriStrategy.HTTP_DELETE;
+	}
 
 }

@@ -83,6 +83,16 @@ public final class DefaultUriStrategy implements UriStrategy {
         return URI.create(String.format(ruleUrlBase + PATH_GNIP_RULES_URI, account.trim(), publisher.trim(), streamName.trim()));
     }
     
+    @Override
+    public URI createRulesDeleteUri(final String account, final String streamName) {
+    	return createRulesUri(account, streamName);
+    }
+    
+    @Override
+	public String getHttpMethodForRulesDelete() {
+		return UriStrategy.HTTP_DELETE;
+	}
+    
     public final String getStreamUrlBase() {
         return streamUrlBase;
     }
