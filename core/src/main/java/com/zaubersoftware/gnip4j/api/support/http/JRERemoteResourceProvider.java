@@ -25,15 +25,18 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URLConnection;
-import java.util.zip.GZIPInputStream;
+import java.util.List;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
+import com.zaubersoftware.gnip4j.api.exception.OffendingRule;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.impl.ErrorCodes;
 import com.zaubersoftware.gnip4j.api.support.base64.Base64PasswordEncoderFactory;
@@ -259,9 +262,13 @@ class Errors {
     }
     
 }
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 class Error {
     private String message;
+
+    @JsonProperty("detail")
+    private List<OffendingRule> rules;
 
     public final String getMessage() {
         return message;
@@ -269,5 +276,13 @@ class Error {
 
     public final void setMessage(final String message) {
         this.message = message;
+    }
+
+    public List<OffendingRule> getRules() {
+        return rules;
+    }
+
+    public void setRules(List<OffendingRule> rules) {
+        this.rules = rules;
     }
 }
