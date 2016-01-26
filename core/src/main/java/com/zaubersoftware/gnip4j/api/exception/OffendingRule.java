@@ -15,6 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.api.exception;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 import com.zaubersoftware.gnip4j.api.model.Rule;
 
 /**
@@ -35,7 +37,8 @@ public class OffendingRule {
    * @throws IllegalArgumentException
    *           if any of the parameters is empty or null.
    */
-  public OffendingRule(final Rule offendingRule, final String errorMessage) {
+    public OffendingRule(@JsonProperty("rule") final Rule offendingRule,
+            @JsonProperty("message") final String errorMessage) {
     super();
 
     if (offendingRule == null) {
