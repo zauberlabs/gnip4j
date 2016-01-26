@@ -38,8 +38,10 @@ public abstract class AbstractRemoteResourceProvider implements RemoteResourcePr
             // nothing to do
         } else { 
             String msg = null;
+            Error error = null;
             if(errorProvider != null) {
-              msg = errorProvider.getError();
+              error = errorProvider.getError();
+              msg = error.getMessage();
             }
             if(msg == null) {
               msg = "";
@@ -50,7 +52,13 @@ public abstract class AbstractRemoteResourceProvider implements RemoteResourcePr
             } else if (statusCode == 422) {
               GnipUnprocessableEntityException exception = null;
               try {
-                exception = new GnipUnprocessableEntityException(String.format("Connection to %s", uri), msg);
+                    if (error.getRules() != null) {
+                        exception = new GnipUnprocessableEntityException(String.format("Connection to %s",
+                                uri), error.getRules());
+                    } else {
+                        exception = new GnipUnprocessableEntityException(String.format("Connection to %s",
+                                uri), msg);
+                    }
               } catch (Exception e) {
                 throw new TransportGnipException(String.format("Connection to %s: status code: %s %s %s", uri,
                     statusCode, reason, msg), e);
@@ -67,5 +75,5 @@ public abstract class AbstractRemoteResourceProvider implements RemoteResourcePr
 }
 
 interface ErrorProvider {
-    String getError();
+    Error getError();
 }

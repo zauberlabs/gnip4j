@@ -108,7 +108,7 @@ public class GnipUnprocessableEntityExceptionTest {
     thrown.expect(IllegalArgumentException.class);
     thrown.expectMessage("server message cannot be empty");
 
-    new GnipUnprocessableEntityException("connecting to uri.com", null);
+    new GnipUnprocessableEntityException("connecting to uri.com", (String)null);
   }
 
   @Test

@@ -32,7 +32,6 @@ import java.util.zip.InflaterInputStream;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
@@ -212,6 +211,10 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
     }
     
     static final String toInputStream(final InputStream is) {
+        if(is == null){
+            return "";
+        }
+
         try {
             final ByteArrayOutputStream bos = new ByteArrayOutputStream();
             byte []buff = new byte[4096];
@@ -236,13 +239,15 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
         }
         
         @Override
-        public String getError() {
+        public Error getError() {
             try {
                 final InputStream is = JRERemoteResourceProvider.getRealInputStream(huc, huc.getErrorStream());
-                if(huc.getContentType().startsWith("application/json")) {
-                    return m.readValue(is, Errors.class).getError().getMessage();
+                if(huc.getContentType() != null && huc.getContentType().startsWith("application/json")) {
+                    return m.readValue(is, Errors.class).getError();
                 } else {
-                    return toInputStream(is); 
+                    Error error = new Error();
+                    error.setMessage(toInputStream(is));
+                    return error;
                 }
             } catch (IOException e) {
                 return null;
