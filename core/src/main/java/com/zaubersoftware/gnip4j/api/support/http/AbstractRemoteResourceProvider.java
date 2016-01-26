@@ -38,8 +38,10 @@ public abstract class AbstractRemoteResourceProvider implements RemoteResourcePr
             // nothing to do
         } else { 
             String msg = null;
+            Error error = null;
             if(errorProvider != null) {
-              msg = errorProvider.getError();
+              error = errorProvider.getError();
+              msg = error.getMessage();
             }
             if(msg == null) {
               msg = "";
@@ -67,5 +69,5 @@ public abstract class AbstractRemoteResourceProvider implements RemoteResourcePr
 }
 
 interface ErrorProvider {
-    String getError();
+    Error getError();
 }
