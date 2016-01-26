@@ -238,7 +238,7 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
         public Error getError() {
             try {
                 final InputStream is = JRERemoteResourceProvider.getRealInputStream(huc, huc.getErrorStream());
-                if(huc.getContentType().startsWith("application/json")) {
+                if(huc.getContentType() != null && huc.getContentType().startsWith("application/json")) {
                     return m.readValue(is, Errors.class).getError();
                 } else {
                     Error error = new Error();
