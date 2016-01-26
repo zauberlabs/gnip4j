@@ -17,6 +17,7 @@ package com.zaubersoftware.gnip4j.api.exception;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,6 +54,12 @@ public class GnipUnprocessableEntityException extends GnipException {
     if (offendingRules.isEmpty()) {
       throw new IllegalArgumentException("server message couldn't be parsed into offending rules");
     }
+  }
+
+  /**  */
+  public GnipUnprocessableEntityException(String message, List<OffendingRule> rules) {
+      super(message);
+      offendingRules = Objects.requireNonNull(rules);
   }
 
   public List<OffendingRule> getOffendingRules() {
