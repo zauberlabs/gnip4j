@@ -209,6 +209,9 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
     }
     
     static final String toInputStream(final InputStream is) {
+    	if (is == null){
+    		return "";
+    	}
         try {
             final ByteArrayOutputStream bos = new ByteArrayOutputStream();
             byte []buff = new byte[4096];
