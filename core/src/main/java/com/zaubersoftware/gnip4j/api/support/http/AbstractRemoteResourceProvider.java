@@ -21,6 +21,8 @@ import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
 import com.zaubersoftware.gnip4j.api.exception.GnipUnprocessableEntityException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
+import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;
+import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
 /**
  * Abstract {@link RemoteResourceProvider}.
@@ -30,6 +32,7 @@ import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
  */
 public abstract class AbstractRemoteResourceProvider implements RemoteResourceProvider {
     protected static final String USER_AGENT = "Gnip4j (https://github.com/zaubersoftware/gnip4j/)";
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     
     /** validate responses */
     public final void validateStatusLine(final URI uri, final int statusCode, final String reason,
@@ -39,12 +42,14 @@ public abstract class AbstractRemoteResourceProvider implements RemoteResourcePr
         } else { 
             String msg = null;
             Error error = null;
-            if(errorProvider != null) {
+            if (errorProvider != null && errorProvider.getError() != null) {
               error = errorProvider.getError();
               msg = error.getMessage();
             }
-            if(msg == null) {
-              msg = "";
+
+            if (msg == null) {
+                logger.warn("there isn't message for code {} and provider {}", statusCode, errorProvider);
+                msg = "";
             }
 
             if (statusCode == 401) {
@@ -52,7 +57,7 @@ public abstract class AbstractRemoteResourceProvider implements RemoteResourcePr
             } else if (statusCode == 422) {
               GnipUnprocessableEntityException exception = null;
               try {
-                    if (error.getRules() != null) {
+                    if (error != null && error.getRules() != null) {
                         exception = new GnipUnprocessableEntityException(String.format("Connection to %s",
                                 uri), error.getRules());
                     } else {

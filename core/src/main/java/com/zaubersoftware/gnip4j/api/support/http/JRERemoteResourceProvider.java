@@ -40,6 +40,8 @@ import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.impl.ErrorCodes;
 import com.zaubersoftware.gnip4j.api.support.base64.Base64PasswordEncoderFactory;
 import com.zaubersoftware.gnip4j.api.support.base64.spi.Base64PasswordEncoder;
+import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;
+import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
 /**
  * JRE Resource Provider
@@ -49,6 +51,7 @@ import com.zaubersoftware.gnip4j.api.support.base64.spi.Base64PasswordEncoder;
  * @since May 23, 2011
  */
 public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
+    private static final Logger logger = LoggerFactory.getLogger(JRERemoteResourceProvider.class);
     private final GnipAuthentication authentication;
     private final Base64PasswordEncoder encoder = Base64PasswordEncoderFactory.getEncoder();
     private final int connectTimeout = 10000;
@@ -250,6 +253,7 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
                     return error;
                 }
             } catch (IOException e) {
+                logger.warn("Exception trying to read error message ", e);
                 return null;
             }
         }
