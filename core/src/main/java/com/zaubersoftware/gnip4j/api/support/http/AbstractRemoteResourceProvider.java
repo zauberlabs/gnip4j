@@ -57,7 +57,7 @@ public abstract class AbstractRemoteResourceProvider implements RemoteResourcePr
             } else if (statusCode == 422) {
               GnipUnprocessableEntityException exception = null;
               try {
-                    if (error.getRules() != null) {
+                    if (error != null && error.getRules() != null) {
                         exception = new GnipUnprocessableEntityException(String.format("Connection to %s",
                                 uri), error.getRules());
                     } else {
