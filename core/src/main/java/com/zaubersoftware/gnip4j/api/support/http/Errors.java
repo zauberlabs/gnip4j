@@ -26,6 +26,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import com.zaubersoftware.gnip4j.api.exception.OffendingRule;
 import com.zaubersoftware.gnip4j.api.model.Rule;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Errors {
     private Error error;
     // since powertrack V2
