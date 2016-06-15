@@ -15,14 +15,13 @@
  */
 package com.zaubersoftware.gnip4j.api.support.http;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,6 +32,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Test;
 
 import com.zaubersoftware.gnip4j.api.exception.OffendingRule;
+import com.zaubersoftware.gnip4j.api.support.http.Errors.RuleErrorDetail;
 
 /**
  * Unit test to check the {@link Errors} parse from js files with the json response from the server. The idea
@@ -77,10 +77,37 @@ public class ErrorsTest {
         assertEquals("-rule14", offendingRule.getOffendingRule().getValue());
         assertNull(offendingRule.getOffendingRule().getTag());
     }
+    
+    @Test
+    public final void test_v2_bis() throws Exception {
+        final Errors errors = m.readValue(ExampleFileDirectory.POWERTRACK_RULE_ERROR_V2BIS.asString(), Errors.class);
+        assertEquals(new Date(1466016139741L), errors.getSent());
+        assertEquals(2, errors.getSummary().size());
+        assertEquals(0, errors.getSummary().get("created"));
+        assertEquals(3, errors.getSummary().get("not_created"));
+        final List<RuleErrorDetail> detail = errors.getDetail();
+        assertNotNull(detail);
+        assertEquals(3, detail.size());
+        
+        assertNotNull(errors);
+        final String []msgs = new String[]{
+                "no viable alternative at character '⚽' (at position 12)\n\n",
+                null,
+                null,
+        };
+        for(int i = 0 ; i < detail.size() ; i++) {
+            final RuleErrorDetail r = detail.get(i);
+            assertFalse(r.isCreated());
+            assertEquals(msgs[i], r.getMessage());
+            assertNotNull(r.getRule());
+        }
+    }
 
     enum ExampleFileDirectory {
-        POWERTRACK_RULE_ERROR_V1("/com/zaubersoftware/gnip4j/powertrack/powertrack_rule_error_v1.js"), POWERTRACK_RULE_ERROR_V2(
-                "/com/zaubersoftware/gnip4j/powertrack/powertrack_rule_error_v2.js"), ;
+        POWERTRACK_RULE_ERROR_V1("/com/zaubersoftware/gnip4j/powertrack/powertrack_rule_error_v1.js"), 
+        POWERTRACK_RULE_ERROR_V2("/com/zaubersoftware/gnip4j/powertrack/powertrack_rule_error_v2.js"),
+        POWERTRACK_RULE_ERROR_V2BIS("/com/zaubersoftware/gnip4j/powertrack/powertrack_rule_error_v2-bis.js"),
+        ;
 
         private static final String FILES_ENCODING = "utf-8";
         private final String filePath;
