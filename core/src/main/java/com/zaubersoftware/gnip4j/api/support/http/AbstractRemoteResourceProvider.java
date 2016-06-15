@@ -44,8 +44,8 @@ public abstract class AbstractRemoteResourceProvider implements RemoteResourcePr
             String msg = null;
             Error error = null;
             if (errorProvider != null && errorProvider.getError() != null) {
-              error = errorProvider.getError();
-              msg = error.getMessage();
+                error = errorProvider.getError();
+                msg = error.getMessage();
             }
 
             if (msg == null) {
@@ -54,28 +54,25 @@ public abstract class AbstractRemoteResourceProvider implements RemoteResourcePr
             }
 
             if (statusCode == 401) {
-              throw new AuthenticationGnipException(reason);
+                throw new AuthenticationGnipException(reason);
             } else if (statusCode == 422) {
-              GnipUnprocessableEntityException exception = null;
-              try {
+                GnipUnprocessableEntityException exception = null;
+                try {
                     if (error != null && error.getRules() != null) {
-                        exception = new GnipUnprocessableEntityException(String.format("Connection to %s",
-                                uri), error.getRules());
+                        exception = new GnipUnprocessableEntityException(String.format("Connection to %s", uri),
+                                error.getRules());
                     } else {
-                        exception = new GnipUnprocessableEntityException(String.format("Connection to %s",
-                                uri), msg);
+                        exception = new GnipUnprocessableEntityException(String.format("Connection to %s", uri), msg);
                     }
-              } catch (Exception e) {
-                throw new TransportGnipException(String.format("Connection to %s: status code: %s %s %s", uri,
-                    statusCode, reason, msg), e);
-              }
-              throw exception;
+                } catch (final Exception e) {
+                    throw new TransportGnipException(
+                            String.format("Connection to %s: status code: %s %s %s", uri, statusCode, reason, msg), e);
+                }
+                throw exception;
+            } else {
+                throw new TransportGnipException(String.format("Connection to %s: Unexpected status code: %s %s %s",
+                        uri, statusCode, reason, msg));
             }
-          else {
-              throw new TransportGnipException(
-                  String.format("Connection to %s: Unexpected status code: %s %s %s",
-                          uri, statusCode, reason, msg));
-          }
         }
     }
 }
