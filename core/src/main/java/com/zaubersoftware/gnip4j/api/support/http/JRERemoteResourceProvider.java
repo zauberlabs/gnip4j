@@ -25,21 +25,18 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URLConnection;
-import java.util.List;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
-import com.zaubersoftware.gnip4j.api.exception.OffendingRule;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.impl.ErrorCodes;
 import com.zaubersoftware.gnip4j.api.support.base64.Base64PasswordEncoderFactory;
 import com.zaubersoftware.gnip4j.api.support.base64.spi.Base64PasswordEncoder;
+import com.zaubersoftware.gnip4j.api.support.http.Errors.Error;
 import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;
 import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
@@ -257,41 +254,5 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
                 return null;
             }
         }
-    }
-}
-class Errors {
-    private Error error;
-
-    public final Error getError() {
-        return error;
-    }
-
-    public final void setError(final Error error) {
-        this.error = error;
-    }
-    
-}
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-class Error {
-    private String message;
-
-    @JsonProperty("detail")
-    private List<OffendingRule> rules;
-
-    public final String getMessage() {
-        return message;
-    }
-
-    public final void setMessage(final String message) {
-        this.message = message;
-    }
-
-    public List<OffendingRule> getRules() {
-        return rules;
-    }
-
-    public void setRules(List<OffendingRule> rules) {
-        this.rules = rules;
     }
 }

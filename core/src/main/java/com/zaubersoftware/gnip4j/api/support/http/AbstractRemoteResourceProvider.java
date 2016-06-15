@@ -21,6 +21,7 @@ import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
 import com.zaubersoftware.gnip4j.api.exception.GnipUnprocessableEntityException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
+import com.zaubersoftware.gnip4j.api.support.http.Errors.Error;
 import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;
 import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
@@ -79,6 +80,3 @@ public abstract class AbstractRemoteResourceProvider implements RemoteResourcePr
     }
 }
 
-interface ErrorProvider {
-    Error getError();
-}
