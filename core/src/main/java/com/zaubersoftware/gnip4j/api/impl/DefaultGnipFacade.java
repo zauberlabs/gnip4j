@@ -26,6 +26,7 @@ import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonProcessingException;
 
 import com.zaubersoftware.gnip4j.api.EDCStreamBuilder;
+import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.PowertrackStreamBuilder;
@@ -44,6 +45,7 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.model.Rule;
 import com.zaubersoftware.gnip4j.api.model.Rules;
 import com.zaubersoftware.gnip4j.api.stats.StreamStats;
+import com.zaubersoftware.gnip4j.api.support.http.JRERemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.support.jmx.JMXProvider;
 
 /**
@@ -53,8 +55,8 @@ import com.zaubersoftware.gnip4j.api.support.jmx.JMXProvider;
  * @since Apr 29, 2011
  */
 public class DefaultGnipFacade implements GnipFacade {
-
     private static final UriStrategy DEFAULT_BASE_URI_STRATEGY = new DefaultUriStrategy();
+    private static final UriStrategy POWERTRACKV2_URI_STRATEGY = new PowerTrackV2UriStrategy();
 
     private final RemoteResourceProvider facade;
     private boolean useJMX = true;
@@ -72,10 +74,31 @@ public class DefaultGnipFacade implements GnipFacade {
         this.baseUriStrategy = baseUriStrategy;
     }
 
+    /** returns a PowerTrack V1 Facade */
+    public static DefaultGnipFacade createPowertrackV1(final GnipAuthentication authentication) {
+        return createPowertrackV1(new JRERemoteResourceProvider(authentication));
+    }
+    
+    /** returns a PowerTrack V1 Facade */
+    public static DefaultGnipFacade createPowertrackV1(final RemoteResourceProvider facade) {
+        return new DefaultGnipFacade(facade, DEFAULT_BASE_URI_STRATEGY);
+    }
+    
+    /** returns a PowerTrack V2 Facade */
+    public static DefaultGnipFacade createPowertrackV2(final GnipAuthentication authentication) {
+        return createPowertrackV2(new JRERemoteResourceProvider(authentication));
+    }
+    
+    /** returns a PowerTrack V2 Facade */
+    public static DefaultGnipFacade createPowertrackV2(final RemoteResourceProvider facade) {
+        return new DefaultGnipFacade(facade, POWERTRACKV2_URI_STRATEGY);
+    }
+    
     /** Creates the HttpGnipFacade. */
     public DefaultGnipFacade(final RemoteResourceProvider facade) {
         this(facade, DEFAULT_BASE_URI_STRATEGY);
     }
+    
 
     @Override
     public PowertrackStreamBuilder createPowertrackStream() {
