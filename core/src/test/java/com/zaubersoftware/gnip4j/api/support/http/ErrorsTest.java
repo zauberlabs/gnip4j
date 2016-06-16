@@ -49,10 +49,11 @@ public class ErrorsTest {
         final Errors errors = m.readValue(ExampleFileDirectory.POWERTRACK_RULE_ERROR_V1.asString(), Errors.class);
         assertNotNull(errors);
         assertNotNull(errors.getError());
-        assertEquals(
-                "Rule '-rule1' is invalid.  Rules must contain a non-negation term (at position 1)\nRules must contain at least one positive, non-stopword clause (at position 1)\nRule '-rule14' is invalid.  Rules must contain a non-negation term (at position 1)\nRules must contain at least one positive, non-stopword clause (at position 1)\n",
+        final String error = "Rule '-rule1' is invalid.  Rules must contain a non-negation term (at position 1)\nRules must contain at least one positive, non-stopword clause (at position 1)\nRule '-rule14' is invalid.  Rules must contain a non-negation term (at position 1)\nRules must contain at least one positive, non-stopword clause (at position 1)\n";
+        assertEquals(error,
                 errors.getError().getMessage());
         assertNull(errors.getError().getRules());
+        assertEquals(error, errors.toHumanMessage());
     }
 
     @Test
@@ -76,6 +77,7 @@ public class ErrorsTest {
                 offendingRule.getErrorMessage());
         assertEquals("-rule14", offendingRule.getOffendingRule().getValue());
         assertNull(offendingRule.getOffendingRule().getTag());
+        assertEquals("One or more rules are invalid", errors.toHumanMessage());
     }
     
     @Test
@@ -101,6 +103,7 @@ public class ErrorsTest {
             assertEquals(msgs[i], r.getMessage());
             assertNotNull(r.getRule());
         }
+        assertEquals("no viable alternative at character '⚽' (at position 12)\n\n", errors.toHumanMessage());
     }
 
     enum ExampleFileDirectory {

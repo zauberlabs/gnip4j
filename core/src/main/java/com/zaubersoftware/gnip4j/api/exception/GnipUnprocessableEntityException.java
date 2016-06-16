@@ -16,12 +16,16 @@
 package com.zaubersoftware.gnip4j.api.exception;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.zaubersoftware.gnip4j.api.model.Rule;
+import com.zaubersoftware.gnip4j.api.support.http.Errors;
+import com.zaubersoftware.gnip4j.api.support.http.Errors.Error;
+import com.zaubersoftware.gnip4j.api.support.http.Errors.RuleErrorDetail;
 
 /**
  * Exception class that knows how to parse the 422 message error into a list of
@@ -38,7 +42,6 @@ public class GnipUnprocessableEntityException extends GnipException {
 
   private final List<OffendingRule> offendingRules;
 
-  /** */
   public GnipUnprocessableEntityException(final String message, final String serverMessage) {
     super(message + "\n" + serverMessage);
 
@@ -47,8 +50,7 @@ public class GnipUnprocessableEntityException extends GnipException {
     }
 
     // parse
-    offendingRules = new ArrayList<OffendingRule>();
-    parseMessage(serverMessage);
+    offendingRules = parseMessage(serverMessage);
 
     // need to know that at least one offending rule was parsed
     if (offendingRules.isEmpty()) {
@@ -56,10 +58,50 @@ public class GnipUnprocessableEntityException extends GnipException {
     }
   }
 
-  /**  */
-  public GnipUnprocessableEntityException(String message, List<OffendingRule> rules) {
-      super(message);
-      offendingRules = Objects.requireNonNull(rules);
+  private static String toMessage(final String message, final Errors errors) {
+      String ret;
+      
+      if(message == null && errors == null) {
+          ret = "Error description was not provided";
+      } else if(message != null && errors == null) {
+          ret = message;
+      } else {
+          ret = message + "\n" +  errors.toHumanMessage();
+      }
+      
+      return ret;
+  }
+  public  GnipUnprocessableEntityException(final String message, final Errors errors) {
+      super(toMessage(message, errors));
+
+      // v2 circa Jan 2016 
+      final Error error = errors.getError();
+      if(error != null && error.getRules() != null) {
+          offendingRules = Objects.requireNonNull(error.getRules());
+      } else {
+          // v2 circa Jun 2016
+          final List<RuleErrorDetail> details = errors.getDetail();
+          if(details == null) {
+              final String msg = errors.toHumanMessage();
+              if(msg == null) {
+                  offendingRules = new LinkedList<OffendingRule>();
+              } else {
+                  offendingRules = parseMessage(msg);
+              }
+          } else {
+              offendingRules = new LinkedList<OffendingRule>();
+              
+              for(final RuleErrorDetail detail : details) {
+                  if(detail != null) {
+                      final OffendingRule offendingRule = detail.toOffendingRule();
+                      if(offendingRule != null) {
+                          offendingRules.add(offendingRule);
+                      }
+                      
+                  }
+              }
+          }
+      }
   }
 
   public List<OffendingRule> getOffendingRules() {
@@ -67,9 +109,10 @@ public class GnipUnprocessableEntityException extends GnipException {
   }
 
   /** parses the message using the pattern to obtain the offending rule */
-  private void parseMessage(final String serverMessage) {
+  private static List<OffendingRule>  parseMessage(final String serverMessage) {
     String offendingRule = null;
     StringBuilder messageBuilder = new StringBuilder();
+    final List<OffendingRule> offendingRules = new LinkedList<OffendingRule>();
 
     final String[] lines = serverMessage.split("\\n");
     for (int i = 0, length = lines.length; i < length; i++) {
@@ -91,10 +134,12 @@ public class GnipUnprocessableEntityException extends GnipException {
     if (offendingRule != null) {
       offendingRules.add(createOffendingRule(offendingRule, messageBuilder.toString()));
     }
+    
+    return offendingRules;
   }
 
   /** helper method to create the offending rule */
-  private OffendingRule createOffendingRule(final String rule, final String errorMessage) {
+  private static OffendingRule createOffendingRule(final String rule, final String errorMessage) {
     final Rule offending = new Rule();
     offending.setValue(rule);
     return new OffendingRule(offending, errorMessage);

@@ -65,6 +65,47 @@ public class Errors {
     public void setSent(final Date sent) {
         this.sent = sent;
     }
+    
+    public final String toHumanMessage() {
+        String msg = null;
+        
+        if(error != null) {
+            msg = error.getMessage();
+        }
+        
+        if(detail != null) {
+            if(msg == null && detail.size() == 1) {
+                msg = detail.get(0).getMessage();
+            } else {
+                int n = msg == null ? 0 : msg.length() + 2;
+                for(final RuleErrorDetail deta : detail) {
+                    final String s = deta.getMessage();
+                    if(s != null) {
+                        n += s.length() + 2;
+                    }
+                }
+                
+                final StringBuilder sb = new StringBuilder(n);
+                if(msg != null) {
+                    sb.append(msg);
+                }
+                for(final RuleErrorDetail deta : detail) {
+                    final String s = deta.getMessage();
+                    if(s != null) {
+                        if(deta.getRule() != null)
+                        if(sb.length() != 0) {
+                            sb.append('\n');
+                        }
+                        sb.append(s);
+                    }
+                }
+                msg = sb.toString();
+            }
+        }
+        
+        
+        return msg;
+    }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Error {
@@ -116,6 +157,14 @@ public class Errors {
 
         public Rule getRule() {
             return rule;
+        }
+        
+        public OffendingRule toOffendingRule() {
+            OffendingRule  ret = null;
+            if(message != null) {
+                ret = new OffendingRule(rule, message);
+            }
+            return ret;
         }
     }
 

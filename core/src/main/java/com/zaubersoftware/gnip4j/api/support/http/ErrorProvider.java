@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 package com.zaubersoftware.gnip4j.api.support.http;
-import com.zaubersoftware.gnip4j.api.support.http.Errors.Error;
+import com.zaubersoftware.gnip4j.api.support.http.Errors;
 
 public interface ErrorProvider {
-    Error getError();
+    Errors getError();
 }

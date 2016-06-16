@@ -239,15 +239,17 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
         }
         
         @Override
-        public Error getError() {
+        public Errors getError() {
             try {
                 final InputStream is = JRERemoteResourceProvider.getRealInputStream(huc, huc.getErrorStream());
                 if(huc.getContentType() != null && huc.getContentType().startsWith("application/json")) {
-                    return m.readValue(is, Errors.class).getError();
+                    return m.readValue(is, Errors.class);
                 } else {
+                    final Errors errors = new Errors();
                     Error error = new Error();
                     error.setMessage(toInputStream(is));
-                    return error;
+                    
+                    return errors;
                 }
             } catch (IOException e) {
                 logger.warn("Exception trying to read error message ", e);
