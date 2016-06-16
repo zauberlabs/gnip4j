@@ -17,6 +17,7 @@ package com.zaubersoftware.gnip4j.api.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
@@ -31,6 +32,18 @@ import org.codehaus.jackson.annotate.JsonAutoDetect;
 public final class Rules implements Serializable {
     private static final long serialVersionUID = 1L;
     private List<Rule> rules;
+
+    public Rules() {
+        // serialization
+    }
+    
+    public Rules(final Rule ...rules) {
+        this(Arrays.asList(rules));
+    }
+    
+    public Rules(final List<Rule> rules) {
+        this.rules = rules;
+    }
 
     /**
      * Gets the value of the rule property.

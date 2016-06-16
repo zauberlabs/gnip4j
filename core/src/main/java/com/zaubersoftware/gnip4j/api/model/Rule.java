@@ -32,6 +32,15 @@ public final class Rule implements Serializable {
     private String value;
     private String tag;
 
+    public Rule() {
+        // for unmarshall and compatibility
+    }
+    
+    public Rule(final String value, final String tag) {
+        this.value = value;
+        this.tag = tag;
+    }
+    
     public String getValue() {
         return value;
     }
