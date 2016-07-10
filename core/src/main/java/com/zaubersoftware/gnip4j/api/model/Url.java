@@ -34,6 +34,9 @@ public class Url implements Serializable {
     @JsonProperty(value = "expanded_url")
     private String expandedUrl;
 
+    @JsonProperty(value = "expanded_status")
+    private Integer expandedStatus;
+
     public final String getUrl() {
         return url;
     }
@@ -49,4 +52,13 @@ public class Url implements Serializable {
     public final void setExpandedUrl(final String expandedUrl) {
         this.expandedUrl = expandedUrl;
     }
+
+    public Integer getExpandedStatus() {
+        return expandedStatus;
+    }
+
+    public void setExpandedStatus(final Integer expandedStatus) {
+        this.expandedStatus = expandedStatus;
+    }
+
 }
