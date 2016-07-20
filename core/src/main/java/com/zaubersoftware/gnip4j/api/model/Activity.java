@@ -389,6 +389,10 @@ public class Activity implements Serializable {
         return links;
     }
     
+    public void setLinks(final List<Links> links) {
+        this.links = links;
+    }
+    
     public final String getSummary() {
         return summary;
     }
