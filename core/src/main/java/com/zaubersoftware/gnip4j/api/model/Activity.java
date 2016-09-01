@@ -322,7 +322,7 @@ public class Activity implements Serializable {
         }
 
 
-        public final void setName(String name) {
+        public final void setName(final String name) {
             this.name = name;
         }
 
@@ -453,7 +453,7 @@ public class Activity implements Serializable {
         return twitterFilterLevel;
     }
 
-    public void setTwitterFilterLevel(String twitterFilterLevel) {
+    public void setTwitterFilterLevel(final String twitterFilterLevel) {
         this.twitterFilterLevel = twitterFilterLevel;
     }
 
@@ -461,7 +461,7 @@ public class Activity implements Serializable {
         return twitterLang;
     }
 
-    public void setTwitterLang(String twitterLang) {
+    public void setTwitterLang(final String twitterLang) {
         this.twitterLang = twitterLang;
     }
     

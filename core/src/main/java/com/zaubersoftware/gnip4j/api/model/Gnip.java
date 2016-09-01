@@ -15,11 +15,11 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.codehaus.jackson.annotate.JsonProperty;
 
 
 /**
@@ -59,7 +59,7 @@ public class Gnip implements Serializable {
         return matchingRules;
     }
 
-    public void setMatchingRules(List<MatchingRules> matchingRules) {
+    public void setMatchingRules(final List<MatchingRules> matchingRules) {
         this.matchingRules = matchingRules;
     }
 
@@ -70,7 +70,7 @@ public class Gnip implements Serializable {
         return urls;
     }
 
-    public void setUrls(List<Url> urls) {
+    public void setUrls(final List<Url> urls) {
         this.urls = urls;
     }
     
@@ -78,7 +78,7 @@ public class Gnip implements Serializable {
     	return kloutScore;
     }
 
-    public void setKloutScore(Float kloutScore) {
+    public void setKloutScore(final Float kloutScore) {
         this.kloutScore = kloutScore;
     }
     

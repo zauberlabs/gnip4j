@@ -38,7 +38,6 @@ import org.junit.Test;
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
-import com.zaubersoftware.gnip4j.api.StreamNotificationAdapter;
 import com.zaubersoftware.gnip4j.api.UriStrategy;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
 import com.zaubersoftware.gnip4j.api.exception.GnipException;
@@ -99,7 +98,7 @@ public final class ReconnectionTest {
             }
 
 			@Override
-			public void notifyReConnected(int attempt, long elaspedDisconnectedTime) {
+			public void notifyReConnected(final int attempt, final long elaspedDisconnectedTime) {
 				out.append(String.format(
                         "Connection attempt %d succeeded\n", attempt));
 				
@@ -162,7 +161,7 @@ class MockRemoteResourceProvider implements RemoteResourceProvider {
     }
 
 	@Override
-	public void deleteResource(URI uri, Object resource)
+	public void deleteResource(final URI uri, final Object resource)
 			throws AuthenticationGnipException, TransportGnipException {
 		// TODO Auto-generated method stub
 		

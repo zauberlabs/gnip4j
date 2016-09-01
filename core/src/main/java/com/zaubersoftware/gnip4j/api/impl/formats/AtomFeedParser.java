@@ -97,7 +97,7 @@ public class AtomFeedParser {
     private static final QName ATOM_IS_VERIFIED = new QName(ATOM_NS, "is_verified");
     private static final QName ATOM_FAN_COUNT = new QName(ATOM_NS, "fan_count");
 
-    private Stack<State> state = new Stack<State>();
+    private final Stack<State> state = new Stack<State>();
 
     /** process an atom feed  */
     public Activity process(final XMLStreamReader reader) throws XMLStreamException, ParseException {
@@ -247,7 +247,7 @@ public class AtomFeedParser {
             }
             
             if(fbActor != null) {
-                Actor actor = activity.getActor();
+                final Actor actor = activity.getActor();
                 if(actor == null) {
                     activity.setActor(fbActor);
                 }

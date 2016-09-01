@@ -31,11 +31,13 @@ import java.util.Date;
  */
 public class ISO8601DateParser {
     private static ThreadLocal<DateFormat> normalDf = new ThreadLocal<DateFormat>() {
+        @Override
         protected synchronized DateFormat initialValue() {
             return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
         }
     };
     private static ThreadLocal<DateFormat> hackDf = new ThreadLocal<DateFormat>() {
+        @Override
         protected synchronized DateFormat initialValue() {
             return new SimpleDateFormat("yyyy-MM-dd'T'HH-mm-ss");
         }
@@ -109,7 +111,7 @@ public class ISO8601DateParser {
 
         try {
             return normalDf.get().parse(input);
-        } catch (ParseException e) {
+        } catch (final ParseException e) {
             // modification by gnip4j. the data collector (at least with
             // facebook feed) sends
             // some date with - in the time part.

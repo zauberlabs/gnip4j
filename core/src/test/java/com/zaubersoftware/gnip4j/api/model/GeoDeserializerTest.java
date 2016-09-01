@@ -18,7 +18,6 @@ package com.zaubersoftware.gnip4j.api.model;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;

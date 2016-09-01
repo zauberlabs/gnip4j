@@ -33,7 +33,7 @@ public abstract class EDCStreamBuilder {
     protected boolean activity = true;
     protected Format format;
     
-    private int streamDefaultWorkers = Runtime.getRuntime().availableProcessors();
+    private final int streamDefaultWorkers = Runtime.getRuntime().availableProcessors();
     protected ExecutorService executorService = Executors.newFixedThreadPool(streamDefaultWorkers);
     protected String account;
     protected StreamNotification observer;

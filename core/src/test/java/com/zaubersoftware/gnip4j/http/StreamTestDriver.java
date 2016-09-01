@@ -85,7 +85,7 @@ public final class StreamTestDriver {
             stream.await();
             System.out.println("-- Shutting down");
 
-        }   catch(Throwable t) {
+        }   catch(final Throwable t) {
             System.out.println(t.getMessage());
             t.printStackTrace();
         }

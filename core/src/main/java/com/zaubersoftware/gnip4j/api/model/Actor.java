@@ -215,7 +215,7 @@ public final class Actor implements Serializable {
         return favoritesCount;
     }
 
-    public void setFavoritesCount(Integer favoritesCount) {
+    public void setFavoritesCount(final Integer favoritesCount) {
         this.favoritesCount = favoritesCount;
     }
 

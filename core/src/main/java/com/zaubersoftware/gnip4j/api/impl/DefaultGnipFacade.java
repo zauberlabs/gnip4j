@@ -214,7 +214,7 @@ public class DefaultGnipFacade implements GnipFacade {
 
     @Override
     public final void addRule(final String account, final String streamName, final Rule rule) {
-        Rules rules = new Rules();
+        final Rules rules = new Rules();
         rules.getRules().add(rule);
         addRules(account, streamName, rules);
     }
@@ -226,7 +226,7 @@ public class DefaultGnipFacade implements GnipFacade {
     
     @Override
     public final void deleteRule(final String account, final String streamName, final Rule rule) {
-        Rules rules = new Rules();
+        final Rules rules = new Rules();
         rules.getRules().add(rule);
         deleteRules(account, streamName, rules);
     }

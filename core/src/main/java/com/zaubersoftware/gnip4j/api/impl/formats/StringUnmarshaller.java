@@ -23,7 +23,7 @@ package com.zaubersoftware.gnip4j.api.impl.formats;
 public class StringUnmarshaller implements Unmarshaller<String> {
 
 	@Override
-	public String unmarshall(String s) {
+	public String unmarshall(final String s) {
 		return s;
 	}
 }

@@ -18,8 +18,6 @@ package com.zaubersoftware.gnip4j.api;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.zaubersoftware.gnip4j.api.model.Activity;
-
 /**
  * TODO: Description of the class, Comments in english by default  
  * 
@@ -30,7 +28,7 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
  */
 public abstract class PowertrackStreamBuilder<T> {
     protected String type;
-    private int streamDefaultWorkers = Runtime.getRuntime().availableProcessors();
+    private final int streamDefaultWorkers = Runtime.getRuntime().availableProcessors();
     protected ExecutorService executorService = Executors.newFixedThreadPool(streamDefaultWorkers);
     protected String account;
     protected StreamNotification<T> observer;

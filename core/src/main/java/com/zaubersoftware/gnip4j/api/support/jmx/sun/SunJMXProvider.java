@@ -38,21 +38,21 @@ import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
  * @since May 26, 2011
  */
 public class SunJMXProvider implements JMXProvider {
-   private Logger logger = LoggerFactory.getLogger(getClass());
+   private final Logger logger = LoggerFactory.getLogger(getClass());
    
     @Override
     public final void registerBean(final GnipStream stream, final StreamStats streamStats) {
         final MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
         // Construct the ObjectName for the Hello MBean we will register
         try {
-            ObjectName mbeanName = getStreamName(stream);
+            final ObjectName mbeanName = getStreamName(stream);
             mbs.registerMBean(new com.zaubersoftware.gnip4j.api.support.jmx.sun.StreamStats(streamStats),
                     mbeanName);
-        } catch (InstanceAlreadyExistsException e) {
+        } catch (final InstanceAlreadyExistsException e) {
             throw new IllegalArgumentException(e);
-        } catch (MBeanRegistrationException e) {
+        } catch (final MBeanRegistrationException e) {
             throw new IllegalArgumentException(e);
-        } catch (NotCompliantMBeanException e) {
+        } catch (final NotCompliantMBeanException e) {
             throw new IllegalArgumentException(e);
         }
     }
@@ -63,7 +63,7 @@ public class SunJMXProvider implements JMXProvider {
             + stream.getStreamName() + ":type=StreamStats";
         try {
             return new ObjectName(name);
-        } catch (MalformedObjectNameException e) {
+        } catch (final MalformedObjectNameException e) {
             throw new IllegalArgumentException("bad name", e);
         }
     }
@@ -73,9 +73,9 @@ public class SunJMXProvider implements JMXProvider {
         final ObjectName name = getStreamName(stream);
         try {
             ManagementFactory.getPlatformMBeanServer().unregisterMBean(name);
-        } catch (MBeanRegistrationException e) {
+        } catch (final MBeanRegistrationException e) {
             throw new RuntimeException(e);
-        } catch (InstanceNotFoundException e) {
+        } catch (final InstanceNotFoundException e) {
             logger.warn("Unknown stream: " + name);
         }
     }

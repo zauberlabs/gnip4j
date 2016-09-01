@@ -28,7 +28,7 @@ public enum Geometries {
     
     private String type;
 
-    private Geometries(String type){
+    private Geometries(final String type){
         this.type = type;
     }
     

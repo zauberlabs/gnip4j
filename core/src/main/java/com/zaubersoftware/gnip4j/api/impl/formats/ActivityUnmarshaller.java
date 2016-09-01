@@ -44,12 +44,13 @@ public class ActivityUnmarshaller implements Unmarshaller<Activity> {
     }
     
     /** parse */
+    @Override
     public final Activity unmarshall(final String s)  {
         try {
             return unmarshallInternal(s);
-        } catch (XMLStreamException e) {
+        } catch (final XMLStreamException e) {
             throw new IllegalArgumentException("parsing activity", e);
-        } catch (ParseException e) {
+        } catch (final ParseException e) {
             throw new IllegalArgumentException("parsing activity", e);
         }
     }

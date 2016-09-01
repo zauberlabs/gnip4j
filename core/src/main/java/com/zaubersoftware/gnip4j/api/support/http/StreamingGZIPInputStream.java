@@ -22,7 +22,7 @@ import java.util.zip.GZIPInputStream;
 public class StreamingGZIPInputStream extends GZIPInputStream {
  
     private final InputStream wrapped;
-    public StreamingGZIPInputStream(InputStream is) throws IOException {
+    public StreamingGZIPInputStream(final InputStream is) throws IOException {
       super(is);
       wrapped = is;
     }
@@ -45,6 +45,7 @@ public class StreamingGZIPInputStream extends GZIPInputStream {
      * @exception  IOException  if an I/O error occurs.
      */
     
+    @Override
     public int available() throws IOException {
       return wrapped.available();
     }

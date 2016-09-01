@@ -15,12 +15,13 @@
  */
 package com.zaubersoftware.gnip4j.api.impl;
 
-import static org.junit.Assert.assertEquals;
-import junit.framework.Assert;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
+
+import junit.framework.Assert;
 
 
 /**

@@ -44,15 +44,15 @@ public class Size implements Serializable {
         return resize;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(final int width) {
         this.width = width;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(final int height) {
         this.height = height;
     }
 
-    public void setResize(String resize) {
+    public void setResize(final String resize) {
         this.resize = resize;
     }
     

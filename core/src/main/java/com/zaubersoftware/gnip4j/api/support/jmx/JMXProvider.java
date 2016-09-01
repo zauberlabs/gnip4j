@@ -36,7 +36,7 @@ public final class JMXProvider {
         try {
             Class.forName("java.lang.management.ManagementFactory");
             provider = new SunJMXProvider();
-        } catch(Exception e) {
+        } catch(final Exception e) {
             provider = new NullJMXProvider();
         }
     }

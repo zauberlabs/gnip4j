@@ -15,7 +15,6 @@
  */
 package com.zaubersoftware.gnip4j.api.exception;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;

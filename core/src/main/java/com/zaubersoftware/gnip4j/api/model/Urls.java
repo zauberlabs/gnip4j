@@ -86,7 +86,7 @@ public class Urls implements Serializable {
      *     {@link String }
      *     
      */
-    public void setExpandedUrl(String value) {
+    public void setExpandedUrl(final String value) {
         this.expandedUrl = value;
     }
 
@@ -127,7 +127,7 @@ public class Urls implements Serializable {
         this.displayUrl = displayUrl;
     }
 
-    public void setIndices(List<Integer> indices) {
+    public void setIndices(final List<Integer> indices) {
         this.indices = indices;
     }
     

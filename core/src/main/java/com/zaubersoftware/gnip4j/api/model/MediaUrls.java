@@ -63,7 +63,7 @@ public class MediaUrls extends Urls {
         return type;
     }
     
-    public void setType(String type) {
+    public void setType(final String type) {
         this.type = type;
     }
 
@@ -71,7 +71,7 @@ public class MediaUrls extends Urls {
         return sizes;        
     }
 
-    public void setSizes(Sizes sizes) {
+    public void setSizes(final Sizes sizes) {
         this.sizes = sizes;
     }
 

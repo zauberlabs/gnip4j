@@ -86,6 +86,7 @@ public class TeeInputStream extends ProxyInputStream {
      *
      * @throws IOException if either of the streams could not be closed
      */
+    @Override
     public final void close() throws IOException {
         try {
             super.close();
@@ -103,8 +104,9 @@ public class TeeInputStream extends ProxyInputStream {
      * @return next byte from the stream, or -1 if the stream has ended
      * @throws IOException if the stream could not be read (or written) 
      */
+    @Override
     public final int read() throws IOException {
-        int ch = super.read();
+        final int ch = super.read();
         if (ch != -1) {
             branch.write(ch);
         }
@@ -121,8 +123,9 @@ public class TeeInputStream extends ProxyInputStream {
      * @return number of bytes read, or -1 if the stream has ended
      * @throws IOException if the stream could not be read (or written) 
      */
+    @Override
     public final int read(final byte[] bts, final int st, final int end) throws IOException {
-        int n = super.read(bts, st, end);
+        final int n = super.read(bts, st, end);
         if (n != -1) {
             branch.write(bts, st, n);
         }
@@ -137,8 +140,9 @@ public class TeeInputStream extends ProxyInputStream {
      * @return number of bytes read, or -1 if the stream has ended
      * @throws IOException if the stream could not be read (or written) 
      */
+    @Override
     public final int read(final byte[] bts) throws IOException {
-        int n = super.read(bts);
+        final int n = super.read(bts);
         if (n != -1) {
             branch.write(bts, 0, n);
         }

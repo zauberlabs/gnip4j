@@ -44,7 +44,7 @@ public class JREReleaseInputStream extends AbstractReleaseInputStream {
                 try {
                     target.close();
                     target = null;
-                } catch (IOException e) {
+                } catch (final IOException e) {
                     // ignore
                 }
             }

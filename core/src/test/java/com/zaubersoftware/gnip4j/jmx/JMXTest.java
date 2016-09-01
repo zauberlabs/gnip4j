@@ -63,7 +63,7 @@ public final class JMXTest {
             }
 
 			@Override
-			public void deleteResource(URI uri, Object resource)
+			public void deleteResource(final URI uri, final Object resource)
 					throws AuthenticationGnipException, TransportGnipException {
 				// TODO Auto-generated method stub
 				

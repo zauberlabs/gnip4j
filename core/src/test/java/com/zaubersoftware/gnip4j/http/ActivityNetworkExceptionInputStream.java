@@ -49,7 +49,7 @@ public final class ActivityNetworkExceptionInputStream extends FilterInputStream
         if(bytesBefore <= 0) {
             throw new IOException("mock connection closed");
         }
-        int ret = super.read(b, off, len);
+        final int ret = super.read(b, off, len);
         bytesBefore -= ret;
         return ret;
     }

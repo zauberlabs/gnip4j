@@ -16,9 +16,7 @@
 package com.zaubersoftware.gnip4j.api.impl.formats;
 
 import java.io.IOException;
-import java.text.ParseException;
 
-import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -38,9 +36,9 @@ public class JSONActivityUnmarshaller implements Unmarshaller<Activity> {
     public final Activity unmarshall(final String s) {
         try {
             return mapper.readValue(s, Activity.class);
-        } catch (JsonMappingException e) {
+        } catch (final JsonMappingException e) {
             throw new IllegalArgumentException("parsing activity", e);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             throw new IllegalArgumentException("parsing activity", e);
         }
     }

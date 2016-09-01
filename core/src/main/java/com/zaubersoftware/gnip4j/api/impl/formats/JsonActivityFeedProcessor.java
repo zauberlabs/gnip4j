@@ -43,7 +43,7 @@ public class JsonActivityFeedProcessor extends BaseFeedProcessor {
     public static final ObjectMapper getObjectMapper() {
         final ObjectMapper mapper = new ObjectMapper();
         
-        SimpleModule gnipActivityModule = new SimpleModule("gnip.activity", new Version(1, 0, 0, null));
+        final SimpleModule gnipActivityModule = new SimpleModule("gnip.activity", new Version(1, 0, 0, null));
         gnipActivityModule.addDeserializer(Geo.class, new GeoDeserializer(Geo.class));
         gnipActivityModule.addSerializer(Geo.class, new GeoSerializer());
         mapper.registerModule(gnipActivityModule);

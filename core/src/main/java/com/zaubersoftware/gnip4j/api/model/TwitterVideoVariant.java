@@ -35,15 +35,15 @@ public class TwitterVideoVariant {
         return url;
     }
 
-    public void setBitrate(Integer bitrate) {
+    public void setBitrate(final Integer bitrate) {
         this.bitrate = bitrate;
     }
 
-    public void setContentType(String contentType) {
+    public void setContentType(final String contentType) {
         this.contentType = contentType;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(final String url) {
         this.url = url;
     }
 

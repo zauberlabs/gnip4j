@@ -22,7 +22,6 @@ import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.util.concurrent.ExecutorService;
 
-import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.StreamNotification;
 import com.zaubersoftware.gnip4j.api.stats.ModifiableStreamStats;
 

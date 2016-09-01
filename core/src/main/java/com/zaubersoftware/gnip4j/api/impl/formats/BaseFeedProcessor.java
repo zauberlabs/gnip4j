@@ -64,6 +64,7 @@ public abstract class BaseFeedProcessor<T> implements FeedProcessor {
         });
     }
     
+    @Override
     public final void setStream(final GnipStream stream) {
         this.stream = stream;
     }

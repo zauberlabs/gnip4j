@@ -35,13 +35,13 @@ import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 public class StringFeedProcessor extends BaseFeedProcessor<String> {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	public StringFeedProcessor(String streamName, ExecutorService activityService, StreamNotification<String> notification) {
+	public StringFeedProcessor(final String streamName, final ExecutorService activityService, final StreamNotification<String> notification) {
 		super(streamName, activityService, notification);
 	}
 
 	@Override
-	public void process(InputStream is, final ModifiableStreamStats stats) throws IOException, ParseException {
-		BufferedReader rdr = new BufferedReader(new InputStreamReader(is));
+	public void process(final InputStream is, final ModifiableStreamStats stats) throws IOException, ParseException {
+		final BufferedReader rdr = new BufferedReader(new InputStreamReader(is));
 		
         logger.debug("Starting to consume activity stream {} ...", streamName);
         while (!Thread.interrupted()) {

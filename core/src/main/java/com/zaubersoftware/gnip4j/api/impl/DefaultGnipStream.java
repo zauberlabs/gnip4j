@@ -32,9 +32,7 @@ import com.zaubersoftware.gnip4j.api.UriStrategy;
 import com.zaubersoftware.gnip4j.api.exception.GnipException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.impl.formats.FeedProcessor;
-import com.zaubersoftware.gnip4j.api.impl.formats.JsonActivityFeedProcessor;
 import com.zaubersoftware.gnip4j.api.impl.formats.Unmarshaller;
-import com.zaubersoftware.gnip4j.api.impl.formats.XMLActivityStreamFeedProcessor;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.stats.DefaultStreamStats;
 import com.zaubersoftware.gnip4j.api.stats.ModifiableStreamStats;
@@ -201,7 +199,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
         private AtomicLong disconnectedSinceTime = null;
 
         private InputStream is;
-        private FeedProcessor processor;
+        private final FeedProcessor processor;
         
         /** Creates the GnipHttpConsumer. */
         public GnipHttpConsumer(final InputStream response, final FeedProcessor proccesor) {

@@ -217,14 +217,14 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
 
         try {
             final ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            byte []buff = new byte[4096];
+            final byte []buff = new byte[4096];
             int i;
             while((i = is.read(buff)) >= 0) {
                 bos.write(buff, 0, i);
             }
             
             return new String(bos.toByteArray(), "utf-8");
-        } catch(IOException e) {
+        } catch(final IOException e) {
             return "";
         }
     }
@@ -246,12 +246,12 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
                     return m.readValue(is, Errors.class);
                 } else {
                     final Errors errors = new Errors();
-                    Error error = new Error();
+                    final Error error = new Error();
                     error.setMessage(toInputStream(is));
                     
                     return errors;
                 }
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 logger.warn("Exception trying to read error message ", e);
                 return null;
             }

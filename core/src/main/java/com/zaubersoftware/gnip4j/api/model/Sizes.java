@@ -45,19 +45,19 @@ public final class Sizes implements Serializable {
         return thumb;
     }
 
-    public void setLarge(Size large) {
+    public void setLarge(final Size large) {
         this.large = large;
     }
 
-    public void setMedium(Size medium) {
+    public void setMedium(final Size medium) {
         this.medium = medium;
     }
 
-    public void setSmall(Size small) {
+    public void setSmall(final Size small) {
         this.small = small;
     }
 
-    public void setThumb(Size thumb) {
+    public void setThumb(final Size thumb) {
         this.thumb = thumb;
     }
 

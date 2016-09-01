@@ -115,10 +115,10 @@ public final class JSONDeserializationTest {
             final Activities activities = parser.readValueAs(Activities.class);
             
             
-            Geo geo1 = activities.getActivities().get(0).getGeo();
-            Geo geo2 = activities.getActivities().get(1).getGeo();
-            Geo geo3 = activities.getActivities().get(0).getLocation().getGeo();
-            Geo geo4 = activities.getActivities().get(1).getLocation().getGeo();
+            final Geo geo1 = activities.getActivities().get(0).getGeo();
+            final Geo geo2 = activities.getActivities().get(1).getGeo();
+            final Geo geo3 = activities.getActivities().get(0).getLocation().getGeo();
+            final Geo geo4 = activities.getActivities().get(1).getLocation().getGeo();
             
             assertNull(geo1);
             assertEquals("lat: 35.11222481 lon: -78.99696934", geo2.getCoordinates().toString());
@@ -135,18 +135,18 @@ public final class JSONDeserializationTest {
      * Run this test with -Dfile.encoding=UTF-8 and then with another encoding, and compare the file results
      * */
     public void utfDesearilzationTest() throws JsonParseException, IOException{
-        InputStream in = getClass().getClassLoader().getResourceAsStream("com/zaubersoftware/gnip4j/payload/deserialize/utf8_tweets.json");
+        final InputStream in = getClass().getClassLoader().getResourceAsStream("com/zaubersoftware/gnip4j/payload/deserialize/utf8_tweets.json");
         
         try  {
             final JsonParser parser = mapper.getJsonFactory().createJsonParser(in);
             final Activities activities = parser.readValueAs(Activities.class);
             
             
-            String body0 = activities.getActivities().get(0).getBody();
-            String body1 = activities.getActivities().get(1).getBody();
-            String body2 = activities.getActivities().get(2).getBody();
+            final String body0 = activities.getActivities().get(0).getBody();
+            final String body1 = activities.getActivities().get(1).getBody();
+            final String body2 = activities.getActivities().get(2).getBody();
 
-            FileOutputStream fileOutputStream = new FileOutputStream(new File("tweets"));
+            final FileOutputStream fileOutputStream = new FileOutputStream(new File("tweets"));
             
             fileOutputStream.write(body0.getBytes("UTF-8"));
             fileOutputStream.write(body1.getBytes("UTF-8"));
@@ -199,7 +199,7 @@ public final class JSONDeserializationTest {
             assertNotNull(activity.getTwitterExtendedEntities());
             assertNotNull(activity.getTwitterExtendedEntities());
             assertEquals(1, activity.getTwitterExtendedEntities().getMediaUrls().size());
-            MediaUrls mediaUrls = activity.getTwitterExtendedEntities().getMediaUrls().get(0);
+            final MediaUrls mediaUrls = activity.getTwitterExtendedEntities().getMediaUrls().get(0);
             
             final VideoInfo videoInfo = mediaUrls.getVideoInfo();
             assertNull(videoInfo.getDurationMillis());
@@ -226,7 +226,7 @@ public final class JSONDeserializationTest {
             assertNotNull(activity.getTwitterExtendedEntities());
             assertNotNull(activity.getTwitterExtendedEntities());
             assertEquals(1, activity.getTwitterExtendedEntities().getMediaUrls().size());
-            MediaUrls mediaUrls = activity.getTwitterExtendedEntities().getMediaUrls().get(0);
+            final MediaUrls mediaUrls = activity.getTwitterExtendedEntities().getMediaUrls().get(0);
             
             final VideoInfo videoInfo = mediaUrls.getVideoInfo();
             assertEquals(29520L, videoInfo.getDurationMillis().longValue());
