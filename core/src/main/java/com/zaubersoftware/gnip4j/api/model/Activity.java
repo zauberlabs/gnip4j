@@ -68,6 +68,11 @@ public class Activity implements Serializable {
     @JsonProperty(value = "twitter_quoted_status")
     private Activity twitterQuotedStatus;
     
+    @JsonProperty(value = "display_text_range")
+    int [] displayTextRange;
+    @JsonProperty(value = "long_object")
+    Object longObject;
+    
     public final InReplyTo getInReplyTo() {
         return inReplyTo;
     }
@@ -208,6 +213,22 @@ public class Activity implements Serializable {
     
     public void setTwitterQuotedStatus(final Activity twitterQuotedStatus) {
         this.twitterQuotedStatus = twitterQuotedStatus;
+    }
+    
+    public void setDisplayTextRange(final int[] displayTextRange) {
+        this.displayTextRange = displayTextRange;
+    }
+    
+    public int[] getDisplayTextRange() {
+        return displayTextRange;
+    }
+    
+    public void setLongObject(final Object longObject) {
+        this.longObject = longObject;
+    }
+    
+    public Object getLongObject() {
+        return longObject;
     }
     
     /**
