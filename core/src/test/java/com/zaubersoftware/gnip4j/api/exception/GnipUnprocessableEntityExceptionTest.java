@@ -20,14 +20,11 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 /**
  * Unit test for {@link GnipUnprocessableEntityException}
  */
 public class GnipUnprocessableEntityExceptionTest {
-  @org.junit.Rule
-  public ExpectedException thrown = ExpectedException.none();
 
   @Test
   public void parse_should_create_offending_rule() {
@@ -93,29 +90,5 @@ public class GnipUnprocessableEntityExceptionTest {
     assertEquals(
         "Rule '(from:106175018 OR retweets_of:106175018 OR from:71395792 OR retweets_of:71395792 OR from:14595353 OR retweets_of:14595353 OR from:8802752 OR retweets_of:8802752 OR from:175479505 OR retweets_of:175479505 OR from:172872728 OR retweets_of:172872728 OR from:60114669 OR retweets_of:60114669 OR from:7302282 OR retweets_of:7302282 OR from:15911679 OR retweets_of:15911679 OR from:10842792 OR retweets_of:10842792 OR from:94132246 OR retweets_of:94132246 OR from:8229132 OR retweets_of:8229132 OR from:38427754 OR retweets_of:38427754 OR from:9317502 OR retweets_of:9317502 OR from:43208247 OR retweets_of:43208247 OR from:28431722 OR retweets_of:28431722 OR from:81169577 OR retweets_of:81169577 OR from:183679324 OR retweets_of:183679324 OR from:65473559 OR retweets_of:65473559 OR from:12652472 OR retweets_of:12652472 OR from:54319658 OR retweets_of:54319658 OR from:52206091 OR retweets_of:52206091 OR from:51124892 OR retweets_of:51124892 OR from:218581170 OR retweets_of:218581170 OR from:15488353 OR retweets_of:15488353 OR from:90697573 OR retweets_of:90697573 OR from:37681380 OR retweets_of:37681380 OR from:26283645 OR retweets_of:26283645 OR from:14595245 OR retweets_of:14595245 OR from:66461494 OR retweets_of:66461494 OR from:42452200 OR retweets_of:42452200 OR from:45261061 OR retweets_of:45261061 OR from:50055866 OR retweets_of:50055866 OR from:18219976 OR retweets_of:18219976 OR from:349131329 OR retweets_of:349131329 OR from:97293135 OR retweets_of:97293135 OR from:16725544 OR retweets_of:16725544 OR from:202338684 OR retweets_of:202338684 OR from:40051349 OR retweets_of:40051349 OR from:17850880 OR retweets_of:17850880 OR from:10844372 OR retweets_of:10844372 OR from:35856249 OR retweets_of:35856249 OR from:24021709 OR retweets_of:24021709 OR from:31392489 OR retweets_of:31392489 OR from:14594876 OR retweets_of:14594876 OR from:9604032 OR retweets_of:9604032 OR from:70799317 OR retweets_of:70799317 OR from:77469764 OR retweets_of:77469764 OR from:14679798 OR retweets_of:14679798 OR from:24201031 OR retweets_of:24201031 OR from:10950922 OR retweets_of:10950922 OR from:420535612 OR retweets_of:420535612 OR from:14179410 OR retweets_of:14179410 OR from:35765232 OR retweets_of:35765232 OR from:29797128 OR retweets_of:29797128 OR from:8163442 OR retweets_of:8163442 OR from:36387528 OR retweets_of:36387528 OR from:78015385 OR retweets_of:78015385 OR from:34532250 OR retweets_of:34532250 OR from:473364457 OR retweets_of:473364457 OR from:246471130 OR retweets_of:246471130 OR from:21007030 OR retweets_of:21007030) twitter_lang:pt ' exceeds the maximum length of a rule. It is 2565 characters while the maximum allowed is 2048 (at position 1)\n",
         offendingRules.get(4).getErrorMessage());
-  }
-
-  @Test
-  public void parse_should_throw_exception_when_unparsable_message() {
-    thrown.expect(IllegalArgumentException.class);
-    thrown.expectMessage("server message couldn't be parsed into offending rules");
-
-    new GnipUnprocessableEntityException("connecting to uri.com", "this is not a valid meessage");
-  }
-
-  @Test
-  public void should_throw_exception_on_null_message() {
-    thrown.expect(IllegalArgumentException.class);
-    thrown.expectMessage("server message cannot be empty");
-
-    new GnipUnprocessableEntityException("connecting to uri.com", (String)null);
-  }
-
-  @Test
-  public void should_throw_exception_on_empty_message() {
-    thrown.expect(IllegalArgumentException.class);
-    thrown.expectMessage("server message cannot be empty");
-
-    new GnipUnprocessableEntityException("connecting to uri.com", "");
   }
 }

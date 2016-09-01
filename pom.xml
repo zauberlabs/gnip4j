@@ -231,38 +231,38 @@
 		<dependency>
 			<artifactId>junit</artifactId>
 			<groupId>junit</groupId>
-			<version>4.7</version>
+			<version>4.12</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
-			<version>1.8.5</version>
+			<version>2.0.2-beta</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
-			<version>1.8.5</version>
+			<version>2.0.2-beta</version>
 		</dependency>
 		<!-- END: Testing -->
 		<dependency>
             		<groupId>commons-io</groupId>
             		<artifactId>commons-io</artifactId>
-            		<version>2.0.1</version>
+            		<version>2.5</version>
         	</dependency>
         	<dependency>
             		<groupId>commons-codec</groupId>
             		<artifactId>commons-codec</artifactId>
-            		<version>1.5</version>
+            		<version>1.10</version>
         	</dependency>
         	<dependency>
             		<groupId>joda-time</groupId>
             		<artifactId>joda-time</artifactId>
-            		<version>2.8.2</version>
+            		<version>2.9.4</version>
         	</dependency>
 		<dependency>
     			<groupId>org.apache.httpcomponents</groupId>
     			<artifactId>httpclient</artifactId>
-    			<version>4.1.1</version>
+    			<version>4.5.2</version>
                         <exclusions>
                             <exclusion>
                                <artifactId>commons-logging</artifactId>

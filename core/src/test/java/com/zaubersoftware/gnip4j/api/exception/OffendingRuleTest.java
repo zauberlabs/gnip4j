@@ -19,7 +19,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import com.zaubersoftware.gnip4j.api.model.Rule;
 
@@ -35,9 +34,6 @@ public class OffendingRuleTest {
   private Rule rule;
   private OffendingRule offending;
 
-  @org.junit.Rule
-  public ExpectedException thrown = ExpectedException.none();
-
   @Before
   public final void before() {
     rule = createTestRule(value, tag);
@@ -48,27 +44,6 @@ public class OffendingRuleTest {
   public final void getters_should_return_constructor_set_values() {
     assertEquals(rule, offending.getOffendingRule());
     assertEquals(mensaje_error, offending.getErrorMessage());
-  }
-
-  @Test
-  public final void constructor_throws_exception_on_null_rule() {
-    thrown.expect(IllegalArgumentException.class);
-    thrown.expectMessage("null offending rule");
-    new OffendingRule(null, mensaje_error);
-  }
-
-  @Test
-  public final void constructor_throws_exception_on_null_message() {
-    thrown.expect(IllegalArgumentException.class);
-    thrown.expectMessage("empty error message");
-    new OffendingRule(rule, null);
-  }
-
-  @Test
-  public final void constructor_throws_exception_on_empty_mesagge() {
-    thrown.expect(IllegalArgumentException.class);
-    thrown.expectMessage("empty error message");
-    new OffendingRule(rule, "");
   }
 
   @Test
