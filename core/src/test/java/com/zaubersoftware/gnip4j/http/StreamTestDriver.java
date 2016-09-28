@@ -76,7 +76,7 @@ public final class StreamTestDriver {
                 }
             };
             
-            final GnipStream stream = gnip.createPowertrackStream()
+            final GnipStream stream = gnip.createPowertrackStream(Activity.class)
                                         .withAccount(account)
                                         .withType(streamName)
                                         .withObserver(n)

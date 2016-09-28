@@ -70,13 +70,13 @@ public final class JMXTest {
 			}
         };
         final GnipFacade f = new DefaultGnipFacade(resources);
-        final GnipStream stream = f.createPowertrackStream()
+        final GnipStream stream = f.createPowertrackStream(Activity.class)
             .withAccount("acme")
             .withType("twitter")
             .withObserver(observer)
             .build();
         stream.close();
-        f.createPowertrackStream()
+        f.createPowertrackStream(Activity.class)
             .withAccount("acme")
             .withType("twitter")
             .withObserver(observer)

@@ -99,9 +99,8 @@ public class DefaultGnipFacade implements GnipFacade {
         this(facade, DEFAULT_BASE_URI_STRATEGY);
     }
     
-
     @Override
-    public PowertrackStreamBuilder createPowertrackStream() {
+    public PowertrackStreamBuilder createPowertrackStream(final Class clazz) {
         return new PowertrackStreamBuilder() {
             @Override
             protected GnipStream buildStream() {
@@ -111,9 +110,10 @@ public class DefaultGnipFacade implements GnipFacade {
                         streamName, 
                         executorService, 
                         this.observer, 
-                        new JSONActivityUnmarshaller());
+                        unmarshaller == null ? new JSONActivityUnmarshaller() : unmarshaller);
                 final GnipStream stream = createStream(this.account, type, 
-                        this.observer, this.executorService, new ActivityUnmarshaller(streamName), 
+                        this.observer, this.executorService, 
+                        unmarshaller == null ? new ActivityUnmarshaller(streamName) : unmarshaller, 
                         processor);
                 processor.setStream(stream);
                 return stream;

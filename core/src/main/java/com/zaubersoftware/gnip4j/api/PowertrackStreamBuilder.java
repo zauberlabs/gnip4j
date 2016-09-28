@@ -18,6 +18,8 @@ package com.zaubersoftware.gnip4j.api;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import com.zaubersoftware.gnip4j.api.impl.formats.Unmarshaller;
+
 /**
  * TODO: Description of the class, Comments in english by default  
  * 
@@ -32,29 +34,34 @@ public abstract class PowertrackStreamBuilder<T> {
     protected ExecutorService executorService = Executors.newFixedThreadPool(streamDefaultWorkers);
     protected String account;
     protected StreamNotification<T> observer;
+    protected Unmarshaller<T> unmarshaller;
     
     /**  if your EDC URL starts with http://acme.gnip.com  then this value is acme*/
-    public final PowertrackStreamBuilder withAccount(final String account) {
+    public final PowertrackStreamBuilder<T> withAccount(final String account) {
         this.account = account;
         return this;
     }
     
-    public final PowertrackStreamBuilder withObserver(final StreamNotification<T> observer) {
+    public final PowertrackStreamBuilder<T> withObserver(final StreamNotification<T> observer) {
         this.observer = observer;
         return this;
     }
     
-    public final PowertrackStreamBuilder withExecutorService(final ExecutorService executor) {
+    public final PowertrackStreamBuilder<T> withExecutorService(final ExecutorService executor) {
         this.executorService = executor;
         return this;
     }
 
     /** twitter | automattic | ... */
-    public final PowertrackStreamBuilder withType(final String type) {
+    public final PowertrackStreamBuilder<T> withType(final String type) {
         this.type = type;
         return this;
     }
     
+    public final PowertrackStreamBuilder<T> withUnmarshall(final Unmarshaller<T> unmarshaller) {
+        this.unmarshaller = unmarshaller;
+        return this;
+    }
     
     public GnipStream build() {
         if(account == null) {

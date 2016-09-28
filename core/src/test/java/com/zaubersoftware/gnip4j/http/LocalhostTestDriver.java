@@ -80,7 +80,7 @@ public final class LocalhostTestDriver {
                     System.out.println(i + "-" + activity.getBody() + " " + activity.getGnip().getMatchingRules());
                 }
             };
-            final GnipStream stream = gnip.createPowertrackStream().withAccount("test-account")
+            final GnipStream stream = gnip.createPowertrackStream(Activity.class).withAccount("test-account")
                                                                     .withType("test-stream")
                                                                     .withObserver(n)
                                                                     .build();

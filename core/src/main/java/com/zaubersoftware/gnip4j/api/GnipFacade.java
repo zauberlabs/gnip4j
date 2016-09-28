@@ -31,7 +31,7 @@ public interface GnipFacade {
     
     /** Let you create a Powertrack Stream 
      * @param <T>*/
-    <T> PowertrackStreamBuilder<T> createPowertrackStream();
+    <T> PowertrackStreamBuilder<T> createPowertrackStream(Class<T> claszz);
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
