@@ -40,7 +40,7 @@ import com.zaubersoftware.gnip4j.api.UriStrategy;
  * @since 10/01/15
  */
 public final class PowerTrackV2UriStrategy implements UriStrategy {
-    public static final String DEFAULT_STREAM_URL_BASE  = "https://stream-data-api.twitter.com";
+    public static final String DEFAULT_STREAM_URL_BASE  = "https://gnip-stream.twitter.com";
     public static final String DEFAULT_RULE_URL_BASE = "https://gnip-api.twitter.com";
     public static final String PATH_GNIP_STREAM_URI =  "/stream/powertrack/accounts/%s/publishers/%s/%s.json";
     public static final String PATH_GNIP_RULES_URI =  "/rules/powertrack/accounts/%s/publishers/%s/%s.json";
