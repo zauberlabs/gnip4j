@@ -6,7 +6,7 @@ from the data from the Java language.
 
 
 ## Features
-   * 100% Pure Java - works on any Java Platform version 1.6 or later 
+   * 100% Pure Java - works on any Java Platform version 1.8 or later 
    * Minimal dependencies: 
       * The [Jackson JSON library](http://jackson.codehaus.org/) is the only requiered dependecy
       * Optionally if `slf4-api` is present in the classpath, logging is supported.
@@ -14,6 +14,8 @@ from the data from the Java language.
    * Push model via Streaming (asynchronous processing)
    * Error handling support (and exponential-backoff reconnections)
    * Monitoring Support (JMX)
+   * Enterprise Data Collector Support
+   * Powertrack V1 and V2 support
 
 ## How To use gnip4j
 
@@ -42,7 +44,7 @@ Add to your dependency Managment:
      </dependencyManagement>
      ...
      <properties>
-         <gnip4j.version>0.1</gnip4j.version>
+         <gnip4j.version>2.0.0</gnip4j.version>
      </properties>
 ```
 
@@ -61,26 +63,26 @@ If you need logging adding `slf4j` as a dependency.
  
 ## Code Snippet
 
-### Consuming ten Activities from the stream
+### Consuming ten raw Activities from the stream
    
 ```java
-    final String account = "YourAccount";
-    final String streamName = "prod";
     final AtomicInteger counter = new AtomicInteger();
 
-    final StreamNotification observer = new StreamNotificationAdapter() {
-      @Override
-      public void notify(final Activity activity, final GnipStream stream) {
-        final int i = counter.getAndIncrement();
-        System.out.println(i + "-" + activity.getBody() 
-                             + " " + activity.getGnip().getMatchingRules());
-        if (i >= 10) {
-            stream.close();
-        }
-      }
-    };
-    
-    final GnipStream stream = gnip.createStream(account, streamName, n);
+    final DefaultGnipFacade x = DefaultGnipFacade.createPowertrackV2(…);
+    final GnipStream stream = x.createPowertrackStream(String.class)
+            .withAccount("YourAccount")
+            .withType("prod")
+            .withUnmarshall(new StringUnmarshaller())
+            .withObserver(new StreamNotificationAdapter<String>() {
+                @Override
+                public void notify(final String activity, final GnipStream stream) {
+                    System.out.println(activity);
+                    if (i >= 10) {
+                        stream.close();
+                    }
+                }
+            })
+            .build();
     stream.await();
 ```
 
@@ -95,20 +97,9 @@ Had an Issue? Fill it in https://github.com/zauberlabs/gnip4j/issues .
 If you want to get in contact with us, or people interested in the project, please visit our group at
 http://groups.google.com/group/gnip4j
 
-## Who is using gnip4j?
-
-Gnip4j was developed by [Zauber](http://www.zaubersoftware.com/), a software boutique & lab based
-in Buenos Aires, Argentina. We built Gnip4j when we started using Gnip Twitter Premium Feeds. 
-We use their service to create scalable social media dashboards and interactive visualizations that
-operate in real time. We were already using Twitter4j for other Twitter-related development projects, 
-thus we thought that building a sister project Gnip4j would make perfect sense. 
-We hope you find it useful too. [Contact us](http://www.zaubersoftware.com/en/contact/)
-if you want to contribute to this project or just have any specific requests.
-
-
 ## License
 
-Copyright (c) 2011 Zauber S.A. <http://www.zaubersoftware.com/>
+Copyright (c) 2011-2016 Zauber S.A. <http://www.zaubersoftware.com/>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
