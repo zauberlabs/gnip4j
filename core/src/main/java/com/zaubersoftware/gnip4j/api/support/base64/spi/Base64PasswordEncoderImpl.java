@@ -15,6 +15,7 @@
  */
 package com.zaubersoftware.gnip4j.api.support.base64.spi;
 
+import java.nio.charset.Charset;
 import java.util.Base64;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;

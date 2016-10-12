@@ -16,6 +16,7 @@
 package com.zaubersoftware.gnip4j.api.impl;
 
 import java.net.URI;
+import java.util.Locale;
 
 import com.zaubersoftware.gnip4j.api.UriStrategy;
 
@@ -42,7 +43,7 @@ public final class EnterpriseDataCollectorUriStrategy implements UriStrategy {
             throw new IllegalArgumentException("The streamName cannot be null or empty");
         }
         
-        return URI.create(String.format(STREAM_URI, account.trim(), streamName.trim()));
+        return URI.create(String.format(Locale.ENGLISH, STREAM_URI, account.trim(), streamName.trim()));
     }
 
     @Override
@@ -54,7 +55,7 @@ public final class EnterpriseDataCollectorUriStrategy implements UriStrategy {
             throw new IllegalArgumentException("The streamName cannot be null or empty");
         }
         
-        return URI.create(String.format(RULES_URI, account.trim(), streamName.trim()));
+        return URI.create(String.format(Locale.ENGLISH, RULES_URI, account.trim(), streamName.trim()));
     }
     
     @Override

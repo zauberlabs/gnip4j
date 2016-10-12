@@ -16,6 +16,7 @@
 package com.zaubersoftware.gnip4j.api.impl;
 
 import java.net.URI;
+import java.util.Locale;
 
 import com.zaubersoftware.gnip4j.api.UriStrategy;
 
@@ -72,7 +73,7 @@ public final class PowerTrackV2UriStrategy implements UriStrategy {
             throw new IllegalArgumentException("The streamName cannot be null or empty");
         }
         
-        return URI.create(String.format(streamUrlBase + PATH_GNIP_STREAM_URI, account.trim(), publisher.trim(), streamName.trim()));
+        return URI.create(String.format(Locale.ENGLISH, streamUrlBase + PATH_GNIP_STREAM_URI, account.trim(), publisher.trim(), streamName.trim()));
     }
 
     @Override
@@ -98,7 +99,7 @@ public final class PowerTrackV2UriStrategy implements UriStrategy {
              throw new IllegalArgumentException("The streamName cannot be null or empty");
          }
          
-         return String.format(ruleUrlBase + PATH_GNIP_RULES_URI, account.trim(), publisher.trim(), streamName.trim());
+         return String.format(Locale.ENGLISH, ruleUrlBase + PATH_GNIP_RULES_URI, account.trim(), publisher.trim(), streamName.trim());
     }
     
     public final String getStreamUrlBase() {

@@ -241,6 +241,30 @@
           <encoding>utf-8</encoding>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>de.thetaphi</groupId>
+        <artifactId>forbiddenapis</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <failOnViolation>true</failOnViolation>
+          <failOnUnsupportedJava>false</failOnUnsupportedJava>
+          <failOnMissingClasses>false</failOnMissingClasses>
+          <failOnUnresolvableSignatures>false</failOnUnresolvableSignatures>
+          <bundledSignatures>
+            <bundledSignature>jdk-unsafe-1.8</bundledSignature>
+            <bundledSignature>jdk-deprecated-1.8</bundledSignature>
+          </bundledSignatures>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+              <goal>testCheck</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+ 
     </plugins>
   </build>
   <inceptionYear>2011</inceptionYear>

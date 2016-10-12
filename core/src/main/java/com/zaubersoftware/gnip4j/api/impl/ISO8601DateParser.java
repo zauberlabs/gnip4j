@@ -20,6 +20,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * ISO 8601 date parsing utility. Designed for parsing the ISO subset used in
@@ -33,13 +34,13 @@ public class ISO8601DateParser {
     private static ThreadLocal<DateFormat> normalDf = new ThreadLocal<DateFormat>() {
         @Override
         protected synchronized DateFormat initialValue() {
-            return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
+            return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz", Locale.ENGLISH);
         }
     };
     private static ThreadLocal<DateFormat> hackDf = new ThreadLocal<DateFormat>() {
         @Override
         protected synchronized DateFormat initialValue() {
-            return new SimpleDateFormat("yyyy-MM-dd'T'HH-mm-ss");
+            return new SimpleDateFormat("yyyy-MM-dd'T'HH-mm-ss", Locale.ENGLISH);
         }
     };
 

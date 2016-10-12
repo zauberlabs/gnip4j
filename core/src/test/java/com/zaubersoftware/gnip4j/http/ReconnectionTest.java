@@ -20,6 +20,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -71,21 +72,21 @@ public final class ReconnectionTest {
         final StreamNotification<Activity> n = new StreamNotification<Activity>() {
             @Override
             public void notifyReConnectionError(final GnipException e) {
-                out.append(String.format("ReConnectionError: %s\n",
+                out.append(String.format(Locale.ENGLISH, "ReConnectionError: %s\n",
                         e.getMessage()));
             }
 
             @Override
             public void notifyReConnectionAttempt(final int attempt,
                     final long waitTime) {
-                out.append(String.format(
+                out.append(String.format(Locale.ENGLISH, 
                         "Connection attempt %d wait time %d\n", attempt,
                         waitTime));
             }
 
             @Override
             public void notifyConnectionError(final TransportGnipException e) {
-                out.append(String.format("ConnectionError: %s\n",
+                out.append(String.format(Locale.ENGLISH, "ConnectionError: %s\n",
                         e.getMessage()));
             }
 
@@ -99,7 +100,7 @@ public final class ReconnectionTest {
 
 			@Override
 			public void notifyReConnected(final int attempt, final long elaspedDisconnectedTime) {
-				out.append(String.format(
+				out.append(String.format(Locale.ENGLISH, 
                         "Connection attempt %d succeeded\n", attempt));
 				
 			}
@@ -149,7 +150,7 @@ class MockRemoteResourceProvider implements RemoteResourceProvider {
             return (InputStream) response[2];
         } else {
             throw new TransportGnipException(
-                String.format("Connection to %s: Unexpected status code: %s %s",
+                String.format(Locale.ENGLISH, "Connection to %s: Unexpected status code: %s %s",
                         uri, statusCode, response[1].toString()));
         }
 

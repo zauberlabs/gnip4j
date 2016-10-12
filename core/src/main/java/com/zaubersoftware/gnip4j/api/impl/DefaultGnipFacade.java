@@ -19,6 +19,7 @@ import static com.zaubersoftware.gnip4j.api.impl.ErrorCodes.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -104,7 +105,7 @@ public class DefaultGnipFacade implements GnipFacade {
         return new PowertrackStreamBuilder() {
             @Override
             protected GnipStream buildStream() {
-                final String streamName = String.format("powertrack-%s-%s", this.account, this.type);
+                final String streamName = String.format(Locale.ENGLISH, "powertrack-%s-%s", this.account, this.type);
                 
                 final FeedProcessor processor =  new ByLineFeedProcessor<Activity>(
                         streamName, 
@@ -127,7 +128,7 @@ public class DefaultGnipFacade implements GnipFacade {
             @Override
             protected GnipStream buildStream() {
                 FeedProcessor p;
-                final String streamName = String.format("edc-%s-%s", this.account, this.dataCollector);
+                final String streamName = String.format(Locale.ENGLISH, "edc-%s-%s", this.account, this.dataCollector);
                 
                 if(activity) {
                     p = new XMLActivityStreamFeedProcessor(this.account, this.executorService, this.observer, 
