@@ -1,0 +1,44 @@
+
+2.0.0 (2016-10-12)
+
+Depending of the features used, this release might not be binary compatible 
+with previous releases. Recompilation of the client apps is adviced.
+
+  - More entities in the Activity model implements Serializable
+  - Activity model expanded to support more twitter  features (140plus 
+    characters, places, expanded_status, etc)
+  - Consumers are able to process raw strings (usefull for native format)
+  - Dependencies updated (junit, mockito, slf4, joda-time...)
+  - Java 8 is required
+  - Powertrack 2 support
+  - removed Mule support
+  - Ease Facade creation for Powertrack V1/V2
+
+  Example of consuming a V2 Raw stream:
+    final DefaultGnipFacade x = DefaultGnipFacade.createPowertrackV2(…);
+    final GnipStream stream = x.createPowertrackStream(String.class)
+        .withAccount("…")
+        .withType("dev")
+        .withUnmarshall(new StringUnmarshaller())
+        .withObserver(new StreamNotificationAdapter<String>() {
+            @Override
+            public void notify(final String activity, final GnipStream stream) {
+                System.out.println(activity);
+            }
+        })
+        .build();
+    stream.await();
+
+
+  Contributors:
+   - Brian Sloan (1):
+   - David Kigel (4):
+   - James Jory (2):
+   - Josh Montague (1):
+   - Juan F. Codagnone (67):
+   - Kenneth Jorgensen (4):
+   - Marcelo Turrin (17):
+   - Pablo Diez (1):
+   - mjmeyer (7):
+
+
