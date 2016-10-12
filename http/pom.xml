@@ -1,66 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<artifactId>zauber-gnip4j-parent</artifactId>
-		<groupId>com.zaubersoftware.gnip4j</groupId>
-		<version>1.2-SNAPSHOT</version>
-	</parent>
-	<groupId>com.zaubersoftware.gnip4j</groupId>
-	<artifactId>gnip4j-http</artifactId>
-	<packaging>jar</packaging>
-	<name>Zauber::Gnip4j::HTTP Client</name>
-	<dependencies>
-
-		<dependency>
-			<artifactId>gnip4j-core</artifactId>
-			<groupId>${project.groupId}</groupId>
-			<version>${project.version}</version>
-		</dependency>
-
-		<!-- START: HTTP -->
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpcore</artifactId>
-			<version>4.1</version>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<!-- END: HTTP -->
-		<!-- BEGIN: Logging -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<!-- END: Logging -->
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<scope>test</scope>
-		</dependency>
-	      	<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-                        <scope>test</scope>
-		</dependency> <!--
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.zaubersoftware.gnip4j</groupId>
+    <artifactId>zauber-gnip4j-parent</artifactId>
+    <version>1.2-SNAPSHOT</version>
+  </parent>
+  <groupId>com.zaubersoftware.gnip4j</groupId>
+  <artifactId>gnip4j-http</artifactId>
+  <packaging>jar</packaging>
+  <name>Zauber::Gnip4j::HTTP Client</name>
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>gnip4j-core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <!-- START: HTTP -->
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpcore</artifactId>
+      <version>4.1</version>
+      <exclusions>
+        <exclusion>
+          <groupId>commons-logging</groupId>
+          <artifactId>commons-logging</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!--
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
 		</dependency>
                 -->
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.1.1</version>
-		</dependency>
-	</dependencies>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.1.1</version>
+    </dependency>
+    <!-- END: HTTP -->
+    <!-- BEGIN: Logging -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!-- END: Logging -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 </project>
