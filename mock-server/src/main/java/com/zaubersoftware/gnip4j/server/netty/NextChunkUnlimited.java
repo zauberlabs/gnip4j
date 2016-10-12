@@ -24,13 +24,6 @@ import org.jboss.netty.handler.codec.http.DefaultHttpChunk;
 
 public class NextChunkUnlimited extends NextChunkStrategy{
 
-    /**
-     * 
-     * Creates the NextChunkIterator.
-     *
-     * @param channel
-     * @param iterator
-     */
     public NextChunkUnlimited(final Collection<String> activities) {
         super(activities);
     }

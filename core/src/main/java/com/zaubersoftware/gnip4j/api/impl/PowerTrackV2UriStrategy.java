@@ -25,15 +25,15 @@ import com.zaubersoftware.gnip4j.api.UriStrategy;
  * 
  * As of 10/1/2015 PowerTrack V2 is in private beta.
  * 
- * https://stream-data-api.twitter.com/stream/powertrack/accounts/<account>/publishers/twitter/<stream>.json
- * https://data-api.twitter.com/rules/powertrack/accounts/<account>/publishers/twitter/<stream>.json"
+ * https://stream-data-api.twitter.com/stream/powertrack/accounts/&lt;account&gt;/publishers/twitter/&lt;stream&gt;.json
+ * https://data-api.twitter.com/rules/powertrack/accounts/&lt;account&gt;/publishers/twitter/&lt;stream&gt;.json"
  *
  * <p>
- * The base URI format for stream is {@link PowerTrackV2UriStrategy#BASE_GNIP_URI_FMT}
+ * The base URI format for stream is {@link PowerTrackV2UriStrategy#DEFAULT_STREAM_URL_BASE}
  * <p>
  *
  * <p>
- * The base URI format for rules is {@link PowerTrackV2UriStrategy#BASE_GNIP_RULES_URI_FMT}
+ * The base URI format for rules is {@link PowerTrackV2UriStrategy#DEFAULT_RULE_URL_BASE}
  * <p>
  *
  * @author mjmeyer

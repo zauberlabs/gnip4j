@@ -59,7 +59,7 @@ public interface GnipFacade {
      * 
      * @param account The account name for the power track API. (For example: acme)
      * @param streamName the streamName
-     * @param rule The Rules object to add to the tracker
+     * @param rules The Rules object to add to the tracker
      */
     void addRules(String account, String streamName, Rules rules);
     

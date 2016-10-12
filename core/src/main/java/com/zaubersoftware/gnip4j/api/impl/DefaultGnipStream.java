@@ -45,7 +45,7 @@ import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
  * Implementation acording
  * http://docs.gnip.com/w/page/23724581/Gnip-Full-Documentation#streaminghttp
  *
- * <verbatim>
+ * {@literal
  *                                               Json
  *   +----------+   HTTP   +------------------+ (String) +--------------+        +-----------------+
  *   | data     | -------> | GnipHttpConsumer |-----+--> | JsonConsumer |----+   | ActivityConsumer|
@@ -54,7 +54,7 @@ import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
  *                                                  |    +--------------+    |   +-----------------+
  *                                                  +--> | JsonConsumer |----+   | ActivityConsumer|
  *                                                       +--------------+        +-----------------+
- * </verbatim>
+ * }
  *
  * @author Guido Marucci Blas
  * @since Apr 29, 2011

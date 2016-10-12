@@ -28,7 +28,7 @@ package com.zaubersoftware.gnip4j.api.support.base64.spi;
  * Example:
  * </p>
  *
- * <code>String encoded = Base64.encode( myByteArray );</code> <br />
+ * <code>String encoded = Base64.encode( myByteArray );</code>
  * <code>byte[] myByteArray = Base64.decode( encoded );</code>
  *
  * <p>
@@ -1843,7 +1843,7 @@ public class Base64 {
          * <pre>
          *   ENCODE or DECODE: Encode or Decode as data is read.
          *   DO_BREAK_LINES: break lines at 76 characters
-         *     (only meaningful when encoding)</i>
+         *     (only meaningful when encoding)
          * </pre>
          * <p>
          * Example: <code>new Base64.InputStream( in, Base64.DECODE )</code>
@@ -2053,7 +2053,7 @@ public class Base64 {
          * <pre>
          *   ENCODE or DECODE: Encode or Decode as data is read.
          *   DO_BREAK_LINES: don't break lines at 76 characters
-         *     (only meaningful when encoding)</i>
+         *     (only meaningful when encoding)
          * </pre>
          * <p>
          * Example: <code>new Base64.OutputStream( out, Base64.ENCODE )</code>

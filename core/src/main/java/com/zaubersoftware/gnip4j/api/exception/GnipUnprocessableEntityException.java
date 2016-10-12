@@ -29,7 +29,7 @@ import com.zaubersoftware.gnip4j.api.support.http.Errors.RuleErrorDetail;
 /**
  * Exception class that knows how to parse the 422 message error into a list of
  * {@link OffendingRule}s. This message is not the full json message but the
- * content of the error->message field.
+ * content of the {@literal error->message} field.
  */
 public class GnipUnprocessableEntityException extends GnipException {
 

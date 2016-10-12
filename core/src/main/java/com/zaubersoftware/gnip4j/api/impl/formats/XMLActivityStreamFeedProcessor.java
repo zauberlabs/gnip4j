@@ -46,13 +46,13 @@ import com.zaubersoftware.gnip4j.api.stats.ModifiableStreamStats;
  * need to know when to process a particular chunk of data. When using the HTTP
  * stream Gnip sends the data over the stream with each activity as its own
  * "top-level" node. In other words, activities will not be wrapped in an
- * enclosing <results> element as they are during a normal poll.
+ * enclosing {@literal <results>} element as they are during a normal poll.
  * </p>
  * <p>
  * Generally the best approach is to read the data and grab the opening element
- * (e.g. the <entry> element when the activities are coming across in Atom
+ * (e.g. the {@literal <entry>} element when the activities are coming across in Atom
  * format), then continue reading until you see the closing element for that tag
- * (</entry>). At this point you've got a fully valid Atom XML entry that can be
+ * ({@literal </entry>}). At this point you've got a fully valid Atom XML entry that can be
  * processed by any standard xml parser.
  * </p>
  * <p>
@@ -62,13 +62,13 @@ import com.zaubersoftware.gnip4j.api.stats.ModifiableStreamStats;
  * <p>
  * For example, the following figure shows what a stream may look like when used
  * with a Twitter Actor - Notices data collector. In this example there are two
- * <status> documents. Using the approach outlined above, your stream client
- * would see the first <status> element, continue reading until it sees the
- * first </status> element, then process that chunk as a single XML document. It
- * would then continue reading at the second <status> element and process the
- * second document when it sees the second </status> element. </blockquote>
+ * {@literal <status>} documents. Using the approach outlined above, your stream client
+ * would see the first {@literal <status>} element, continue reading until it sees the
+ * first {@literal </status>} element, then process that chunk as a single XML document. It
+ * would then continue reading at the second {@literal <status>} element and process the
+ * second document when it sees the second {@literal </status>} element. 
  * </p>
- * 
+ * </blockquote>
  * @author Juan F. Codagnone
  * @since Dec 11, 2012
  */

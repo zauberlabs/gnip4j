@@ -24,11 +24,11 @@ import com.zaubersoftware.gnip4j.api.UriStrategy;
  * to the real Gnip endpoint.
  *
  * <p>
- * The base URI format for stream is {@link DefaultUriStrategy#BASE_GNIP_URI_FMT}
+ * The base URI format for stream is {@link DefaultUriStrategy#DEFAULT_STREAM_URL_BASE}
  * <p>
  *
  * <p>
- * The base URI format for rules is {@link DefaultUriStrategy#BASE_GNIP_RULES_URI_FMT}
+ * The base URI format for rules is {@link DefaultUriStrategy#DEFAULT_RULE_URL_BASE}
  * <p>
  *
  * @author Guido Marucci Blas
