@@ -1,18 +1,18 @@
 
-2.0.0 (2016-10-12)
+### 2.0.0 (2016-10-12)
 
 Depending of the features used, this release might not be binary compatible 
 with previous releases. Recompilation of the client apps is adviced.
 
-  - More entities in the Activity model implements Serializable
-  - Activity model expanded to support more twitter  features (140plus 
-    characters, places, expanded_status, etc)
-  - Consumers are able to process raw strings (usefull for native format)
-  - Dependencies updated (junit, mockito, slf4, joda-time...)
-  - Java 8 is required
-  - Powertrack 2 support
-  - removed Mule support
-  - Ease Facade creation for Powertrack V1/V2
+ * More entities in the Activity model implements Serializable
+ * Activity model expanded to support more twitter  features (140plus 
+ * characters, places, expanded_status, etc)
+ * Consumers are able to process raw strings (usefull for native format)
+ * Dependencies updated (junit, mockito, slf4, joda-time...)
+ * Java 8 is required
+ * Powertrack 2 support
+ * removed Mule support
+ * Ease Facade creation for Powertrack V1/V2
 
   Example of consuming a V2 Raw stream:
     final DefaultGnipFacade x = DefaultGnipFacade.createPowertrackV2(…);
@@ -29,7 +29,6 @@ with previous releases. Recompilation of the client apps is adviced.
         .build();
     stream.await();
 
-
   Contributors:
    - Brian Sloan (1):
    - David Kigel (4):
@@ -41,4 +40,38 @@ with previous releases. Recompilation of the client apps is adviced.
    - Pablo Diez (1):
    - mjmeyer (7):
 
+### Gnip4j 1.1.1 (2013-08-08)
 
+ * Bugfix: Rule encoding fix: when ASCII chars where encoded with default
+ * charset instead of using utf-8
+ * enhace: DefaultUriStrategy can be parameterized with the publisher
+ * (twitter, tumblr, ...)
+ * enhace: JRERemoteResourceProvider:  more verborragic error reporting
+
+### Gnip4j 1.0
+
+ * Updates to support the new API coming up on March 2012 ( not compatible
+ * with previous API )
+ * Missing property order "type" for Geo.java ( thanks simonwg )
+ * cannot deserialize properly for the geo coordinates ( thanks simonwg )
+ * remove support for Apache HttpClient 
+
+
+### Gnip4j 0.2
+
+ * Added UriStrategy to generate URI to connect to Gnip endpoint
+
+### Gnip4j 0.1
+
+ * Fix "Usage" documentation (contributed by Adrian Petrescu)
+ * Added twitterTimeZone to Actor (contributed by Rob Stanley)
+ * Added support for the activity.geo.coordinates (contributed by chouck)
+ * Return klout_score in activity.gnip object (if Klout is enabled for your
+ * Gnip account) (contributed by Adrian Petrescu)
+ * Added support for fetching rules list from Gnip's REST API. (contributed by
+ * Adrian Petrescu)
+ * Typos and better base64 implementation (contributed by Adrian Petrescu)
+
+### Gnip4j 0.0
+
+Initial Release. Only the streaming API is supported.
