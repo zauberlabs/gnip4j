@@ -41,7 +41,7 @@ public class StringFeedProcessor extends BaseFeedProcessor<String> {
 
 	@Override
 	public void process(final InputStream is, final ModifiableStreamStats stats) throws IOException, ParseException {
-		final BufferedReader rdr = new BufferedReader(new InputStreamReader(is));
+		final BufferedReader rdr = new BufferedReader(new InputStreamReader(is, "utf-8"));
 		
         logger.debug("Starting to consume activity stream {} ...", streamName);
         while (!Thread.interrupted()) {
