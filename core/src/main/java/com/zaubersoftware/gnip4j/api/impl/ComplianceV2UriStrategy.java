@@ -5,7 +5,7 @@ import com.zaubersoftware.gnip4j.api.UriStrategy;
 import java.net.URI;
 
 public class ComplianceV2UriStrategy implements UriStrategy {
-    public static final String BASE_GNIP_STREAM_URI_V2 = "https://gnip-api.twitter.com/stream/compliance/accounts/%s/publishers/twitter/%s.json?partition=%s";
+    public static final String BASE_GNIP_STREAM_URI_V2 = "https://gnip-stream.twitter.com/stream/compliance/accounts/%s/publishers/twitter/%s.json?partition=%s";
 
     private final String baseGnipStreamUri;
     private final String partition;
@@ -56,5 +56,9 @@ public class ComplianceV2UriStrategy implements UriStrategy {
         }
 
         return String.format(BASE_GNIP_RULES_URI, account.trim(), streamName.trim());
+    }
+
+    public String getPartition() {
+        return partition;
     }
 }

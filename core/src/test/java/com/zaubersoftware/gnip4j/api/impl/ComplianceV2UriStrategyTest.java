@@ -11,7 +11,7 @@ public class ComplianceV2UriStrategyTest {
     public void uriConstructedFromAccountAndStream() {
         ComplianceV2UriStrategy strategy = new ComplianceV2UriStrategy(1);
         URI streamUri = strategy.createStreamUri("my-account", "my-stream");
-        assertEquals("https://gnip-api.twitter.com/stream/compliance/accounts/my-account/publishers/twitter/my-stream.json?partition=1", streamUri.toString());
+        assertEquals("https://gnip-stream.twitter.com/stream/compliance/accounts/my-account/publishers/twitter/my-stream.json?partition=1", streamUri.toString());
 
         URI rulesUri = strategy.createRulesUri("my-account", "my-stream");
         assertEquals("https://gnip-api.twitter.com/rules/powertrack/accounts/my-account/publishers/twitter/my-stream.json", rulesUri.toString());

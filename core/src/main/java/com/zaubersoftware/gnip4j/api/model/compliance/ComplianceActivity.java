@@ -34,8 +34,10 @@ import java.io.Serializable;
     @JsonSubTypes.Type(value=UndeleteUserActivity.class, name=ComplianceActivity.Verb.USER_UNDELETE),
     @JsonSubTypes.Type(value=ScrubGeoActivity.class, name=ComplianceActivity.Verb.SCRUB_GEO),
     @JsonSubTypes.Type(value=UserProtectActivity.class, name=ComplianceActivity.Verb.USER_PROTECT),
+    @JsonSubTypes.Type(value=UserUnprotectActivity.class, name=ComplianceActivity.Verb.USER_UNPROTECT),
     @JsonSubTypes.Type(value=UserSuspendActivity.class, name=ComplianceActivity.Verb.USER_SUSPEND),
-    @JsonSubTypes.Type(value=UserUnsuspendActivity.class, name=ComplianceActivity.Verb.USER_UNSUSPEND)
+    @JsonSubTypes.Type(value=UserUnsuspendActivity.class, name=ComplianceActivity.Verb.USER_UNSUSPEND),
+    @JsonSubTypes.Type(value=StatusWithheldActivity.class, name=ComplianceActivity.Verb.STATUS_WITHHELD)
 })
 public interface ComplianceActivity extends Serializable {
     Activity toActivity();
@@ -46,7 +48,9 @@ public interface ComplianceActivity extends Serializable {
         String USER_UNDELETE = "user_undelete";
         String SCRUB_GEO = "scrub_geo";
         String USER_PROTECT = "user_protect";
+        String USER_UNPROTECT = "user_unprotect";
         String USER_SUSPEND = "user_suspend";
         String USER_UNSUSPEND = "user_unsuspend";
+        String STATUS_WITHHELD = "status_withheld";
     }
 }
