@@ -95,6 +95,13 @@ public class DefaultGnipFacade implements GnipFacade {
         return new DefaultGnipFacade(facade, POWERTRACKV2_URI_STRATEGY);
     }
     
+    public static DefaultGnipFacade createPowertrackV2Compliance(
+            final GnipAuthentication authentication, final int partition) {
+        return new DefaultGnipFacade(new JRERemoteResourceProvider(authentication), 
+                                     new ComplianceV2UriStrategy(partition));
+    }
+    
+    
     /** Creates the HttpGnipFacade. */
     public DefaultGnipFacade(final RemoteResourceProvider facade) {
         this(facade, DEFAULT_BASE_URI_STRATEGY);

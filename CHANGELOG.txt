@@ -1,3 +1,26 @@
+### 2.1.0 (2016-10-17)
+
+ * bugfix: avoid using default charset and user locale
+ * feature: Compliance Firehose 2.0 by Dennis Lloyd Jr
+
+  final AtomicInteger counter = new AtomicInteger();
+  final DefaultGnipFacade x = DefaultGnipFacade.createPowertrackV2Compliance(
+                              authentication, 1);
+  final GnipStream stream = x.createPowertrackStream(String.class)
+      .withAccount("foo")
+      .withType("prod")
+      .withUnmarshall(new ComplianceActivityUnmarshaller())
+      .withObserver(new StreamNotificationAdapter<Activity>() {
+          @Override
+          public void notify(final Activity activity, final GnipStream stream) {
+              System.out.println(activity);
+              if (counter.incrementAndGet() >= 10) {
+                  stream.close();
+              }
+          }
+      })
+      .build();
+  stream.await();
 
 ### 2.0.0 (2016-10-12)
 
