@@ -164,7 +164,11 @@ public class DefaultGnipFacade implements GnipFacade {
             ret = new GnipStream() {
                 @Override
                 public String getStreamName() {
-                    return stream.getStreamName();
+                    if(baseUriStrategy instanceof ComplianceV2UriStrategy) {
+                        return stream.getStreamName() + ((ComplianceV2UriStrategy)baseUriStrategy).getPartition();
+                    } else {
+                        return stream.getStreamName();
+                    }
                 }
 
                 @Override
@@ -191,7 +195,7 @@ public class DefaultGnipFacade implements GnipFacade {
                     return stream.getStreamStats();
                 }
             };
-            JMXProvider.getProvider().registerBean(stream, stream.getStreamStats());
+            JMXProvider.getProvider().registerBean(ret, stream.getStreamStats());
         }
         return ret;
     }
