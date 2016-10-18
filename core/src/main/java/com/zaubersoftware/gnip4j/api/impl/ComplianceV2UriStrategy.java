@@ -3,6 +3,7 @@ package com.zaubersoftware.gnip4j.api.impl;
 import com.zaubersoftware.gnip4j.api.UriStrategy;
 
 import java.net.URI;
+import java.util.Locale;
 
 public class ComplianceV2UriStrategy implements UriStrategy {
     public static final String BASE_GNIP_STREAM_URI_V2 = "https://gnip-stream.twitter.com/stream/compliance/accounts/%s/publishers/twitter/%s.json?partition=%s";
@@ -29,7 +30,7 @@ public class ComplianceV2UriStrategy implements UriStrategy {
         if (streamName == null || streamName.trim().isEmpty()) {
             throw new IllegalArgumentException("The streamName cannot be null or empty");
         }
-        return URI.create(String.format(baseGnipStreamUri, account.trim(), streamName.trim(), partition));
+        return URI.create(String.format(Locale.ENGLISH, baseGnipStreamUri, account.trim(), streamName.trim(), partition));
     }
 
     @Override
@@ -55,7 +56,7 @@ public class ComplianceV2UriStrategy implements UriStrategy {
             throw new IllegalArgumentException("The streamName cannot be null or empty");
         }
 
-        return String.format(BASE_GNIP_RULES_URI, account.trim(), streamName.trim());
+        return String.format(Locale.ENGLISH, BASE_GNIP_RULES_URI, account.trim(), streamName.trim());
     }
 
     public String getPartition() {
