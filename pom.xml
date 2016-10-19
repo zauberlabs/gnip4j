@@ -87,12 +87,7 @@
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
-        <version>2.0.2-beta</version>
-      </dependency>
-      <dependency>
-        <groupId>org.mockito</groupId>
-        <artifactId>mockito-all</artifactId>
-        <version>2.0.2-beta</version>
+        <version>2.2.5</version>
       </dependency>
       <!-- END: Testing -->
       <dependency>
