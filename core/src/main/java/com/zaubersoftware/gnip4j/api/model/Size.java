@@ -17,7 +17,7 @@ package com.zaubersoftware.gnip4j.api.model;
 
 import java.io.Serializable;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * <p>Java class for anonymous complex type.

@@ -17,8 +17,8 @@ package com.zaubersoftware.gnip4j.api.impl.formats;
 
 import java.io.IOException;
 
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.zaubersoftware.gnip4j.api.model.Activity;
 

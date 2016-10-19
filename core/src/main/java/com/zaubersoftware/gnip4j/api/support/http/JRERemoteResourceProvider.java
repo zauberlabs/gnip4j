@@ -28,7 +28,7 @@ import java.net.URLConnection;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;

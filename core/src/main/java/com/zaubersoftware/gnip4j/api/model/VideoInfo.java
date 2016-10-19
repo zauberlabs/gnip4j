@@ -17,7 +17,7 @@ package com.zaubersoftware.gnip4j.api.model;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Twitter Video Info

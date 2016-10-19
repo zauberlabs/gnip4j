@@ -19,10 +19,11 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.model.compliance.ComplianceActivity;
 import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;
 import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Translates JSON input from the Compliance v2 stream into instances of Activity.

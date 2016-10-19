@@ -18,12 +18,10 @@ package com.zaubersoftware.gnip4j.api.model.compliance;
 import java.io.UncheckedIOException;
 import java.util.Date;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonTypeName;
-
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.model.Actor;
-import org.codehaus.jackson.map.JsonMappingException;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * Represents deleting a status from the Compliance v2 stream
