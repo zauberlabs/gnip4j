@@ -67,7 +67,7 @@ public final class ReconnectionTest {
         root.setLevel(Level.OFF);
 
         final AtomicInteger count = new AtomicInteger(0);
-        final DefaultGnipStream stream = new DefaultGnipStream(new MockRemoteResourceProvider(), "account", "stream", new MockExecutorService(), uriStrategy);
+        final DefaultGnipStream stream = new DefaultGnipStream(new MockRemoteResourceProvider(), "account", "stream", new MockExecutorService(), uriStrategy, null);
         final StringBuilder out = new StringBuilder();
         final StreamNotification<Activity> n = new StreamNotification<Activity>() {
             @Override

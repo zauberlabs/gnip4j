@@ -42,7 +42,7 @@ import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;
 import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
 /**
- * Implementation acording
+ * Implementation according
  * http://docs.gnip.com/w/page/23724581/Gnip-Full-Documentation#streaminghttp
  *
  * {@literal
@@ -62,7 +62,7 @@ import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 public class DefaultGnipStream extends AbstractGnipStream {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    /** stream name for debugging propourse */
+    /** stream name for debugging purpose */
     private final String streamName;
     private final URI streamURI;
     private final RemoteResourceProvider client;
@@ -74,7 +74,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
     private StreamNotification notification = new StreamNotificationAdapter<Activity>() {
         @Override
         public void notify(final Activity activity, final GnipStream stream) {
-            logger.warn("No notification is registed for stream {}", getStreamName());
+            logger.warn("No notification is registered for stream {}", getStreamName());
         }
     };
 
@@ -86,7 +86,8 @@ public class DefaultGnipStream extends AbstractGnipStream {
             final String account,
             final String streamName,
             final ExecutorService activityService,
-            final UriStrategy baseUriStrategy) {
+            final UriStrategy baseUriStrategy,
+            final Integer backfillMinutes) {
         if (client == null) {
             throw new IllegalArgumentException(ERROR_NULL_HTTPCLIENT);
         }
@@ -103,7 +104,12 @@ public class DefaultGnipStream extends AbstractGnipStream {
             throw new IllegalArgumentException(ERROR_NULL_BASE_URI_STRATEGY);
         }
 
-        this.streamURI = baseUriStrategy.createStreamUri(account, streamName);
+
+        if (backfillMinutes == null) {
+            this.streamURI = baseUriStrategy.createStreamUri(account, streamName);
+        } else {
+            this.streamURI = baseUriStrategy.createStreamUri(account, streamName, backfillMinutes);
+        }
         this.client = client;
         this.streamName = streamName;
         this.activityService = activityService;

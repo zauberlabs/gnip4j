@@ -95,14 +95,6 @@ public class DefaultGnipFacade implements GnipFacade {
         return new DefaultGnipFacade(facade, POWERTRACKV2_URI_STRATEGY);
     }
 
-    public static DefaultGnipFacade createPowerTrackV2(final GnipAuthentication authentication, final int backFillMinutes) {
-        return createPowerTrackV2(new JRERemoteResourceProvider(authentication), backFillMinutes);
-    }
-
-    public static DefaultGnipFacade createPowerTrackV2(final RemoteResourceProvider facade, int backFillMinutes) {
-        return new DefaultGnipFacade(facade, new PowerTrackV2UriStrategy(backFillMinutes));
-    }
-
     public static DefaultGnipFacade createPowertrackV2Compliance(
             final GnipAuthentication authentication, final int partition) {
         return new DefaultGnipFacade(new JRERemoteResourceProvider(authentication), 
@@ -130,7 +122,7 @@ public class DefaultGnipFacade implements GnipFacade {
                 final GnipStream stream = createStream(this.account, type, 
                         this.observer, this.executorService, 
                         unmarshaller == null ? new ActivityUnmarshaller(streamName) : unmarshaller, 
-                        processor);
+                        processor, backfillMinutes);
                 processor.setStream(stream);
                 return stream;
             }
@@ -161,7 +153,7 @@ public class DefaultGnipFacade implements GnipFacade {
                 }
                 final GnipStream stream = createStream(this.account, dataCollector.toString(), 
                         this.observer, this.executorService, this.unmarshaller, 
-                        p);
+                        p, null);
                 p.setStream(stream);
                 return stream;
             }
@@ -171,8 +163,8 @@ public class DefaultGnipFacade implements GnipFacade {
     
     public final GnipStream createStream(final String account, final String streamName,
             final StreamNotification observer, final ExecutorService executor, final Unmarshaller unmarshaller,
-            final FeedProcessor feedProcessor) {
-        final DefaultGnipStream stream = createStream(account, streamName, executor);
+            final FeedProcessor feedProcessor, final Integer backfillMinutes) {
+        final DefaultGnipStream stream = createStream(account, streamName, executor, backfillMinutes);
         stream.open(observer, unmarshaller, feedProcessor);
         GnipStream ret = stream;
         if(useJMX) {
@@ -271,7 +263,7 @@ public class DefaultGnipFacade implements GnipFacade {
 
     /** Creates a new {@link DefaultGnipStream} */
     private DefaultGnipStream createStream(final String account, final String streamName,
-            final ExecutorService executor) {
-            return new DefaultGnipStream(facade, account, streamName, executor, baseUriStrategy);
+            final ExecutorService executor, final Integer backfillMinutes) {
+            return new DefaultGnipStream(facade, account, streamName, executor, baseUriStrategy, backfillMinutes);
     }
 }

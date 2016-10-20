@@ -35,7 +35,8 @@ public abstract class PowertrackStreamBuilder<T> {
     protected String account;
     protected StreamNotification<T> observer;
     protected Unmarshaller<T> unmarshaller;
-    
+    protected Integer backfillMinutes;
+
     /**  if your EDC URL starts with http://acme.gnip.com  then this value is acme*/
     public final PowertrackStreamBuilder<T> withAccount(final String account) {
         this.account = account;
@@ -62,7 +63,12 @@ public abstract class PowertrackStreamBuilder<T> {
         this.unmarshaller = unmarshaller;
         return this;
     }
-    
+
+    public final PowertrackStreamBuilder<T> withBackfillMinutes(final Integer backfillMinutes) {
+        this.backfillMinutes = backfillMinutes;
+        return this;
+    }
+
     public GnipStream build() {
         if(account == null) {
             throw new IllegalArgumentException("you must set the account");
