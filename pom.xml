@@ -19,8 +19,8 @@
   </modules>
   <properties>
     <jackson.version>1.8.0</jackson.version>
-    <slf4j.version>1.7.12</slf4j.version>
     <netty.version>3.10.6.Final</netty.version>
+    <slf4j.version>1.7.12</slf4j.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -253,7 +253,6 @@
           </execution>
         </executions>
       </plugin>
- 
     </plugins>
   </build>
   <inceptionYear>2011</inceptionYear>
