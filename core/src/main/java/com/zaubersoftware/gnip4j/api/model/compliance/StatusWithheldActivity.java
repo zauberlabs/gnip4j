@@ -15,13 +15,14 @@
  */
 package com.zaubersoftware.gnip4j.api.model.compliance;
 
-import com.zaubersoftware.gnip4j.api.model.Activity;
-import com.zaubersoftware.gnip4j.api.model.Actor;
+import java.util.Collection;
+import java.util.Date;
+
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeName;
 
-import java.util.Collection;
-import java.util.Date;
+import com.zaubersoftware.gnip4j.api.model.Activity;
+import com.zaubersoftware.gnip4j.api.model.Actor;
 
 /**
  * Represents a status being withheld in the Compliance v2 Stream

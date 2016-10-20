@@ -24,7 +24,7 @@ import com.zaubersoftware.gnip4j.api.GnipAuthentication;
  * Local implementation of Base64
  */
 public class Base64PasswordEncoderImpl implements Base64PasswordEncoder {
-    private Charset ascii = Charset.forName("ASCII");
+    private final Charset ascii = Charset.forName("ASCII");
     
     @Override
     public final String encode(final GnipAuthentication auth) {

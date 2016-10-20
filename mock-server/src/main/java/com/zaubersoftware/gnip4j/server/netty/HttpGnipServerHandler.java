@@ -18,12 +18,12 @@ package com.zaubersoftware.gnip4j.server.netty;
 import static org.jboss.netty.handler.codec.http.HttpHeaders.Names.CONTENT_TYPE;
 import static org.jboss.netty.handler.codec.http.HttpHeaders.Names.LOCATION;
 import static org.jboss.netty.handler.codec.http.HttpHeaders.Names.TRANSFER_ENCODING;
+import static org.jboss.netty.handler.codec.http.HttpHeaders.setHeader;
 import static org.jboss.netty.handler.codec.http.HttpMethod.GET;
 import static org.jboss.netty.handler.codec.http.HttpResponseStatus.BAD_REQUEST;
 import static org.jboss.netty.handler.codec.http.HttpResponseStatus.INTERNAL_SERVER_ERROR;
 import static org.jboss.netty.handler.codec.http.HttpResponseStatus.METHOD_NOT_ALLOWED;
 import static org.jboss.netty.handler.codec.http.HttpResponseStatus.MOVED_PERMANENTLY;
-import static org.jboss.netty.handler.codec.http.HttpResponseStatus.NOT_FOUND;
 import static org.jboss.netty.handler.codec.http.HttpResponseStatus.OK;
 import static org.jboss.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
@@ -72,7 +72,7 @@ public class HttpGnipServerHandler extends SimpleChannelUpstreamHandler {
         if (uri.equals("/")) {
             final HttpResponse response = new DefaultHttpResponse(HTTP_1_1, OK);
             response.setStatus(MOVED_PERMANENTLY);
-            response.setHeader(LOCATION, "/fake-stream");
+            setHeader(response, LOCATION, "/fake-stream");
 
             final Channel ch = e.getChannel();
             ChannelFuture writeFuture;
@@ -82,7 +82,7 @@ public class HttpGnipServerHandler extends SimpleChannelUpstreamHandler {
             writeFuture.addListener(ChannelFutureListener.CLOSE);
         } else {
             final HttpResponse response = new DefaultHttpResponse(HTTP_1_1, OK);
-            response.setHeader(TRANSFER_ENCODING, "chunked");
+            setHeader(response, TRANSFER_ENCODING, "chunked");
             response.setChunked(true);
             final Channel ch = e.getChannel();
             ch.write(response);
@@ -132,7 +132,7 @@ public class HttpGnipServerHandler extends SimpleChannelUpstreamHandler {
 
     private void sendError(final ChannelHandlerContext ctx, final HttpResponseStatus status) {
         final HttpResponse response = new DefaultHttpResponse(HTTP_1_1, status);
-        response.setHeader(CONTENT_TYPE, "text/plain; charset=UTF-8");
+        setHeader(response, CONTENT_TYPE, "text/plain; charset=UTF-8");
         response.setContent(ChannelBuffers.copiedBuffer(
                 "Failure: " + status.toString() + "\r\n",
                 CharsetUtil.UTF_8));

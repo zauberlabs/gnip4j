@@ -54,7 +54,7 @@ public class Gnip implements Serializable {
     @JsonProperty(value = "matching_rules")
     public final List<MatchingRules> getMatchingRules() {
         if (matchingRules == null) {
-            matchingRules = new ArrayList<MatchingRules>();
+            matchingRules = new ArrayList<>();
         }
         return matchingRules;
     }
@@ -65,7 +65,7 @@ public class Gnip implements Serializable {
 
     public final List<Url> getUrls() {
         if (urls  == null) {
-            urls  = new ArrayList<Url>();
+            urls  = new ArrayList<>();
         }
         return urls;
     }
@@ -92,7 +92,7 @@ public class Gnip implements Serializable {
 
     public List<Location> getProfileLocations() {
         if (profileLocations == null) {
-            profileLocations = new ArrayList<Location>();
+            profileLocations = new ArrayList<>();
         }
         return profileLocations;
     }

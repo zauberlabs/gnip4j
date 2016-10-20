@@ -63,7 +63,7 @@ public final class TwitterEntities implements Serializable {
      */
     public List<Urls> getUrls() {
         if (urls == null) {
-            urls = new ArrayList<Urls>();
+            urls = new ArrayList<>();
         }
         return urls;
     }
@@ -92,7 +92,7 @@ public final class TwitterEntities implements Serializable {
      */
     public List<UserMentions> getUserMentions() {
         if (userMentions == null) {
-            userMentions = new ArrayList<UserMentions>();
+            userMentions = new ArrayList<>();
         }
         return userMentions;
     }
@@ -121,7 +121,7 @@ public final class TwitterEntities implements Serializable {
      */
     public List<Hashtags> getHashtags() {
         if (hashtags == null) {
-            hashtags = new ArrayList<Hashtags>();
+            hashtags = new ArrayList<>();
         }
         return hashtags;
     }
@@ -150,7 +150,7 @@ public final class TwitterEntities implements Serializable {
      */
     public List<MediaUrls> getMediaUrls() {
         if (mediaUrls == null) {
-            mediaUrls = new ArrayList<MediaUrls>();
+            mediaUrls = new ArrayList<>();
         }
         return mediaUrls;
     }

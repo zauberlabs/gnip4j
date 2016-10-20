@@ -74,7 +74,7 @@ public class GeoDeserializer extends StdDeserializer<Geo> {
 
     /** @return a polygon */
     private Polygon createPolygon(final JsonNode linearrings) throws IOException {
-        final List<LinearRing> linearRings = new ArrayList<LinearRing>(linearrings.size());
+        final List<LinearRing> linearRings = new ArrayList<>(linearrings.size());
         
         for(final Iterator<JsonNode> it = linearrings.getElements(); it.hasNext() ; ) {
             final JsonNode linearRingNode = it.next();
@@ -86,7 +86,7 @@ public class GeoDeserializer extends StdDeserializer<Geo> {
     }
 
     private LinearRing parseLinearRing(final JsonNode linearRingNode) throws IOException {
-        final List<Point> points = new ArrayList<Point>(linearRingNode.size());
+        final List<Point> points = new ArrayList<>(linearRingNode.size());
         for(final Iterator<JsonNode> it = linearRingNode.getElements(); it.hasNext() ; ) {
             final JsonNode next = it.next();
             points.add(createPoint(next));

@@ -97,7 +97,7 @@ public final class Actor implements Serializable {
      */
     public List<String> getLanguages() {
         if (languages == null) {
-            languages = new ArrayList<String>();
+            languages = new ArrayList<>();
         }
         return languages;
     }
@@ -126,7 +126,7 @@ public final class Actor implements Serializable {
      */
     public List<Links> getLinks() {
         if (links == null) {
-            links = new ArrayList<Links>();
+            links = new ArrayList<>();
         }
         return links;
     }

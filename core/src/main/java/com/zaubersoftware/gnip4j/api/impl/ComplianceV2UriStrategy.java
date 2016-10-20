@@ -1,9 +1,9 @@
 package com.zaubersoftware.gnip4j.api.impl;
 
-import com.zaubersoftware.gnip4j.api.UriStrategy;
-
 import java.net.URI;
 import java.util.Locale;
+
+import com.zaubersoftware.gnip4j.api.UriStrategy;
 
 public class ComplianceV2UriStrategy implements UriStrategy {
     public static final String BASE_GNIP_STREAM_URI_V2 = "https://gnip-stream.twitter.com/stream/compliance/accounts/%s/publishers/twitter/%s.json?partition=%s";
@@ -23,7 +23,7 @@ public class ComplianceV2UriStrategy implements UriStrategy {
     }
 
     @Override
-    public URI createStreamUri(String account, String streamName) {
+    public URI createStreamUri(final String account, final String streamName) {
         if (account == null || account.trim().isEmpty()) {
             throw new IllegalArgumentException("The account cannot be null or empty");
         }

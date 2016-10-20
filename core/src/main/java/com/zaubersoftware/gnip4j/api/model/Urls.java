@@ -61,7 +61,7 @@ public class Urls implements Serializable {
      */
     public List<Integer> getIndices() {
         if (indices == null) {
-            indices = new ArrayList<Integer>();
+            indices = new ArrayList<>();
         }
         return this.indices;
     }
