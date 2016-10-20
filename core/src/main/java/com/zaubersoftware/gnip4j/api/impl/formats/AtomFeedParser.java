@@ -97,7 +97,7 @@ public class AtomFeedParser {
     private static final QName ATOM_IS_VERIFIED = new QName(ATOM_NS, "is_verified");
     private static final QName ATOM_FAN_COUNT = new QName(ATOM_NS, "fan_count");
 
-    private final Stack<State> state = new Stack<State>();
+    private final Stack<State> state = new Stack<>();
 
     /** process an atom feed  */
     public Activity process(final XMLStreamReader reader) throws XMLStreamException, ParseException {
@@ -181,7 +181,7 @@ public class AtomFeedParser {
             }
         }
     }
-    private static final Set<String> reportedUnhandled = new HashSet<String>();
+    private static final Set<String> reportedUnhandled = new HashSet<>();
     
     /** initial state */
     class StartState extends State {
@@ -440,7 +440,7 @@ public class AtomFeedParser {
     
     /** parses gnip:matching_rules */
     class MatchingRulesState extends State {
-        protected final List<MatchingRules> rules = new ArrayList<MatchingRules>();
+        protected final List<MatchingRules> rules = new ArrayList<>();
 
         @Override
         public boolean doProcess(final XMLStreamReader reader) throws XMLStreamException {

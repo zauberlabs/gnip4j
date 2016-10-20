@@ -71,7 +71,7 @@ public class Url implements Serializable {
         return expandedUrlTitle;
     }
 
-    public void setExpandedUrlTitle(String expandedUrlTitle) {
+    public void setExpandedUrlTitle(final String expandedUrlTitle) {
         this.expandedUrlTitle = expandedUrlTitle;
     }
 
@@ -79,7 +79,7 @@ public class Url implements Serializable {
         return expandedUrlDescription;
     }
 
-    public void setExpandedUrlDescription(String expandedUrlDescription) {
+    public void setExpandedUrlDescription(final String expandedUrlDescription) {
         this.expandedUrlDescription = expandedUrlDescription;
     }
 }

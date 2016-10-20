@@ -16,7 +16,10 @@
 package com.zaubersoftware.gnip4j.api.model;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -405,14 +408,14 @@ public class Activity implements Serializable {
     /** get the categories */
     public final List<Category> getCategoriesRules() {
         if (categories == null) {
-            categories = new ArrayList<Category>();
+            categories = new ArrayList<>();
         }
         return categories;
     }
     
     public final List<Links> getLinks() {
         if (links == null) {
-            links = new ArrayList<Links>();
+            links = new ArrayList<>();
         }
         return links;
     }

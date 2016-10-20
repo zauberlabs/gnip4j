@@ -122,7 +122,7 @@ public final class ReconnectionTest {
 /** mock implementation */
 class MockRemoteResourceProvider implements RemoteResourceProvider {
     private final AtomicInteger i = new AtomicInteger();
-    private final List<Object []> responses = new ArrayList<Object []>();
+    private final List<Object []> responses = new ArrayList<>();
 
     /** Creates the MockRemoteResourceProvider. */
     public MockRemoteResourceProvider() {

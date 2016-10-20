@@ -69,7 +69,7 @@ public final class Rules implements Serializable {
      */
     public List<Rule> getRules() {
         if (rules == null) {
-            rules = new ArrayList<Rule>();
+            rules = new ArrayList<>();
         }
         return rules;
     }

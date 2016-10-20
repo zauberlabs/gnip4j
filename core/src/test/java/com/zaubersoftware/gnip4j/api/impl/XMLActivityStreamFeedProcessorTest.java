@@ -60,7 +60,7 @@ public class XMLActivityStreamFeedProcessorTest {
         try {
             final AtomicInteger i = new AtomicInteger();
             final ObjectMapper mapper = JsonActivityFeedProcessor.getObjectMapper();
-            final FeedProcessor p = new XMLActivityStreamFeedProcessor<Activity>("foo", new DirectExecuteService(),
+            final FeedProcessor p = new XMLActivityStreamFeedProcessor<>("foo", new DirectExecuteService(),
                     new StreamNotificationAdapter<Activity>() {
                         @Override
                         public void notify(final Activity activity, final GnipStream stream) {

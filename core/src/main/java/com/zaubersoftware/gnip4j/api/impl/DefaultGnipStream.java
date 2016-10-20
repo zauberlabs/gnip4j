@@ -235,12 +235,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
                             logger.warn(msg, e);
                         }
                         if(!shuttingDown.get()) {
-                            activityService.execute(new Runnable() {
-                                @Override
-                                public void run() {
-                                    notification.notifyConnectionError(new TransportGnipException(msg, e));
-                                }
-                            });
+                            activityService.execute(() -> notification.notifyConnectionError(new TransportGnipException(msg, e)));
                         }
                     } catch (final Throwable e) {
                         if(logger.isWarnEnabled()) {
@@ -277,12 +272,7 @@ public class DefaultGnipStream extends AbstractGnipStream {
                 reConnectionWaitTime = (reConnectionWaitTime * 2);
                 reConnectionWaitTime = (reConnectionWaitTime > MAX_RE_CONNECTION_WAIT_TIME)
                     ? MAX_RE_CONNECTION_WAIT_TIME : reConnectionWaitTime;
-                activityService.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        notification.notifyReConnectionAttempt(attempt, reConnectionWaitTime);
-                    }
-                });
+                activityService.execute(() -> notification.notifyReConnectionAttempt(attempt, reConnectionWaitTime));
                 logger.debug("{}: Waiting for {} ms till next re-connection", streamName, reConnectionWaitTime);
                 try {
                     Thread.sleep(reConnectionWaitTime);
@@ -300,13 +290,8 @@ public class DefaultGnipStream extends AbstractGnipStream {
 
             } catch (final Throwable e) {
                 logger.error(streamName + ": The re-connection could not be established", e);
-                activityService.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        notification.notifyReConnectionError(e instanceof GnipException
-                                ? ((GnipException)e) : new GnipException(e));
-                    }
-                });
+                activityService.execute(() -> notification.notifyReConnectionError(e instanceof GnipException
+                        ? ((GnipException)e) : new GnipException(e)));
             }
         }
     }
