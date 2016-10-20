@@ -21,6 +21,7 @@
     <jackson.version>1.8.0</jackson.version>
     <netty.version>3.10.6.Final</netty.version>
     <slf4j.version>1.7.12</slf4j.version>
+    <netty.version>3.10.6.Final</netty.version>
   </properties>
   <dependencyManagement>
     <dependencies>
