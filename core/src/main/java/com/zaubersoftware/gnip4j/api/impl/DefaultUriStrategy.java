@@ -34,7 +34,9 @@ import com.zaubersoftware.gnip4j.api.UriStrategy;
  *
  * @author Guido Marucci Blas
  * @since 11/11/2011
+ * @deprecated GNIP 1.0 will be gone by 1st of Dec 2016
  */
+@Deprecated
 public final class DefaultUriStrategy implements UriStrategy {
     public static final String DEFAULT_STREAM_URL_BASE  = "https://stream.gnip.com:443";
     public static final String DEFAULT_RULE_URL_BASE = "https://api.gnip.com:443";
@@ -60,14 +62,16 @@ public final class DefaultUriStrategy implements UriStrategy {
     }
 
     @Override
-    public URI createStreamUri(final String account, final String streamName) {
+    public URI createStreamUri(final String account, final String streamName, final Integer backfill) {
         if (account == null || account.trim().isEmpty()) {
             throw new IllegalArgumentException("The account cannot be null or empty");
         }
         if (streamName == null || streamName.trim().isEmpty()) {
             throw new IllegalArgumentException("The streamName cannot be null or empty");
         }
-        
+        if(backfill != null) {
+            throw new IllegalArgumentException("Backfill (with a minute window is not supported)");
+        }
         
         return URI.create(String.format(Locale.ENGLISH, streamUrlBase + PATH_GNIP_STREAM_URI, account.trim(), publisher.trim(), streamName.trim()));
     }

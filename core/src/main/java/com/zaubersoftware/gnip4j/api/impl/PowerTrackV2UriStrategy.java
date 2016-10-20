@@ -44,7 +44,6 @@ public final class PowerTrackV2UriStrategy implements UriStrategy {
     public static final String DEFAULT_STREAM_URL_BASE  = "https://gnip-stream.twitter.com";
     public static final String DEFAULT_RULE_URL_BASE = "https://gnip-api.twitter.com";
     public static final String PATH_GNIP_STREAM_URI =  "/stream/powertrack/accounts/%s/publishers/%s/%s.json";
-    public static final String PATH_GNIP_STREAM_URI_BACKFILL =  "/stream/powertrack/accounts/%s/publishers/%s/%s.json?backfillMinutes=%s";
     public static final String PATH_GNIP_RULES_URI =  "/rules/powertrack/accounts/%s/publishers/%s/%s.json";
 
     private String streamUrlBase = DEFAULT_STREAM_URL_BASE;
@@ -52,7 +51,6 @@ public final class PowerTrackV2UriStrategy implements UriStrategy {
 
     
     private final String publisher;
-    private int backFillMinutes = -1;
     
     /** Creates the DefaultUriStrategy. */
     public PowerTrackV2UriStrategy() {
@@ -66,24 +64,24 @@ public final class PowerTrackV2UriStrategy implements UriStrategy {
         this.publisher = publisher;
     }
 
-    public PowerTrackV2UriStrategy(final int backFillMinutes) {
-        this("twitter");
-        setBackFillMinutes(backFillMinutes);
-    }
-
     @Override
-    public URI createStreamUri(final String account, final String streamName) {
+    public URI createStreamUri(final String account, final String streamName, final Integer backFillMinutes) {
         if (account == null || account.trim().isEmpty()) {
             throw new IllegalArgumentException("The account cannot be null or empty");
         }
         if (streamName == null || streamName.trim().isEmpty()) {
             throw new IllegalArgumentException("The streamName cannot be null or empty");
         }
-        if (getBackFillMinutes() == -1) {
-            return URI.create(String.format(Locale.ENGLISH, streamUrlBase + PATH_GNIP_STREAM_URI, account.trim(), publisher.trim(), streamName.trim()));
-        } else {
-            return URI.create(String.format(Locale.ENGLISH, streamUrlBase + PATH_GNIP_STREAM_URI_BACKFILL, account.trim(), publisher.trim(), streamName.trim(), getBackFillMinutes()));
+        if (backFillMinutes != null && (backFillMinutes < 1 || backFillMinutes > 5)) {
+            throw new IllegalArgumentException("If set, the backfill parameter must be assigned a value between 1 and 5 (inclusive)");
         }
+        
+        final StringBuilder sb = new StringBuilder(60);
+        sb.append(String.format(Locale.ENGLISH, streamUrlBase + PATH_GNIP_STREAM_URI, account.trim(), publisher.trim(), streamName.trim()));
+        if (backFillMinutes != null) {
+            sb.append(String.format(Locale.ENGLISH, "?backfillMinutes=%s", backFillMinutes));
+        }
+        return URI.create(sb.toString());
     }
 
     @Override
@@ -133,15 +131,6 @@ public final class PowerTrackV2UriStrategy implements UriStrategy {
         }
         this.ruleUrlBase = ruleUrlBase;
     }
-
-    private int getBackFillMinutes() {
-        return backFillMinutes;
-    }
-
-    private void setBackFillMinutes(int backFillMinutes) {
-        if (backFillMinutes < 1 || backFillMinutes > 5) {
-            throw new IllegalArgumentException("If set, the backfill parameter must be assigned a value between 1 and 5 (inclusive)");
-        }
-        this.backFillMinutes = backFillMinutes;
-    }
+    
+    
 }
