@@ -56,7 +56,7 @@ public class ValidationTest {
     @Test
     public final void streamNullClient() {
         try {
-            new DefaultGnipStream(null, "account", "stream", mock(ExecutorService.class), uriStrategy);
+            new DefaultGnipStream(null, "account", "stream", mock(ExecutorService.class), uriStrategy, null);
             fail();
         } catch(final IllegalArgumentException e) {
             assertEquals(ERROR_NULL_HTTPCLIENT, e.getMessage());
@@ -69,7 +69,7 @@ public class ValidationTest {
     public final void streamEmptyDomain() {
         try {
             new DefaultGnipStream(mock(RemoteResourceProvider.class),
-                    " \t", "stream", mock(ExecutorService.class), uriStrategy);
+                    " \t", "stream", mock(ExecutorService.class), uriStrategy, null);
             fail();
         } catch(final IllegalArgumentException e) {
             assertEquals(ERROR_EMPTY_ACCOUNT, e.getMessage());
@@ -81,7 +81,7 @@ public class ValidationTest {
     public final void streamNullExecutorService() {
         try {
             new DefaultGnipStream(mock(RemoteResourceProvider.class),
-                    "xxx \t", "stream", null, uriStrategy);
+                    "xxx \t", "stream", null, uriStrategy, null);
             fail();
         } catch(final IllegalArgumentException e) {
             assertEquals(ERROR_NULL_ACTIVITY_SERVICE, e.getMessage());
@@ -93,7 +93,7 @@ public class ValidationTest {
     public final void streamNullUriStrategy() {
         try {
             new DefaultGnipStream(mock(RemoteResourceProvider.class),
-                    "xxx \t", "stream", mock(ExecutorService.class), null);
+                    "xxx \t", "stream", mock(ExecutorService.class), null, null);
             fail();
         } catch(final IllegalArgumentException e) {
             assertEquals(ERROR_NULL_BASE_URI_STRATEGY, e.getMessage());
