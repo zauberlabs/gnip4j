@@ -34,7 +34,9 @@ import com.zaubersoftware.gnip4j.api.UriStrategy;
  *
  * @author Guido Marucci Blas
  * @since 11/11/2011
+ * @deprecated GNIP 1.0 will be gone by 1st of Dec 2016
  */
+@Deprecated
 public final class DefaultUriStrategy implements UriStrategy {
     public static final String DEFAULT_STREAM_URL_BASE  = "https://stream.gnip.com:443";
     public static final String DEFAULT_RULE_URL_BASE = "https://api.gnip.com:443";
