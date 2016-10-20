@@ -23,13 +23,17 @@ public class ComplianceV2UriStrategy implements UriStrategy {
     }
 
     @Override
-    public URI createStreamUri(final String account, final String streamName) {
+    public URI createStreamUri(final String account, final String streamName, final Integer backfill) {
         if (account == null || account.trim().isEmpty()) {
             throw new IllegalArgumentException("The account cannot be null or empty");
         }
         if (streamName == null || streamName.trim().isEmpty()) {
             throw new IllegalArgumentException("The streamName cannot be null or empty");
         }
+        if(backfill != null) {
+            throw new IllegalArgumentException("Backfill is not supported at the compliance");
+        }
+        
         return URI.create(String.format(Locale.ENGLISH, baseGnipStreamUri, account.trim(), streamName.trim(), partition));
     }
 

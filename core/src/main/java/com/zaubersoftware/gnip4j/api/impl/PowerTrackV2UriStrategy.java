@@ -65,15 +65,23 @@ public final class PowerTrackV2UriStrategy implements UriStrategy {
     }
 
     @Override
-    public URI createStreamUri(final String account, final String streamName) {
+    public URI createStreamUri(final String account, final String streamName, final Integer backFillMinutes) {
         if (account == null || account.trim().isEmpty()) {
             throw new IllegalArgumentException("The account cannot be null or empty");
         }
         if (streamName == null || streamName.trim().isEmpty()) {
             throw new IllegalArgumentException("The streamName cannot be null or empty");
         }
+        if (backFillMinutes != null && (backFillMinutes < 1 || backFillMinutes > 5)) {
+            throw new IllegalArgumentException("If set, the backfill parameter must be assigned a value between 1 and 5 (inclusive)");
+        }
         
-        return URI.create(String.format(Locale.ENGLISH, streamUrlBase + PATH_GNIP_STREAM_URI, account.trim(), publisher.trim(), streamName.trim()));
+        final StringBuilder sb = new StringBuilder(60);
+        sb.append(String.format(Locale.ENGLISH, streamUrlBase + PATH_GNIP_STREAM_URI, account.trim(), publisher.trim(), streamName.trim()));
+        if (backFillMinutes != null) {
+            sb.append(String.format(Locale.ENGLISH, "?backfillMinutes=%s", backFillMinutes));
+        }
+        return URI.create(sb.toString());
     }
 
     @Override
