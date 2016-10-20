@@ -93,7 +93,7 @@ public final class ReconnectionTest {
             @Override
             public void notify(final Activity activity, final GnipStream stream) {
                 out.append(activity.getBody() + "\n");
-                if (count.incrementAndGet() >= 4) {
+                if (count.incrementAndGet() >= 8) {
                     stream.close();
                 }
             }
@@ -113,7 +113,7 @@ public final class ReconnectionTest {
         final String expected = IOUtils.toString(getClass().getClassLoader()
                 .getResourceAsStream("reconnectlog.txt"));
         Assert.assertEquals(expected, s);
-        Assert.assertEquals("transferedBytes = 8000\ntransferedActivities = 4\n"
+        Assert.assertEquals("transferedBytes = 16000\ntransferedActivities = 8\n"
                 + "numberOfSucessfulReconnections = 1\nnumberOfReconnections = 4",
                 stream.getStreamStats().toString());
     }
