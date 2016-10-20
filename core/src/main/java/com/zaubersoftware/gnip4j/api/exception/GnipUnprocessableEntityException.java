@@ -83,12 +83,12 @@ public class GnipUnprocessableEntityException extends GnipException {
           if(details == null) {
               final String msg = errors.toHumanMessage();
               if(msg == null) {
-                  offendingRules = new LinkedList<OffendingRule>();
+                  offendingRules = new LinkedList<>();
               } else {
                   offendingRules = parseMessage(msg);
               }
           } else {
-              offendingRules = new LinkedList<OffendingRule>();
+              offendingRules = new LinkedList<>();
               
               for(final RuleErrorDetail detail : details) {
                   if(detail != null) {
@@ -111,7 +111,7 @@ public class GnipUnprocessableEntityException extends GnipException {
   private static List<OffendingRule>  parseMessage(final String serverMessage) {
     String offendingRule = null;
     StringBuilder messageBuilder = new StringBuilder();
-    final List<OffendingRule> offendingRules = new LinkedList<OffendingRule>();
+    final List<OffendingRule> offendingRules = new LinkedList<>();
 
     final String[] lines = serverMessage.split("\\n");
     for (int i = 0, length = lines.length; i < length; i++) {

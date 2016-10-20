@@ -52,7 +52,7 @@ public class Source implements Serializable {
     
     public final List<Links> getLinks() {
         if (links == null) {
-            links = new ArrayList<Links>();
+            links = new ArrayList<>();
         }
         return links;
     }

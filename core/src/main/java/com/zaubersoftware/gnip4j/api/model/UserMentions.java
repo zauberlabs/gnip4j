@@ -65,7 +65,7 @@ public final class UserMentions implements Serializable {
      */
     public List<Integer> getIndices() {
         if (indices == null) {
-            indices = new ArrayList<Integer>();
+            indices = new ArrayList<>();
         }
         return indices;
     }

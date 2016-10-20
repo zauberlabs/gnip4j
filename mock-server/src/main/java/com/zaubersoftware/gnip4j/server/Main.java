@@ -26,7 +26,7 @@ public final class Main {
     private static final int DEFAUL_SERVER_PORT = 8080;
 
     private static final InputStream ACTIVITIES = Main.class.getClassLoader().getResourceAsStream(
-            "com/zaubersoftware/gnip4j/server/activity/twitter.json");
+            "com/zaubersoftware/gnip4j/server/activity/activities.json");
 
     public static void main(final String[] args) throws InterruptedException  {
                final MockServer mockServer = new MockServer(DEFAUL_SERVER_PORT);
