@@ -6,6 +6,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Test;
 
 import com.zaubersoftware.gnip4j.api.impl.formats.JsonActivityFeedProcessor;
+import static org.junit.Assert.*;
 
 /**
  * @author Fredrik Olsson
