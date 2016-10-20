@@ -28,8 +28,16 @@ public interface UriStrategy {
     String HTTP_DELETE = "DELETE";
     String HTTP_POST = "POST";
 
-	/** Generates a {@link URI} to connect against a Gnip endpoint to consume the activity stream. */
-    URI createStreamUri(String account, String streamName);
+    default URI createStreamUri(final String account, final String streamName) {
+        return createStreamUri(account, streamName, null); 
+    }
+    
+    /** 
+     * Generates a {@link URI} to connect against a Gnip endpoint to consume the activity stream
+     * @param backFillMinutes Null or a number of minutes (1-5, whole numbers only) 
+     *                        {@link http://support.gnip.com/apis/powertrack2.0/recovery.html#Backfill}  
+     */
+    URI createStreamUri(String account, String streamName, final Integer backFillMinutes);
 
     /** Generates a {@link URI} to connect against a Gnip endpoint to get/modify rules. */
     URI createRulesUri(String account, String streamName);
