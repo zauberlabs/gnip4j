@@ -37,6 +37,12 @@ public class Url implements Serializable {
     @JsonProperty(value = "expanded_status")
     private Integer expandedStatus;
 
+    @JsonProperty(value = "expanded_url_title")
+    private String expandedUrlTitle;
+
+    @JsonProperty(value = "expanded_url_description")
+    private String expandedUrlDescription;
+
     public final String getUrl() {
         return url;
     }
@@ -61,4 +67,19 @@ public class Url implements Serializable {
         this.expandedStatus = expandedStatus;
     }
 
+    public String getExpandedUrlTitle() {
+        return expandedUrlTitle;
+    }
+
+    public void setExpandedUrlTitle(String expandedUrlTitle) {
+        this.expandedUrlTitle = expandedUrlTitle;
+    }
+
+    public String getExpandedUrlDescription() {
+        return expandedUrlDescription;
+    }
+
+    public void setExpandedUrlDescription(String expandedUrlDescription) {
+        this.expandedUrlDescription = expandedUrlDescription;
+    }
 }
