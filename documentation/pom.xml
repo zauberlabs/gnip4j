@@ -11,6 +11,5 @@
   <packaging>pom</packaging>
   <name>Zauber::Gnip4j::Documentation Parent</name>
   <modules>
-    <module>site</module>
   </modules>
 </project>
