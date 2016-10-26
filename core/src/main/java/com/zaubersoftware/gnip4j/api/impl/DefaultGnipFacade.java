@@ -19,10 +19,12 @@ import static com.zaubersoftware.gnip4j.api.impl.ErrorCodes.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.zaubersoftware.gnip4j.api.model.ruleValidation.RulesValidation;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonProcessingException;
 
@@ -250,6 +252,20 @@ public class DefaultGnipFacade implements GnipFacade {
     	} else {
     		facade.deleteResource(baseUriStrategy.createRulesDeleteUri(account, streamName), rules);
     	}
+    }
+
+    @Override // TODO test
+    public RulesValidation validateRules(String account, String streamName, Rules rules) {
+        RulesValidation validation = null;
+        try {
+            URI rulesValidationUri = baseUriStrategy.createRulesValidationUri(account, streamName);
+            String responseString = facade.postResource(rulesValidationUri, rules);
+            final JsonParser parser = JsonActivityFeedProcessor.getObjectMapper().getJsonFactory().createJsonParser(responseString);
+            validation = parser.readValueAs(RulesValidation.class);
+        } catch (IOException e) {
+            throw new GnipException("Could not validate rules", e);
+        }
+        return validation;
     }
 
     public final boolean isUseJMX() {

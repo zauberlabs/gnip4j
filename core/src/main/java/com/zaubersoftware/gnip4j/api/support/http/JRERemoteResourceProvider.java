@@ -15,9 +15,11 @@
  */
 package com.zaubersoftware.gnip4j.api.support.http;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.CookieHandler;
 import java.net.CookieManager;
@@ -114,9 +116,10 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
     private final ObjectMapper mapper = new ObjectMapper();
     
     @Override
-    public final void postResource(final URI uri, final Object resource) throws AuthenticationGnipException,
+    public final String postResource(final URI uri, final Object resource) throws AuthenticationGnipException,
             TransportGnipException {
-        
+
+        String result = "";
         OutputStream outStream = null;
         try {
             final URLConnection uc = uri.toURL().openConnection();
@@ -143,7 +146,9 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
                 validateStatusLine(uri, huc.getResponseCode(), huc.getResponseMessage(),
                         new DefaultErrorProvider(huc));
             }
-            
+
+            result = getResponseAsString(huc);
+
         } catch (final MalformedURLException e) {
             throw new TransportGnipException(e);
         } catch (final IOException e) {
@@ -157,8 +162,26 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
                 // Nothing to be done here!
             }
         }
+        return result;
     }
-    
+
+    private String getResponseAsString(HttpURLConnection huc) throws IOException {
+        String responseAsString = "";
+        if (huc != null) {
+            try {
+                InputStream is = JRERemoteResourceProvider.getRealInputStream(huc, huc.getInputStream());
+                responseAsString = toInputStream(is);
+            } finally {
+                try {
+                    getRealInputStream(huc, huc.getInputStream()).close();
+                } catch (IOException e) {
+                    // NOOP
+                }
+            }
+        }
+        return responseAsString;
+    }
+
     @Override
     public final void deleteResource(final URI uri, final Object resource) throws AuthenticationGnipException,
             TransportGnipException {
