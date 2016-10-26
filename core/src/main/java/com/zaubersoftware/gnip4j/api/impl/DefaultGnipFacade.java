@@ -19,6 +19,7 @@ import static com.zaubersoftware.gnip4j.api.impl.ErrorCodes.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -45,6 +46,7 @@ import com.zaubersoftware.gnip4j.api.impl.formats.XMLActivityStreamFeedProcessor
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.model.Rule;
 import com.zaubersoftware.gnip4j.api.model.Rules;
+import com.zaubersoftware.gnip4j.api.model.ruleValidation.RulesValidation;
 import com.zaubersoftware.gnip4j.api.stats.StreamStats;
 import com.zaubersoftware.gnip4j.api.support.http.JRERemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.support.jmx.JMXProvider;
@@ -250,6 +252,20 @@ public class DefaultGnipFacade implements GnipFacade {
     	} else {
     		facade.deleteResource(baseUriStrategy.createRulesDeleteUri(account, streamName), rules);
     	}
+    }
+
+    @Override // TODO test
+    public RulesValidation validateRules(final String account, final String streamName, final Rules rules) {
+        RulesValidation validation = null;
+        try {
+            final URI rulesValidationUri = baseUriStrategy.createRulesValidationUri(account, streamName);
+            final String responseString = facade.postResource(rulesValidationUri, rules);
+            final JsonParser parser = JsonActivityFeedProcessor.getObjectMapper().getJsonFactory().createJsonParser(responseString);
+            validation = parser.readValueAs(RulesValidation.class);
+        } catch (final IOException e) {
+            throw new GnipException("Could not validate rules", e);
+        }
+        return validation;
     }
 
     public final boolean isUseJMX() {

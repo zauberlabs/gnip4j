@@ -25,11 +25,13 @@ import com.zaubersoftware.gnip4j.api.impl.DefaultGnipFacade;
 import com.zaubersoftware.gnip4j.api.impl.ImmutableGnipAuthentication;
 import com.zaubersoftware.gnip4j.api.model.Rule;
 import com.zaubersoftware.gnip4j.api.model.Rules;
+import com.zaubersoftware.gnip4j.api.model.ruleValidation.RulesValidation;
 import com.zaubersoftware.gnip4j.api.support.http.JRERemoteResourceProvider;
 
 public class GnipRulesTestDriver {
 
 	private GnipFacade gnip;
+	private GnipFacade gnipV2;
 	private String account;
 	private String streamName;
 	
@@ -54,6 +56,7 @@ public class GnipRulesTestDriver {
         }
         
         gnip = new DefaultGnipFacade(new JRERemoteResourceProvider(new ImmutableGnipAuthentication(username, password)));
+		gnipV2 = DefaultGnipFacade.createPowertrackV2(new ImmutableGnipAuthentication(username, password));
 	}
 	
 	@Test
@@ -82,5 +85,26 @@ public class GnipRulesTestDriver {
 			}
 		}
 		assertTrue(ruleAdded);
+	}
+
+	@Test
+	public void testValidateRules() throws Exception {
+
+		final Rules rules = new Rules();
+		final Rule r1 = new Rule();
+		r1.setTag("ExampleTag,123");
+		r1.setValue("abc AND 123");
+		rules.getRules().add(r1);
+
+		final Rule r2 = new Rule();
+		r2.setTag("AnotherTag,456");
+		r2.setValue("(abc OR def) lang:SV");
+		rules.getRules().add(r2);
+
+		final RulesValidation validation = gnipV2.validateRules(account, streamName, rules);
+
+		assertNotNull(validation);
+		assertEquals((Integer) 1, validation.getSummary().getValid());
+		assertEquals((Integer) 1, validation.getSummary().getNotValid());
 	}
 }

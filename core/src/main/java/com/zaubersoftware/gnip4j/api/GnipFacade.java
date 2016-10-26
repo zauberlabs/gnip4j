@@ -17,6 +17,7 @@ package com.zaubersoftware.gnip4j.api;
 
 import com.zaubersoftware.gnip4j.api.model.Rule;
 import com.zaubersoftware.gnip4j.api.model.Rules;
+import com.zaubersoftware.gnip4j.api.model.ruleValidation.RulesValidation;
 
 /**
  * Facade to the Gnip Streaming API  
@@ -80,4 +81,14 @@ public interface GnipFacade {
      * @param rules The Rules object to add to the tracker.
      */
     void deleteRules(String account, String streamName, Rules rules);
+
+    /**
+     * Validate a collection of rules wrt Gnip's Rule Validation end point.
+     *
+     * @param account The account name for the power track API.
+     * @param streamName the name of the stream.
+     * @param rules The rules to validate.
+     * @return A response indicating the validity of each input rule.
+     */
+    RulesValidation validateRules(String account, String streamName, Rules rules);
 }

@@ -157,8 +157,8 @@ class MockRemoteResourceProvider implements RemoteResourceProvider {
     }
 
     @Override
-    public void postResource(final URI uri, final Object resource) {
-
+    public String postResource(final URI uri, final Object resource) {
+        return "";
     }
 
 	@Override
