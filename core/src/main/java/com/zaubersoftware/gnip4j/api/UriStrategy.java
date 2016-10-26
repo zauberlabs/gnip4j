@@ -45,6 +45,15 @@ public interface UriStrategy {
     /** Generates a {@link URI} to connect against a Gnip endpoint to delete rules. */
 	URI createRulesDeleteUri(String account, String streamName);
 
+    /**
+     * Generates a {@link URI} to connect against a Gnip endpoint to validate a set of PowerTrack rules.
+     *
+     * @param account The account for which to create the URI.
+     * @param streamName The stream for which to create the URI.
+     * @return The URI.
+     */
+    URI createRulesValidationUri(String account, String streamName);
+
 	/** Informs the {@link GnipFacade} which http verb/method to use for rule deletion. Powertrack V2 API uses POST. V1 uses DELETE. */
 	String getHttpMethodForRulesDelete();
 }

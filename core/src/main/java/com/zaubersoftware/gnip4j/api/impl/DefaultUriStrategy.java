@@ -92,7 +92,13 @@ public final class DefaultUriStrategy implements UriStrategy {
     public URI createRulesDeleteUri(final String account, final String streamName) {
     	return createRulesUri(account, streamName);
     }
-    
+
+    @Override
+    public URI createRulesValidationUri(String account, String streamName) {
+        // There is no rule validation end-point for API v1.
+        return null;
+    }
+
     @Override
 	public String getHttpMethodForRulesDelete() {
 		return UriStrategy.HTTP_DELETE;

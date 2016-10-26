@@ -33,7 +33,7 @@ public interface RemoteResourceProvider {
     InputStream getResource(final URI uri) throws AuthenticationGnipException, TransportGnipException;
 
     /** Post a remote resource to Gnip. */
-    void postResource(final URI uri, Object resource) throws AuthenticationGnipException, TransportGnipException;
+    String postResource(final URI uri, Object resource) throws AuthenticationGnipException, TransportGnipException;
     
     /** Delete a remote resource to Gnip. */
     void deleteResource(final URI uri, Object resource) throws AuthenticationGnipException, TransportGnipException;
