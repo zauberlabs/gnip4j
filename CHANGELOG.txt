@@ -1,3 +1,17 @@
+### 2.2.0 (2016-11-24)
+
+ * remove PowertrackV1 support
+   Can trigger compiling issues, but on December 1st 2016 the service won't
+   be available any more.
+ * #64: Rule is now exposing the new id property
+ * Rule validation endpoint available (Fredrik Olsson)
+ * Activity Model allow for deserialization of information about expanded URLs
+   (Fredrik Olsson)
+ * http-client maven module was removed (it was incomplete since December 2012)
+ * Dependencies upgraded (Thanks Jamie Magee)
+    * mockito from 2.0.2-beta to 2.2.5
+    * netty (for mock server) upgraded from 3.2.6 to 3.10.6
+
 ### 2.1.0 (2016-10-17)
 
  * bugfix: avoid using default charset and user locale
