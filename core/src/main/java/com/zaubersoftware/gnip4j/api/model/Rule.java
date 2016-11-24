@@ -19,20 +19,27 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonCreator;
 
 @JsonAutoDetect
 public final class Rule implements Serializable {
     private static final long serialVersionUID = -6252436995868989738L;
     private String value;
     private String tag;
-
+    private Long id;
+    
     public Rule() {
         // for unmarshall and compatibility
     }
-    
+   
     public Rule(final String value, final String tag) {
+        this(value, tag, null);
+    }
+    
+    public Rule(final String value, final String tag, final Long id) {
         this.value = value;
         this.tag = tag;
+        this.id  = id;
     }
     
     public String getValue() {
@@ -52,6 +59,14 @@ public final class Rule implements Serializable {
         tag = value;
     }
     
+    public Long getId() {
+        return id;
+    }
+    
+    public void setId(final Long id) {
+        this.id = id;
+    }
+    
     @Override
     public boolean equals(final java.lang.Object obj) {
         boolean ret = false;
@@ -61,7 +76,10 @@ public final class Rule implements Serializable {
         } else if(obj instanceof Rule) {
             final Rule r = ((Rule)obj);
             
-            ret = Objects.equals(value, r.value) && Objects.equals(tag, r.tag); 
+            ret = Objects.equals(value, r.value) 
+               && Objects.equals(tag,   r.tag) 
+               && Objects.equals(id,    r.id)
+               ;
         }
         return ret;
     }
@@ -71,7 +89,9 @@ public final class Rule implements Serializable {
         int ret = 17;
         
         ret = 19 * ret + ((value == null) ? 0 : value.hashCode());
-        ret = 19 * ret + ((tag == null) ? 0 : tag.hashCode());
+        ret = 19 * ret + ((tag == null)   ? 0 : tag.hashCode());
+        ret = 19 * ret + ((id == null)    ? 0 : id.hashCode());
+        
         return ret;
     }
     
@@ -104,7 +124,15 @@ public final class Rule implements Serializable {
             sb.append(escape(value));
             sb.append('"');
         }
-        
+        if(id != null) {
+            if(sb.length() != 0) {
+                if(sb.length() > 1) {
+                    sb.append(", ");
+                }
+            }
+            sb.append("\"id\": ");
+            sb.append(id);
+        }
         sb.append('}');
         
         return sb.toString();

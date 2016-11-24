@@ -59,6 +59,21 @@ public class RuleTest {
         assertEquals("{\"tag\": \"t\\\"ag\"}", r.toString());
     }
     
+    @Test
+    public void testOnlyId() {
+        final Rule r = new Rule();
+        r.setId(1L);
+        
+        assertEquals("{\"id\": 1}", r.toString());
+    }
+    
+    @Test
+    public void testFull() {
+        final Rule r = new Rule("foo", "bar", 42L);
+        
+        assertEquals("{\"tag\": \"bar\", \"value\": \"foo\", \"id\": 42}", r.toString());
+    }
+    
     
     @Test
     public void testEmptyRule() {
@@ -73,5 +88,6 @@ public class RuleTest {
         assertEquals(new Rule("a", null),  new Rule("a", null));
         assertEquals(new Rule(null, "a"),  new Rule(null, "a"));
         assertEquals(new Rule("a", "b"),   new Rule("a", "b"));
+        assertEquals(new Rule("a", "b", 1L),   new Rule("a", "b", 1L));
     }
 }
