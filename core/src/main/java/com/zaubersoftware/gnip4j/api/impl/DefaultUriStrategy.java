@@ -95,7 +95,7 @@ public final class DefaultUriStrategy implements UriStrategy {
 
     @Override
     public URI createRulesValidationUri(final String account, final String streamName) {
-        return null;
+        throw new IllegalStateException("not implemented");
     }
 
     @Override
