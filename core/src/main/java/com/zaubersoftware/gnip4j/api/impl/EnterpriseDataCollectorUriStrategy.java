@@ -65,7 +65,13 @@ public final class EnterpriseDataCollectorUriStrategy implements UriStrategy {
     public URI createRulesDeleteUri(final String account, final String streamName) {
     	return createRulesUri(account, streamName);
     }
-    
+
+    @Override
+    public URI createRulesValidationUri(final String account, final String streamName) {
+        // There currently is no rule validation end-point for managed sources.
+        return null;
+    }
+
     @Override
 	public String getHttpMethodForRulesDelete() {
 		return UriStrategy.HTTP_DELETE;

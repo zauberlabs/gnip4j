@@ -114,9 +114,8 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
     private final ObjectMapper mapper = new ObjectMapper();
     
     @Override
-    public final void postResource(final URI uri, final Object resource) throws AuthenticationGnipException,
+    public final <T> T postResource(final URI uri, final Object resource, final Class<T> clazz) throws AuthenticationGnipException,
             TransportGnipException {
-        
         OutputStream outStream = null;
         try {
             final URLConnection uc = uri.toURL().openConnection();
@@ -139,11 +138,19 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
             outStream = uc.getOutputStream();
             outStream.write(mapper.writeValueAsString(resource).getBytes("UTF-8"));
             
+            T ret = null;
             if (huc != null) {
                 validateStatusLine(uri, huc.getResponseCode(), huc.getResponseMessage(),
                         new DefaultErrorProvider(huc));
+                if(clazz != null) {
+                    if(huc.getContentType() != null && huc.getContentType().startsWith("application/json")) {
+                        try(final InputStream is = JRERemoteResourceProvider.getRealInputStream(huc, huc.getInputStream())) {
+                            ret = m.readValue(is,  clazz);
+                        }
+                    }
+                }
             }
-            
+            return ret;
         } catch (final MalformedURLException e) {
             throw new TransportGnipException(e);
         } catch (final IOException e) {
@@ -158,7 +165,7 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
             }
         }
     }
-    
+
     @Override
     public final void deleteResource(final URI uri, final Object resource) throws AuthenticationGnipException,
             TransportGnipException {

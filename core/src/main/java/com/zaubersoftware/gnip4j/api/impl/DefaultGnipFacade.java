@@ -19,6 +19,7 @@ import static com.zaubersoftware.gnip4j.api.impl.ErrorCodes.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -45,6 +46,7 @@ import com.zaubersoftware.gnip4j.api.impl.formats.XMLActivityStreamFeedProcessor
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.model.Rule;
 import com.zaubersoftware.gnip4j.api.model.Rules;
+import com.zaubersoftware.gnip4j.api.model.ruleValidation.RulesValidation;
 import com.zaubersoftware.gnip4j.api.stats.StreamStats;
 import com.zaubersoftware.gnip4j.api.support.http.JRERemoteResourceProvider;
 import com.zaubersoftware.gnip4j.api.support.jmx.JMXProvider;
@@ -233,7 +235,7 @@ public class DefaultGnipFacade implements GnipFacade {
     
     @Override
     public final void addRules(final String account, final String streamName, final Rules rules) {
-        facade.postResource(baseUriStrategy.createRulesUri(account, streamName), rules);
+        facade.postResource(baseUriStrategy.createRulesUri(account, streamName), rules, null);
     }
     
     @Override
@@ -246,10 +248,16 @@ public class DefaultGnipFacade implements GnipFacade {
     @Override
     public final void deleteRules(final String account, final String streamName, final Rules rules) {
     	if (baseUriStrategy.getHttpMethodForRulesDelete().equals(UriStrategy.HTTP_POST)){
-    		facade.postResource(baseUriStrategy.createRulesDeleteUri(account, streamName), rules);
+    		facade.postResource(baseUriStrategy.createRulesDeleteUri(account, streamName), rules, null);
     	} else {
     		facade.deleteResource(baseUriStrategy.createRulesDeleteUri(account, streamName), rules);
     	}
+    }
+
+    @Override
+    public RulesValidation validateRules(final String account, final String streamName, final Rules rules) {
+        final URI rulesValidationUri = baseUriStrategy.createRulesValidationUri(account, streamName);
+        return facade.postResource(rulesValidationUri, rules, RulesValidation.class);
     }
 
     public final boolean isUseJMX() {

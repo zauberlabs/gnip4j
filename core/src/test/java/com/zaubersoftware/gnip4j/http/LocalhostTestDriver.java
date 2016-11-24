@@ -57,6 +57,11 @@ public final class LocalhostTestDriver {
                 public URI createRulesDeleteUri(final String domain, final String streamName) {
                     return null;
                 }
+
+                @Override
+                public URI createRulesValidationUri(final String account, final String streamName) {
+                    return null;
+                }
                 
                 @Override
             	public String getHttpMethodForRulesDelete() {
