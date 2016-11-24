@@ -17,7 +17,7 @@ public class RulesValidation implements Serializable {
     private RuleValidationSummary summary;
 
     @JsonProperty(value = "detail")
-    private List<RuleValidation> validations;
+    private List<RuleValidation> detail;
 
     public RuleValidationSummary getSummary() {
         return summary;
@@ -27,14 +27,13 @@ public class RulesValidation implements Serializable {
         this.summary = summary;
     }
 
-    public List<RuleValidation> getValidations() {
-        return validations;
+    public List<RuleValidation> getDetail() {
+        return detail;
     }
 
-    public void setValidations(final List<RuleValidation> validations) {
-        this.validations = validations;
+    public void setValidations(final List<RuleValidation> detail) {
+        this.detail = detail;
     }
-
 
     @Override
     public String toString() {
@@ -43,7 +42,7 @@ public class RulesValidation implements Serializable {
             .append(summary)
             .append(' ')
             .append("detail=")
-            .append(validations)
+            .append(detail)
             .append(']')
             .toString();
     }

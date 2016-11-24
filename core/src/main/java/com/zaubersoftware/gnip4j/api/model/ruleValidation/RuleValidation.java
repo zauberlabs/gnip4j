@@ -11,7 +11,7 @@ public class RuleValidation implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @JsonProperty(value = "valid")
-    private Boolean valid;
+    private boolean valid;
 
     @JsonProperty(value = "rule")
     private Rule rule;
@@ -19,11 +19,11 @@ public class RuleValidation implements Serializable {
     @JsonProperty(value = "message")
     private String message;
 
-    public Boolean getValid() {
+    public boolean isValid() {
         return valid;
     }
 
-    public void setValid(final Boolean valid) {
+    public void setValid(final boolean valid) {
         this.valid = valid;
     }
 
