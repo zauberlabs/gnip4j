@@ -26,7 +26,8 @@ public final class MatchingRules implements Serializable {
     private static final long serialVersionUID = 1L;
     private String value;
     private String tag;
-
+    private Long id;
+    
     public String getValue() {
         return value;
     }
@@ -42,4 +43,14 @@ public final class MatchingRules implements Serializable {
     public void setTag(final String value) {
         tag = value;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(final Long id) {
+        this.id = id;
+    }
+    
+    
 }
