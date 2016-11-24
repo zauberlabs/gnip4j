@@ -16,16 +16,10 @@
 package com.zaubersoftware.gnip4j.api.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 
-
-/**
- * <p>Java class for anonymous complex type.
- *
- * <p>The following schema fragment specifies the expected content contained within this class.
- *
- */
 @JsonAutoDetect
 public final class Rule implements Serializable {
     private static final long serialVersionUID = -6252436995868989738L;
@@ -67,7 +61,7 @@ public final class Rule implements Serializable {
         } else if(obj instanceof Rule) {
             final Rule r = ((Rule)obj);
             
-            ret = equals(value, r.value) && equals(tag, r.tag); 
+            ret = Objects.equals(value, r.value) && Objects.equals(tag, r.tag); 
         }
         return ret;
     }
@@ -81,17 +75,6 @@ public final class Rule implements Serializable {
         return ret;
     }
     
-    private static boolean equals(final String s1, final String s2) {
-        boolean ret = false;
-        if(s1 == null && s2 == null) {
-            ret = true;
-        } else if(s1 == null || s2 == null) {
-            ret = false;
-        } else {
-            ret = s1.equals(s2);
-        }
-        return ret;
-    }
     
     @Override
     public String toString() {

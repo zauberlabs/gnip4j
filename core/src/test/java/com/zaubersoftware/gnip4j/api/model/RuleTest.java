@@ -66,4 +66,12 @@ public class RuleTest {
         
         assertEquals("{}", r.toString());
     }
+    
+    @Test
+    public void testEquals() {
+        assertEquals(new Rule(null, null), new Rule(null, null));
+        assertEquals(new Rule("a", null),  new Rule("a", null));
+        assertEquals(new Rule(null, "a"),  new Rule(null, "a"));
+        assertEquals(new Rule("a", "b"),   new Rule("a", "b"));
+    }
 }
