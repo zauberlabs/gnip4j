@@ -58,7 +58,6 @@ import com.zaubersoftware.gnip4j.api.support.jmx.JMXProvider;
  * @since Apr 29, 2011
  */
 public class DefaultGnipFacade implements GnipFacade {
-    private static final UriStrategy DEFAULT_BASE_URI_STRATEGY = new DefaultUriStrategy();
     private static final UriStrategy POWERTRACKV2_URI_STRATEGY = new PowerTrackV2UriStrategy();
 
     private final RemoteResourceProvider facade;
@@ -77,16 +76,6 @@ public class DefaultGnipFacade implements GnipFacade {
         this.baseUriStrategy = baseUriStrategy;
     }
 
-    /** returns a PowerTrack V1 Facade */
-    public static DefaultGnipFacade createPowertrackV1(final GnipAuthentication authentication) {
-        return createPowertrackV1(new JRERemoteResourceProvider(authentication));
-    }
-    
-    /** returns a PowerTrack V1 Facade */
-    public static DefaultGnipFacade createPowertrackV1(final RemoteResourceProvider facade) {
-        return new DefaultGnipFacade(facade, DEFAULT_BASE_URI_STRATEGY);
-    }
-    
     /** returns a PowerTrack V2 Facade */
     public static DefaultGnipFacade createPowertrackV2(final GnipAuthentication authentication) {
         return createPowertrackV2(new JRERemoteResourceProvider(authentication));
@@ -106,7 +95,7 @@ public class DefaultGnipFacade implements GnipFacade {
     
     /** Creates the HttpGnipFacade. */
     public DefaultGnipFacade(final RemoteResourceProvider facade) {
-        this(facade, DEFAULT_BASE_URI_STRATEGY);
+        this(facade, POWERTRACKV2_URI_STRATEGY);
     }
     
     @Override

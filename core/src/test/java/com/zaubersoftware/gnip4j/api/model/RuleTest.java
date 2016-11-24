@@ -17,6 +17,11 @@ package com.zaubersoftware.gnip4j.api.model;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+import java.io.InputStream;
+
+import org.apache.commons.io.IOUtils;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Test;
 
 /**
@@ -90,4 +95,22 @@ public class RuleTest {
         assertEquals(new Rule("a", "b"),   new Rule("a", "b"));
         assertEquals(new Rule("a", "b", 1L),   new Rule("a", "b", 1L));
     }
+    
+
+    @Test
+    public void testUnmarshall() throws IOException {
+        final ObjectMapper m = new ObjectMapper();
+        
+        try(final InputStream is = getClass().getClassLoader().getResourceAsStream("com/zaubersoftware/gnip4j/payload/rules.js")) {
+            final Rules rules = m.reader(Rules.class).readValue(is);
+            assertEquals(1, rules.getRules().size());
+            final Rule rule = rules.getRules().get(0);
+            assertEquals("foo", rule.getValue());
+            assertEquals("f88489e8dc1279583956da7582b94a0c507383fd", rule.getTag());
+            assertEquals((Long)794146392408298500L, rule.getId());
+        }
+    }
+    
+    
+    
 }

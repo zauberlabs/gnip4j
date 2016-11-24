@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 
 /**
@@ -29,6 +30,7 @@ import org.codehaus.jackson.annotate.JsonAutoDetect;
  * <p>The following schema fragment specifies the expected content contained within this class.
  */
 @JsonAutoDetect
+@JsonIgnoreProperties(ignoreUnknown=true)
 public final class Rules implements Serializable {
     private static final long serialVersionUID = 1L;
     private List<Rule> rules;

@@ -44,7 +44,7 @@ import com.zaubersoftware.gnip4j.api.exception.AuthenticationGnipException;
 import com.zaubersoftware.gnip4j.api.exception.GnipException;
 import com.zaubersoftware.gnip4j.api.exception.TransportGnipException;
 import com.zaubersoftware.gnip4j.api.impl.DefaultGnipStream;
-import com.zaubersoftware.gnip4j.api.impl.DefaultUriStrategy;
+import com.zaubersoftware.gnip4j.api.impl.PowerTrackV2UriStrategy;
 import com.zaubersoftware.gnip4j.api.impl.formats.ActivityUnmarshaller;
 import com.zaubersoftware.gnip4j.api.impl.formats.JsonActivityFeedProcessor;
 import com.zaubersoftware.gnip4j.api.model.Activity;
@@ -57,7 +57,7 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
  */
 public final class ReconnectionTest {
 
-    private final UriStrategy uriStrategy = new DefaultUriStrategy();
+    private final UriStrategy uriStrategy = new PowerTrackV2UriStrategy();
 
     /** test */
     @Test//(timeout = 10000)

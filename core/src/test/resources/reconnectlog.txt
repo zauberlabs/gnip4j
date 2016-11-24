@@ -2,11 +2,11 @@ So true LOL RT @FreddyAmazin: Dear McDonald's, May I have some Coke with my ice?
 Testing! Coca coke coca-cola
 ConnectionError: I/O error in channel stream: mock connection closed
 Connection attempt 1 wait time 500
-ReConnectionError: Connection to https://stream.gnip.com:443/accounts/account/publishers/twitter/streams/track/stream.json: Unexpected status code: 505 TEST!
+ReConnectionError: Connection to https://gnip-stream.twitter.com/stream/powertrack/accounts/account/publishers/twitter/stream.json: Unexpected status code: 505 TEST!
 Connection attempt 2 wait time 1000
-ReConnectionError: Connection to https://stream.gnip.com:443/accounts/account/publishers/twitter/streams/track/stream.json: Unexpected status code: 505 TEST!
+ReConnectionError: Connection to https://gnip-stream.twitter.com/stream/powertrack/accounts/account/publishers/twitter/stream.json: Unexpected status code: 505 TEST!
 Connection attempt 3 wait time 2000
-ReConnectionError: Connection to https://stream.gnip.com:443/accounts/account/publishers/twitter/streams/track/stream.json: Unexpected status code: 505 TEST!
+ReConnectionError: Connection to https://gnip-stream.twitter.com/stream/powertrack/accounts/account/publishers/twitter/stream.json: Unexpected status code: 505 TEST!
 Connection attempt 4 wait time 4000
 Connection attempt 4 succeeded
 So true LOL RT @FreddyAmazin: Dear McDonald's, May I have some Coke with my ice?! Sincerely, I asked for a DRINK, not a half a cup of ice.
