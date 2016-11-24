@@ -4,7 +4,7 @@
   <parent>
     <groupId>com.zaubersoftware.maven.poms</groupId>
     <artifactId>bare</artifactId>
-    <version>1.0.10</version>
+    <version>1.0.11</version>
   </parent>
   <groupId>com.zaubersoftware.gnip4j</groupId>
   <artifactId>zauber-gnip4j-parent</artifactId>
