@@ -58,8 +58,8 @@ public final class JMXTest {
             }
             
             @Override
-            public String postResource(final URI uri, final Object resource) {
-                return "";
+            public <T> T postResource(final URI uri, final Object resource, final Class<T> clazz) {
+                return null;
             }
 
 			@Override

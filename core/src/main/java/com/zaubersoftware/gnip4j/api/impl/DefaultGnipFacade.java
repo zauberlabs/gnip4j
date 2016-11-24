@@ -235,7 +235,7 @@ public class DefaultGnipFacade implements GnipFacade {
     
     @Override
     public final void addRules(final String account, final String streamName, final Rules rules) {
-        facade.postResource(baseUriStrategy.createRulesUri(account, streamName), rules);
+        facade.postResource(baseUriStrategy.createRulesUri(account, streamName), rules, null);
     }
     
     @Override
@@ -248,24 +248,16 @@ public class DefaultGnipFacade implements GnipFacade {
     @Override
     public final void deleteRules(final String account, final String streamName, final Rules rules) {
     	if (baseUriStrategy.getHttpMethodForRulesDelete().equals(UriStrategy.HTTP_POST)){
-    		facade.postResource(baseUriStrategy.createRulesDeleteUri(account, streamName), rules);
+    		facade.postResource(baseUriStrategy.createRulesDeleteUri(account, streamName), rules, null);
     	} else {
     		facade.deleteResource(baseUriStrategy.createRulesDeleteUri(account, streamName), rules);
     	}
     }
 
-    @Override // TODO test
+    @Override
     public RulesValidation validateRules(final String account, final String streamName, final Rules rules) {
-        RulesValidation validation = null;
-        try {
-            final URI rulesValidationUri = baseUriStrategy.createRulesValidationUri(account, streamName);
-            final String responseString = facade.postResource(rulesValidationUri, rules);
-            final JsonParser parser = JsonActivityFeedProcessor.getObjectMapper().getJsonFactory().createJsonParser(responseString);
-            validation = parser.readValueAs(RulesValidation.class);
-        } catch (final IOException e) {
-            throw new GnipException("Could not validate rules", e);
-        }
-        return validation;
+        final URI rulesValidationUri = baseUriStrategy.createRulesValidationUri(account, streamName);
+        return facade.postResource(rulesValidationUri, rules, RulesValidation.class);
     }
 
     public final boolean isUseJMX() {
