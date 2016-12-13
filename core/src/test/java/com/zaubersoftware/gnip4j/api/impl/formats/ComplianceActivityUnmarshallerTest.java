@@ -15,16 +15,16 @@
  */
 package com.zaubersoftware.gnip4j.api.impl.formats;
 
-import static org.junit.Assert.*;
+import com.zaubersoftware.gnip4j.api.model.Activity;
+import com.zaubersoftware.gnip4j.api.model.compliance.ComplianceActivity;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Date;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import com.zaubersoftware.gnip4j.api.model.Activity;
-import com.zaubersoftware.gnip4j.api.model.compliance.ComplianceActivity;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * @author Dennis Lloyd Jr
@@ -46,6 +46,23 @@ public class ComplianceActivityUnmarshallerTest {
         assertEquals("601430178305220600", result.getId());
         assertEquals("3198576760", result.getActor().getId());
         assertEquals(new Date(1432228155593L), result.getUpdated());
+    }
+
+    @Test
+    public void deleteFavorite() {
+        final String s = "{\"delete\":{\"favorite\":{\"id\":601430178305220600,\"id_str\":\"601430178305220600\",\"user_id\":3198576760,\"user_id_str\":\"3198576760\"},\"timestamp_ms\":\"1432228155593\"}}";
+        final Activity result = unmarshaller.unmarshall(s);
+        assertEquals(ComplianceActivity.Verb.FAVORITE_DELETE, result.getVerb());
+        assertEquals("601430178305220600", result.getId());
+        assertEquals("3198576760", result.getActor().getId());
+        assertEquals(new Date(1432228155593L), result.getUpdated());
+    }
+
+    @Test
+    public void deleteUnknown() { // What happens when we receive data for a delete that we don't expect
+        final String s = "{\"delete\":{\"unknown\":{\"id\":601430178305220600,\"id_str\":\"601430178305220600\",\"user_id\":3198576760,\"user_id_str\":\"3198576760\"},\"timestamp_ms\":\"1432228155593\"}}";
+        final Activity result = unmarshaller.unmarshall(s);
+        assertNull(result);
     }
 
     @Test
@@ -121,6 +138,16 @@ public class ComplianceActivityUnmarshallerTest {
         assertEquals("2308560145", result.getActor().getId());
         assertEquals(Arrays.asList("xy"), result.getWithheldInCountries());
         assertEquals(new Date(1476731813446L), result.getUpdated());
+    }
+
+    @Test
+    public void userWithheld() {
+        final String s = "{\"user_withheld\":{\"id\":1375036644,\"timestamp_ms\":\"1481626100690\",\"withheld_in_countries\":[\"TR\"]}}";
+        final Activity result = unmarshaller.unmarshall(s);
+        assertEquals(ComplianceActivity.Verb.USER_WITHHELD, result.getVerb());
+        assertEquals("1375036644", result.getActor().getId());
+        assertEquals(Arrays.asList("TR"), result.getWithheldInCountries());
+        assertEquals(new Date(1481626100690L), result.getUpdated());
     }
 
     @Test
