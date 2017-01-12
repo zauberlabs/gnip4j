@@ -1,3 +1,6 @@
+### 2.2.1 (2017-01-12)
+ * #67 Add support for delete favorite and user withheld (dennislloydjr)
+
 ### 2.2.0 (2016-11-24)
 
  * remove PowertrackV1 support
