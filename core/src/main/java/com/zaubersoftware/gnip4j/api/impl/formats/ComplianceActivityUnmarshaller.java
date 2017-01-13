@@ -15,15 +15,14 @@
  */
 package com.zaubersoftware.gnip4j.api.impl.formats;
 
-import java.io.IOException;
-
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.model.compliance.ComplianceActivity;
 import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;
 import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
+
+import java.io.IOException;
+import java.io.UncheckedIOException;
 
 /**
  * Translates JSON input from the Compliance v2 stream into instances of Activity.
@@ -41,11 +40,9 @@ public class ComplianceActivityUnmarshaller implements Unmarshaller<Activity> {
     public final Activity unmarshall(final String s) {
         try {
             return mapper.readValue(s, ComplianceActivity.class).toActivity();
-        } catch (final JsonMappingException e) {
+        } catch (final IOException | UncheckedIOException e) {
             logger.warn("Failed to parse compliance activity: " + s, e);
             return null;
-        } catch (final IOException e) {
-            throw new IllegalArgumentException("parsing compliance activity", e);
         }
     }
 }
