@@ -2,7 +2,7 @@ package com.zaubersoftware.gnip4j.api.model;
 
 import static org.junit.Assert.*;
 
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 
 import com.zaubersoftware.gnip4j.api.impl.formats.JsonActivityFeedProcessor;

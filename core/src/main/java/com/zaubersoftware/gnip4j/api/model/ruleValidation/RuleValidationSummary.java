@@ -1,8 +1,8 @@
 package com.zaubersoftware.gnip4j.api.model.ruleValidation;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import java.io.Serializable;
 
 public class RuleValidationSummary implements Serializable {
     private static final long serialVersionUID = 1L;

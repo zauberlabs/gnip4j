@@ -18,6 +18,7 @@ package com.zaubersoftware.gnip4j.api.model.compliance;
 import java.io.UncheckedIOException;
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.model.Actor;
 import com.fasterxml.jackson.annotation.JsonProperty;
