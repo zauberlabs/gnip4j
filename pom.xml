@@ -18,7 +18,7 @@
   </modules>
   <properties>
     <jackson.version>1.8.0</jackson.version>
-    <slf4j.version>1.7.12</slf4j.version>
+    <slf4j.version>1.7.25</slf4j.version>
   </properties>
   <dependencyManagement>
     <dependencies>
