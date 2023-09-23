@@ -83,4 +83,4 @@ public final class StreamStats implements StreamStatsMBean {
     public String toString() {
         return target.toString();
     }
-};
+}

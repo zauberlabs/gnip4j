@@ -19,7 +19,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
-import org.codehaus.jackson.annotate.JsonCreator;
 
 @JsonAutoDetect
 public final class Rule implements Serializable {

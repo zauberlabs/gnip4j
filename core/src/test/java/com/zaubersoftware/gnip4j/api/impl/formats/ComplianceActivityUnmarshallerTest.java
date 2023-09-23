@@ -15,16 +15,16 @@
  */
 package com.zaubersoftware.gnip4j.api.impl.formats;
 
-import com.zaubersoftware.gnip4j.api.model.Activity;
-import com.zaubersoftware.gnip4j.api.model.compliance.ComplianceActivity;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.Date;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.zaubersoftware.gnip4j.api.model.Activity;
+import com.zaubersoftware.gnip4j.api.model.compliance.ComplianceActivity;
 
 /**
  * @author Dennis Lloyd Jr

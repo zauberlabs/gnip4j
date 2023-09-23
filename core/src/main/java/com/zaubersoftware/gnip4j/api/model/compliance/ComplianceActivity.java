@@ -15,11 +15,12 @@
  */
 package com.zaubersoftware.gnip4j.api.model.compliance;
 
-import com.zaubersoftware.gnip4j.api.model.Activity;
+import java.io.Serializable;
+
 import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 
-import java.io.Serializable;
+import com.zaubersoftware.gnip4j.api.model.Activity;
 
 /**
  * Activity from the Compliance v2 stream that can be converted to an Activity

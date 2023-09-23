@@ -20,7 +20,6 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.apache.commons.io.IOUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Test;
 

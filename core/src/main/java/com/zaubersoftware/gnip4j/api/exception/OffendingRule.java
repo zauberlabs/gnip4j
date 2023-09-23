@@ -15,6 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.api.exception;
 
+import java.util.Objects;
+
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import com.zaubersoftware.gnip4j.api.model.Rule;
@@ -72,11 +74,7 @@ public class OffendingRule {
 
   @Override
   public final int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((errorMessage == null) ? 0 : errorMessage.hashCode());
-    result = prime * result + ((offendingRule == null) ? 0 : offendingRule.hashCode());
-    return result;
+    return Objects.hash(errorMessage, offendingRule);
   }
 
   @Override
@@ -84,10 +82,7 @@ public class OffendingRule {
     if (this == obj) {
       return Boolean.TRUE;
     }
-    if (obj == null) {
-      return Boolean.FALSE;
-    }
-    if (getClass() != obj.getClass()) {
+    if ((obj == null) || (getClass() != obj.getClass())) {
       return Boolean.FALSE;
     }
     final OffendingRule other = (OffendingRule) obj;
