@@ -19,7 +19,7 @@ package com.zaubersoftware.gnip4j.jmx;
 import java.io.InputStream;
 import java.net.URI;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.GnipStream;

@@ -18,8 +18,7 @@ package com.zaubersoftware.gnip4j.api.impl.formats;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 
-import org.codehaus.jackson.map.ObjectMapper;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.model.compliance.ComplianceActivity;
 import com.zaubersoftware.gnip4j.api.support.logging.LoggerFactory;

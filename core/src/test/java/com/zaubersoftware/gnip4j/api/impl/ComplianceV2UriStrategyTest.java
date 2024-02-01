@@ -1,10 +1,10 @@
 package com.zaubersoftware.gnip4j.api.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.net.URI;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ComplianceV2UriStrategyTest {
     @Test

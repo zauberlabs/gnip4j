@@ -15,10 +15,10 @@
  */
 package com.zaubersoftware.gnip4j.api.exception;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.zaubersoftware.gnip4j.api.model.Rule;
 
@@ -34,7 +34,7 @@ public class OffendingRuleTest {
   private Rule rule;
   private OffendingRule offending;
 
-  @Before
+  @BeforeEach
   public final void before() {
     rule = createTestRule(value, tag);
     offending = new OffendingRule(rule, mensaje_error);

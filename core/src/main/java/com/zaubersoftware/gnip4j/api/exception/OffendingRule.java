@@ -17,8 +17,7 @@ package com.zaubersoftware.gnip4j.api.exception;
 
 import java.util.Objects;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.zaubersoftware.gnip4j.api.model.Rule;
 
 /**

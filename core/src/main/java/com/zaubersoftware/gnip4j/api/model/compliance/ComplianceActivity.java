@@ -17,9 +17,8 @@ package com.zaubersoftware.gnip4j.api.model.compliance;
 
 import java.io.Serializable;
 
-import org.codehaus.jackson.annotate.JsonSubTypes;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.zaubersoftware.gnip4j.api.model.Activity;
 
 /**

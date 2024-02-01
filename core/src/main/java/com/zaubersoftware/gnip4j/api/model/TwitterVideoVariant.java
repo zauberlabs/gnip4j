@@ -15,7 +15,7 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TwitterVideoVariant {
     private Integer bitrate;

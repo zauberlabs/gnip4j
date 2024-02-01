@@ -15,13 +15,13 @@
  */
 package com.zaubersoftware.gnip4j.api.impl.formats;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.Date;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.zaubersoftware.gnip4j.api.model.Activity;
 import com.zaubersoftware.gnip4j.api.model.compliance.ComplianceActivity;
@@ -33,7 +33,7 @@ import com.zaubersoftware.gnip4j.api.model.compliance.ComplianceActivity;
 public class ComplianceActivityUnmarshallerTest {
     Unmarshaller<Activity> unmarshaller;
 
-    @Before
+    @BeforeEach
     public void setup() {
         unmarshaller = new ComplianceActivityUnmarshaller();
     }

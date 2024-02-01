@@ -15,13 +15,12 @@
  */
 package com.zaubersoftware.gnip4j.api.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.zaubersoftware.gnip4j.api.GnipAuthentication;
 
-import junit.framework.Assert;
 
 
 /**
@@ -45,16 +44,18 @@ public class ImmutableGnipAuthenticationTest {
     }
     
     /** test null argument */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public final void testNullUser() {
-        new ImmutableGnipAuthentication(null, "xx");
-        Assert.fail();
+        assertThrows(IllegalArgumentException.class, () ->{
+            new ImmutableGnipAuthentication(null, "xx");
+        });
     }
     
     /** test null argument */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public final void testNullPass() {
-        new ImmutableGnipAuthentication("xx", null);
-        Assert.fail();
+        assertThrows(IllegalArgumentException.class, () ->{
+            new ImmutableGnipAuthentication("xx", null);
+        });
     }
 }

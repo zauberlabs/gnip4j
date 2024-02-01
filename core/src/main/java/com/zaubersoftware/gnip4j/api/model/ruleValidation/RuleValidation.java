@@ -2,8 +2,7 @@ package com.zaubersoftware.gnip4j.api.model.ruleValidation;
 
 import java.io.Serializable;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.zaubersoftware.gnip4j.api.model.Rule;
 
 public class RuleValidation implements Serializable {

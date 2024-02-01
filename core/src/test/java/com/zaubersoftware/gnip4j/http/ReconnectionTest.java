@@ -15,6 +15,8 @@
  */
 package com.zaubersoftware.gnip4j.http;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.io.InputStream;
 import java.net.URI;
 import java.util.ArrayList;
@@ -33,8 +35,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.zaubersoftware.gnip4j.api.GnipStream;
 import com.zaubersoftware.gnip4j.api.RemoteResourceProvider;
@@ -112,8 +113,8 @@ public final class ReconnectionTest {
         final String s = out.toString();
         final String expected = IOUtils.toString(getClass().getClassLoader()
                 .getResourceAsStream("reconnectlog.txt"));
-        Assert.assertEquals(expected, s);
-        Assert.assertEquals("transferedBytes = 8000\ntransferedActivities = 4\n"
+        assertEquals(expected, s);
+        assertEquals("transferedBytes = 8000\ntransferedActivities = 4\n"
                 + "numberOfSucessfulReconnections = 1\nnumberOfReconnections = 4",
                 stream.getStreamStats().toString());
     }
@@ -164,8 +165,6 @@ class MockRemoteResourceProvider implements RemoteResourceProvider {
 	@Override
 	public void deleteResource(final URI uri, final Object resource)
 			throws AuthenticationGnipException, TransportGnipException {
-		// TODO Auto-generated method stub
-		
 	}
 }
 
@@ -211,13 +210,11 @@ class MockExecutorService implements ExecutorService {
 
     @Override
     public boolean isTerminated() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean isShutdown() {
-        // TODO Auto-generated method stub
         return false;
     }
 
@@ -225,14 +222,12 @@ class MockExecutorService implements ExecutorService {
     public <T> T invokeAny(final Collection<? extends Callable<T>> tasks,
             final long timeout, final TimeUnit unit)
             throws InterruptedException, ExecutionException, TimeoutException {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public <T> T invokeAny(final Collection<? extends Callable<T>> tasks)
             throws InterruptedException, ExecutionException {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -240,7 +235,6 @@ class MockExecutorService implements ExecutorService {
     public <T> List<Future<T>> invokeAll(
             final Collection<? extends Callable<T>> tasks, final long timeout,
             final TimeUnit unit) throws InterruptedException {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -248,14 +242,12 @@ class MockExecutorService implements ExecutorService {
     public <T> List<Future<T>> invokeAll(
             final Collection<? extends Callable<T>> tasks)
             throws InterruptedException {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public boolean awaitTermination(final long timeout, final TimeUnit unit)
             throws InterruptedException {
-        // TODO Auto-generated method stub
         return false;
     }
 }

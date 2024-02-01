@@ -20,11 +20,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.DeserializationContext;
-import org.codehaus.jackson.map.deser.StdDeserializer;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
 /**
  * Geo Deserializer
@@ -50,9 +50,9 @@ public class GeoDeserializer extends StdDeserializer<Geo> {
 
 
         final Geo geo = new Geo();
-        geo.setType(type.getTextValue());
+        geo.setType(type.textValue());
 
-        if(Geometries.Polygon.equals(Geometries.valueOf(type.getTextValue()))) {
+        if(Geometries.Polygon.equals(Geometries.valueOf(type.textValue()))) {
             geo.setCoordinates(createPolygon(coordinates));
         } else {
             geo.setCoordinates(createPoint(coordinates));
@@ -65,7 +65,7 @@ public class GeoDeserializer extends StdDeserializer<Geo> {
     private Point createPoint(final JsonNode coordinates) throws IOException {
         final Point ret;
         if(coordinates.isArray()) {
-            ret = new Point(coordinates.get(0).getDoubleValue(), coordinates.get(1).getDoubleValue());
+            ret = new Point(coordinates.get(0).doubleValue(), coordinates.get(1).doubleValue());
         } else {
             ret = null;
         }
@@ -76,7 +76,7 @@ public class GeoDeserializer extends StdDeserializer<Geo> {
     private Polygon createPolygon(final JsonNode linearrings) throws IOException {
         final List<LinearRing> linearRings = new ArrayList<>(linearrings.size());
         
-        for(final Iterator<JsonNode> it = linearrings.getElements(); it.hasNext() ; ) {
+        for(final Iterator<JsonNode> it = linearrings.elements(); it.hasNext() ; ) {
             final JsonNode linearRingNode = it.next();
             linearRings.add(parseLinearRing(linearRingNode));
                 
@@ -87,7 +87,7 @@ public class GeoDeserializer extends StdDeserializer<Geo> {
 
     private LinearRing parseLinearRing(final JsonNode linearRingNode) throws IOException {
         final List<Point> points = new ArrayList<>(linearRingNode.size());
-        for(final Iterator<JsonNode> it = linearRingNode.getElements(); it.hasNext() ; ) {
+        for(final Iterator<JsonNode> it = linearRingNode.elements(); it.hasNext() ; ) {
             final JsonNode next = it.next();
             points.add(createPoint(next));
         }

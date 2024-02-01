@@ -15,10 +15,10 @@
  */
 package com.zaubersoftware.gnip4j.http;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.zaubersoftware.gnip4j.api.GnipFacade;
 import com.zaubersoftware.gnip4j.api.impl.DefaultGnipFacade;
@@ -35,7 +35,7 @@ public class GnipRulesTestDriver {
 	private String account;
 	private String streamName;
 	
-	@Before
+	@BeforeEach
 	public void setUp() {
 	    final String username = System.getProperty("gnip.username");
         final String password = System.getProperty("gnip.password");

@@ -15,9 +15,9 @@
  */
 package com.zaubersoftware.gnip4j.api.support.base64;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.zaubersoftware.gnip4j.api.impl.ImmutableGnipAuthentication;
 import com.zaubersoftware.gnip4j.api.support.base64.spi.Base64PasswordEncoder;

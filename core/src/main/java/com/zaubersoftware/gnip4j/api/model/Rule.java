@@ -18,7 +18,7 @@ package com.zaubersoftware.gnip4j.api.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.codehaus.jackson.annotate.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect
 public final class Rule implements Serializable {

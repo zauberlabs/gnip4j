@@ -19,10 +19,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
-
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.zaubersoftware.gnip4j.api.exception.OffendingRule;
 import com.zaubersoftware.gnip4j.api.model.Rule;
 
@@ -139,9 +138,10 @@ public class Errors {
         
         @JsonCreator
         public RuleErrorDetail(
-                @JsonProperty("created") final boolean created, 
-                @JsonProperty("message") final String message, 
-                @JsonProperty("rule") final Rule rule) {
+            @JsonProperty("created") final boolean created, 
+            @JsonProperty("message") final String message, 
+            @JsonProperty("rule") final Rule rule
+        ) {
             this.created = created;
             this.message = message;
             this.rule = rule;

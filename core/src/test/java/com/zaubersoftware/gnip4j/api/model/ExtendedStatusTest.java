@@ -15,13 +15,13 @@
  */
 package com.zaubersoftware.gnip4j.api.model;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.zaubersoftware.gnip4j.api.impl.formats.JSONActivityUnmarshaller;
 

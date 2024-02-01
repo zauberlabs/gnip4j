@@ -15,7 +15,7 @@
  */
 package com.zaubersoftware.gnip4j.api.support.http;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -26,11 +26,11 @@ import java.util.List;
 import java.util.Objects;
 
 import org.apache.commons.io.IOUtils;
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zaubersoftware.gnip4j.api.exception.OffendingRule;
 import com.zaubersoftware.gnip4j.api.support.http.Errors.RuleErrorDetail;
 
