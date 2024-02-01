@@ -134,9 +134,6 @@ public class DefaultGnipStream extends AbstractGnipStream {
 
     /**
      * Waits for a thread to terminate
-     *
-     * @param thread
-     * @return
      */
     public static boolean waitForTermination(final Thread thread) {
         boolean wait = true;

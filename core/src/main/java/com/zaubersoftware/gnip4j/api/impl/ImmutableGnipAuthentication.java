@@ -28,12 +28,6 @@ public final class ImmutableGnipAuthentication implements GnipAuthentication {
     private final String username;
     private final String password;
     
-    /**
-     * Creates the BasicCredentials.
-     *
-     * @param username
-     * @param password
-     */
     public ImmutableGnipAuthentication(final String username, final String password) {
         if(username == null) {
             throw new IllegalArgumentException("The username cannot be null");

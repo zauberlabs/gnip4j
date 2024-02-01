@@ -22,20 +22,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
-/**
- * @see GeoDeserializer
- *
- * @author Juan F. Codagnone
- * @since Jul 24, 2015
- */
 public class GeoSerializer extends JsonSerializer<Geo> {
-
     @Override
     public void serialize(
-            final Geo value, 
-            final JsonGenerator jgen, 
-            final SerializerProvider provider)
-            throws IOException, JsonProcessingException {
+        final Geo value, 
+        final JsonGenerator jgen, 
+        final SerializerProvider provider
+    ) throws IOException, JsonProcessingException {
         jgen.writeStartObject();
 
         jgen.writeStringField("type", value.getType());
@@ -64,5 +57,4 @@ public class GeoSerializer extends JsonSerializer<Geo> {
         }
         jgen.writeEndObject();
     }
-
 }

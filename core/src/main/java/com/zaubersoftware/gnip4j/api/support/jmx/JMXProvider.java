@@ -25,7 +25,7 @@ import com.zaubersoftware.gnip4j.api.support.jmx.sun.SunJMXProvider;
  * @since May 26, 2011
  */
 public final class JMXProvider {
-    /** utility class */
+
     private JMXProvider() {
         // void
     }

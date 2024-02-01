@@ -58,13 +58,7 @@ public class Geo implements Serializable {
 
     @Override
     public String toString() {
-        return new StringBuilder()
-                .append("{\"type\": \"")
-                .append(type)
-                .append("\", \"coordinates\": ")
-                .append(coordinates)
-                .append("}")
-                .toString();
+        return "{\"type\": \"" + type + "\", \"coordinates\": " + coordinates + "}";
     }
     
     @Override

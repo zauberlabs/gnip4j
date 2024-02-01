@@ -23,28 +23,28 @@ package com.zaubersoftware.gnip4j.api.stats;
  * @since May 26, 2011
  */
 public interface StreamStats {
-    /** @return number of activities transfered */
+    /** return number of activities transfered */
     long getTransferedActivities();
     
-    /** @return the date of the last transfered activity */
+    /** return the date of the last transfered activity */
     long getLastTransferedActivityDate();
     
-    /** @return number of bytes transfered throu the channel (after gzip) */
+    /** return number of bytes transfered throu the channel (after gzip) */
     long getTransferedBytes();
     
-    /** @return the date of the last transfered byte */
+    /** return the date of the last transfered byte */
     long getLastTransferedByteDate();
     
-    /** @return of reconnections of the channel */
+    /** return of reconnections of the channel */
     int getNumberOfSuccessfulReconnections();
     
-    /** @return the date of the last successful reconnect */
+    /** return the date of the last successful reconnect */
     long getLastSuccessfulReconnectionsDate();
     
-    /** @return the number of connections attemps */
+    /** return the number of connections attemps */
     int getNumberOfReconnectionsAttempt();
     
-    /** @return the date of the last reconnection attempt  */
+    /** return the date of the last reconnection attempt  */
     long getLastReconnectionsAttemptDate();
     
 }

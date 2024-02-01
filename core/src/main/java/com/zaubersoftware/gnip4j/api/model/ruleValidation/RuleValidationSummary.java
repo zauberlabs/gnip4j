@@ -31,13 +31,6 @@ public class RuleValidationSummary implements Serializable {
 
     @Override
     public String toString() {
-        return new StringBuilder("RuleValidationSummary[")
-                .append("valid=")
-                .append(valid)
-                .append(' ')
-                .append("notValid=")
-                .append(notValid)
-                .append("]")
-                .toString();
+        return "RuleValidationSummary[" + "valid=" + valid + ' ' + "notValid=" + notValid + "]";
     }
 }

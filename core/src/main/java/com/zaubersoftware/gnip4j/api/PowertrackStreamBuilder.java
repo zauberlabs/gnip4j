@@ -25,7 +25,6 @@ import com.zaubersoftware.gnip4j.api.impl.formats.Unmarshaller;
  * 
  * 
  * @author Juan F. Codagnone
- * @param <T>
  * @since Oct 3, 2013
  */
 public abstract class PowertrackStreamBuilder<T> {

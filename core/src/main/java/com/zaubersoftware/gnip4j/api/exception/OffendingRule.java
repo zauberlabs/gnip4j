@@ -70,37 +70,25 @@ public class OffendingRule {
         && ((offendingRule.getValue() == null && rule.getValue() == null) || (offendingRule.getValue()
             .equals(rule.getValue())));
   }
-
-  @Override
-  public final int hashCode() {
-    return Objects.hash(errorMessage, offendingRule);
-  }
-
-  @Override
-  public final boolean equals(final Object obj) {
-    if (this == obj) {
-      return Boolean.TRUE;
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(errorMessage, offendingRule);
     }
-    if ((obj == null) || (getClass() != obj.getClass())) {
-      return Boolean.FALSE;
+    
+    @Override
+    public boolean equals(final Object obj) {
+        boolean ret = false;
+        
+        if (this == obj) {
+            ret = true;
+        } else if(obj instanceof OffendingRule) {
+            final OffendingRule other = (OffendingRule) obj;
+            ret = Objects.equals(errorMessage, other.errorMessage)
+                && Objects.equals(offendingRule, other.offendingRule);
+        }
+        return ret;
     }
-    final OffendingRule other = (OffendingRule) obj;
-    if (errorMessage == null) {
-      if (other.errorMessage != null) {
-        return Boolean.FALSE;
-      }
-    } else if (!errorMessage.equals(other.errorMessage)) {
-      return Boolean.FALSE;
-    }
-    if (offendingRule == null) {
-      if (other.offendingRule != null) {
-        return Boolean.FALSE;
-      }
-    } else if (!offendingRule.equals(other.offendingRule)) {
-      return Boolean.FALSE;
-    }
-    return Boolean.TRUE;
-  }
 
   @Override
   public final String toString() {

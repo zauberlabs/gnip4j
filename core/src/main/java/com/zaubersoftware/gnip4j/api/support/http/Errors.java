@@ -41,7 +41,6 @@ public class Errors {
         this.error = error;
     }
 
-    /** @since Powertrack V2 */
     public Map<String, Number> getSummary() {
         return summary;
     }
@@ -49,7 +48,6 @@ public class Errors {
         this.summary = summary;
     }
     
-    /** @since Powertrack V2 */
     public List<RuleErrorDetail> getDetail() {
         return detail;
     }
@@ -57,7 +55,6 @@ public class Errors {
         this.detail = detail;
     }
 
-    /** @since Powertrack V2 */
     public Date getSent() {
         return sent;
     }

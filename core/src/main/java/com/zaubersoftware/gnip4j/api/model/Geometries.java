@@ -26,7 +26,7 @@ public enum Geometries {
     
     point("point"), Point("Point"), Polygon("Polygon");
     
-    private String type;
+    private final String type;
 
     private Geometries(final String type){
         this.type = type;

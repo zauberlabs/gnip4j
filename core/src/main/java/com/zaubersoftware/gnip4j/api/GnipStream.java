@@ -56,10 +56,10 @@ public interface GnipStream {
     boolean await(long time, TimeUnit unit) throws InterruptedException;
     
     
-    /** @return an identification for this stream */
+    /** return an identification for this stream */
     String getStreamName();
     
-    /** @return stream stats */
+    /** return stream stats */
     StreamStats getStreamStats();
 
 }

@@ -15,7 +15,7 @@
  */
 package com.zaubersoftware.gnip4j.api.exception;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -83,12 +83,12 @@ public class GnipUnprocessableEntityException extends GnipException {
           if(details == null) {
               final String msg = errors.toHumanMessage();
               if(msg == null) {
-                  offendingRules = new LinkedList<>();
+                  offendingRules = new ArrayList<>();
               } else {
                   offendingRules = parseMessage(msg);
               }
           } else {
-              offendingRules = new LinkedList<>();
+              offendingRules = new ArrayList<>();
               
               for(final RuleErrorDetail detail : details) {
                   if(detail != null) {
@@ -111,7 +111,7 @@ public class GnipUnprocessableEntityException extends GnipException {
   private static List<OffendingRule>  parseMessage(final String serverMessage) {
     String offendingRule = null;
     StringBuilder messageBuilder = new StringBuilder();
-    final List<OffendingRule> offendingRules = new LinkedList<>();
+    final List<OffendingRule> offendingRules = new ArrayList<>();
 
     final String[] lines = serverMessage.split("\\n");
     for (int i = 0, length = lines.length; i < length; i++) {

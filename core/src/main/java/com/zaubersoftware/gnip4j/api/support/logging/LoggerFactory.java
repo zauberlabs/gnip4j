@@ -25,20 +25,12 @@ import com.zaubersoftware.gnip4j.api.support.logging.nil.NilLoggerFactory;
 import com.zaubersoftware.gnip4j.api.support.logging.slf4j.SLF4JTargetLoggerFactory;
 import com.zaubersoftware.gnip4j.api.support.logging.spi.Logger;
 
-/**
- * Decides what SPI implementation is used for logging.
- * 
- * @author Juan F. Codagnone
- * @since May 23, 2011
- */
 public final class LoggerFactory {
     private static com.zaubersoftware.gnip4j.api.support.logging.spi.LoggerFactory targetLoggerFactory;
     
-    /** constructor */
     private LoggerFactory() {
         // utility class
     }
-    
     
     static {
         targetLoggerFactory = getLoggerImplementation();
@@ -72,7 +64,6 @@ public final class LoggerFactory {
      * the statically bound {@link ILoggerFactory} instance.
      * 
      * @param clazz the returned logger will be named after clazz
-     * @return logger
      */
     public static Logger getLogger(final Class<?> clazz) {
         return targetLoggerFactory.getLogger(clazz);

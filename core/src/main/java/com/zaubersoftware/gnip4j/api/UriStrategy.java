@@ -34,8 +34,9 @@ public interface UriStrategy {
     
     /** 
      * Generates a {@link URI} to connect against a Gnip endpoint to consume the activity stream
+     * http://support.gnip.com/apis/powertrack2.0/recovery.html#Backfill
+     *   
      * @param backFillMinutes Null or a number of minutes (1-5, whole numbers only) 
-     *                        {@link http://support.gnip.com/apis/powertrack2.0/recovery.html#Backfill}  
      */
     URI createStreamUri(String account, String streamName, final Integer backFillMinutes);
 

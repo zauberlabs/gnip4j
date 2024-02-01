@@ -135,7 +135,7 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
             doConfiguration(uc);
             
             outStream = uc.getOutputStream();
-            outStream.write(mapper.writeValueAsString(resource).getBytes("UTF-8"));
+            outStream.write(mapper.writeValueAsString(resource).getBytes(java.nio.charset.StandardCharsets.UTF_8));
             
             T ret = null;
             if (huc != null) {
@@ -190,7 +190,7 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
             doConfiguration(uc);
             
             outStream = uc.getOutputStream();
-            outStream.write(new ObjectMapper().writeValueAsString(resource).getBytes("UTF-8"));
+            outStream.write(new ObjectMapper().writeValueAsString(resource).getBytes(java.nio.charset.StandardCharsets.UTF_8));
             
             if (huc != null) {
                 validateStatusLine(uri, huc.getResponseCode(), huc.getResponseMessage(), new DefaultErrorProvider(huc));
@@ -229,7 +229,7 @@ public class JRERemoteResourceProvider extends AbstractRemoteResourceProvider {
                 bos.write(buff, 0, i);
             }
             
-            return new String(bos.toByteArray(), "utf-8");
+            return new String(bos.toByteArray(), java.nio.charset.StandardCharsets.UTF_8);
         } catch(final IOException e) {
             return "";
         }

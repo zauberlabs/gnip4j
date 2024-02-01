@@ -22,11 +22,6 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 
-/**
- * @author Martin Silva
- * @since Feb 15, 2012
- */
-
 @JsonAutoDetect(getterVisibility = Visibility.PUBLIC_ONLY)
 public class Polygon implements Geometry, Iterable<LinearRing> {
     private List<LinearRing> holes;
@@ -49,7 +44,6 @@ public class Polygon implements Geometry, Iterable<LinearRing> {
     public final Iterator<LinearRing> iterator() {
         return this.holes.iterator();
     }
-    
     
     public final List<LinearRing> getHoles() {
         return holes;

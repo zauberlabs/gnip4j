@@ -22,41 +22,20 @@ package com.zaubersoftware.gnip4j.api.exception;
  * @since Apr 29, 2011
  */
 public class GnipException extends RuntimeException {
-    /** <code>serialVersionUID</code> */
     private static final long serialVersionUID = 7264815091470201543L;
 
-    /**
-     * Creates the GnipException.
-     *
-     */
     public GnipException() {
         super();
     }
 
-    /**
-     * Creates the GnipException.
-     *
-     * @param message
-     * @param cause
-     */
     public GnipException(final String message, final Throwable cause) {
         super(message, cause);
     }
 
-    /**
-     * Creates the GnipException.
-     *
-     * @param message
-     */
     public GnipException(final String message) {
         super(message);
     }
 
-    /**
-     * Creates the GnipException.
-     *
-     * @param cause
-     */
     public GnipException(final Throwable cause) {
         super(cause);
     }

@@ -26,12 +26,7 @@ import com.zaubersoftware.gnip4j.api.stats.StreamStats;
  */
 public interface JMXProvider  {
 
-    /**
-     * @param stream
-     * @param streamStats
-     */
     void registerBean(GnipStream stream, StreamStats streamStats);
 
-    /** @param stream */
     void unregister(GnipStream stream);
 }

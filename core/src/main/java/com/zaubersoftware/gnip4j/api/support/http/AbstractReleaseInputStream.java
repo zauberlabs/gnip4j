@@ -72,7 +72,7 @@ public abstract class AbstractReleaseInputStream extends InputStream {
 
     @Override
     public final String toString() {
-        return target == null ? null : target.toString();
+        return target == null ? "" : target.toString();
     }
 
     @Override
