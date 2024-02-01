@@ -16,6 +16,7 @@
 package com.zaubersoftware.gnip4j.api.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 
 /**
@@ -67,17 +68,24 @@ public class Geo implements Serializable {
     }
     
     @Override
+    public int hashCode() {
+        return Objects.hash(
+            coordinates,
+            type
+        );
+    }
+
+    @Override
     public boolean equals(final java.lang.Object obj) {
         boolean ret = false;
         
         if(this == obj) {
             ret = true;
         } else if(obj instanceof Geo) {
-            final Geo g = (Geo) obj;
-            ret = type.equals(g.type) && 
-                  coordinates.equals(g.coordinates);
+            final Geo other = (Geo) obj;
+            ret = Objects.equals(type, other.type)
+              && Objects.equals(coordinates, other.coordinates);
         }
-        
         return ret;
     }
 }
