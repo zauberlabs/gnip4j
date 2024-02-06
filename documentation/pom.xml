@@ -10,6 +10,5 @@
   <artifactId>gnip4j-documentation-parent</artifactId>
   <packaging>pom</packaging>
   <name>Zauber::Gnip4j::Documentation Parent</name>
-  <modules>
-  </modules>
+  <modules></modules>
 </project>
