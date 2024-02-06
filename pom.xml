@@ -6,6 +6,8 @@
   <version>2.2.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Zauber::Gnip4j</name>
+  <description>Gnip4j is an Open Source (ASFL 2.0) library to access and process Activities (tweets) from the Gnip API from the data from the Java language.</description>
+  <url>https://github.com/zauberlabs/gnip4j</url>
   <inceptionYear>2011</inceptionYear>
   <licenses>
     <license>
