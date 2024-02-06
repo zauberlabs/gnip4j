@@ -47,14 +47,14 @@
     <module>documentation</module>
   </modules>
   <scm>
-    <connection>scm:git:git@github.com:zaubersoftware/gnip4j.git</connection>
-    <developerConnection>scm:git:git@github.com:zaubersoftware/gnip4j.git</developerConnection>
+    <connection>scm:git:git@github.com:zauberlabs/gnip4j.git</connection>
+    <developerConnection>scm:git:git@github.com:zauberlabs/gnip4j.git</developerConnection>
     <tag>HEAD</tag>
-    <url>https://github.com/zaubersoftware/gnip4j</url>
+    <url>https://github.com/zauberlabs/gnip4j</url>
   </scm>
   <issueManagement>
     <system>github</system>
-    <url>https://github.com/zaubersoftware/gnip4j/issues</url>
+    <url>https://github.com/zauberlabs/gnip4j/issues</url>
   </issueManagement>
   <distributionManagement>
     <repository>
