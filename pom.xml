@@ -69,7 +69,7 @@
     </snapshotRepository>
   </distributionManagement>
   <properties>
-    <slf4j.version>2.0.11</slf4j.version>
+    <slf4j.version>2.0.12</slf4j.version>
   </properties>
   <dependencyManagement>
     <dependencies>
