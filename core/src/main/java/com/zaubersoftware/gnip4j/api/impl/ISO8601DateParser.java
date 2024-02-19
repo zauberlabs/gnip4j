@@ -31,13 +31,13 @@ import java.util.Locale;
  *          $
  */
 public class ISO8601DateParser {
-    private static ThreadLocal<DateFormat> normalDf = new ThreadLocal<DateFormat>() {
+    private static ThreadLocal<DateFormat> normalDf = new ThreadLocal<>() {
         @Override
         protected synchronized DateFormat initialValue() {
             return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz", Locale.ENGLISH);
         }
     };
-    private static ThreadLocal<DateFormat> hackDf = new ThreadLocal<DateFormat>() {
+    private static ThreadLocal<DateFormat> hackDf = new ThreadLocal<>() {
         @Override
         protected synchronized DateFormat initialValue() {
             return new SimpleDateFormat("yyyy-MM-dd'T'HH-mm-ss", Locale.ENGLISH);

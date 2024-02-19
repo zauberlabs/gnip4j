@@ -38,7 +38,7 @@ import com.zaubersoftware.gnip4j.api.model.Activity;
  * @since May 26, 2011
  */
 public final class JMXTest {
-    private final StreamNotificationAdapter<Activity> observer = new StreamNotificationAdapter<Activity>() {
+    private final StreamNotificationAdapter<Activity> observer = new StreamNotificationAdapter<>() {
         @Override
         public void notify(final Activity activity, final GnipStream stream) {
             

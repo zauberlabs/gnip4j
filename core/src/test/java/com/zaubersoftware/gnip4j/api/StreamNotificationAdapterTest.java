@@ -31,7 +31,7 @@ public class StreamNotificationAdapterTest {
     /** nothing to do! */
     @Test
     public final void testNull() {
-        final StreamNotification<Activity> n = new StreamNotificationAdapter<Activity>() {
+        final StreamNotification<Activity> n = new StreamNotificationAdapter<>() {
             @Override
             public void notify(final Activity activity, final GnipStream stream) {
             }

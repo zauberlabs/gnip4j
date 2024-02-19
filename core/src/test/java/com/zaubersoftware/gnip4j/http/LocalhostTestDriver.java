@@ -74,7 +74,7 @@ public final class LocalhostTestDriver {
 
             System.out.println("-- Creating stream");
             final AtomicInteger counter = new AtomicInteger();
-            final StreamNotificationAdapter<Activity> n = new StreamNotificationAdapter<Activity>() {
+            final StreamNotificationAdapter<Activity> n = new StreamNotificationAdapter<>() {
                 @Override
                 public void notify(final Activity activity, final GnipStream stream) {
                     final int i = counter.getAndIncrement();
